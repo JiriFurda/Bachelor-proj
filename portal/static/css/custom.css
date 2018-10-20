@@ -1,0 +1,60 @@
+.bg-ec_dark_blue
+{
+	background-color: #004494;
+	color: #fff;
+} 
+
+.img-eu_flag
+{
+	width: 120px;
+	height: 120px;
+} 
+
+.input-main_search
+{
+
+}
+
+.header
+{
+	height: 150px;
+
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
+.container--header
+{
+	display: flex;
+	align-items: center;
+
+	height: 100%;
+}
+
+.container--main
+{
+	display: flex;
+
+}
+
+.sidebar
+{
+	min-width: 130px;
+	margin-right: 20px;
+
+	position: sticky;
+	top: 200px;
+	height: calc(100vh - 200px);
+	overflow-y: auto;
+}
+
+.card--search_result
+{
+	margin-bottom: 10px;
+}
+
+.line_under
+{
+	border-bottom: 1px solid #e5e5e5;
+}
