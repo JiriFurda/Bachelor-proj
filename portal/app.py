@@ -11,6 +11,7 @@ client = Elasticsearch()
 
 @app.route('/')
 def results():
+
     # Available facets for filter
     facets = {
         'year':
@@ -33,10 +34,14 @@ def results():
     search = Search(using=client, index='xstane34_projects')
     search = search.highlight('objective')
 
+
     # Process query send through GET request
     if request.args.has_key('query'):
         search = search.query(
-            Q('multi_match', query=request.args.get('query'), fields=['title', 'objective', 'acronym']))
+            Q('multi_match', query=request.args.get('query'),
+              fields=['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb']))
+
+
 
     # Process facet filters sent through GET request
     facets_query = None
@@ -44,8 +49,8 @@ def results():
     for arg_name, arg_value in request.args.iteritems(True):  # Walk through every GET argument
         if arg_name in facets:  # If GET argument key is in facets dictionary
             field = facets[arg_name]['field']
-            field = field.replace('.',
-                                  '__')  # Access nested fields @see https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html#dotted-fields
+            field = field.replace('.', '__')    # Access nested fields @see https://elasticsearch-dsl.readthedocs.io/en
+                                                # /latest/search_dsl.html#dotted-fields
 
             if facets_query is None:
                 facets_query = Q("match", **{field: arg_value})  # Create new query
@@ -55,9 +60,11 @@ def results():
     if facets_query is not None:  # If any facet is used
         search = search.query(facets_query)
 
+
     # Create facets aggregations (facet specific count in sidebar)
     for facet_name, facet_attributes in facets.items():
         search.aggs.bucket(facet_name, 'terms', field=facet_attributes['field'])
+
 
     # Execute the search
     response = search.execute()

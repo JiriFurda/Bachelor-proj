@@ -38,23 +38,23 @@
 			{% for result in results %}
 				
 				<div class="card card--search_result rounded shadow-sm">
-				  <div class="card-header bg-ec_dark_blue">
-				    {{ result.acronym }}
-				  </div>
-				  <div class="card-body">
-				    <h5 class="card-title">{{ result.title }}</h5>
-				    <p class="card-text">
-		               {% if result.meta.highlight.objective %}
-		                  <p class="text-justify"> ... {{ ' ... '.join(result.meta.highlight.objective)|safe }}... </p>
-		               {% elif result.objective %}
-		                  <p class="text-justify"> {{ result.objective[:200] }}... </p>
-		               {% endif %}
-					</p>
-				    <a class="btn btn-secondary" href="/projects/{{ result.id }}" role="button">View details »</a>
-				  </div>
-				  <div class="card-footer text-muted">
-				  	{{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
-				  </div>
+					<div class="card-header bg-ec_dark_blue">
+						{{ result.acronym }}
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">{{ result.title }}</h5>
+						<p class="card-text">
+								{% if result.meta.highlight and result.meta.highlight.objective %}
+									<p class="text-justify"> ... {{ ' ... '.join(result.meta.highlight.objective)|safe }}... </p>
+								{% elif result.objective %}
+									<p class="text-justify"> {{ result.objective[:200] }}... </p>
+								{% endif %}
+						</p>
+						<a class="btn btn-secondary" href="/projects/{{ result.id }}" role="button">View details »</a>
+					</div>
+					<div class="card-footer text-muted">
+						{{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
+					</div>
 				</div>
 			{% endfor %}
 		</div>
