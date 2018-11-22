@@ -3,23 +3,23 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Flask sandbox</title>
-		<link rel="stylesheet" href="static/css/bootstrap.min.css">
-		<link rel="stylesheet" href="static/css/custom.css">
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/css/custom.css">
 	</head>
 	<body class="bg-light">
-		<header class="header bg-ec_dark_blue">
-			<div class="container container--header">
-				<img src="static/img/European_stars.svg" class="img-eu_flag">
-				<form action="{{ url_for('results') }}" method="GET" class="flex-grow-1">
-					<input class="form-control input-main_search" type="text" name="q" placeholder="Search" aria-label="Search">
-				</form>
-			</div>
-		</header>
+		<form action="{{ url_for('results') }}" method="GET" class="flex-grow-1">
+			<header class="header bg-ec_dark_blue">
+				<div class="container container--header">
+					<img src="static/img/European_stars.svg" class="img-eu_flag">
+					<input class="form-control input-main_search" type="text" name="query" placeholder="Search" aria-label="Search" value="{{ get_arguments.get('query', '') }}">
+				</div>
+			</header>
 
-				{% block body %}{% endblock %}
-		</div>
+			{% block body %}{% endblock %}
+		</form>
 
 		<script src="static/js/jquery-3.3.1.min.js"></script>
 		<script src="static/js/bootstrap.min.js"></script>
+		{% block javascript %}{% endblock %}
 	</body>
 </html>

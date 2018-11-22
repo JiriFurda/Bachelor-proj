@@ -3,28 +3,34 @@
 {% block body %}
 	<div class="container container--main">
 		<div class="sidebar">
-			{% for facet_name, facet_attributes in facets.items() %}
-				<fieldset class="form-group">
-					
-		    		<legend class="line_under">
-		    			<a data-toggle="collapse" href="#facetCollapse-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="facetCollapse-{{ loop.index }}">
-		    				{{ facet_attributes['label'] }}
-		    			</a>
-		    		</legend>
-		    		<div class="collapse" id="facetCollapse-{{ loop.index }}">
-		    			{% set facetLoop = loop %}
-						{% for facet_data in facet_attributes['data'] %}
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="facet.key" id="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]">
-								<label class="form-check-label" for="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]">
-									{{ facet_data.key }} ({{ facet_data.doc_count }})
-								</label>
-							</div>
-						{% endfor %}
-					
-					</div>
-				</fieldset>
-			{% endfor %}
+				<button class="btn" type="send">Use filters</button>
+				{% for facet_name, facet_attributes in facets.items() %}
+					<fieldset class="form-group">
+			    		<legend class="line_under">
+			    			<a data-toggle="collapse" href="#collapse-{{ facet_name }}" role="button" aria-expanded="false" aria-controls="collapse-{{ facet_name }}">
+			    				{{ facet_attributes['label'] }}
+			    			</a>
+			    		</legend>
+			    		<div class="collapse" id="collapse-{{ facet_name }}">
+			    			<input class="form-control facet-filter" type="text">
+			    			{% set facetLoop = loop %}
+							{% for facet_data in facet_attributes['data'] %}
+								<div class="form-check" data-value="{{ facet_data.key }}">
+									<input class="form-check-input"
+										type="checkbox"
+										value="{{ facet_data.key }}"
+										id="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]"
+										name="{{ facet_name }}"
+									>
+									<label class="form-check-label" for="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]">
+										{{ facet_data.key }} ({{ facet_data.doc_count }})
+									</label>
+								</div>
+							{% endfor %}
+						
+						</div>
+					</fieldset>
+				{% endfor %}
 		</div>
 		<div class="flex-grow-1">
 			{{ debug }}
@@ -37,8 +43,14 @@
 				  </div>
 				  <div class="card-body">
 				    <h5 class="card-title">{{ result.title }}</h5>
-				    <p class="card-text">{{ result.objective|safe }}</p>
-				    <a class="btn btn-secondary" href="{{ result.id }}" role="button">View details »</a>
+				    <p class="card-text">
+		               {% if result.meta.highlight.objective %}
+		                  <p class="text-justify"> ... {{ ' ... '.join(result.meta.highlight.objective)|safe }}... </p>
+		               {% elif result.objective %}
+		                  <p class="text-justify"> {{ result.objective[:200] }}... </p>
+		               {% endif %}
+					</p>
+				    <a class="btn btn-secondary" href="/projects/{{ result.id }}" role="button">View details »</a>
 				  </div>
 				  <div class="card-footer text-muted">
 				  	{{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
@@ -47,4 +59,20 @@
 			{% endfor %}
 		</div>
 	</div>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+	$(".facet-filter").on('input', function()
+	{
+		var searchedValue = $(this).val().toLowerCase();
+
+		$('.form-check').hide();
+		$('.form-check').filter(function()
+		{
+			return String($(this).data('value')).toLowerCase().indexOf(searchedValue) > -1;
+		}).show();
+	});
+</script>
 {% endblock %}

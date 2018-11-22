@@ -1,0 +1,372 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class="container">
+				<div class="card card--search_project rounded shadow-sm">
+				  <div class="card-header bg-ec_dark_blue">
+				    {{ project.acronym }}
+				  </div>
+				  <div class="card-body">
+				    <h5 class="card-title">{{ project.title }}</h5>
+				    <p class="card-text">{{ project.objective|safe }}</p>
+				    <a class="btn btn-secondary" href="/projects/{{ project.id }}" role="button">View details »</a>
+
+				  </div>
+				  <div class="card-footer text-muted">
+				  	{{ project.statusDetails }} - From {{ project.startDate }} to {{ project.endDate }}
+				  </div>
+				</div>
+
+
+
+	  {% if project.startDate and project.endDate %}
+      <p><b>From</b> {{ project.startDate }} <b>to</b> {{ project.endDate }}{% if isRunning %}, {{ project.statusDetails|lower }}{% else %}, closed project{% endif %}</p>
+      {% endif %}
+
+      {% if project.url %}
+      <p><a href="http://cordiproject.europa.eu{{ project.url }}" target="_blank">View this project on Cordis <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></p>
+      {% endif %}
+
+      {% if project.website %}
+         <b>Project website</b>  
+         <ul>
+            {% for website in project.website %}
+               <li>
+                  <a href="{{ website.origWeb }}" target="_blank">{{ project.acronym }} website{% if website.retCode < 200 or website.retCode > 300 %} <span class="badge alert-danger">{{ website.retCode }}</span>{% endif %}</a>
+                  {# if current_user.authenticated %}
+                     <span class="badge alert-danger">From Yahoo {{ website.fromGoogle }}</span> 
+                     <span class="badge alert-danger">Auto accepted: {{ website.autoAccepted }}</span>
+                     <span class="badge alert-danger">Accepted: {{ website.accepted }}</span>
+                  {% else #}
+                     {% if website.fromGoogle and not website.autoAccepted and not website.accepted %}
+                        <span class="badge alert-danger">Warning: URL found on Yahoo and not accepted</span> 
+                     {% endif %}
+                  {# endif #}
+               </li>
+            {% endfor %}
+         </ul>
+      {% endif %}
+
+      {% if project.objective %}
+         <h3>Summary</h3>
+         <div class="text-justify"> {{ project.objective|safe }}</div>
+      {% endif %}
+
+     <h3>Project details</h3>
+      <div class="row details">
+         <div class="col-sm-3">
+            <ul>
+               {% if project.fundedUnder %}
+                  <li><b>Funded under</b>  
+                     <ul>
+                        {% for fundedUnder in project.fundedUnder %}
+                           <li>{{ fundedUnder.programme }}-{{ fundedUnder.subprogramme }}</li>
+                        {% endfor %}
+                     </ul>
+               {% endif %}
+
+               {% if project.totalCost %}
+                  <li><b>Total cost</b>  
+                     <ul>
+                        <li>&euro; {{ '{:.1f}'.format(project.totalCost|float) }}</li>
+                     </ul>
+               {% endif %}
+
+               {% if project.ecMaxContribution %}
+                  <li><b>EU contribution</b>  
+                     <ul>
+                        <li>&euro; {{ '{:.1f}'.format(project.ecMaxContribution|float) }}</li>
+                     </ul>
+               {% endif %}
+               
+                {% if project.id %}
+                  <li><b>RCN</b>  
+                     <ul>
+                        <li>{{ project.id }}</li>
+                     </ul>
+               {% endif %}
+            </ul>
+         </div>
+
+         <div class="col-sm-6">
+            <ul>          
+               {% if project.fundingScheme %}
+                  <li><b>Funding Scheme</b>  
+                     <ul>
+                        <li>{{ project.fundingScheme.code }} - {{ project.fundingScheme.title }}</li>
+                     </ul>
+                  </li>
+               {% endif %}
+
+               {% if project.topics %}
+                  <li><b>Topic</b>  
+                     <ul>
+                        {% for topic in project.topics %}
+                           <li>{{ topic.code }} - {{ topic.title }}</li>
+                        {% endfor %}
+                     </ul>
+                  </li>
+               {% endif %}
+
+               {% if project.subjects %}
+                  <li><b>Subject</b>  
+                     <ul>
+                        {% for subject in project.subjects %}
+                           <li>{{ subject.code }} - {{ subject.title }}</li>
+                        {% endfor %}
+                     </ul>
+                  </li>
+               {% endif %}
+               
+               {% if project.callForPropos %}
+                  <li><b>Call For Proposal</b>  
+                     <ul>
+                        <li>{{ project.callForPropos }}</li>
+                     </ul>
+                  </li>
+               {% endif %}
+            </ul>
+         </div>
+
+         <div class="col-sm-3">
+            <ul>
+               {% if project.lastUpdate %}
+                  <li><b>Last update on Cordis</b>  
+                     <ul>
+                        <li>{{ project.lastUpdate }}</li>
+                     </ul>
+                  </li>
+               {% endif %}
+
+               {# if project.statproject.updateDate %}
+                  <li><b>Last update in DB</b>  
+                     <ul>
+                        <li>{{ project.statproject.updateDate }}</li>
+                     </ul>
+                  </li>
+               {% endif %}
+
+               {% if project.statproject.insertDate %}
+                  <li><b>Inserted in DB</b>  
+                     <ul>
+                        <li>{{ project.statproject.insertDate }}</li>
+                     </ul>
+                  </li>
+               {% endif #}
+
+               {% if project.reference %}
+                  <li><b>Project Reference</b>  
+                     <ul>
+                        <li>{{ project.reference }}</li>
+                     </ul>
+                  </li>
+               {% endif %}
+            </ul>
+         </div> 
+      </div>
+
+      {% if project.coordinator %}
+         {% if project.coordinator|length == 1 and project.coordinator[0].prinInvestFirstName %}
+            <h3>Principal Investigator</h3>
+            {{ project.coordinator[0].prinInvestFirstName }} {{ project.coordinator[0].prinInvestLastName }}<br>
+            Tel.: {{ project.coordinator[0].prinInvestTel }}<br>
+            Fax: {{ project.coordinator[0].prinInvestFax }}
+         {% endif %}
+      {% endif %}
+
+      {% if project.coordinator %}
+      <h3>{# if project.flagproject.projType == 'withPartCoord' %}Coordinator{% else %}Host Institution{% endif %}{% if project.coordinator|length > 1 %}s{% endif %} ({{ project.coordinator|length #})</h3>
+         <div class="row">
+            <div class="col-sm-12 col-md-10 row">
+               {% for coordinator in project.coordinator %}
+                  <div class="institution">
+                     <div class="header">
+                        <div class="name col-xs-9">{{ coordinator.name.title() }}
+                           {% if coordinator.shortName %}
+                                 <span style="color:gray;">({{ coordinator.shortName.title() }})</span>
+                           {% endif %}
+                        </div>   
+                        <div class="country col-sm-2 hidden-xs">
+                           {% if coordinator.country %}
+                              {{ coordinator.country }}
+                           {% endif %}
+                        </div>
+                        <div class="country col-sm-1 col-xs-2 text-right"><i class="glyphicon glyphicon-plus"></i></div>
+                     </div>
+                     <div class="content col-xs-12">
+                        {# if coordinator.address %}
+                           <div>{{ coordinator.addresproject.title() }}</div>
+                        {% endif #}
+
+                        {% if coordinator.postalCode or coordinator.city %}
+                           <div>
+                              {% if coordinator.postalCode %}
+                                 {{ coordinator.postalCode }}
+                              {% endif %}
+
+                              {% if coordinator.city %}
+                                 {{ coordinator.city.title() }}
+                              {% endif %}
+                           </div>
+                        {% endif %}
+
+                        {% if coordinator.country %}
+                           <div>{{ coordinator.country }}</div>
+                        {% endif %}
+
+                        {% if coordinator.firstName %}
+                           <div>Administrative contact: {{ coordinator.firstName }} {{ coordinator.lastName }}</div>
+                        {% endif %}
+
+                        {% if coordinator.tel %}
+                           <div>Tel.: {{ coordinator.tel }}</div>
+                        {% endif %}
+
+                        {% if coordinator.fax %}
+                           <div>Fax: {{ coordinator.fax }}</div>
+                        {% endif %}
+                     </div>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
+      {% endif %}
+
+      {% if project.participant %}
+      <h3>{# { if project.flagproject.projType == 'withPartCoord' %}Participant{% if project.participant|length > 1 %}s{% endif %}{% else %}Beneficiar{% if project.participant|length == 1 %}y{% else %}ies{% endif %}{% endif %} ({{ project.participant|length }}) #}</h3>
+         <div class="row">
+            <div class="col-sm-12 col-md-10 row">
+               {% for participant in project.participant %}
+                  <div class="institution">
+                     <div class="header">
+                        <div class="name col-xs-9">{{ participant.name.title() }}
+                           {% if participant.shortName %}
+                                 <span style="color:gray;">({{ participant.shortName.title() }})</span>
+                           {% endif %}
+                        </div>   
+                        <div class="country col-sm-2 hidden-xs">
+                           {% if participant.country %}
+                              {{ participant.country }}
+                           {% endif %}
+                        </div>
+                        <div class="country col-sm-1 col-xs-2 text-right"><i class="glyphicon glyphicon-plus"></i></div>
+                     </div>
+                     <div class="content col-xs-12">
+                        {# if participant.address %}
+                           <div>{{ participant.addresproject.title() }}</div>
+                        {% endif #}
+
+                        {% if participant.postalCode or participant.city %}
+                           <div>
+                              {% if participant.postalCode %}
+                                 {{ participant.postalCode }}
+                              {% endif %}
+
+                              {% if participant.city %}
+                                 {{ participant.city.title() }}
+                              {% endif %}
+                           </div>
+                        {% endif %}
+
+                        {% if participant.country %}
+                           <div>{{ participant.country }}</div>
+                        {% endif %}
+
+                        {% if participant.firstName %}
+                           <div>Administrative contact: {{ participant.firstName }} {{ participant.lastName }}</div>
+                        {% endif %}
+
+                        {% if participant.tel %}
+                           <div>Tel.: {{ participant.tel }}</div>
+                        {% endif %}
+
+                        {% if participant.fax %}
+                           <div>Fax: {{ participant.fax }}</div>
+                        {% endif %}
+                     </div>
+                  </div>
+               {% endfor %}
+            </div>
+         </div>
+      {% endif %}
+
+      {% if (project.website and project.website[0].delivWeb) or d[0]|length > 0 or d[1]|length > 0 or d[2]|length > 0 %}
+         <h3>Deliverables</h3>
+      {% endif %} 
+
+      {% if project.website and project.website[0].delivWeb %}
+      <p>
+         <small>
+            {% for website in project.website %}
+               {% if website.delivWeb %} 
+                  Official website &ndash; subpage
+                     <ul>
+                        {% for website in project.website %}
+                           {% if website.delivWeb %} 
+                           <li><a href="{{ website.delivWeb }}" target="_blank">{{ website.delivWeb }} <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+                           {% endif %}
+                        {% endfor %}
+                     </ul>
+               {% endif %}
+            {% endfor %}   
+         </small>
+      </p>
+      {% endif %} 
+
+      {% if d %}
+      <div class="row deliverables">
+         <div class="col-lg-10">
+            {% for delivGroup in d %}
+               {% if delivGroup[1]|length > 0 %}
+                  <b>{{ delivGroup[0] }} ({{ delivGroup[1]|length }})</b>
+                  <ul>
+                     {% for deli in delivGroup[1] %}
+                        <li>
+                 
+                           {% if deli.deliv.sourceInfo[0].delivType == SH_CONF['DELIV_TYPE']['CORDIS_REPORT'] %}
+                              <a href="/report/{{ deli.id }}/{{ deli.deliv.hash }}" data-toggle="tooltip" data-placement="bottom" title="show report"><i class="glyphicon glyphicon-eye-open"></i></a>
+                           {% else %}
+                           <a href="/download/{{ deli.id }}/{{ deli.deliv.hash }}" data-toggle="tooltip" data-placement="bottom" title="download from Athena"><i class="glyphicon glyphicon-save"></i></a>
+                              {% endif %}
+                           <a href="{{ deli.deliv.sourceInfo[0].url }}" target="_blank" data-toggle="tooltip" data-placement="bottom"  data-html="true" title="download from external source
+                              {% if deli.deliv.sourceInfo|length > 1 %}
+                                 <br><br>ALTERNATIVE TITLES:<br>
+                                 {% for sourceInfo in deli.deliv.sourceInfo %}
+                                    <div style='text-align:left'>
+                                       {{ loop.index }}. {{ sourceInfo.title }}
+                                    </div>
+                                 {% endfor %}
+                              {% endif %}
+                              ">{{ deli.deliv.sourceInfo[0].title }}</a>
+                        </li>    
+                     {% endfor %}
+                  </ul>
+               {% endif %}   
+            {% endfor %} 
+         </div>
+      </div>
+      {% endif %}
+
+      {% if similar %}
+         <br><h3>Similar projects</h3>
+         <div class="row">
+            {% for item in similar %}
+            <div class="col-lg-4">
+               <div class="similar">
+                  <a href="/project/{{ item.id[0] }}"><h3>{{ item.title[0] }}</h3></a>
+                  {% if item.objective and item.objective[0] %}
+                     <p>{{ item.objective[0][:300] }}...</p>
+                  {% endif %}
+               </div>
+            </div>
+            {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if url %}
+         <center><a href="{{ url }}"><h3><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>Return to search</h3></a></center> 
+      {% else %}
+         <center><a href="/"><h3><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>Return to search</h3></a></center> 
+      {% endif %}
+	</div>
+{% endblock %}
