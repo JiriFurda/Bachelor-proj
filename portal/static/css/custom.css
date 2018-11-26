@@ -6,8 +6,8 @@
 
 .img-eu_flag
 {
-	width: 120px;
-	height: 120px;
+	width: 40px;
+	height: 40px;
 } 
 
 .input-main_search
@@ -17,7 +17,7 @@
 
 .header
 {
-	height: 150px;
+	height: 50px;
 
 	position: sticky;
 	top: 0;
@@ -38,14 +38,27 @@
 
 }
 
+.col
+{
+	padding-top: 20px;
+}
+
+.col--side
+{
+	width: 160px;
+	min-width: 160px;
+}
+
+.col--main
+{
+	padding: 20px;
+}
+
 .sidebar
 {
-	min-width: 130px;
-	margin-right: 20px;
-
 	position: sticky;
-	top: 200px;
-	height: calc(100vh - 200px);
+	top: 50px;
+	height: calc(100vh - 50px);
 	overflow-y: auto;
 }
 

@@ -10,8 +10,13 @@
 		<form action="{{ url_for('results') }}" method="GET" class="flex-grow-1">
 			<header class="header bg-ec_dark_blue">
 				<div class="container container--header">
-					<img src="static/img/European_stars.svg" class="img-eu_flag">
-					<input class="form-control input-main_search" type="text" name="query" placeholder="Search" aria-label="Search" value="{{ get_arguments.get('query', '') }}">
+					<div class="col--side">
+						<img src="static/img/European_stars.svg" class="img-eu_flag">
+					</div>
+					<div class="col--main">
+						<input class="form-control input-main_search" type="text" name="query" placeholder="Search" aria-label="Search" value="{{ get_arguments.get('query', '') if get_arguments }}">
+
+					</div>
 				</div>
 			</header>
 

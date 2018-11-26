@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, abort
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 import pprint
+import json
 
 app = Flask(__name__)
 client = Elasticsearch()
@@ -22,12 +23,12 @@ def results():
         'programme':
             {
                 'label': 'Programme',
-                'field': 'fundedUnder.programme',
+                'field': 'fundedUnder.programme.keyword',
             },
         'subprogramme':
             {
                 'label': 'Subprogramme',
-                'field': 'fundedUnder.subprogramme',
+                'field': 'fundedUnder.subprogramme.keyword',
             },
     }
 
@@ -36,7 +37,7 @@ def results():
 
 
     # Process query send through GET request
-    if request.args.has_key('query'):
+    if request.args.has_key('query') and request.args.get('query') != '':
         search = search.query(
             Q('multi_match', query=request.args.get('query'),
               fields=['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb']))
@@ -96,8 +97,8 @@ def json_results():
 
     response = s.execute()
 
-    return render_template('debug.html', debug=pprint.pprint(response.to_dict))
+    return render_template('debug.html', debug=json.dumps(response.hits[0].to_dict()))
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=2020)
+    app.run(host='0.0.0.0', debug=True, port=2021)

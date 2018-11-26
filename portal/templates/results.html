@@ -2,7 +2,7 @@
 
 {% block body %}
 	<div class="container container--main">
-		<div class="sidebar">
+		<div class="col--side sidebar">
 				<button class="btn" type="send">Use filters</button>
 				{% for facet_name, facet_attributes in facets.items() %}
 					<fieldset class="form-group">
@@ -35,8 +35,12 @@
 					</fieldset>
 				{% endfor %}
 		</div>
-		<div class="flex-grow-1">
+		<div class="col--main flex-grow-1 border border-bottom-0 bg-white">
 			{{ debug }}
+
+			<h1 class="h3">Search results</h1>
+
+			{{ results.hits.total }} results
 
 			{% for result in results %}
 				
