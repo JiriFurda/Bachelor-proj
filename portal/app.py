@@ -3,6 +3,7 @@
 from flask import Flask, render_template, request, abort
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
+from flask_paginate import Pagination, get_page_args
 import pprint
 import json
 
@@ -30,6 +31,11 @@ def results():
                 'label': 'Subprogramme',
                 'field': 'fundedUnder.subprogramme.keyword',
             },
+        'funding':
+            {
+                'label': 'Funding scheme',
+                'field': 'fundingScheme.code.keyword',
+            }
     }
 
     search = Search(using=client, index='xstane34_projects')
@@ -67,15 +73,30 @@ def results():
         search.aggs.bucket(facet_name, 'terms', field=facet_attributes['field'])
 
 
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    per_page = 10
+    paginate_from = page*per_page
+    paginate_to = paginate_from+per_page
+    search = search[paginate_from:paginate_to]
+
     # Execute the search
+
     response = search.execute()
+
+
+    total = response.hits.total
+    #pagination_users = get_users(offset=offset, per_page=per_page)
+    #pagination = Pagination(page=page, per_page=per_page, total=total,
+    #                        css_framework='bootstrap4')
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
 
     #
     for facet_name, facet_attributes in facets.items():
         facet_attributes['data'] = eval('response.aggregations.' + facet_name).buckets
 
-    return render_template('results.html', results=response, facets=facets, get_arguments=request.args,
-                           debug=Q("match").to_dict())
+    return render_template('results.html', results=response, facets=facets, get_arguments=request.args, page=page, per_page=per_page, pagination=pagination)
 
 
 @app.route('/projects/<int:project_id>')
