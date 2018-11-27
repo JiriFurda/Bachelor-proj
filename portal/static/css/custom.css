@@ -1,3 +1,8 @@
+body
+{
+    font-size: 14px;
+}
+
 .bg-ec_dark_blue
 {
 	background-color: #004494;
@@ -38,11 +43,6 @@
 
 }
 
-.col
-{
-	padding-top: 20px;
-}
-
 .col--side
 {
 	width: 160px;
@@ -51,8 +51,18 @@
 
 .col--main
 {
-	padding: 20px;
 	width: 100%;
+}
+
+.col--main, .col--side
+{
+    padding: 10px;
+}
+
+.row--content
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .sidebar
@@ -80,11 +90,10 @@ em
 
 .facet-label
 {
-	line-height: 1.8;
-    font-size: 13px;
 	color: #6c757d;
 	width: 100%;
 	cursor: pointer;
+    padding: 5px;
 }
 
 .facet-label:hover
@@ -99,8 +108,24 @@ em
 
 }
 
+.facet-label:not(.collapsed)
+{
+    font-weight: bold;
+    color: #000;
+}
+
 .facet-label:after
 {
 	content: '▲';
 	float: right;
+}
+
+.facet-filter
+{
+    height: 20px;
+}
+
+.facet-submenu
+{
+    margin-bottom: 10px;
 }
