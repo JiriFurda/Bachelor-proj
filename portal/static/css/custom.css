@@ -52,6 +52,7 @@
 .col--main
 {
 	padding: 20px;
+	width: 100%;
 }
 
 .sidebar
@@ -75,4 +76,31 @@
 em
 {
 	font-weight: 700;
+}
+
+.facet-label
+{
+	line-height: 1.8;
+    font-size: 13px;
+	color: #6c757d;
+	width: 100%;
+	cursor: pointer;
+}
+
+.facet-label:hover
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.facet-label.collapsed:after
+{
+	content: '▼'; /* &#x25BC; */
+
+}
+
+.facet-label:after
+{
+	content: '▲';
+	float: right;
 }

@@ -3,14 +3,13 @@
 {% block body %}
 	<div class="container container--main">
 		<div class="col--side sidebar">
-				<button class="btn" type="send">Use filters</button>
+				<!--<button class="btn" type="send">Use filters</button>-->
+			<ul class="list-unstyled">
 				{% for facet_name, facet_attributes in facets.items() %}
-					<fieldset class="form-group">
-			    		<legend class="line_under">
-			    			<a data-toggle="collapse" href="#collapse-{{ facet_name }}" role="button" aria-expanded="false" aria-controls="collapse-{{ facet_name }}">
+					<li>
+			    		<div class="facet-label" data-toggle="collapse" href="#collapse-{{ facet_name }}" role="button" aria-expanded="false" aria-controls="collapse-{{ facet_name }}">
 			    				{{ facet_attributes['label'] }}
-			    			</a>
-			    		</legend>
+			    		</div>
 			    		<div class="collapse" id="collapse-{{ facet_name }}">
 			    			<input class="form-control facet-filter" type="text">
 			    			{% set facetLoop = loop %}
@@ -30,10 +29,10 @@
 									</label>
 								</div>
 							{% endfor %}
-						
 						</div>
-					</fieldset>
+					</li>
 				{% endfor %}
+			</ul>
 		</div>
 		<div class="col--main flex-grow-1 border border-bottom-0 bg-white">
 			{{ debug }}

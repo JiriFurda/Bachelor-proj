@@ -78,7 +78,7 @@ def results():
     per_page = 10
     paginate_from = page*per_page
     paginate_to = paginate_from+per_page
-    search = search[paginate_from:paginate_to]
+    search = search[paginate_from:paginate_to]  # @todo Change to scan API becuase of large amount of data
 
     # Execute the search
 
@@ -86,9 +86,6 @@ def results():
 
 
     total = response.hits.total
-    #pagination_users = get_users(offset=offset, per_page=per_page)
-    #pagination = Pagination(page=page, per_page=per_page, total=total,
-    #                        css_framework='bootstrap4')
     pagination = Pagination(page=page, per_page=per_page, total=total,
                             css_framework='bootstrap4')
 

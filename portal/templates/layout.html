@@ -14,8 +14,21 @@
 						<img src="static/img/European_stars.svg" class="img-eu_flag">
 					</div>
 					<div class="col--main">
-						<input class="form-control input-main_search" type="text" name="query" placeholder="Search" aria-label="Search" value="{{ get_arguments.get('query', '') if get_arguments }}">
-
+						<div class="input-group input-group-sm">
+							<div class="input-group-prepend">
+								<span class="input-group-text p-0">
+									<select name="search" class="bg-transparent border-0 custom-select" id="inputGroupSelect01">
+										<option value="all" selected>All</option>
+										<option value="proj">Projects</option>
+										<option value="deliv">Deliverables</option>
+									</select>
+								</span>
+							</div>
+							<input name="query" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" value="{{ get_arguments.get('query', '') if get_arguments }}">
+							<div class="input-group-append">
+								<button class="btn btn-light" type="send">Search</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</header>
