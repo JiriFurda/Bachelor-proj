@@ -55,6 +55,7 @@ def results():
     ])
 
     search = Search(using=client, index='xstane34_projects')
+    #search = Search(using=client, index='xstane34_deliverables')
     search = search.highlight('objective')
 
 
@@ -92,9 +93,9 @@ def results():
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
     per_page = 10
-    paginate_from = page*per_page
+    paginate_from = (page-1)*per_page
     paginate_to = paginate_from+per_page
-    search = search[paginate_from:paginate_to]  # @todo Change to scan API becuase of large amount of data
+    search = search[paginate_from:paginate_to] # @todo Change to scan API becuase of large amount of data
 
     # Execute the search
 

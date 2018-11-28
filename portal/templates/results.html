@@ -37,8 +37,10 @@
 				{% endfor %}
 			</ul>
 		</div>
-		<div class="col--main flex-grow-1 border bg-white my-2">
+		<div class="col--main flex-grow-1 content">
 			<h1 class="h3">Search results</h1>
+
+            {{ debug }}
 
             <p>
 			Found {{ results.hits.total }} results
@@ -47,6 +49,7 @@
             <p>
             {# @todo Hide when no facet is used #}
             {# @todo Move logic to .py file #}
+            {# @todo Use real facets not GET arguments #}
             Active filters:
             {% for arg_name, arg_value in request.args.iteritems(True) %}
                 {% if arg_name != 'query' and arg_name != 'search' %}
@@ -56,21 +59,20 @@
             </p>
 
 			{% for result in results %}
-				
-				<div class="card card--search_result rounded shadow-sm">
+
+				<div class="card card--search_result card--small-padding rounded shadow-sm">
 					<div class="card-header bg-ec_dark_blue">
-						{{ result.acronym }}
+                        <a href="/projects/{{ result.id }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
 					</div>
 					<div class="card-body">
-						<h5 class="card-title">{{ result.title }}</h5>
-						<p class="card-text">
+						<p>
 								{% if result.meta.highlight and result.meta.highlight.objective %}
-									<p class="text-justify"> ... {{ ' ... '.join(result.meta.highlight.objective)|safe }}... </p>
+									...{{ ' ... '.join(result.meta.highlight.objective)|safe }}...
 								{% elif result.objective %}
-									<p class="text-justify"> {{ result.objective[:200] }}... </p>
+									{{ result.objective[:300] }}...
 								{% endif %}
 						</p>
-						<a class="btn btn-secondary" href="/projects/{{ result.id }}" role="button">View details »</a>
+						<a href="/projects/{{ result.id }}">View details »</a>
 					</div>
 					<div class="card-footer text-muted">
 						{{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
@@ -78,7 +80,9 @@
 				</div>
 			{% endfor %}
 
-			{{ pagination.links }}
+            <div class="d-flex justify-content-center pt-1">
+			    {{ pagination.links }}
+            </div>
 		</div>
 	</div>
 {% endblock %}
