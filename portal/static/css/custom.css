@@ -45,8 +45,8 @@ body
 
 .col--side
 {
-	width: 160px;
-	min-width: 160px;
+	width: 200px;
+	min-width: 200px;
 }
 
 .col--main
@@ -128,4 +128,13 @@ em
 .facet-submenu
 {
     margin-bottom: 10px;
+    overflow-x: auto;
+}
+
+.facet-submenu-item
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
 }

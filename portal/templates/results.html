@@ -25,8 +25,8 @@
                                         {% endif %}
 									>
 									<label class="form-check-label w-100" for="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]">
-										<div class="w-100 d-flex flex-row justify-content-between">
-											<div>{{ facet_data.key }}</div>
+										<div class="facet-submenu-item">
+											<div class="d-inline-block text-truncate" data-toggle="tooltip" data-placement="left" title="{{ facet_data.key }}">{{ facet_data.key }}</div>
 											<div><span class="badge badge-pill badge-secondary">{{ facet_data.doc_count }}</span></div>
 										</div>
 									</label>
@@ -86,12 +86,12 @@
 
 {% block javascript %}
 <script>
-	$(".facet-filter").on('input', function()
+	$('.facet-filter').on('input', function()
 	{
 		var searchedValue = $(this).val().toLowerCase();
 
-		$('.form-check').hide();
-		$('.form-check').filter(function()
+		$(this).siblings('.form-check').hide();
+		$(this).siblings('.form-check').filter(function()
 		{
 			return String($(this).data('value')).toLowerCase().indexOf(searchedValue) > -1;
 		}).show();

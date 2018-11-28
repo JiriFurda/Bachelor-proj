@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, abort
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 from flask_paginate import Pagination, get_page_args
+from collections import OrderedDict
 import pprint
 import json
 
@@ -15,28 +16,43 @@ client = Elasticsearch()
 def results():
 
     # Available facets for filter
-    facets = {
-        'year':
-            {
-                'label': 'Year',
-                'field': 'year',
-            },
-        'programme':
+    facets = OrderedDict([
+        ('programme',
             {
                 'label': 'Programme',
                 'field': 'fundedUnder.programme.keyword',
-            },
-        'subprogramme':
+            }),
+        ('subprogramme',
             {
                 'label': 'Subprogramme',
                 'field': 'fundedUnder.subprogramme.keyword',
-            },
-        'funding':
+            }),
+        ('topic',
+            {
+                'label': 'Topic',
+                'field': 'topics.title.keyword',
+            }),
+        ('funding',
             {
                 'label': 'Funding scheme',
                 'field': 'fundingScheme.code.keyword',
-            }
-    }
+            }),
+        ('coordinator',
+            {
+                'label': 'Coordinator',
+                'field': 'coordinator.name.keyword',
+            }),
+        ('coordcountry',
+            {
+                'label': 'Coord. Country',
+                'field': 'coordinator.country.keyword',
+            }),
+        ('year',
+            {
+                'label': 'Year',
+                'field': 'year',
+            })
+    ])
 
     search = Search(using=client, index='xstane34_projects')
     search = search.highlight('objective')
