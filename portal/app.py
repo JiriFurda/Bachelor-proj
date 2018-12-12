@@ -87,7 +87,7 @@ def results():
 
     # Create facets aggregations (facet specific count in sidebar)
     for facet_name, facet_attributes in facets.items():
-        search.aggs.bucket(facet_name, 'terms', field=facet_attributes['field'])
+        search.aggs.bucket(facet_name, 'terms', field=facet_attributes['field'], size=6)
 
 
     page, per_page, offset = get_page_args(page_parameter='page',
