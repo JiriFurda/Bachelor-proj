@@ -7,6 +7,7 @@ from flask_paginate import Pagination, get_page_args
 from collections import OrderedDict
 import pprint
 import json
+import ast
 
 app = Flask(__name__)
 client = Elasticsearch()
@@ -65,8 +66,6 @@ def results():
             Q('multi_match', query=request.args.get('query'),
               fields=['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb']))
 
-
-
     # Process facet filters sent through GET request
     facets_query = None
 
@@ -83,6 +82,8 @@ def results():
 
     if facets_query is not None:  # If any facet is used
         search = search.query(facets_query)
+
+    search_without_facets = search
 
 
     # Create facets aggregations (facet specific count in sidebar)
@@ -110,7 +111,25 @@ def results():
     for facet_name, facet_attributes in facets.items():
         facet_attributes['data'] = eval('response.aggregations.' + facet_name).buckets
 
-    return render_template('results.html', results=response, facets=facets, get_arguments=request.args, page=page, per_page=per_page, pagination=pagination)
+    return render_template('results.html', results=response, facets=facets, get_arguments=request.args, page=page, per_page=per_page, pagination=pagination, search_dict=search_without_facets.to_dict())
+
+
+@app.route('/ajax_search_in_facet/<string:facet_name>')
+def ajax_search_in_facet(facet_name):
+    facet_name = "subprogramme"
+    facet_field = "fundedUnder.subprogramme.keyword"
+
+    search_dict = request.args.get('search_dict')   # Load GET parameter
+    search_dict = ast.literal_eval(search_dict)   # Change single quotes to double quotes
+    search_dict = json.loads(json.dumps(search_dict))
+
+
+    search = Search(using=client, index='xstane34_projects')    # Set search env
+    search = search.update_from_dict(search_dict)   # Use main search query used
+    search.aggs.bucket(facet_name, 'terms', field=facet_field, size=100)    # Aggregate the field
+    response = search.execute()
+
+    return render_template('ajax_search_in_facet.html', results=eval('response.aggregations.' + facet_name).buckets, facet_name=facet_name)
 
 
 @app.route('/projects/<int:project_id>')

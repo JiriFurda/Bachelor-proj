@@ -1,0 +1,19 @@
+{% for result in results %}
+    <div class="form-check w-100" data-value="{{ result.key }}">
+        <input class="form-check-input"
+            type="checkbox"
+            value="{{ result.key }}"
+            id="defaultCheck[@todo][{{ loop.index }}]"
+            name="{{ facet_name }}"
+            {# if facet_data.key in get_arguments.getlist(facet_name)
+               checked
+             endif #}
+        >
+        <label class="form-check-label w-100" for="defaultCheck[@todo][{{ loop.index }}]">
+            <div class="facet-submenu-item">
+                <div class="d-inline-block text-truncate" data-toggle="tooltip" data-placement="left" title="{{ result.key }}">{{ result.key }}</div>
+                <div><span class="badge badge-pill badge-secondary">{{ result.doc_count }}</span></div>
+            </div>
+        </label>
+    </div>
+{% endfor %}

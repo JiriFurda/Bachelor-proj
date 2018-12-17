@@ -34,12 +34,9 @@
 								</div>
                                 {% else %}
                                     <button type="button"
-                                            class="btn btn-sm btn-link"
-                                            data-toggle="popover"
-                                            data-container="body"
-                                            data-placement="left"
+                                            class="btn btn-sm btn-link more-facets"
                                             title="{{ facet_attributes['label'] }}"
-                                            data-content="Lorem ipsum">More...</button>
+                                    >More...</button>
                                 {% endif %}
 							{% endfor %}
 						</div>
@@ -51,6 +48,9 @@
 			<h1 class="h3">Search results</h1>
 
             {{ debug }}
+
+            <div id="test">
+            </div>
 
             <p>
 			Found {{ results.hits.total }} results
@@ -110,5 +110,22 @@
 			return String($(this).data('value')).toLowerCase().indexOf(searchedValue) > -1;
 		}).show();
 	});
+
+
+    $('.more-facets').click(function()
+    {
+        alert('aaa');
+
+        $.ajax(
+        {
+            url: '/ajax_search_in_facet/fundedUnder.subprogramme.keyword',
+            data: { 'search_dict': "{{ search_dict|safe }}" },
+            success: function (data, status, xhr)
+            {// success callback function
+                $('#test').append(data);
+            },
+        });
+    });
+
 </script>
 {% endblock %}
