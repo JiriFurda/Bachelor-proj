@@ -189,3 +189,11 @@ em
 {
 	margin-bottom: 0;
 }
+
+.in-facet-search
+{
+	position: sticky;
+	top: 0;
+	background-color: #ffffff;
+	z-index: 1;
+}

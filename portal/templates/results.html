@@ -36,7 +36,11 @@
                                     <button type="button"
                                             class="btn btn-sm btn-link more-facets"
                                             title="{{ facet_attributes['label'] }}"
-                                    >More...</button>
+                                            data-toggle="modal"
+                                            data-target="#exampleModal"
+                                    >
+                                        More...
+                                    </button>
                                 {% endif %}
 							{% endfor %}
 						</div>
@@ -95,6 +99,31 @@
             </div>
 		</div>
 	</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="in-facet-search">
+                  <input class="form-control" id="in-facet-search-input">
+              </div>
+              <div id="test-modal">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}
 
 
@@ -114,7 +143,8 @@
 
     $('.more-facets').click(function()
     {
-        alert('aaa');
+        //alert('aaa');
+        //var $moreLinkElement = $(this);
 
         $.ajax(
         {
@@ -122,7 +152,26 @@
             data: { 'search_dict': "{{ search_dict|safe }}" },
             success: function (data, status, xhr)
             {// success callback function
-                $('#test').append(data);
+                $('#test-modal').html(data);
+            },
+        });
+    });
+
+    $('#in-facet-search-input').on('input propertychange', function()
+    {
+        //alert($(this).val());
+        var searchVal = $(this).val();
+
+        $.ajax(
+        {
+            url: '/ajax_search_in_facet/fundedUnder.subprogramme.keyword',
+            data:
+                { 'search_dict': "{{ search_dict|safe }}",
+                    'search_val': searchVal
+                },
+            success: function (data, status, xhr)
+            {// success callback function
+                $('#test-modal').html(data);
             },
         });
     });

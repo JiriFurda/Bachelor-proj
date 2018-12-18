@@ -127,6 +127,11 @@ def ajax_search_in_facet(facet_name):
     search = Search(using=client, index='xstane34_projects')    # Set search env
     search = search.update_from_dict(search_dict)   # Use main search query used
     search.aggs.bucket(facet_name, 'terms', field=facet_field, size=100)    # Aggregate the field
+
+    search_val = '*' + request.args.get('search_val') + '*'
+    search = search.query('wildcard', fundedUnder__subprogramme=search_val)
+
+
     response = search.execute()
 
     return render_template('ajax_search_in_facet.html', results=eval('response.aggregations.' + facet_name).buckets, facet_name=facet_name)
