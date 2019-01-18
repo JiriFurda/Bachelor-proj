@@ -8,6 +8,7 @@ from collections import OrderedDict
 import pprint
 import json
 import ast
+from models.facets import Facet
 
 app = Flask(__name__)
 client = Elasticsearch()
@@ -116,8 +117,9 @@ def results():
 
 @app.route('/ajax_search_in_facet/<string:facet_name>')
 def ajax_search_in_facet(facet_name):
-    facet_name = "subprogramme"
-    facet_field = "fundedUnder.subprogramme.keyword"
+    facet = Facet.get(facet_name)
+    if(facet is None):
+        return
 
     search_dict = request.args.get('search_dict')   # Load GET parameter
     search_dict = ast.literal_eval(search_dict)   # Change single quotes to double quotes
@@ -126,7 +128,7 @@ def ajax_search_in_facet(facet_name):
 
     search = Search(using=client, index='xstane34_projects')    # Set search env
     search = search.update_from_dict(search_dict)   # Use main search query used
-    search.aggs.bucket(facet_name, 'terms', field=facet_field, size=100)    # Aggregate the field
+    search.aggs.bucket(facet.name, 'terms', field=facet.field, size=100)    # Aggregate the field
 
     if request.args.get('search_val') is not None:
         search_val = '*' + request.args.get('search_val') + '*'
@@ -136,7 +138,7 @@ def ajax_search_in_facet(facet_name):
 
     response = search.execute()
 
-    return render_template('ajax_search_in_facet.html', results=eval('response.aggregations.' + facet_name).buckets, facet_name=facet_name)
+    return render_template('ajax_search_in_facet.html', results=eval('response.aggregations.' + facet.name).buckets, facet=facet)
 
 
 @app.route('/projects/<int:project_id>')

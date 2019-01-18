@@ -37,7 +37,8 @@
                                             class="btn btn-sm btn-link more-facets"
                                             title="{{ facet_attributes['label'] }}"
                                             data-toggle="modal"
-                                            data-target="#exampleModal"
+                                            data-target="#facetModal"
+                                            data-facet="{{ facet_name }}"
                                     >
                                         More...
                                     </button>
@@ -46,6 +47,9 @@
 						</div>
 					</li>
 				{% endfor %}
+                <li>
+                    <button class="btn btn-secondary" type="submit">Apply filters</button>
+                </li>
 			</ul>
 		</div>
 		<div class="col--main flex-grow-1 content">
@@ -101,11 +105,11 @@
 	</div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade" id="facetModal" tabindex="-1" role="dialog" aria-labelledby="facetModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="facetModalLabel">Facet Modal Title</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -114,7 +118,7 @@
               <div class="in-facet-search">
                   <input class="form-control" id="in-facet-search-input">
               </div>
-              <div id="test-modal">
+              <div id="facet-modal-content">
               </div>
           </div>
           <div class="modal-footer">
@@ -145,14 +149,16 @@
     {
         //alert('aaa');
         //var $moreLinkElement = $(this);
+        var facet = $(this).data('facet');
 
         $.ajax(
         {
-            url: '/ajax_search_in_facet/fundedUnder.subprogramme.keyword',
+            url: '/ajax_search_in_facet/'+facet,
             data: { 'search_dict': "{{ search_dict|safe }}" },
             success: function (data, status, xhr)
-            {// success callback function
-                $('#test-modal').html(data);
+            {
+                $('#facetModal #in-facet-search-input').val('');    // Reset search input
+                $('#facetModal #facet-modal-content').html(data);
             },
         });
     });
@@ -171,7 +177,7 @@
                 },
             success: function (data, status, xhr)
             {// success callback function
-                $('#test-modal').html(data);
+                $('#facet-modal-content').html(data);
             },
         });
     });
