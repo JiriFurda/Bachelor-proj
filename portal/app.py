@@ -109,10 +109,11 @@ def results():
                             css_framework='bootstrap4')
 
     #
+    facets_data = {}
     for facet_name, facet_attributes in facets.items():
-        facet_attributes['data'] = eval('response.aggregations.' + facet_name).buckets
+        facets_data[facet_name] = eval('response.aggregations.' + facet_name).buckets
 
-    return render_template('results.html', results=response, facets=facets, get_arguments=request.args, page=page, per_page=per_page, pagination=pagination, search_dict=search_without_facets.to_dict())
+    return render_template('results.html', results=response, facets=Facet.all(), facets_data=facets_data, get_arguments=request.args, page=page, per_page=per_page, pagination=pagination, search_dict=search_without_facets.to_dict())
 
 
 @app.route('/ajax_search_in_facet/<string:facet_name>')

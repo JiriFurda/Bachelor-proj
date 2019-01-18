@@ -5,15 +5,15 @@
 		<div class="col--side sidebar">
 				<!--<button class="btn" type="send">Use filters</button>-->
 			<ul class="list-unstyled">
-				{% for facet_name, facet_attributes in facets.items() %}
+				{% for facet in facets %}
 					<li>
-			    		<div class="facet-label collapsed" data-toggle="collapse" href="#collapse-{{ facet_name }}" role="button" aria-expanded="false" aria-controls="collapse-{{ facet_name }}">
-			    				{{ facet_attributes['label'] }}
+			    		<div class="facet-label collapsed" data-toggle="collapse" href="#collapse-{{ facet.name }}" role="button" aria-expanded="false" aria-controls="collapse-{{ facet.name }}">
+			    				{{ facet.title }}
 			    		</div>
-			    		<div class="facet-submenu collapse" id="collapse-{{ facet_name }}">
+			    		<div class="facet-submenu collapse" id="collapse-{{ facet.name }}">
 			    			<input class="form-control facet-filter" type="text">
 			    			{% set facetLoop = loop %}
-							{% for facet_data in facet_attributes['data'] %}
+							{% for facet_data in facets_data[facet.name] %}
                                 {% if loop.index < 6 %}
 								<div class="form-check w-100" data-value="{{ facet_data.key }}">
 									<input class="form-check-input"
@@ -21,7 +21,7 @@
 										value="{{ facet_data.key }}"
 										id="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]"
 										name="{{ facet_name }}"
-                                        {% if facet_data.key in get_arguments.getlist(facet_name)  %}
+                                        {% if facet_data.key in get_arguments.getlist(facet.name)  %}
                                            checked
                                         {% endif %}
 									>
@@ -35,10 +35,11 @@
                                 {% else %}
                                     <button type="button"
                                             class="btn btn-sm btn-link more-facets"
-                                            title="{{ facet_attributes['label'] }}"
+                                            title="{{ facet.title }}"
                                             data-toggle="modal"
                                             data-target="#facetModal"
-                                            data-facet="{{ facet_name }}"
+                                            data-facet="{{ facet.name }}"
+                                            data-title="{{ facet.title }}"
                                     >
                                         More...
                                     </button>
@@ -149,15 +150,17 @@
     {
         //alert('aaa');
         //var $moreLinkElement = $(this);
-        var facet = $(this).data('facet');
+        var facet_name = $(this).data('facet');
+        var facet_title = $(this).data('title');
 
         $.ajax(
         {
-            url: '/ajax_search_in_facet/'+facet,
+            url: '/ajax_search_in_facet/'+facet_name,
             data: { 'search_dict': "{{ search_dict|safe }}" },
             success: function (data, status, xhr)
             {
                 $('#facetModal #in-facet-search-input').val('');    // Reset search input
+                $('#facetModal #facetModalLabel').text(facet_title);
                 $('#facetModal #facet-modal-content').html(data);
             },
         });
