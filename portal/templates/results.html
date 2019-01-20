@@ -37,9 +37,7 @@
                                             class="btn btn-sm btn-link more-facets"
                                             title="{{ facet.title }}"
                                             data-toggle="modal"
-                                            data-target="#facetModal"
-                                            data-facet="{{ facet.name }}"
-                                            data-title="{{ facet.title }}"
+                                            data-target="#facetModal-{{ facet.name }}"
                                     >
                                         More...
                                     </button>
@@ -105,53 +103,44 @@
 		</div>
 	</div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="facetModal" tabindex="-1" role="dialog" aria-labelledby="facetModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="facetModalLabel">Facet Modal Title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <div class="in-facet-search">
-                  <input class="form-control" id="in-facet-search-input">
+  <!-- Modal -->
+    {% for facet in facets %}
+        {% if facets_data[facet.name]|length >= 6 %}
+            <div class="modal fade facet-modal" id="facetModal-{{ facet.name }}" tabindex="-1" role="dialog" aria-labelledby="facetModalLabel-{{ facet.name }}" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="facetModalLabel-{{ facet.name }}">{{ facet.title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="in-facet-search">
+                          <input class="form-control" id="in-facet-search-input">
+                      </div>
+                      <div id="facet-modal-content">
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
               </div>
-              <div id="facet-modal-content">
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
 {% endblock %}
 
 
 {% block javascript %}
 <script>
-	$('.facet-filter').on('input', function()
-	{
-		var searchedValue = $(this).val().toLowerCase();
-
-		$(this).siblings('.form-check').hide();
-		$(this).siblings('.form-check').filter(function()
-		{
-			return String($(this).data('value')).toLowerCase().indexOf(searchedValue) > -1;
-		}).show();
-	});
-
-
     $('.more-facets').click(function()
     {
-        //alert('aaa');
-        //var $moreLinkElement = $(this);
-        var facet_name = $(this).data('facet');
-        var facet_title = $(this).data('title');
+        var modal_id = $(this).data('target');
+        var facet_name = modal_id.replace('#facetModal-','');
 
         $.ajax(
         {
@@ -159,10 +148,9 @@
             data: { 'search_dict': "{{ search_dict|safe }}" },
             success: function (data, status, xhr)
             {
-                $('#facetModal #in-facet-search-input').data('facet', facet_name);
-                $('#facetModal #in-facet-search-input').val('');    // Reset search input
-                $('#facetModal #facetModalLabel').text(facet_title);
-                $('#facetModal #facet-modal-content').html(data);
+                $(modal_id+' #in-facet-search-input').data('facet', facet_name);
+                $(modal_id+' #in-facet-search-input').val('');    // Reset search input
+                $(modal_id+' #facet-modal-content').html(data);
             },
         });
     });
