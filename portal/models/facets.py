@@ -15,7 +15,7 @@ class Facet:
                 Facet('funding', 'Funding scheme', 'fundingScheme.code.keyword'),
                 Facet('coordinator', 'Coordinator', 'coordinator.name.keyword'),
                 Facet('coordcountry', 'Coord. Country', 'coordinator.country.keyword'),
-                Facet('year', 'label', 'Year')
+                Facet('year', 'Year', 'year')
             ]
         return facets_list
 

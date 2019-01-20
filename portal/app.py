@@ -133,8 +133,8 @@ def ajax_search_in_facet(facet_name):
 
     if request.args.get('search_val') is not None:
         search_val = '*' + request.args.get('search_val') + '*'
-        search_val = search_val.lower()
-        search = search.query('wildcard', fundedUnder__subprogramme=search_val) # @todo experiment with __keyword
+        #search_val = search_val.lower() @todo wildcard seems to be case sensitive
+        search = search.query('wildcard', **{facet.field: search_val}) # @todo experiment with __keyword
 
 
     response = search.execute()

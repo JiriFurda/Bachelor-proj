@@ -20,7 +20,7 @@
 										type="checkbox"
 										value="{{ facet_data.key }}"
 										id="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]"
-										name="{{ facet_name }}"
+										name="{{ facet.name }}"
                                         {% if facet_data.key in get_arguments.getlist(facet.name)  %}
                                            checked
                                         {% endif %}
@@ -159,6 +159,7 @@
             data: { 'search_dict': "{{ search_dict|safe }}" },
             success: function (data, status, xhr)
             {
+                $('#facetModal #in-facet-search-input').data('facet', facet_name);
                 $('#facetModal #in-facet-search-input').val('');    // Reset search input
                 $('#facetModal #facetModalLabel').text(facet_title);
                 $('#facetModal #facet-modal-content').html(data);
@@ -168,12 +169,12 @@
 
     $('#in-facet-search-input').on('input propertychange', function()
     {
-        //alert($(this).val());
         var searchVal = $(this).val();
+        var facet_name = $(this).data('facet');
 
         $.ajax(
         {
-            url: '/ajax_search_in_facet/fundedUnder.subprogramme.keyword',
+            url: '/ajax_search_in_facet/'+facet_name,
             data:
                 { 'search_dict': "{{ search_dict|safe }}",
                     'search_val': searchVal
