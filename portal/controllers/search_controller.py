@@ -70,8 +70,8 @@ class SearchController:
             if arg_name in facets:  # If GET argument key is in facets dictionary
                 field = facets[arg_name]['field']
                 field = field.replace('.',
-                                      '__')  # Access nested fields @see https://elasticsearch-dsl.readthedocs.io/en
-                # /latest/search_dsl.html#dotted-fields
+                                      '__') # Access nested fields @see https://elasticsearch-dsl.readthedocs.io/en
+                                            # /latest/search_dsl.html#dotted-fields
 
                 if facets_query is None:
                     facets_query = Q("match", **{field: arg_value})  # Create new query

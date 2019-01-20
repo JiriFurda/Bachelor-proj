@@ -70,7 +70,7 @@
             Active filters:
             {% for arg_name, arg_value in request.args.iteritems(True) %}
                 {% if arg_name != 'query' and arg_name != 'search' %}
-                    <span class="badge badge-secondary">{{ arg_value }}</span>
+                    <span class="badge badge-secondary">{{ arg_value }}{# <a href="{{ url_for(request.endpoint) }}">X</a> #}</span>
                 {% endif %}
             {% endfor %}
             </p>
