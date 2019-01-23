@@ -66,6 +66,13 @@ def json_results():
 
     return render_template('debug.html', debug=json.dumps(response.hits[0].to_dict()))
 
+@app.route('/json_calls')
+def json_calls():
+    s = Search(using=client, index="xfurda00_calls")
+
+    response = s.execute()
+
+    return render_template('debug.html', debug=json.dumps(response.to_dict()))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=2021)
