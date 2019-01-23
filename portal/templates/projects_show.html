@@ -137,8 +137,7 @@
             {% endif %}
 
             <p class="card-text">{{ project.objective|safe }}</p>
-
-        <!--
+        
       {% if project.coordinator %}
          {% if project.coordinator|length == 1 and project.coordinator[0].prinInvestFirstName %}
             <h3>Principal Investigator</h3>
@@ -340,6 +339,6 @@
       {% else %}
          <center><a href="/"><h3><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>Return to search</h3></a></center> 
       {% endif %}
-      -->
+
 	</div>
 {% endblock %}
