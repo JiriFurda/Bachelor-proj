@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 import urllib, json
 from elasticsearch import Elasticsearch
-from elasticsearch_dsl import Document, Text, Index
+from elasticsearch_dsl import Document, Text, Index, Nested, InnerDoc
 
 client = Elasticsearch()
 callsIndex = Index('xfurda00_calls', using=client)
@@ -9,8 +9,16 @@ if callsIndex.exists():
     print('Index already exists!')
     callsIndex.delete(ignore=404)
 
+class Topic(InnerDoc):
+    topicIdentifier = Text()
+    title = Text()
+    tags = Text()
+
 class Call(Document):
     callId = Text()
+    programme = Text()
+    title = Text()
+    topics = Nested(Topic)
 
 callsIndex.document(Call)
 callsIndex.create()
@@ -29,6 +37,8 @@ class Extractor:
         for inputCall in inputCalls:
             outputCall = Call()
             outputCall.callId = inputCall['CallIdentifier']['CallId']
+            outputCall.programme = inputCall['FrameworkProgramme']
+            outputCall.title = inputCall['Title']
             outputCall.save()
             print('Saved call {0}'.format(outputCall.callId))
 
