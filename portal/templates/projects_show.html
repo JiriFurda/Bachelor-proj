@@ -318,27 +318,20 @@
       </div>
       {% endif %}
 
-      {% if similar %}
-         <br><h3>Similar projects</h3>
-         <div class="row">
-            {% for item in similar %}
-            <div class="col-lg-4">
-               <div class="similar">
-                  <a href="/project/{{ item.id[0] }}"><h3>{{ item.title[0] }}</h3></a>
-                  {% if item.objective and item.objective[0] %}
-                     <p>{{ item.objective[0][:300] }}...</p>
-                  {% endif %}
-               </div>
+        {% if similar_projects %}
+            <h3>Similar projects</h3>
+            <div class="row">
+                {% for similar_project in similar_projects %}
+                    <div class="col-md-4">
+                        <h4 class="h5">{{ similar_project.title }}</h4>
+                        {% if similar_project.objective %}
+                            <p>{{ similar_project.objective[:300] }}...</p>
+                        {% endif %}
+                        <p><a class="btn btn-secondary" href="/projects/{{ similar_project.id }}" role="button">Read more</a></p>
+                    </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-      </div>
-      {% endif %}
-
-      {% if url %}
-         <center><a href="{{ url }}"><h3><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>Return to search</h3></a></center> 
-      {% else %}
-         <center><a href="/"><h3><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"> </span>Return to search</h3></a></center> 
-      {% endif %}
+        {% endif %}
 
 	</div>
 {% endblock %}
