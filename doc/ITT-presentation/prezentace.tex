@@ -11,9 +11,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[Generátor veděckých portálů]{Generátor veděckých portálů}
 
-\author[]{Jiří Furda}
+\author[Jiří Furda]{Jiří Furda\\*Doc. RNDr. Pavel Smrž, Ph.D.}
 
-\institute[]{Fakulta informačních technologií Vysokého učení technického v Brně\\
+\institute[FIT VUT]{Fakulta informačních technologií Vysokého učení technického v Brně\\
 Bo\v{z}et\v{e}chova 1/2. 612 66 Brno - Kr\'alovo Pole\\
 xfurda00@stud.fit.vutbr.cz}
 
@@ -28,25 +28,12 @@ xfurda00@stud.fit.vutbr.cz}
 \frame[plain]{\titlepage}
 
 \begin{frame}
-    \frametitle{Zakladní informace}
-    \begin{itemize}
-        \item Vedoucí práce: \emph{Doc. RNDr. Pavel Smrž, Ph.D.}
-        \item Vědecký portál evropských výzkumných projektů
-        \item Navazuje na: \emph{Automaticky aktualizovaný vědecký portál}
-        \item Dva hlavní celky
-            \begin{itemize}
-                \item \emph{Extraktor dat}
-                \item \emph{Webový portál}
-        	\end{itemize}
-        \item Použité technologie
-            \begin{itemize}
-                \item Python (Flask)
-                \item ElasticSearch (Elasticsearch DSL)
-                \item HTML, CSS (Bootstrap)
-        	\end{itemize}
-	\end{itemize}
+    \frametitle{Motivace}
+    \begin{center}
+        \includegraphics[scale=0.29]{img/teams_statistic.png}
+    \end{center}
 \end{frame}
-    
+
     
 \begin{frame}
     \frametitle{Cíle práce}
@@ -54,13 +41,17 @@ xfurda00@stud.fit.vutbr.cz}
         \item Technologická aktualizace původního portálu
             \begin{itemize}
                 \item Přechod z \emph{ElasticUtils} na \emph{Elasticsearch DSL}
-                \item Nové uživatelské prostředí
+                \item Nové uživatelské rozhraní
                 \item Refaktorizace
         	\end{itemize}
     	\item Rozšíření poskytovaného obsahu
     	    \begin{itemize}
-                \item Začlenění výzev
+                \item Začlenění obsahu výzev
+                \item Provazování výzev s předchozími tématy projektů
+                \item Vyhledávání stránek týmů a osob
+                \item Indexování celého obsahu webových stránek projektů
         	\end{itemize}
+        \item Zlepšení vyhledávání a extrakce stránek projektů a odevzdávaných zpráv z nich
     	\item Nový zdroj získávání dat
     	    \begin{itemize}
                 \item \emph{Participant Portal} bude nahrazen \emph{Funding and Tenders Portal}
@@ -68,31 +59,70 @@ xfurda00@stud.fit.vutbr.cz}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Uživatelské prostředí}
-    \begin{center}
-        \includegraphics[scale=0.35]{stanek-sidepanel.png}
-        \hspace{0.2cm}
-        \includegraphics[scale=0.35]{my-sidepanel.png}
-        \vspace{0.2cm}
-        \includegraphics[scale=0.3]{my-modal.png}
-    \end{center}
-\end{frame}
 
 \begin{frame}
-    \frametitle{Výzvy}
-    \emph{@todo} Zde doplním konkrétní případ využítí provázání podobných výzev
+    \frametitle{Současný stav}
+    
+    \begin{itemize}
+        \item \emph{Webový portál}
+        \begin{itemize}
+            \item Refaktorizace (50\%)
+            \item Uživatelské rozhraní (65\%)
+	    \end{itemize}    
+	    
+	   \item \emph{Extraktor dat}
+        \begin{itemize}
+            \item Začlenění výzev (50\%)
+            \item Nový zdroj dat (10\%)
+            \item Stránky týmů a osob (0\%)
+            \item Indexace stránek projektů (0\%)
+	    \end{itemize}    
+	\end{itemize}    
 \end{frame}
+
+
+\begin{frame}
+    \frametitle{Výsledky v 1. semestru}
+    
+    \begin{itemize}
+        \item Portál beží na \emph{Elasticsearch 6.4}
+        \item Uživatelské rozhraní lépe pracuje s prostorem
+        \item Portál umožňuje \emph{vyhledat výzvy}
+        \item Portál \emph{propojuje podobné výzvy}
+    \end{itemize}    
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Vyhodnocení a zjištěné nedostatky}
+    
+    \begin{itemize}
+        \item Získání znalosti použití jazyku \emph{Python pro webové aplikace}
+        \item Získání znalosti práce s Elasticsearch
+        \item Náhled do problematiky \emph{web scrapingu}
+        
+        \item Problémy
+        \begin{itemize}
+            \item Počáteční bariéra s použitými technologiemi a kódem
+            \item Nedostatek času v průběhu semestru
+        \end{itemize} 
+        
+    \end{itemize}    
+\end{frame}
+
 
 \begin{frame}
     \frametitle{Plán na letní semestr}
     \begin{enumerate}
-        \item Zlepšení struktury kódu
-        \item Implementace chybějící funkcionality z původního portálu
-        \item Doladění uživatelského rozhraní
-        \item Získávání dat z Funding and Tenders Portal
+        \item Zlepšení struktury kódu (do \emph{17. 2.})
+        \item Implementace chybějící funkcionality portálu (do \emph{3. 3.})
+        \item Doladění uživatelského rozhraní (do \emph{10. 3.})
+        \item Napojení na Funding and Tenders Portal (do \emph{17. 3.})
+        \item Vyhledávání stránek týmů, osob a projektů (do \emph{31. 3.})
+        \item Sepsání bakalářské práce (do \emph{30. 4.})
     \end{enumerate}
 \end{frame}
+
 
 \bluepage{Děkuji za pozornost!}
 
