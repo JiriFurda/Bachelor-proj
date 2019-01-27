@@ -1,0 +1,199 @@
+body
+{
+    font-size: 14px;
+}
+
+.bg-ec_dark_blue
+{
+	background-color: #004494;
+	color: #fff;
+} 
+
+.img-eu_flag
+{
+	width: 40px;
+	height: 40px;
+} 
+
+.input-main_search
+{
+
+}
+
+.header
+{
+	height: 50px;
+
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
+.container--header
+{
+	display: flex;
+	align-items: center;
+
+	height: 100%;
+}
+
+.container--main
+{
+	display: flex;
+
+}
+
+.col--side
+{
+	width: 200px;
+	min-width: 200px;
+}
+
+.col--main
+{
+	width: 100%;
+}
+
+.col--side
+{
+    padding: 10px;
+}
+
+.row--content
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sidebar
+{
+	position: sticky;
+	top: 50px;
+	height: calc(100vh - 50px);
+	overflow-y: auto;
+}
+
+.card--search_result
+{
+	margin-bottom: 10px;
+}
+
+.line_under
+{
+	border-bottom: 1px solid #e5e5e5;
+}
+
+em
+{
+	font-weight: 700;
+}
+
+.facet-label
+{
+	color: #6c757d;
+	width: 100%;
+	cursor: pointer;
+    padding: 5px;
+}
+
+.facet-label:hover
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.facet-label.collapsed:after
+{
+	content: '▼'; /* &#x25BC; */
+
+}
+
+.facet-label:not(.collapsed)
+{
+    font-weight: bold;
+    color: #000;
+}
+
+.facet-label:after
+{
+	content: '▲';
+	float: right;
+}
+
+.facet-filter
+{
+    height: 20px;
+}
+
+.facet-submenu
+{
+    margin-bottom: 10px;
+    overflow-x: auto;
+}
+
+.facet-submenu-item
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+}
+
+.card--small-padding .card-header,
+.card--small-padding .card-body,
+.card--small-padding .card-footer
+{
+	padding: 10px;
+}
+
+.card--search_result .card-header a
+{
+	color: inherit;
+}
+
+.content
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 15px;
+	background-color: #fff;
+	border: 1px solid #dee2e6;
+	min-height: calc(100vh - 50px - 20px);
+}
+
+.link-unstyled,
+.link-unstyled:hover
+{
+	color: inherit;
+}
+
+.card--project-details
+{
+	float: right;
+	max-width: 300px;
+	margin-left: 10px;
+}
+
+.card--project-details ul
+{
+	padding-left: 20px;
+	margin-bottom: 0;
+}
+
+.card--project-details ul li
+{
+	list-style: none;
+}
+
+.pagination
+{
+	margin-bottom: 0;
+}
+
+.in-facet-search
+{
+	position: sticky;
+	top: 0;
+	background-color: #ffffff;
+	z-index: 1;
+}
