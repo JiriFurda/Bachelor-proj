@@ -64,6 +64,24 @@ def projects_show(project_id):
 
     return render_template('projects_show.html', project=project, similar_projects=similar_response[:3])
 
+@app.route('/calls/<string:topic_id>')
+def topics(topic_id):
+    s = Search(using=client, index="xfurda00_topics") \
+        .query("match", identifier=topic_id)
+    response = s.execute()
+
+    if response.success() == False or response.hits.total == 0:
+        abort(404)
+
+    topic = response.hits[0]
+
+    similar_search = Search(using=client,
+                            index="xfurda00_topics")
+    similar_search = similar_search.query(MoreLikeThis(like={'_id': topic.meta.id, '_index': 'xfurda00_topics', 'fields': ['tags']}))
+    similar_response = similar_search.execute()
+
+    return render_template('topic.html', topic=response.hits[0], similar_topics=similar_response[:10], debug=None)
+
 
 @app.route('/json')
 def json_results():
@@ -74,6 +92,21 @@ def json_results():
 
     return render_template('debug.html', debug=json.dumps(response.hits[0].to_dict()))
 
+@app.route('/json_calls')
+def json_calls():
+    s = Search(using=client, index="xfurda00_calls")
+
+    response = s.execute()
+
+    return render_template('debug.html', debug=json.dumps(response.to_dict()))
+
+@app.route('/json_topics')
+def json_topics():
+    s = Search(using=client, index="xfurda00_topics")
+
+    response = s.execute()
+
+    return render_template('debug.html', debug=json.dumps(response.to_dict()))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=2021)

@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class="container">
+        <div class="content">
+            {{ debug }}
+
+
+            <div class="card card--project-details card--small-padding">
+                <div class="card-header">
+                    Topic details
+                </div>
+                <div class="card-body">
+					<b>Type of action</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>Deadline Model</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>Opening</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>Deadline</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>State</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>Call name</b>
+					<ul>
+						<li>{{ topic.call_title }}</li>
+					</ul>
+
+					<b>Call ID</b>
+					<ul>
+						<li>{{ topic.call_identifier }}</li>
+					</ul>
+
+
+              </div>
+            </div>
+
+            <h1 class="h2">{{ topic.title }}</h1>
+            {{ topic.description|safe }}
+
+<h2 class="h4 pt-4 pb-2">Related topics statistics</h2>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Topics</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Projects</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Teams</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Countries</a>
+  </li>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for similar_topic in similar_topics %}
+        <tr>
+          <td><a href="/calls/{{ similar_topic.identifier }}">{{ similar_topic.title }}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+	</div>
+{% endblock %}
