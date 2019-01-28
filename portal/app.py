@@ -56,6 +56,17 @@ def projects_show(project_id):
 
     return render_template('projects_show.html', project=response.hits[0])
 
+@app.route('/calls/<string:topic_id>')
+def topics(topic_id):
+    s = Search(using=client, index="xfurda00_topics") \
+        .query("match", identifier=topic_id)
+    response = s.execute()
+
+    if response.success() == False or response.hits.total == 0:
+        abort(404)
+
+    return render_template('topic.html', topic=response.hits[0])
+
 
 @app.route('/json')
 def json_results():
@@ -69,6 +80,14 @@ def json_results():
 @app.route('/json_calls')
 def json_calls():
     s = Search(using=client, index="xfurda00_calls")
+
+    response = s.execute()
+
+    return render_template('debug.html', debug=json.dumps(response.to_dict()))
+
+@app.route('/json_topics')
+def json_topics():
+    s = Search(using=client, index="xfurda00_topics")
 
     response = s.execute()
 

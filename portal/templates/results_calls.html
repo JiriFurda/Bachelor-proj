@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class="container container--main">
+		<div class="col--side sidebar">
+
+		</div>
+		<div class="col--main flex-grow-1 content">
+			<h1 class="h3">Search results</h1>
+
+            {{ debug }}
+
+            <div id="test">
+            </div>
+
+            <p>
+			Found {{ results.hits.total }} results
+            </p>
+
+			{% for result in results %}
+
+				<div class="card card--search_result card--small-padding rounded shadow-sm">
+					<div class="card-header bg-ec_dark_blue">
+                        <a href="/calls/{{ result.identifier }}">{{ result.title }}</a>
+					</div>
+					<div class="card-body">
+						<p>
+                            {{ result.description[:300] }}...
+						</p>
+						<a href="/calls/{{ result.identifier }}">View details »</a>
+					</div>
+					<div class="card-footer text-muted">
+					</div>
+				</div>
+			{% endfor %}
+
+            <div class="d-flex justify-content-center pt-1">
+			    {{ pagination.links }}
+            </div>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+
+{% block javascript %}
+{% endblock %}

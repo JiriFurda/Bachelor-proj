@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div class="container">
+        <div class="content">
+
+
+
+            <div class="card card--project-details card--small-padding">
+                <div class="card-header">
+                    Topic details
+                </div>
+                <div class="card-body">
+					<b>Type of action</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>Deadline Model</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>Opening</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>Deadline</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>State</b>
+					<ul>
+						<li></li>
+					</ul>
+
+					<b>Call name</b>
+					<ul>
+						<li>{{ topic.call_title }}</li>
+					</ul>
+
+					<b>Call ID</b>
+					<ul>
+						<li>{{ topic.call_identifier }}</li>
+					</ul>
+
+
+              </div>
+            </div>
+
+            <h1 class="h2">{{ topic.title }}</h1>
+            {{ topic.description|safe }}
+
+<h2 class="h4 pt-4 pb-2">Related topics statistics</h2>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Topics</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Projects</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Teams</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Countries</a>
+  </li>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Organisation name</th>
+      <th scope="col"># projects involved</th>
+      <th scope="col">EU Contribution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>TELEFONICA INVESTIGACION Y DESARROLLO SA</td>
+      <td>5</td>
+      <td>€ 2 537 993</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>UNIVERSIDAD COMPLUTENSE DE MADRID</td>
+      <td>4</td>
+      <td>€ 1 975 317</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>AGENCIA ESTATAL CONSEJO SUPERIOR DE INVESTIGACIONES CIENTIFICAS</td>
+      <td>2</td>
+      <td>€ 761 503</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>UNIVERSITAT POLITECNICA DE VALENCIA</td>
+      <td>1</td>
+      <td>€ 437 787</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>ATOS SPAIN SA</td>
+      <td>1</td>
+      <td>€ 349 746</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>INDRA SISTEMAS SA</td>
+      <td>1</td>
+      <td>€ 257 174</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>TELEFONICA INVESTIGACION Y DESARROLLO SA</td>
+      <td>1</td>
+      <td>€ 157 344</td>
+    </tr>
+  </tbody>
+</table>
+
+	</div>
+{% endblock %}
