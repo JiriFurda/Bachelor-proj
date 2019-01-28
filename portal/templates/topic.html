@@ -3,7 +3,7 @@
 {% block body %}
 	<div class="container">
         <div class="content">
-
+            {{ debug }}
 
 
             <div class="card card--project-details card--small-padding">
@@ -73,55 +73,15 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Organisation name</th>
-      <th scope="col"># projects involved</th>
-      <th scope="col">EU Contribution</th>
+      <th scope="col">Name</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>TELEFONICA INVESTIGACION Y DESARROLLO SA</td>
-      <td>5</td>
-      <td>€ 2 537 993</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>UNIVERSIDAD COMPLUTENSE DE MADRID</td>
-      <td>4</td>
-      <td>€ 1 975 317</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>AGENCIA ESTATAL CONSEJO SUPERIOR DE INVESTIGACIONES CIENTIFICAS</td>
-      <td>2</td>
-      <td>€ 761 503</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>UNIVERSITAT POLITECNICA DE VALENCIA</td>
-      <td>1</td>
-      <td>€ 437 787</td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td>ATOS SPAIN SA</td>
-      <td>1</td>
-      <td>€ 349 746</td>
-    </tr>
-    <tr>
-      <th scope="row">6</th>
-      <td>INDRA SISTEMAS SA</td>
-      <td>1</td>
-      <td>€ 257 174</td>
-    </tr>
-    <tr>
-      <th scope="row">7</th>
-      <td>TELEFONICA INVESTIGACION Y DESARROLLO SA</td>
-      <td>1</td>
-      <td>€ 157 344</td>
-    </tr>
+    {% for similar_topic in similar_topics %}
+        <tr>
+          <td><a href="/calls/{{ similar_topic.identifier }}">{{ similar_topic.title }}</td>
+        </tr>
+    {% endfor %}
   </tbody>
 </table>
 

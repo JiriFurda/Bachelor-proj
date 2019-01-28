@@ -73,7 +73,14 @@ def topics(topic_id):
     if response.success() == False or response.hits.total == 0:
         abort(404)
 
-    return render_template('topic.html', topic=response.hits[0])
+    topic = response.hits[0]
+
+    similar_search = Search(using=client,
+                            index="xfurda00_topics")
+    similar_search = similar_search.query(MoreLikeThis(like={'_id': topic.meta.id, '_index': 'xfurda00_topics', 'fields': ['tags']}))
+    similar_response = similar_search.execute()
+
+    return render_template('topic.html', topic=response.hits[0], similar_topics=similar_response[:10], debug=None)
 
 
 @app.route('/json')
