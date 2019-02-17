@@ -47,43 +47,63 @@
 					</ul>
 
 
-              </div>
+                </div>
             </div>
 
             <h1 class="h2">{{ topic.title }}</h1>
             {{ topic.description|safe }}
 
-<h2 class="h4 pt-4 pb-2">Related topics statistics</h2>
+            <h2 class="h4 pt-4 pb-2">Related topics statistics</h2>
 
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Topics</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Projects</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Teams</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Countries</a>
-  </li>
-</ul>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="topics-tab" data-toggle="tab" href="#topics" role="tab">Topics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="projects-tab" data-toggle="tab" href="#projects" role="tab">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="teams-tab" data-toggle="tab" href="#teams" role="tab">Teams</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab">Countries</a>
+                </li>
+            </ul>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for similar_topic in similar_topics %}
-        <tr>
-          <td><a href="/calls/{{ similar_topic.identifier }}">{{ similar_topic.title }}</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-	</div>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="topics" role="tabpanel">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for similar_topic in similar_topics %}
+                            <tr>
+                                <td><a href="/calls/{{ similar_topic.identifier }}">{{ similar_topic.title }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade show" id="projects" role="tabpanel">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for project in projects_in_topic %}
+                            <tr>
+                                <td><a href="/projects/{{ project.id }}">{{ project.title }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

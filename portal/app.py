@@ -75,12 +75,22 @@ def topics(topic_id):
 
     topic = response.hits[0]
 
+
     similar_search = Search(using=client,
                             index="xfurda00_topics")
     similar_search = similar_search.query(MoreLikeThis(like={'_id': topic.meta.id, '_index': 'xfurda00_topics', 'fields': ['tags']}))
     similar_response = similar_search.execute()
 
-    return render_template('topic.html', topic=response.hits[0], similar_topics=similar_response[:10], debug=None)
+    projects_search = Search(using=client,
+                            index="xstane34_projects")
+    projects_search = projects_search.query("match", callForPropos=topic_id)
+    projects_response = projects_search.execute()
+
+    return render_template('topic.html',
+                           topic=response.hits[0],
+                           similar_topics=similar_response[:10],
+                           projects_in_topic=projects_response,
+                           debug=None)
 
 
 @app.route('/json')
