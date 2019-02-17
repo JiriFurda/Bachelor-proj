@@ -25,7 +25,7 @@
 					</div>
 					<div class="card-body">
 						<p>
-                            {{ result.description[:300] }}...
+                            {{ result.description[:300].replace(':', ': ')|striptags }}...
 						</p>
 						<a href="/calls/{{ result.identifier }}">View details »</a>
 					</div>
