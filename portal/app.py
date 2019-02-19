@@ -10,6 +10,7 @@ import pprint
 import json
 import ast
 from models.facets import Facet
+from models.topic import Topic
 from controllers.search_controller import SearchController
 
 app = Flask(__name__)
@@ -78,19 +79,25 @@ def topics(topic_id):
 
     similar_search = Search(using=client,
                             index="xfurda00_topics")
-    similar_search = similar_search.query(MoreLikeThis(like={'_id': topic.meta.id, '_index': 'xfurda00_topics', 'fields': ['tags']}))
+    similar_search = similar_search.query(MoreLikeThis(like={'_id': topic.meta.id, '_index': 'xfurda00_topics', 'fields': ['tags', 'title^3']}))
     similar_response = similar_search.execute()
 
-    projects_search = Search(using=client,
-                            index="xstane34_projects")
-    projects_search = projects_search.query("match", callForPropos=topic_id)
-    projects_response = projects_search.execute()
+    projects_response = Topic(topic_id).projects()
+
+    query = Topic(topic_id).projects_query()
+    query.aggs.bucket('country', 'terms', field='coordinator.country.keyword')
+    test = query.execute().aggregations.country.buckets
+    countries_count = {}
+    for item in test:
+        countries_count[item.key] = item.doc_count
+
+    sorted_countries_count = sorted(countries_count.items(), key=lambda x: x[1], reverse=True)
 
     return render_template('topic.html',
                            topic=response.hits[0],
-                           similar_topics=similar_response[:10],
+                           similar_topics=similar_response[:30],
                            projects_in_topic=projects_response,
-                           debug=None)
+                           debug=sorted_countries_count)
 
 
 @app.route('/json')
