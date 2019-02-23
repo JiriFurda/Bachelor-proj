@@ -21,13 +21,13 @@
 
 				<div class="card card--search_result card--small-padding rounded shadow-sm">
 					<div class="card-header bg-ec_dark_blue">
-                        <a href="/calls/{{ result.identifier }}">{{ result.title }}</a>
+                        <a href="{{ url_for('topics.show', topic_id=result.identifier) }}">{{ result.title }}</a>
 					</div>
 					<div class="card-body">
 						<p>
                             {{ result.description[:300].replace(':', ': ')|striptags }}...
 						</p>
-						<a href="/calls/{{ result.identifier }}">View details »</a>
+						<a href="{{ url_for('topics.show', topic_id=result.identifier) }}">View details »</a>
 					</div>
 					<div class="card-footer text-muted">
 					</div>

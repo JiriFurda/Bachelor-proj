@@ -79,7 +79,7 @@
 
 				<div class="card card--search_result card--small-padding rounded shadow-sm">
 					<div class="card-header bg-ec_dark_blue">
-                        <a href="/projects/{{ result.id }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
+                        <a href="{{ url_for('projects.show', project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
 					</div>
 					<div class="card-body">
 						<p>
@@ -89,7 +89,7 @@
 									{{ result.objective[:300] }}...
 								{% endif %}
 						</p>
-						<a href="/projects/{{ result.id }}">View details »</a>
+						<a href="{{ url_for('projects.show', project_id=result.id) }}">View details »</a>
 					</div>
 					<div class="card-footer text-muted">
 						{{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
@@ -144,7 +144,7 @@
 
         $.ajax(
         {
-            url: '/ajax_search_in_facet/'+facet_name,
+            url: '/facets/'+facet_name,
             data: { 'search_dict': "{{ search_dict|safe }}" },
             success: function (data, status, xhr)
             {
@@ -162,7 +162,7 @@
 
         $.ajax(
         {
-            url: '/ajax_search_in_facet/'+facet_name,
+            url: '/facets/'+facet_name,
             data:
                 { 'search_dict': "{{ search_dict|safe }}",
                     'search_val': searchVal
