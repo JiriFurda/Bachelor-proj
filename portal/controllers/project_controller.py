@@ -10,11 +10,11 @@ import json
 import ast
 from models.facets import Facet
 
-class SearchController:
+class ProjectController:
     @classmethod
     def render(self):
-        if request.args.has_key('search') and request.args.get('search') == 'call':
-            return self.render_calls()
+        #if request.args.has_key('search') and request.args.get('search') == 'call':
+        #    return self.render_calls()
 
 
         # Available facets for filter
