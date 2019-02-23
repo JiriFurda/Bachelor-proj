@@ -113,7 +113,7 @@ class SearchController:
 
         return render_template('results.html', results=response, facets=Facet.all(), facets_data=facets_data,
                                get_arguments=request.args, page=page, per_page=per_page, pagination=pagination,
-                               search_dict=search_without_facets.to_dict())
+                               search_dict=search_without_facets.to_dict(), debug=json.dumps(search.to_dict(), indent=4))
 
     @classmethod
     def render_calls(self):

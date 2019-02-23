@@ -57,7 +57,7 @@
 
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" id="topics-tab" data-toggle="tab" href="#topics" role="tab">Topics</a>
+                    <a class="nav-link active" id="topics-tab" data-toggle="tab" href="#topics" role="tab">Similar topics</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="projects-tab" data-toggle="tab" href="#projects" role="tab">Projects</a>
@@ -72,37 +72,46 @@
 
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="topics" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for similar_topic in similar_topics %}
+                    {% if(similar_topics) %}
+                        <table class="table table-striped">
+                            <thead>
                             <tr>
-                                <td><a href="/calls/{{ similar_topic.identifier }}">{{ similar_topic.title }}</td>
-                                <td>{{ similar_topic.meta.score }}</td>
+                                <th scope="col">Name</th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {% for similar_topic in similar_topics %}
+                                <tr>
+                                    <td><a href="/calls/{{ similar_topic.identifier }}">{{ similar_topic.title }}</td>
+                                    <td>{{ similar_topic.meta.score }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        No similar topics found
+                    {% endif %}
                 </div>
                 <div class="tab-pane fade show" id="projects" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for project in projects_in_topic %}
+                    {% if(projects_in_topic) %}
+                        <table class="table table-striped">
+                            <thead>
                             <tr>
-                                <td><a href="/projects/{{ project.id }}">{{ project.title }}</td>
+                                <th scope="col">Name</th>
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {% for project in projects_in_topic %}
+                                <tr>
+                                    <td><a href="/projects/{{ project.id }}">{{ project.title }}</td>
+                                    <td>{{ project.meta.score }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        No projects with this topic found
+                    {% endif %}
                 </div>
             </div>
         </div>
