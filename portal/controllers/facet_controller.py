@@ -32,5 +32,5 @@ def show(facet_name):
 
     response = search.execute()
 
-    return render_template('facets/index.html',
+    return render_template('facets/show.html',
                            results=eval('response.aggregations.' + facet.name).buckets, facet=facet)

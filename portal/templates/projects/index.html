@@ -137,6 +137,7 @@
 
 {% block javascript %}
 <script>
+$(function(){
     $('.more-facets').click(function()
     {
         var modal_id = $(this).data('target');
@@ -159,6 +160,7 @@
     {
         var searchVal = $(this).val();
         var facet_name = $(this).data('facet');
+        alert('wtf');
 
         $.ajax(
         {
@@ -173,6 +175,6 @@
             },
         });
     });
-
+});
 </script>
 {% endblock %}
