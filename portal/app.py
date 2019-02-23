@@ -82,14 +82,22 @@ def topics(topic_id):
     similar_search = similar_search.query(MoreLikeThis(like={'_id': topic.meta.id, '_index': 'xfurda00_topics', 'fields': ['tags', 'title^3']}))
     similar_response = similar_search.execute()
 
-    projects_response = Topic(topic_id).projects()
+    #projects_response = Topic(topic_id).projects()
 
-    query = Topic(topic_id).projects_query()
-    query.aggs.bucket('country', 'terms', field='coordinator.country.keyword')
-    test = query.execute().aggregations.country.buckets
+    projects_query = Topic(topic_id).projects_query()    # Projects to search in
+    projects_query.aggs.bucket('coordinator_country', 'terms', field='coordinator.country.keyword')
+    projects_query.aggs.bucket('participant_country', 'terms', field='participant.country.keyword')
+    projects_response = projects_query.execute()
+
     countries_count = {}
-    for item in test:
+    for item in projects_response.aggregations.participant_country.buckets:
         countries_count[item.key] = item.doc_count
+
+    for item in projects_response.aggregations.coordinator_country.buckets:
+        if item.key in countries_count:
+            countries_count[item.key] += item.doc_count
+        else:
+            countries_count[item.key] = item.doc_count
 
     sorted_countries_count = sorted(countries_count.items(), key=lambda x: x[1], reverse=True)
 
@@ -98,7 +106,7 @@ def topics(topic_id):
                            similar_topics=similar_response[:30],
                            projects_in_topic=projects_response,
                            countries=sorted_countries_count,
-                           debug=json.dumps(query.to_dict(), indent=4))
+                           debug=None)
 
 
 @app.route('/json')
