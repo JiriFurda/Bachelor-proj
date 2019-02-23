@@ -131,7 +131,7 @@
                         <b>From</b> {{ project.startDate }} <b>to</b> {{ project.endDate }}{% if isRunning %}, {{ project.statusDetails|lower }}{% else %}, closed project{% endif %}
                     {% endif %}
                     {% if project.url %}
-                        <a href="http://cordiproject.europa.eu{{ project.url }}" target="_blank">View this project on Cordis <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
+                        <a href="https://cordis.europa.eu/project/rcn/{{ project.id }}/factsheet/en" target="_blank">View this project on Cordis <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
                     {% endif %}
                 </p>
             {% endif %}
