@@ -85,18 +85,19 @@ def topics(topic_id):
     projects_response = Topic(topic_id).projects()
 
     query = Topic(topic_id).projects_query()
-    #query.aggs.bucket('country', 'terms', field='coordinator.country.keyword')
-    test = query.execute()#.aggregations.country.buckets
-    #countries_count = {}
-    #for item in test:
-    #    countries_count[item.key] = item.doc_count
+    query.aggs.bucket('country', 'terms', field='coordinator.country.keyword')
+    test = query.execute().aggregations.country.buckets
+    countries_count = {}
+    for item in test:
+        countries_count[item.key] = item.doc_count
 
-    #sorted_countries_count = sorted(countries_count.items(), key=lambda x: x[1], reverse=True)
+    sorted_countries_count = sorted(countries_count.items(), key=lambda x: x[1], reverse=True)
 
     return render_template('topic.html',
                            topic=response.hits[0],
                            similar_topics=similar_response[:30],
                            projects_in_topic=projects_response,
+                           countries=sorted_countries_count,
                            debug=json.dumps(query.to_dict(), indent=4))
 
 
