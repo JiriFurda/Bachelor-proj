@@ -23,9 +23,9 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text p-0">
 									<select name="search" class="bg-transparent border-0 custom-select" id="inputGroupSelect01">
-                                        {% for val, text in [('proj', 'Projects'), ('call', 'Calls')] %}
+                                        {% for val, text in [('projects', 'Projects'), ('topics', 'Topics')] %}
                                             {% if get_arguments|default(false) %}
-                                                <option value="{{ val }}" {{ 'selected' if get_arguments.get('search')|default('proj') == val }}>{{ text }}</option>
+                                                <option value="{{ val }}" {{ 'selected' if get_arguments.get('search')|default('projects') == val }}>{{ text }}</option>
                                             {% else %}
                                                 <option value="{{ val }}"}>{{ text }}</option>
                                             {% endif %}

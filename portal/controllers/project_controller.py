@@ -6,19 +6,17 @@ from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.query import MoreLikeThis
 from flask_paginate import Pagination, get_page_args
 from collections import OrderedDict
-import json
 from models.facet import Facet
+from topic_controller import index as topic_index
 
-homepage_controller = Blueprint('homepage', __name__)
 project_controller = Blueprint('projects', __name__, url_prefix='/projects')
 client = Elasticsearch()
 
 
-@homepage_controller.route('/')
 @project_controller.route('/')
 def index():
-    #if request.args.has_key('search') and request.args.get('search') == 'call':
-    #    return self.render_calls()
+    if request.args.has_key('search') and request.args.get('search') == 'topics':
+        return topic_index() # @todo create search controller
 
 
     # Available facets for filter
@@ -123,7 +121,7 @@ def index():
                            per_page=per_page,
                            pagination=pagination,
                            search_dict=search_without_facets.to_dict(),
-                           debug=json.dumps(search.to_dict(), indent=4))
+                           debug=None)
 
 
 @project_controller.route('/<int:project_id>')
