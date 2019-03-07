@@ -148,61 +148,92 @@
       {% endif %}
 
       {% if project.coordinator %}
-      {#<h3> if project.flagproject.projType == 'withPartCoord' %}Coordinator{% else %}Host Institution{% endif %}{% if project.coordinator|length > 1 %}s{% endif %} ({{ project.coordinator|length)</h3> #}
-         <div class="row">
-            <div class="col-sm-12 col-md-10 row">
-               {% for coordinator in project.coordinator %}
-                  <div class="institution">
-                     <div class="header">
-                        <div class="name col-xs-9">{{ coordinator.name.title() }}
-                           {% if coordinator.shortName %}
-                                 <span style="color:gray;">({{ coordinator.shortName.title() }})</span>
-                           {% endif %}
-                        </div>   
-                        <div class="country col-sm-2 hidden-xs">
-                           {% if coordinator.country %}
-                              {{ coordinator.country }}
-                           {% endif %}
+
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- Team -->
+<section class="pb-5">
+    <div class="container">
+        <div class="row">
+            {% for coordinator in project.coordinator %}
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="https://pngimage.net/wp-content/uploads/2018/06/placeholder-png.png" alt="card image"></p>
+                                    <h6 class="card-title">{{ coordinator.name.title() }}
+                                        {% if coordinator.shortName %}
+                                            <span style="color:gray;">({{ coordinator.shortName.title() }})</span>
+                                        {% endif %}
+                                    </h6>
+                                    {% if coordinator.country %}
+                                        <p class="card-text">
+                                            {{ coordinator.country }}<br>
+                                            <i>Coordinator</i>
+                                        </p>
+                                    {% endif %}
+                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="country col-sm-1 col-xs-2 text-right"><i class="glyphicon glyphicon-plus"></i></div>
-                     </div>
-                     <div class="content col-xs-12">
-                        {# if coordinator.address %}
-                           <div>{{ coordinator.addresproject.title() }}</div>
-                        {% endif #}
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h6 class="card-title">{{ coordinator.name.title() }}</h6>
+                                    <p class="card-text">
+                                        {# if coordinator.address %}
+                                           <div>{{ coordinator.addresproject.title() }}</div>
+                                        {% endif #}
 
-                        {% if coordinator.postalCode or coordinator.city %}
-                           <div>
-                              {% if coordinator.postalCode %}
-                                 {{ coordinator.postalCode }}
-                              {% endif %}
+                                        {% if coordinator.postalCode or coordinator.city %}
+                                           <div>
+                                              {% if coordinator.postalCode %}
+                                                 {{ coordinator.postalCode }}
+                                              {% endif %}
 
-                              {% if coordinator.city %}
-                                 {{ coordinator.city.title() }}
-                              {% endif %}
-                           </div>
-                        {% endif %}
+                                              {% if coordinator.city %}
+                                                 {{ coordinator.city.title() }}
+                                              {% endif %}
+                                           </div>
+                                        {% endif %}
 
-                        {% if coordinator.country %}
-                           <div>{{ coordinator.country }}</div>
-                        {% endif %}
+                                        {% if coordinator.country %}
+                                           <div>{{ coordinator.country }}</div>
+                                        {% endif %}
 
-                        {% if coordinator.firstName %}
-                           <div>Administrative contact: {{ coordinator.firstName }} {{ coordinator.lastName }}</div>
-                        {% endif %}
+                                        {% if coordinator.firstName %}
+                                           <div>Administrative contact: {{ coordinator.firstName }} {{ coordinator.lastName }}</div>
+                                        {% endif %}
 
-                        {% if coordinator.tel %}
-                           <div>Tel.: {{ coordinator.tel }}</div>
-                        {% endif %}
+                                        {% if coordinator.tel %}
+                                           <div>Tel.: {{ coordinator.tel }}</div>
+                                        {% endif %}
 
-                        {% if coordinator.fax %}
-                           <div>Fax: {{ coordinator.fax }}</div>
-                        {% endif %}
-                     </div>
-                  </div>
-               {% endfor %}
+                                        {% if coordinator.fax %}
+                                           <div>Fax: {{ coordinator.fax }}</div>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
+            <!-- ./Team member -->
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Team -->
+
+      {#<h3> if project.flagproject.projType == 'withPartCoord' %}Coordinator{% else %}Host Institution{% endif %}{% if project.coordinator|length > 1 %}s{% endif %} ({{ project.coordinator|length)</h3> #}
+
       {% endif %}
 
       {% if project.participant %}
