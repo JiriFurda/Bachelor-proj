@@ -16,7 +16,7 @@ client = Elasticsearch()
 @project_controller.route('/')
 def index():
     if request.args.has_key('search') and request.args.get('search') == 'topics':
-        return topic_index() # @todo create search controller
+        return topic_index()
 
 
     # Available facets for filter

@@ -73,6 +73,7 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="topics" role="tabpanel">
                     {% if(similar_topics) %}
+                        Found {{ similar_topics.hits.total }}
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -80,7 +81,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% for similar_topic in similar_topics %}
+                            {% for similar_topic in similar_topics[:30] %}
                                 <tr>
                                     <td><a href="/calls/{{ similar_topic.identifier }}">{{ similar_topic.title }}</td>
                                     <td>{{ similar_topic.meta.score }}</td>
@@ -89,7 +90,9 @@
                             </tbody>
                         </table>
                     {% else %}
+                        <div class="alert alert-warning mt-3" role="alert">
                         No similar topics found
+                        </div>
                     {% endif %}
                 </div>
                 <div class="tab-pane fade show" id="projects" role="tabpanel">
@@ -110,8 +113,13 @@
                             </tbody>
                         </table>
                     {% else %}
+                        <div class="alert alert-warning mt-3" role="alert">
                         No projects with this topic found
+                        </div>
                     {% endif %}
+                </div>
+                <div class="tab-pane fade show" id="teams" role="tabpanel">
+                    @todo
                 </div>
                 <div class="tab-pane fade show" id="countries" role="tabpanel">
                     {% if(countries) %}
@@ -132,7 +140,9 @@
                             </tbody>
                         </table>
                     {% else %}
-                        No projects with this topic found
+                        <div class="alert alert-warning mt-3" role="alert">
+                            No projects with this topic found
+                        </div>
                     {% endif %}
                 </div>
             </div>

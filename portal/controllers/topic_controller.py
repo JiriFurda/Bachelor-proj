@@ -56,6 +56,7 @@ def show(topic_id):
     similar_search = Search(using=client,
                             index="xfurda00_topics")
     similar_search = similar_search.query(MoreLikeThis(like={'_id': topic.meta.id, '_index': 'xfurda00_topics', 'fields': ['tags', 'title^3']}))
+
     similar_response = similar_search.execute()
 
     #projects_response = Topic(topic_id).projects()
@@ -79,7 +80,7 @@ def show(topic_id):
 
     return render_template('topics/show.html',
                            topic=response.hits[0],
-                           similar_topics=similar_response[:30],
+                           similar_topics=similar_response,
                            projects_in_topic=projects_response,
                            countries=sorted_countries_count,
                            debug=None)
