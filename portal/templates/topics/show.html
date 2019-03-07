@@ -83,7 +83,7 @@
                             <tbody>
                             {% for similar_topic in similar_topics[:30] %}
                                 <tr>
-                                    <td><a href="/calls/{{ similar_topic.identifier }}">{{ similar_topic.title }}</td>
+                                    <td><a href={{ url_for('topics.show', topic_id=similar_topic.identifier) }}">{{ similar_topic.title }}</td>
                                     <td>{{ similar_topic.meta.score }}</td>
                                 </tr>
                             {% endfor %}
