@@ -1,36 +1,36 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-	<div class="container container--main">
-		<div class="col--side sidebar">
-				<!--<button class="btn" type="send">Use filters</button>-->
-			<ul class="list-unstyled">
-				{% for facet in facets %}
-					<li>
-			    		<div class="facet-label collapsed" data-toggle="collapse" href="#collapse-{{ facet.name }}" role="button" aria-expanded="false" aria-controls="collapse-{{ facet.name }}">
-			    				{{ facet.title }}
-			    		</div>
-			    		<div class="facet-submenu collapse" id="collapse-{{ facet.name }}">
-			    			{% set facetLoop = loop %}
-							{% for facet_data in facets_data[facet.name] %}
+    <div class="container container--main">
+        <div class="col--side sidebar">
+            <!--<button class="btn" type="send">Use filters</button>-->
+            <ul class="list-unstyled">
+                {% for facet in facets %}
+                    <li>
+                        <div class="facet-label collapsed" data-toggle="collapse" href="#collapse-{{ facet.name }}" role="button" aria-expanded="false" aria-controls="collapse-{{ facet.name }}">
+                            {{ facet.title }}
+                        </div>
+                        <div class="facet-submenu collapse" id="collapse-{{ facet.name }}">
+                            {% set facetLoop = loop %}
+                            {% for facet_data in facets_data[facet.name] %}
                                 {% if loop.index < 6 %}
-								<div class="form-check w-100" data-value="{{ facet_data.key }}">
-									<input class="form-check-input"
-										type="checkbox"
-										value="{{ facet_data.key }}"
-										id="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]"
-										name="{{ facet.name }}"
-                                        {% if facet_data.key in get_arguments.getlist(facet.name)  %}
-                                           checked
-                                        {% endif %}
-									>
-									<label class="form-check-label w-100" for="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]">
-										<div class="facet-submenu-item">
-											<div class="d-inline-block text-truncate" data-toggle="tooltip" data-placement="left" title="{{ facet_data.key }}">{{ facet_data.key }}</div>
-											<div><span class="badge badge-pill badge-secondary">{{ facet_data.doc_count }}</span></div>
-										</div>
-									</label>
-								</div>
+                                    <div class="form-check w-100" data-value="{{ facet_data.key }}">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               value="{{ facet_data.key }}"
+                                               id="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]"
+                                               name="{{ facet.name }}"
+                                                {% if facet_data.key in get_arguments.getlist(facet.name)  %}
+                                               checked
+                                                {% endif %}
+                                        >
+                                        <label class="form-check-label w-100" for="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]">
+                                            <div class="facet-submenu-item">
+                                                <div class="d-inline-block text-truncate" data-toggle="tooltip" data-placement="left" title="{{ facet_data.key }}">{{ facet_data.key }}</div>
+                                                <div><span class="badge badge-pill badge-secondary">{{ facet_data.doc_count }}</span></div>
+                                            </div>
+                                        </label>
+                                    </div>
                                 {% else %}
                                     <button type="button"
                                             class="btn btn-sm btn-link more-facets"
@@ -41,17 +41,49 @@
                                         More...
                                     </button>
                                 {% endif %}
-							{% endfor %}
-						</div>
-					</li>
-				{% endfor %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endfor %}
+
+                <li>
+                    <div class="facet-label collapsed" data-toggle="collapse" href="#collapse-test" role="button" aria-expanded="false" aria-controls="collapse-test">
+                        test
+                    </div>
+                    <div class="facet-submenu collapse" id="collapse-test">
+                        <div class="form-check w-100" data-value="test">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   value="test"
+                                   id="defaultCheck[test][test]"
+                                   name="test"
+                            >
+                            <label class="form-check-label w-100" for="defaultCheck[test}][test]">
+                                <div class="facet-submenu-item">
+                                    <div class="d-inline-block text-truncate" data-toggle="tooltip" data-placement="left" title="test">test</div>
+                                    <div><span class="badge badge-pill badge-secondary">test</span></div>
+                                </div>
+                            </label>
+                        </div>
+                        <button type="button"
+                                class="btn btn-sm btn-link more-facets"
+                                title="test"
+                                data-toggle="modal"
+                                data-target="#facetModal-test"
+                        >
+                            More...
+                        </button>
+                    </div>
+                </li>
+
+
                 <li>
                     <button class="btn btn-secondary" type="submit">Apply filters</button>
                 </li>
-			</ul>
-		</div>
-		<div class="col--main flex-grow-1 content">
-			<h1 class="h3">Search results</h1>
+            </ul>
+        </div>
+        <div class="col--main flex-grow-1 content">
+            <h1 class="h3">Search results</h1>
 
             {{ debug }}
 
@@ -59,121 +91,187 @@
             </div>
 
             <p>
-			Found {{ results.hits.total }} results
+                Found {{ results.hits.total }} results
             </p>
 
             <p>
-            {# @todo Hide when no facet is used #}
-            {# @todo Move logic to .py file #}
-            {# @todo Use real facets not GET arguments #}
-            Active filters:
-            {% for arg_name, arg_value in request.args.iteritems(True) %}
-                {% if arg_name != 'query' and arg_name != 'search' %}
-                    <span class="badge badge-secondary">{{ arg_value }}{# <a href="{{ url_for(request.endpoint) }}">X</a> #}</span>
-                {% endif %}
-            {% endfor %}
+                {# @todo Hide when no facet is used #}
+                {# @todo Move logic to .py file #}
+                {# @todo Use real facets not GET arguments #}
+                Active filters:
+                {% for arg_name, arg_value in request.args.iteritems(True) %}
+                    {% if arg_name != 'query' and arg_name != 'search' %}
+                        <span class="badge badge-secondary">{{ arg_value }}{# <a href="{{ url_for(request.endpoint) }}">X</a> #}</span>
+                    {% endif %}
+                {% endfor %}
             </p>
 
-			{% for result in results %}
+            {% for result in results %}
 
-				<div class="card card--search_result card--small-padding rounded shadow-sm">
-					<div class="card-header bg-ec_dark_blue">
+                <div class="card card--search_result card--small-padding rounded shadow-sm">
+                    <div class="card-header bg-ec_dark_blue">
                         <a href="{{ url_for('projects.show', project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
-					</div>
-					<div class="card-body">
-						<p>
-								{% if result.meta.highlight and result.meta.highlight.objective %}
-									...{{ ' ... '.join(result.meta.highlight.objective)|safe }}...
-								{% elif result.objective %}
-									{{ result.objective[:300] }}...
-								{% endif %}
-						</p>
-						<a href="{{ url_for('projects.show', project_id=result.id) }}">View details »</a>
-					</div>
-					<div class="card-footer text-muted">
-						{{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
-					</div>
-				</div>
-			{% endfor %}
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            {% if result.meta.highlight and result.meta.highlight.objective %}
+                                ...{{ ' ... '.join(result.meta.highlight.objective)|safe }}...
+                            {% elif result.objective %}
+                                {{ result.objective[:300] }}...
+                            {% endif %}
+                        </p>
+                        <a href="{{ url_for('projects.show', project_id=result.id) }}">View details »</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
+                    </div>
+                </div>
+            {% endfor %}
 
             <div class="d-flex justify-content-center pt-1">
-			    {{ pagination.links }}
+                {{ pagination.links }}
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 
-  <!-- Modal -->
+    <!-- Modal -->
     {% for facet in facets %}
         {% if facets_data[facet.name]|length >= 6 %}
             <div class="modal fade facet-modal" id="facetModal-{{ facet.name }}" tabindex="-1" role="dialog"  aria-hidden="true">
-              <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">{{ facet.title }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                      <div class="in-facet-search">
-                          <input class="form-control form-control-sm in-facet-search-input">
-                      </div>
-                      <div class="pt-2 facet-modal-options">
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{ facet.title }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="in-facet-search">
+                                <input class="form-control form-control-sm in-facet-search-input">
+                            </div>
+                            <div class="pt-2 facet-modal-options">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
         {% endif %}
     {% endfor %}
+
+    <div class="modal fade facet-modal" id="facetModal-test" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">test</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="in-facet-search">
+                        <input class="form-control form-control-sm in-facet-search-input">
+                    </div>
+                    <div class="pt-2 facet-modal-options">
+                        <div v-for="checkedOption in checkedOptions">
+                            [[ checkedOption.text ]]
+                        </div>
+
+                        <hr>
+
+                        <div v-for="checkedOption in checkedOptions" class="form-check w-100" data-value="test">
+                            <input class="form-check-input" type="checkbox" :value="checkedOption" :key="checkedOption.value" name="test" v-model="checkedOptions" checked>
+                            <label class="form-check-label w-100">
+                                <div class="facet-submenu-item">
+                                    <div class="d-inline-block text-truncate">[[ checkedOption.text ]]</div>
+                                    <div><span class="badge badge-pill badge-secondary">test</span></div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <hr>
+
+                        <div v-for="option in options" class="form-check w-100" data-value="test">
+                            <input class="form-check-input" type="checkbox" :value="option" :key="option.value" name="test" v-model="checkedOptions">
+                            <label class="form-check-label w-100">
+                                <div class="facet-submenu-item">
+                                    <div class="d-inline-block text-truncate">[[ option.text ]]</div>
+                                    <div><span class="badge badge-pill badge-secondary">test</span></div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 
 {% block javascript %}
-<script>
-$(function(){
-    $('.more-facets').click(function()
-    {
-        var modal_id = $(this).data('target');
-        var facet_name = modal_id.replace('#facetModal-','');
-
-        $.ajax(
-        {
-            url: '/facets/'+facet_name,
-            data: { 'search_dict': "{{ search_dict|safe }}" },
-            success: function (data, status, xhr)
+    <script>
+        var app = new Vue({
+            el: '#facetModal-test',
+            data: {
+                options: [
+                    { text: 'Czechia', value: 'cz' },
+                    { text: 'Slovakia', value: 'sk' },
+                    { text: 'Netherlands', value: 'nl' }
+                ],
+                checkedOptions: [
+                ]
+            },
+            delimiters: ['[[',']]']
+        });
+    </script>
+    <script>
+        $(function(){
+            $('.more-facets').click(function()
             {
-                $(modal_id+' .in-facet-search-input').data('facet', facet_name);
-                $(modal_id+' .in-facet-search-input').val('');    // Reset search input
-                $(modal_id+' .facet-modal-options').html(data);
-            },
-        });
-    });
+                var modal_id = $(this).data('target');
+                var facet_name = modal_id.replace('#facetModal-','');
 
-    $('.in-facet-search-input').on('input propertychange', function()
-    {
-        var searchVal = $(this).val();
-        var facet_name = $(this).data('facet');
-        var modal_id = '#facetModal-'+facet_name;
+                $.ajax(
+                    {
+                        url: '/facets/'+facet_name,
+                        data: { 'search_dict': "{{ search_dict|safe }}" },
+                        success: function (data, status, xhr)
+                        {
+                            $(modal_id+' .in-facet-search-input').data('facet', facet_name);
+                            $(modal_id+' .in-facet-search-input').val('');    // Reset search input
+                            $(modal_id+' .facet-modal-options').html(data);
+                        },
+                    });
+            });
 
-        $.ajax(
-        {
-            url: '/facets/'+facet_name,
-            data:
-                { 'search_dict': "{{ search_dict|safe }}",
-                    'search_val': searchVal
-                },
-            success: function (data, status, xhr)
-            {// success callback function
-                $(modal_id+' .facet-modal-options').html(data);
-            },
+            $('.in-facet-search-input').on('input propertychange', function()
+            {
+                var searchVal = $(this).val();
+                var facet_name = $(this).data('facet');
+                var modal_id = '#facetModal-'+facet_name;
+
+                $.ajax(
+                    {
+                        url: '/facets/'+facet_name,
+                        data:
+                            { 'search_dict': "{{ search_dict|safe }}",
+                                'search_val': searchVal
+                            },
+                        success: function (data, status, xhr)
+                        {// success callback function
+                            $(modal_id+' .facet-modal-options').html(data);
+                        },
+                    });
+            });
         });
-    });
-});
-</script>
+    </script>
 {% endblock %}
