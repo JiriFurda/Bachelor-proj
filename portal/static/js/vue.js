@@ -1,15 +1,26 @@
 
 Vue.component('sidebar-facet-list', {
-    template: `<div><sidebar-facet v-for="task in tasks"></sidebar-facet></div>`, // <div v-for="facet in store.facets">TEST</div><
+    template: `<div><sidebar-facet v-for="(facet, index) in facets" :index="index"></sidebar-facet></div>`, // <div v-for="facet in store.facets">TEST</div><
     computed: {
-        tasks () {
-            return store.state.tasks
+        facets() {
+            return store.state.facets;
         }
     }
 });
 
 Vue.component('sidebar-facet', {
-    template: `<div>Sidebar facet</div>`,
+    props: ['index'],
+    template: `<div>
+        {{ facet.title }}
+        <div v-for="option in facet.modalOptions">
+            <input type="checkbox" :value="option" :key="option.value" name="test" v-model="facet.checkedOptions"> {{ option.text }}
+        </div>
+    </div>`,
+    computed: {
+        facet() {
+            return store.state.facets[this.index];
+        }
+    }
 });
 
 
