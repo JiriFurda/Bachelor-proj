@@ -10,15 +10,29 @@ Vue.component('sidebar-facet-list', {
 
 Vue.component('sidebar-facet', {
     props: ['index'],
-    template: `<div>
+    template: `
+    <div>
         {{ facet.title }}
-        <div v-for="option in facet.modalOptions">
+        <div v-for="option in visibleOptions">
             <input type="checkbox" :value="option" :key="option.value" name="test" v-model="facet.checkedOptions"> {{ option.text }}
         </div>
+        <button type="button"
+                class="btn btn-sm btn-link more-facets"
+                title="test"
+                data-toggle="modal"
+                :data-target="'#facetModal-' + facet.name"
+        >
+            More...
+        </button>
     </div>`,
     computed: {
         facet() {
             return store.state.facets[this.index];
+        },
+        visibleOptions() {
+            let additionalOptionsCount = Math.max(0, 5 - this.facet.checkedOptions.length);
+            let additionalOptions = this.facet.mostFrequentOptions.slice(0, additionalOptionsCount);
+            return this.facet.checkedOptions.concat(additionalOptions);
         }
     }
 });
@@ -35,7 +49,7 @@ Vue.component('modal-facet-list', {
 Vue.component('modal-facet', {
     props: ['index'],
     template: `
-    <div class="modal fade facet-modal" id="facetModal-test" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal fade facet-modal" :id="'facetModal-' + facet.name" tabindex="-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog modal-lg" role="document">
              <div class="modal-content">
                  <div class="modal-header">
@@ -173,11 +187,19 @@ const store = new Vuex.Store({
                 field: 'test.facet',
                 mostFrequentOptions: [
                     {text: 'Czechia', value: 'cz'},
+                    {text: 'Czechia2', value: 'cz2'},
+                    {text: 'Czechia3', value: 'cz3'},
+                    {text: 'Czechia4', value: 'cz4'},
+                    {text: 'Czechia5', value: 'cz5'},
                 ],
                 modalOptions: [
                     {text: 'Czechia', value: 'cz'},
+                    {text: 'Czechia2', value: 'cz2'},
+                    {text: 'Czechia3', value: 'cz3'},
+                    {text: 'Czechia4', value: 'cz4'},
+                    {text: 'Czechia5', value: 'cz5'},
                     {text: 'Slovakia', value: 'sk'},
-                    {text: 'Netherlands', value: 'nl'}
+                    {text: 'Netherlands', value: 'nl'},
                 ],
                 checkedOptions: [],
             },
