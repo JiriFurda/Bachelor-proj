@@ -103,7 +103,7 @@ Vue.component('modal-facet', {
 const store = new Vuex.Store({
     state: {
         facets: [
-            {
+            /*{
                 name: 'testfacet',
                 title: 'Test Facet',
                 field: 'test.facet',
@@ -124,13 +124,21 @@ const store = new Vuex.Store({
                     {text: 'Netherlands', value: 'nl'},
                 ],
                 checkedOptions: [],
-            },
+            },*/
         ],
     },
     mutations: {
-        increment (state) {
-            state.count++
+        initfacetData (state, payload) {
+            state.facets = payload;
         }
+    }
+});
+
+Vue.component('init-facet-data', {
+    props: ['input'],
+    template: '<div></div>',
+    mounted() {
+        store.commit('initfacetData', this.input);
     }
 });
 

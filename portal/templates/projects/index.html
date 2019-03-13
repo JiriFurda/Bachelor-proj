@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 
 {% block body %}
     <div class="container container--main">
@@ -100,7 +100,7 @@
                 {# @todo Use real facets not GET arguments #}
                 Active filters:
                 {% for arg_name, arg_value in request.args.iteritems(True) %}
-                    {% if arg_name != 'query' and arg_name != 'search' %}
+                    {% if arg_name != "query" and arg_name != "search" %}
                         <span class="badge badge-secondary">{{ arg_value }}{# <a href="{{ url_for(request.endpoint) }}">X</a> #}</span>
                     {% endif %}
                 {% endfor %}
@@ -110,17 +110,17 @@
 
                 <div class="card card--search_result card--small-padding rounded shadow-sm">
                     <div class="card-header bg-ec_dark_blue">
-                        <a href="{{ url_for('projects.show', project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
+                        <a href="{{ url_for("projects.show", project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
                     </div>
                     <div class="card-body">
                         <p>
                             {% if result.meta.highlight and result.meta.highlight.objective %}
-                                ...{{ ' ... '.join(result.meta.highlight.objective)|safe }}...
+                                ...{{ " ... ".join(result.meta.highlight.objective)|safe }}...
                             {% elif result.objective %}
                                 {{ result.objective[:300] }}...
                             {% endif %}
                         </p>
-                        <a href="{{ url_for('projects.show', project_id=result.id) }}">View details »</a>
+                        <a href="{{ url_for("projects.show", project_id=result.id) }}">View details »</a>
                     </div>
                     <div class="card-footer text-muted">
                         {{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
@@ -164,7 +164,28 @@
     {% endfor %}
 
     <div id="vue">
-        <!--<facet-modal facet_key="coord_country" facet_title="Coordinator Country" v-model="list"></facet-modal>-->
+        <init-facet-data :input='[{
+                name: "testfacet",
+                title: "Test Facet",
+                field: "test.facet",
+                mostFrequentOptions: [
+                    {text: "Czechia", value: "cz"},
+                    {text: "Czechia2", value: "cz2"},
+                    {text: "Czechia3", value: "cz3"},
+                    {text: "Czechia4", value: "cz4"},
+                    {text: "Czechia5", value: "cz5"},
+                ],
+                modalOptions: [
+                    {text: "Czechia", value: "cz"},
+                    {text: "Czechia2", value: "cz2"},
+                    {text: "Czechia3", value: "cz3"},
+                    {text: "Czechia4", value: "cz4"},
+                    {text: "Czechia5", value: "cz5"},
+                    {text: "Slovakia", value: "sk"},
+                    {text: "Netherlands", value: "nl"},
+                ],
+                checkedOptions: [],
+            }]'></init-facet-data>
         <sidebar-facet-list></sidebar-facet-list>
         <modal-facet-list></modal-facet-list>
     </div>
@@ -175,40 +196,40 @@
     <script src="/static/js/vue.js"></script>
     <script>
         $(function(){
-            $('.more-facets').click(function()
+            $(".more-facets").click(function()
             {
-                var modal_id = $(this).data('target');
-                var facet_name = modal_id.replace('#facetModal-','');
+                var modal_id = $(this).data("target");
+                var facet_name = modal_id.replace("#facetModal-","");
 
                 $.ajax(
                     {
-                        url: '/facets/'+facet_name,
-                        data: { 'search_dict': "{{ search_dict|safe }}" },
+                        url: "/facets/"+facet_name,
+                        data: { "search_dict": "{{ search_dict|safe }}" },
                         success: function (data, status, xhr)
                         {
-                            $(modal_id+' .in-facet-search-input').data('facet', facet_name);
-                            $(modal_id+' .in-facet-search-input').val('');    // Reset search input
-                            $(modal_id+' .facet-modal-options').html(data);
+                            $(modal_id+" .in-facet-search-input").data("facet", facet_name);
+                            $(modal_id+" .in-facet-search-input").val("");    // Reset search input
+                            $(modal_id+" .facet-modal-options").html(data);
                         },
                     });
             });
 
-            $('.in-facet-search-input').on('input propertychange', function()
+            $(".in-facet-search-input").on("input propertychange", function()
             {
                 var searchVal = $(this).val();
-                var facet_name = $(this).data('facet');
-                var modal_id = '#facetModal-'+facet_name;
+                var facet_name = $(this).data("facet");
+                var modal_id = "#facetModal-"+facet_name;
 
                 $.ajax(
                     {
-                        url: '/facets/'+facet_name,
+                        url: "/facets/"+facet_name,
                         data:
-                            { 'search_dict': "{{ search_dict|safe }}",
-                                'search_val': searchVal
+                            { "search_dict": "{{ search_dict|safe }}",
+                                "search_val": searchVal
                             },
                         success: function (data, status, xhr)
                         {// success callback function
-                            $(modal_id+' .facet-modal-options').html(data);
+                            $(modal_id+" .facet-modal-options").html(data);
                         },
                     });
             });
