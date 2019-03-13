@@ -30,9 +30,15 @@ Vue.component('sidebar-facet', {
             return store.state.facets[this.index];
         },
         visibleOptions() {
-            let additionalOptionsCount = Math.max(0, 5 - this.facet.checkedOptions.length);
-            let additionalOptions = this.facet.mostFrequentOptions.slice(0, additionalOptionsCount);
-            return this.facet.checkedOptions.concat(additionalOptions);
+            let additionalOptionsCount = Math.max(0, 5 - this.facet.checkedOptions.length); // How many options are missing to be more than five shown overall
+            let additionalOptions = this.facet.mostFrequentOptions; // Retrieve additional options
+            let checkedOptions = this.facet.checkedOptions;
+            additionalOptions = additionalOptions.filter(function(item, pos) {
+                return checkedOptions.indexOf(item) === -1;
+            }); // Filter out those already selected
+            additionalOptions = additionalOptions.slice(0, additionalOptionsCount); // Pick only the amount needed to show at least five
+            let resultOptions = this.facet.checkedOptions.concat(additionalOptions); // Merge selected and filling options
+            return resultOptions;
         }
     }
 });
@@ -128,7 +134,7 @@ const store = new Vuex.Store({
         ],
     },
     mutations: {
-        initfacetData (state, payload) {
+        initFacetData (state, payload) {
             state.facets = payload;
         }
     }
@@ -138,7 +144,7 @@ Vue.component('init-facet-data', {
     props: ['input'],
     template: '<div></div>',
     mounted() {
-        store.commit('initfacetData', this.input);
+        store.commit('initFacetData', this.input);
     }
 });
 
