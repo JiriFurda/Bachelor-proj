@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-from flask import Blueprint, Flask, render_template, request, abort
+from flask import Blueprint, Flask, render_template, request, abort, jsonify
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 import json, ast
@@ -63,4 +63,4 @@ def showApi(facet_name):
     for result_es in results_es:
         results_dict.update({'name': result_es.name, 'value': result_es.key, 'count': result_es.doc_count})
 
-    return json.dumps(results_dict)
+    return jsonify(results_dict)

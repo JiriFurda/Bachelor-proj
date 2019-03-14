@@ -162,9 +162,11 @@
             </div>
         {% endif %}
     {% endfor %}
-
+    {{ es_query|safe }}
+    <hr>
+{{ search_dict|safe }}
     <div id="vue">
-        <init-facet-data :input='[{
+        <init-vue-data :facets='[{
                 name: "testfacet",
                 title: "Test Facet",
                 field: "test.facet",
@@ -185,7 +187,8 @@
                     {text: "Netherlands", value: "nl"},
                 ],
                 checkedOptions: [],
-            }]'></init-facet-data>
+            }]'
+        :es='{{ es_query|safe }}'></init-vue-data>
         <sidebar-facet-list></sidebar-facet-list>
         <modal-facet-list></modal-facet-list>
     </div>

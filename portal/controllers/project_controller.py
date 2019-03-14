@@ -8,6 +8,7 @@ from flask_paginate import Pagination, get_page_args
 from collections import OrderedDict
 from models.facet import Facet
 from topic_controller import index as topic_index
+import json
 
 project_controller = Blueprint('projects', __name__, url_prefix='/projects')
 client = Elasticsearch()
@@ -121,6 +122,7 @@ def index():
                            per_page=per_page,
                            pagination=pagination,
                            search_dict=search_without_facets.to_dict(),
+                           es_query=json.dumps(search_without_facets.to_dict()),
                            debug=None)
 
 

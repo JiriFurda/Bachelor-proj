@@ -121,6 +121,9 @@ Vue.component('modal-facet', {
     computed: {
         facet() {
             return store.state.facets[this.index];
+        },
+        esQuery() {
+            return store.state.esQuery;
         }
     },
     methods: {
@@ -129,7 +132,8 @@ Vue.component('modal-facet', {
             axios.get('/facets/api/' + this.facet.name, {
                 params:
                     {
-                        search_val: this.searchInput
+                        search_val: this.searchInput,
+                        search_dict: this.esQuery
                     }
                 })
                 .then(response => this.modalOptions = response.data)
@@ -164,19 +168,24 @@ const store = new Vuex.Store({
                 checkedOptions: [],
             },*/
         ],
+        esQuery: null
     },
     mutations: {
-        initFacetData (state, payload) {
+        initFacetsData (state, payload) {
             state.facets = payload;
+        },
+        initEsQuery (state, payload) {
+            state.esQuery = payload;
         }
     }
 });
 
-Vue.component('init-facet-data', {
-    props: ['input'],
+Vue.component('init-vue-data', {
+    props: ['facets', 'es'],
     template: '<div></div>',
     mounted() {
-        store.commit('initFacetData', this.input);
+        store.commit('initFacetsData', this.facets);
+        store.commit('initEsQuery', JSON.stringify(this.es));
     }
 });
 
@@ -184,7 +193,6 @@ var vue = new Vue({
     el: '#vue',
     store: store,
     data: {
-        list: [],
     },
 });
 
