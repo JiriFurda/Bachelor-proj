@@ -66,7 +66,7 @@ Vue.component('modal-facet', {
                  </div>
                  <div class="modal-body">
                      <div class="in-facet-search">
-                         <input class="form-control form-control-sm in-facet-search-input">
+                         <input class="form-control form-control-sm" v-model="searchInput">
                      </div>
                      <div class="pt-2 facet-modal-options">
                          <div v-for="option in facet.checkedOptions" class="form-check w-100">
@@ -81,7 +81,7 @@ Vue.component('modal-facet', {
     
                          <hr>
     
-                         <div v-for="option in facet.modalOptions" class="form-check w-100">
+                         <div v-for="option in modalOptions" class="form-check w-100">
                              <input type="checkbox" class="form-check-input" :value="option" :key="option.value" name="test" v-model="facet.checkedOptions">
                              <label class="form-check-label w-100">
                                  <div class="facet-submenu-item">
@@ -99,9 +99,41 @@ Vue.component('modal-facet', {
              </div>
          </div>
      </div>`,
+    watch: {
+        searchInput(after, before) {
+            this.fetchOptions();
+        }
+    },
+    data () {
+        return {
+            modalOptions: [
+                    {text: 'Czechia', value: 'cz'},
+                    {text: 'Czechia2', value: 'cz2'},
+                    {text: 'Czechia3', value: 'cz3'},
+                    {text: 'Czechia4', value: 'cz4'},
+                    {text: 'Czechia5', value: 'cz5'},
+                    {text: 'Slovakia', value: 'sk'},
+                    {text: 'Netherlands', value: 'nl'},
+                ],
+            searchInput: null,
+        };
+    },
     computed: {
         facet() {
             return store.state.facets[this.index];
+        }
+    },
+    methods: {
+        fetchOptions() {
+            console.log(this.searchInput);
+            axios.get('/facets/api/' + this.facet.name, {
+                params:
+                    {
+                        search_val: this.searchInput
+                    }
+                })
+                .then(response => this.modalOptions = response.data)
+                .catch(error => {});
         }
     }
 });
