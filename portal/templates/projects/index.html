@@ -135,6 +135,7 @@
     </div>
 
     <!-- Modal -->
+    {#
     {% for facet in facets %}
         {% if facets_data[facet.name]|length >= 6 %}
             <div class="modal fade facet-modal" id="facetModal-{{ facet.name }}" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -162,11 +163,15 @@
             </div>
         {% endif %}
     {% endfor %}
-    {{ es_query|safe }}
+    #}
     <hr>
-{{ search_dict|safe }}
+    {{ vue_facets|safe }}
+    <hr>
     <div id="vue">
-        <init-vue-data :facets='[{
+
+        <init-vue-data
+            {#
+            :facets='[{
                 name: "testfacet",
                 title: "Test Facet",
                 field: "test.facet",
@@ -188,7 +193,9 @@
                 ],
                 checkedOptions: [],
             }]'
-        :es='{{ es_query|safe }}'></init-vue-data>
+            #}
+            :facets='{{ vue_facets|safe }}'
+            :es='{{ es_query|safe }}'></init-vue-data>
         <sidebar-facet-list></sidebar-facet-list>
         <modal-facet-list></modal-facet-list>
     </div>
@@ -197,6 +204,7 @@
 
 {% block javascript %}
     <script src="/static/js/vue.js"></script>
+    {#
     <script>
         $(function(){
             $(".more-facets").click(function()
@@ -238,4 +246,5 @@
             });
         });
     </script>
+    #}
 {% endblock %}

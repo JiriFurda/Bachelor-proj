@@ -1,4 +1,4 @@
-
+import json
 
 class Facet:
     def __init__(self, name, title, field):
@@ -25,3 +25,14 @@ class Facet:
             if facet.name == searched_name:
                 return facet
         return None
+
+    def toJson(self):
+        dict = {
+            'name': self.name,
+            'title': self.title,
+            'field': self.field,
+            'mostFrequentOptions': [],
+            'checkedOptions': [],
+        }
+
+        return json.dumps(dict)

@@ -113,6 +113,13 @@ def index():
     for facet_name, facet_attributes in facets.items():
         facets_data[facet_name] = eval('response.aggregations.' + facet_name).buckets
 
+    facets = Facet.all()
+    vue_facets = ''
+    for facet in facets:
+        vue_facets += facet.toJson()
+        vue_facets += ','
+    vue_facets = '['+vue_facets[:-1]+']'
+
     return render_template('projects/index.html',
                            results=response,
                            facets=Facet.all(),
@@ -123,6 +130,7 @@ def index():
                            pagination=pagination,
                            search_dict=search_without_facets.to_dict(),
                            es_query=json.dumps(search_without_facets.to_dict()),
+                           vue_facets=vue_facets,
                            debug=None)
 
 

@@ -59,8 +59,9 @@ def showApi(facet_name):
     response = search.execute()
 
     results_es = eval('response.aggregations.' + facet.name).buckets
-    results_dict = {}
+    results_arr = []
+    #results_dict.update(response.to_dict())
     for result_es in results_es:
-        results_dict.update({'name': result_es.name, 'value': result_es.key, 'count': result_es.doc_count})
+        results_arr.append({'text': result_es.key, 'value': result_es.key, 'count': result_es.doc_count})
 
-    return jsonify(results_dict)
+    return jsonify(results_arr)
