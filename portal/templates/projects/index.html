@@ -4,84 +4,8 @@
 <div id="vue">
     <div class="container container--main">
         <div class="col--side sidebar">
-            <!--<button class="btn" type="send">Use filters</button>-->
-            <ul class="list-unstyled">
-                {% for facet in facets %}
-                    <li>
-                        <div class="facet-label collapsed" data-toggle="collapse" href="#collapse-{{ facet.name }}" role="button" aria-expanded="false" aria-controls="collapse-{{ facet.name }}">
-                            {{ facet.title }}
-                        </div>
-                        <div class="facet-submenu collapse" id="collapse-{{ facet.name }}">
-                            {% set facetLoop = loop %}
-                            {% for facet_data in facets_data[facet.name] %}
-                                {% if loop.index < 6 %}
-                                    <div class="form-check w-100" data-value="{{ facet_data.key }}">
-                                        <input class="form-check-input"
-                                               type="checkbox"
-                                               value="{{ facet_data.key }}"
-                                               id="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]"
-                                               name="{{ facet.name }}"
-                                                {% if facet_data.key in get_arguments.getlist(facet.name)  %}
-                                               checked
-                                                {% endif %}
-                                        >
-                                        <label class="form-check-label w-100" for="defaultCheck[{{ facetLoop.index }}][{{ loop.index }}]">
-                                            <div class="facet-submenu-item">
-                                                <div class="d-inline-block text-truncate" data-toggle="tooltip" data-placement="left" title="{{ facet_data.key }}">{{ facet_data.key }}</div>
-                                                <div><span class="badge badge-pill badge-secondary">{{ facet_data.doc_count }}</span></div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                {% else %}
-                                    <button type="button"
-                                            class="btn btn-sm btn-link more-facets"
-                                            title="{{ facet.title }}"
-                                            data-toggle="modal"
-                                            data-target="#facetModal-{{ facet.name }}"
-                                    >
-                                        More...
-                                    </button>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </li>
-                {% endfor %}
-
-                <li>
-                    <div class="facet-label collapsed" data-toggle="collapse" href="#collapse-test" role="button" aria-expanded="false" aria-controls="collapse-test">
-                        test
-                    </div>
-                    <div class="facet-submenu collapse" id="collapse-test">
-                        <div class="form-check w-100" data-value="test">
-                            <input class="form-check-input"
-                                   type="checkbox"
-                                   value="test"
-                                   id="defaultCheck[test][test]"
-                                   name="test"
-                            >
-                            <label class="form-check-label w-100" for="defaultCheck[test}][test]">
-                                <div class="facet-submenu-item">
-                                    <div class="d-inline-block text-truncate" data-toggle="tooltip" data-placement="left" title="test">test</div>
-                                    <div><span class="badge badge-pill badge-secondary">test</span></div>
-                                </div>
-                            </label>
-                        </div>
-                        <button type="button"
-                                class="btn btn-sm btn-link more-facets"
-                                title="test"
-                                data-toggle="modal"
-                                data-target="#facetModal-test"
-                        >
-                            More...
-                        </button>
-                    </div>
-                </li>
-
-
-                <li>
-                    <button class="btn btn-secondary" type="submit">Apply filters</button>
-                </li>
-            </ul>
+            <sidebar-facet-list></sidebar-facet-list>
+            <button class="btn btn-secondary" type="submit">Apply filters</button>
         </div>
         <div class="col--main flex-grow-1 content">
             <h1 class="h3">Search results</h1>
@@ -197,7 +121,6 @@
             #}
             :facets='{{ vue_facets|safe }}'
             :es='{{ es_query|safe }}'></init-vue-data>
-        <sidebar-facet-list></sidebar-facet-list>
         <modal-facet-list></modal-facet-list>
     </div>
 </div>
