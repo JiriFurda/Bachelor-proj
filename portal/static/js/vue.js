@@ -1,6 +1,6 @@
 
 Vue.component('sidebar-facet-list', {
-    template: `<div><sidebar-facet v-for="(facet, index) in facets" :index="index"></sidebar-facet></div>`, // <div v-for="facet in store.facets">TEST</div><
+    template: `<ul class="list-unstyled"><sidebar-facet v-for="(facet, index) in facets" :index="index"></sidebar-facet></ul>`,
     computed: {
         facets() {
             return store.state.facets;
@@ -11,20 +11,24 @@ Vue.component('sidebar-facet-list', {
 Vue.component('sidebar-facet', {
     props: ['index'],
     template: `
-    <div>
-        {{ facet.title }}
-        <div v-for="option in visibleOptions">
-            <input type="checkbox" :value="option" :key="option.value" name="test" v-model="facet.checkedOptions"> {{ option.text }}
+    <li>
+        <div class="facet-label" data-toggle="collapse" :href="'#collapse-'+facet.name" role="button">
+            {{ facet.title }}
         </div>
-        <button type="button"
-                class="btn btn-sm btn-link more-facets"
-                title="test"
-                data-toggle="modal"
-                :data-target="'#facetModal-' + facet.name"
-        >
-            More...
-        </button>
-    </div>`,
+        <div class="facet-submenu collapse show" :id="'collapse-'+facet.name">
+            <div v-for="option in visibleOptions">
+            <input type="checkbox" :value="option" :key="option.value" name="test" v-model="facet.checkedOptions"> {{ option.text }}
+            </div>
+            <button type="button"
+                    class="btn btn-sm btn-link more-facets"
+                    title="test"
+                    data-toggle="modal"
+                    :data-target="'#facetModal-'+facet.name"
+            >
+                More...
+            </button>                                
+        </div>
+    </li>`,
     computed: {
         facet() {
             return store.state.facets[this.index];
