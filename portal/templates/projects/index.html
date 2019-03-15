@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<div id="vue">
     <div class="container container--main">
         <div class="col--side sidebar">
             <!--<button class="btn" type="send">Use filters</button>-->
@@ -167,7 +168,7 @@
     <hr>
     {{ vue_facets|safe }}
     <hr>
-    <div id="vue">
+    <div>
 
         <init-vue-data
             {#
@@ -199,6 +200,7 @@
         <sidebar-facet-list></sidebar-facet-list>
         <modal-facet-list></modal-facet-list>
     </div>
+</div>
 {% endblock %}
 
 
