@@ -12,10 +12,18 @@ Vue.component('sidebar-facet', {
     props: ['index'],
     template: `
     <li>
-        <div class="facet-label" data-toggle="collapse" :href="'#collapse-'+facet.name" role="button">
+        <div
+          @click="showCollapse = !showCollapse"
+          :class="'facet-label ' + (showCollapse ? 'collapsed' : null)"
+          :aria-controls="'collapse-'+facet.name"
+          :aria-expanded="showCollapse ? 'true' : 'false'"
+          role="button"
+        >
             {{ facet.title }}
         </div>
-        <div class="facet-submenu collapse show" :id="'collapse-'+facet.name">
+        
+        </div>
+        <b-collapse v-model="showCollapse" class="facet-submenu" :id="'collapse-'+facet.name">
             <option-facet v-for="option in visibleOptions" :option="option" :facet="facet"></option-facet>
             <button type="button"
                     class="btn btn-sm btn-link more-facets"
@@ -25,7 +33,7 @@ Vue.component('sidebar-facet', {
             >
                 More...
             </button>                                
-        </div>
+        </b-collapse>
     </li>`,
     computed: {
         facet() {
@@ -46,6 +54,7 @@ Vue.component('sidebar-facet', {
     },
     data () {
         return {
+            showCollapse: false,
             /* @todo Save options in sidebar component not store
             [
                 {text: 'Czechia', value: 'cz'},
