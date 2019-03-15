@@ -116,7 +116,19 @@ def index():
     facets = Facet.all()
     vue_facets = ''
     for facet in facets:
-        vue_facets += facet.toJson()
+        facet_dict = facet.toDict()
+        facet_dict.update({'checkedOptions': []})
+
+        option_list = []
+        for option in facets_data[facet.name]:
+            option_list.append({
+                'value': option.key,
+                'text': option.key,
+                'count': option.doc_count,
+            })
+        facet_dict.update({'mostFrequentOptions': option_list})
+
+        vue_facets += json.dumps(facet_dict)
         vue_facets += ','
     vue_facets = '['+vue_facets[:-1]+']'
 

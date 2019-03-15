@@ -33,7 +33,8 @@ Vue.component('sidebar-facet', {
         },
         visibleOptions() {
             let additionalOptionsCount = Math.max(0, 5 - this.facet.checkedOptions.length); // How many options are missing to be more than five shown overall
-            let additionalOptions = this.mostFrequentOptions; // Retrieve additional options
+            //let additionalOptions = this.mostFrequentOptions; // @todo Save options in sidebar component not store
+            let additionalOptions = this.facet.mostFrequentOptions; // Retrieve additional options
             let checkedOptions = this.facet.checkedOptions;
             additionalOptions = additionalOptions.filter(function (item, pos) {
                 return checkedOptions.indexOf(item) === -1;
@@ -45,13 +46,14 @@ Vue.component('sidebar-facet', {
     },
     data () {
         return {
-            mostFrequentOptions: [
+            /* @todo Save options in sidebar component not store
+            [
                 {text: 'Czechia', value: 'cz'},
                 {text: 'Czechia2', value: 'cz2'},
                 {text: 'Czechia3', value: 'cz3'},
                 {text: 'Czechia4', value: 'cz4'},
                 {text: 'Czechia5', value: 'cz5'},
-            ]
+            ]*/
         }
     },
 });

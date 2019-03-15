@@ -26,12 +26,11 @@ class Facet:
                 return facet
         return None
 
-    def toJson(self):
+    def toDict(self):
         dict = {
             'name': self.name,
             'title': self.title,
             'field': self.field,
-            'checkedOptions': [],
         }
 
-        return json.dumps(dict)
+        return dict
