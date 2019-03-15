@@ -58,118 +58,14 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal -->
-    {#
-    {% for facet in facets %}
-        {% if facets_data[facet.name]|length >= 6 %}
-            <div class="modal fade facet-modal" id="facetModal-{{ facet.name }}" tabindex="-1" role="dialog"  aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{ facet.title }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="in-facet-search">
-                                <input class="form-control form-control-sm in-facet-search-input">
-                            </div>
-                            <div class="pt-2 facet-modal-options">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
-    #}
-    <hr>
-    {{ vue_facets|safe }}
-    <hr>
-    <div>
-
-        <init-vue-data
-            {#
-            :facets='[{
-                name: "testfacet",
-                title: "Test Facet",
-                field: "test.facet",
-                mostFrequentOptions: [
-                    {text: "Czechia", value: "cz"},
-                    {text: "Czechia2", value: "cz2"},
-                    {text: "Czechia3", value: "cz3"},
-                    {text: "Czechia4", value: "cz4"},
-                    {text: "Czechia5", value: "cz5"},
-                ],
-                modalOptions: [
-                    {text: "Czechia", value: "cz"},
-                    {text: "Czechia2", value: "cz2"},
-                    {text: "Czechia3", value: "cz3"},
-                    {text: "Czechia4", value: "cz4"},
-                    {text: "Czechia5", value: "cz5"},
-                    {text: "Slovakia", value: "sk"},
-                    {text: "Netherlands", value: "nl"},
-                ],
-                checkedOptions: [],
-            }]'
-            #}
-            :facets='{{ vue_facets|safe }}'
-            :es='{{ es_query|safe }}'></init-vue-data>
-        <modal-facet-list></modal-facet-list>
-    </div>
+    <init-vue-data
+        :facets='{{ vue_facets|safe }}'
+        :es='{{ es_query|safe }}'></init-vue-data>
+    <modal-facet-list></modal-facet-list>
 </div>
 {% endblock %}
 
 
 {% block javascript %}
     <script src="/static/js/vue.js"></script>
-    {#
-    <script>
-        $(function(){
-            $(".more-facets").click(function()
-            {
-                var modal_id = $(this).data("target");
-                var facet_name = modal_id.replace("#facetModal-","");
-
-                $.ajax(
-                    {
-                        url: "/facets/"+facet_name,
-                        data: { "search_dict": "{{ search_dict|safe }}" },
-                        success: function (data, status, xhr)
-                        {
-                            $(modal_id+" .in-facet-search-input").data("facet", facet_name);
-                            $(modal_id+" .in-facet-search-input").val("");    // Reset search input
-                            $(modal_id+" .facet-modal-options").html(data);
-                        },
-                    });
-            });
-
-            $(".in-facet-search-input").on("input propertychange", function()
-            {
-                var searchVal = $(this).val();
-                var facet_name = $(this).data("facet");
-                var modal_id = "#facetModal-"+facet_name;
-
-                $.ajax(
-                    {
-                        url: "/facets/"+facet_name,
-                        data:
-                            { "search_dict": "{{ search_dict|safe }}",
-                                "search_val": searchVal
-                            },
-                        success: function (data, status, xhr)
-                        {// success callback function
-                            $(modal_id+" .facet-modal-options").html(data);
-                        },
-                    });
-            });
-        });
-    </script>
-    #}
 {% endblock %}
