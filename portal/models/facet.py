@@ -31,7 +31,6 @@ class Facet:
             'name': self.name,
             'title': self.title,
             'field': self.field,
-            'mostFrequentOptions': [],
             'checkedOptions': [],
         }
 

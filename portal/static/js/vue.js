@@ -31,16 +31,28 @@ Vue.component('sidebar-facet', {
         },
         visibleOptions() {
             let additionalOptionsCount = Math.max(0, 5 - this.facet.checkedOptions.length); // How many options are missing to be more than five shown overall
-            let additionalOptions = this.facet.mostFrequentOptions; // Retrieve additional options
+            let additionalOptions = this.mostFrequentOptions; // Retrieve additional options
             let checkedOptions = this.facet.checkedOptions;
-            additionalOptions = additionalOptions.filter(function(item, pos) {
+            additionalOptions = additionalOptions.filter(function (item, pos) {
                 return checkedOptions.indexOf(item) === -1;
             }); // Filter out those already selected
             additionalOptions = additionalOptions.slice(0, additionalOptionsCount); // Pick only the amount needed to show at least five
             let resultOptions = this.facet.checkedOptions.concat(additionalOptions); // Merge selected and filling options
             return resultOptions;
+        },
+    },
+    data () {
+        return {
+            mostFrequentOptions: [
+                {text: 'Czechia', value: 'cz'},
+                {text: 'Czechia2', value: 'cz2'},
+                {text: 'Czechia3', value: 'cz3'},
+                {text: 'Czechia4', value: 'cz4'},
+                {text: 'Czechia5', value: 'cz5'},
+            ]
         }
-    }
+    },
+
 });
 
 Vue.component('modal-facet-list', {
