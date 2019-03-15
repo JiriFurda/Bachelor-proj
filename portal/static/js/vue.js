@@ -59,7 +59,7 @@ Vue.component('sidebar-facet', {
 Vue.component('option-facet', {
     props: ['option', 'facet'],
     template: `
-    <div class="form-check">
+    <div class="form-check w-100">
         <input type="checkbox"
             class="form-check-input"
             :id="'option-facet-'+uid"
@@ -68,16 +68,14 @@ Vue.component('option-facet', {
             :name="facet.name"
             v-model="facet.checkedOptions"
         >
-        <label :for="'option-facet-'+uid" class="form-check-label">{{ option.text }}</label>
+        <label :for="'option-facet-'+uid" class="form-check-label w-100">
+            <div class="facet-submenu-item">
+                <div class="d-inline-block text-truncate">{{ option.text }}</div>
+                <div><span class="badge badge-pill badge-secondary">@todo</span></div>
+            </div>
+        </label>
     </div>
     `,
-    computed: {
-        /*
-        facet() {
-            return store.state.facets[this.index];
-        },
-        */
-    },
     data () {
         return {
             uid: null
@@ -114,27 +112,11 @@ Vue.component('modal-facet', {
                          <input class="form-control form-control-sm" v-model="searchInput">
                      </div>
                      <div class="pt-2 facet-modal-options">
-                         <div v-for="option in facet.checkedOptions" class="form-check w-100">
-                             <input type="checkbox" class="form-check-input" :value="option" :key="option.value" name="test" v-model="facet.checkedOptions">
-                             <label class="form-check-label w-100">
-                                 <div class="facet-submenu-item">
-                                     <div class="d-inline-block text-truncate">{{ option.text }}</div>
-                                     <div><span class="badge badge-pill badge-secondary">test</span></div>
-                                 </div>
-                             </label>
-                         </div>
+                        <option-facet v-for="option in facet.checkedOptions" :option="option" :facet="facet"></option-facet>
     
                          <hr>
     
-                         <div v-for="option in modalOptions" class="form-check w-100">
-                             <input type="checkbox" class="form-check-input" :value="option" :key="option.value" name="test" v-model="facet.checkedOptions">
-                             <label class="form-check-label w-100">
-                                 <div class="facet-submenu-item">
-                                     <div class="d-inline-block text-truncate">{{ option.text }}</div>
-                                     <div><span class="badge badge-pill badge-secondary">test</span></div>
-                                 </div>
-                             </label>
-                         </div>
+                         <option-facet v-for="option in modalOptions" :option="option" :facet="facet"></option-facet>
                      </div>
                  </div>
                  <div class="modal-footer">
@@ -189,30 +171,7 @@ Vue.component('modal-facet', {
 
 const store = new Vuex.Store({
     state: {
-        facets: [
-            /*{
-                name: 'testfacet',
-                title: 'Test Facet',
-                field: 'test.facet',
-                mostFrequentOptions: [
-                    {text: 'Czechia', value: 'cz'},
-                    {text: 'Czechia2', value: 'cz2'},
-                    {text: 'Czechia3', value: 'cz3'},
-                    {text: 'Czechia4', value: 'cz4'},
-                    {text: 'Czechia5', value: 'cz5'},
-                ],
-                modalOptions: [
-                    {text: 'Czechia', value: 'cz'},
-                    {text: 'Czechia2', value: 'cz2'},
-                    {text: 'Czechia3', value: 'cz3'},
-                    {text: 'Czechia4', value: 'cz4'},
-                    {text: 'Czechia5', value: 'cz5'},
-                    {text: 'Slovakia', value: 'sk'},
-                    {text: 'Netherlands', value: 'nl'},
-                ],
-                checkedOptions: [],
-            },*/
-        ],
+        facets: [],
         esQuery: null
     },
     mutations: {
