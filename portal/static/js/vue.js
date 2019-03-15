@@ -73,7 +73,7 @@ Vue.component('option-facet', {
         <label :for="'option-facet-'+uid" class="form-check-label w-100">
             <div class="facet-submenu-item">
                 <div class="d-inline-block text-truncate">{{ option.text }}</div>
-                <div><span class="badge badge-pill badge-secondary">@todo</span></div>
+                <div><span class="badge badge-pill badge-secondary">{{ option.count }}</span></div>
             </div>
         </label>
     </div>
