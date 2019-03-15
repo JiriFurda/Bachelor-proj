@@ -16,9 +16,7 @@ Vue.component('sidebar-facet', {
             {{ facet.title }}
         </div>
         <div class="facet-submenu collapse show" :id="'collapse-'+facet.name">
-            <div v-for="option in visibleOptions">
-            <input type="checkbox" :value="option" :key="option.value" name="test" v-model="facet.checkedOptions"> {{ option.text }}
-            </div>
+            <option-facet v-for="option in visibleOptions" :option="option" :facet="facet"></option-facet>
             <button type="button"
                     class="btn btn-sm btn-link more-facets"
                     title="test"
@@ -56,7 +54,38 @@ Vue.component('sidebar-facet', {
             ]
         }
     },
+});
 
+Vue.component('option-facet', {
+    props: ['option', 'facet'],
+    template: `
+    <div class="form-check">
+        <input type="checkbox"
+            class="form-check-input"
+            :id="'option-facet-'+uid"
+            :value="option"
+            :key="option.value"
+            :name="facet.name"
+            v-model="facet.checkedOptions"
+        >
+        <label :for="'option-facet-'+uid" class="form-check-label">{{ option.text }}</label>
+    </div>
+    `,
+    computed: {
+        /*
+        facet() {
+            return store.state.facets[this.index];
+        },
+        */
+    },
+    data () {
+        return {
+            uid: null
+        }
+    },
+    mounted () {
+        this.uid = this._uid
+    },
 });
 
 Vue.component('modal-facet-list', {
