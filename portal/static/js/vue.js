@@ -162,6 +162,40 @@ Vue.component('modal-facet', {
     }
 });
 
+Vue.component('search-input', {
+    template: `
+        <div class="input-group input-group-sm">
+            <input name="query-new" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" :value="query">
+            <div class="input-group-append">
+                <button class="btn btn-light" type="send">Search</button>
+            </div>
+        </div>
+    `,
+    computed: {
+        facets() {
+            return store.state.facets;
+        },
+        query() {
+            return this.buildQuery();
+        }
+    },
+    methods: {
+        buildQuery() {
+            let queryString = '';
+            this.facets.forEach(function(facet) {
+                if(facet.checkedOptions.length)
+                {
+                    let values = facet.checkedOptions.map(function(option) {
+                        return option.value;
+                    });
+                    queryString += facet.name + ':(' + values.join(' OR ') + ')';
+                }
+            });
+            return queryString;
+        }
+    }
+});
+
 const store = new Vuex.Store({
     state: {
         facets: [],
