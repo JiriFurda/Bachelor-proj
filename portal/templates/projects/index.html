@@ -4,6 +4,9 @@
 <div id="vue">
     <div class="container container--main">
         <div class="col--side sidebar">
+            <div v-if="!$data">
+                Loading...
+            </div>
             <sidebar-facet-list></sidebar-facet-list>
             <button class="btn btn-secondary" type="submit">Apply filters</button>
         </div>

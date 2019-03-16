@@ -20,7 +20,7 @@ Vue.component('sidebar-facet', {
           role="button"
         >
             <div class="d-inline-block text-truncate w-100">{{ facet.title }}</div>
-            <div v-if="checkedOptionsCount"><span class="badge badge-pill badge-secondary">{{ checkedOptionsCount }}</span></div>
+            <div v-if="showCount"><span class="badge badge-pill badge-secondary">{{ checkedOptionsCount }}</span></div>
         </div>
         
         </div>
@@ -49,14 +49,20 @@ Vue.component('sidebar-facet', {
         },
         checkedOptionsCount() {
             return this.facet.checkedOptions.length;
+        },
+        showCount() {
+            return !this.showCollapse && this.checkedOptionsCount;
         }
     },
     data () {
         return {
-            showCollapse: false,
+            showCollapse: null,
             // @todo Save options in sidebar component not store
         }
     },
+    mounted () {
+        this.showCollapse = Boolean(this.checkedOptionsCount);
+    }
 });
 
 Vue.component('option-facet', {
