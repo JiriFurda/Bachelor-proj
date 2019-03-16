@@ -30,6 +30,7 @@ Vue.component('sidebar-facet', {
                 More...
             </b-button>                           
         </b-collapse>
+        <input v-for="option in facet.checkedOptions" type="hidden" :name="facet.name" :value="option.value">
     </li>`,
     computed: {
         facet() {
@@ -52,7 +53,7 @@ Vue.component('sidebar-facet', {
         },
         showCount() {
             return !this.showCollapse && this.checkedOptionsCount;
-        }
+        },
     },
     data () {
         return {
@@ -74,7 +75,6 @@ Vue.component('option-facet', {
             :id="'option-facet-'+uid"
             :value="option"
             :key="option.value"
-            :name="facet.name"
             v-model="facet.checkedOptions"
         >
         <label :for="'option-facet-'+uid" class="form-check-label w-100">
