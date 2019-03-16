@@ -25,14 +25,9 @@ Vue.component('sidebar-facet', {
         </div>
         <b-collapse v-model="showCollapse" class="facet-submenu" :id="'collapse-'+facet.name">
             <option-facet v-for="option in visibleOptions" :option="option" :facet="facet"></option-facet>
-            <button type="button"
-                    class="btn btn-sm btn-link more-facets"
-                    title="test"
-                    data-toggle="modal"
-                    :data-target="'#facetModal-'+facet.name"
-            >
+            <b-button v-b-modal="'facetModal-'+facet.name" variant="link" size="sm">
                 More...
-            </button>                                
+            </b-button>                           
         </b-collapse>
     </li>`,
     computed: {
@@ -109,34 +104,16 @@ Vue.component('modal-facet-list', {
 Vue.component('modal-facet', {
     props: ['index'],
     template: `
-    <div class="modal fade facet-modal" :id="'facetModal-' + facet.name" tabindex="-1" role="dialog"  aria-hidden="true">
-         <div class="modal-dialog modal-lg" role="document">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title">{{ facet.title }}</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body">
-                     <div class="in-facet-search">
-                         <input class="form-control form-control-sm" v-model="searchInput">
-                     </div>
-                     <div class="pt-2 facet-modal-options">
-                        <option-facet v-for="option in facet.checkedOptions" :option="option" :facet="facet"></option-facet>
-    
-                         <hr>
-    
-                         <option-facet v-for="option in modalOptions" :option="option" :facet="facet"></option-facet>
-                     </div>
-                 </div>
-                 <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary">Save changes</button>
-                 </div>
-             </div>
-         </div>
-     </div>`,
+    <b-modal :id="'facetModal-' + facet.name" size="xl" scrollable :title="facet.title">
+        <div class="in-facet-search">
+            <input class="form-control form-control-sm" v-model="searchInput">
+        </div>
+        <div class="pt-2 facet-modal-options">
+            <option-facet v-for="option in facet.checkedOptions" :option="option" :facet="facet"></option-facet>
+            <hr>
+            <option-facet v-for="option in modalOptions" :option="option" :facet="facet"></option-facet>
+        </div>
+    </b-modal>`,
     watch: {
         searchInput(after, before) {
             this.fetchOptions();
@@ -144,15 +121,7 @@ Vue.component('modal-facet', {
     },
     data () {
         return {
-            modalOptions: [
-                    {text: 'Czechia', value: 'cz'},
-                    {text: 'Czechia2', value: 'cz2'},
-                    {text: 'Czechia3', value: 'cz3'},
-                    {text: 'Czechia4', value: 'cz4'},
-                    {text: 'Czechia5', value: 'cz5'},
-                    {text: 'Slovakia', value: 'sk'},
-                    {text: 'Netherlands', value: 'nl'},
-                ],
+            modalOptions: [],
             searchInput: null,
         };
     },
@@ -176,7 +145,17 @@ Vue.component('modal-facet', {
                 })
                 .then(response => this.modalOptions = response.data)
                 .catch(error => {});
+        },
+        resetContent() {
+            this.searchInput = null;
+            this.fetchOptions();
         }
+    },
+    mounted() {
+      this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+          if(modalId === 'facetModal-' + this.facet.name) // @todo not exactly the best method to listen the open event
+              this.resetContent();
+      })
     }
 });
 
