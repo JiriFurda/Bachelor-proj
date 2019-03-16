@@ -14,12 +14,13 @@ Vue.component('sidebar-facet', {
     <li>
         <div
           @click="showCollapse = !showCollapse"
-          :class="'facet-label ' + (showCollapse ? 'collapsed' : null)"
+          :class="'facet-label has-right-badge ' + (!showCollapse ? 'collapsed' : null)"
           :aria-controls="'collapse-'+facet.name"
           :aria-expanded="showCollapse ? 'true' : 'false'"
           role="button"
         >
-            {{ facet.title }}
+            <div class="d-inline-block text-truncate w-100">{{ facet.title }}</div>
+            <div v-if="checkedOptionsCount"><span class="badge badge-pill badge-secondary">{{ checkedOptionsCount }}</span></div>
         </div>
         
         </div>
@@ -46,18 +47,14 @@ Vue.component('sidebar-facet', {
             let resultOptions = this.facet.checkedOptions.concat(additionalOptions); // Merge selected and filling options
             return resultOptions;
         },
+        checkedOptionsCount() {
+            return this.facet.checkedOptions.length;
+        }
     },
     data () {
         return {
             showCollapse: false,
-            /* @todo Save options in sidebar component not store
-            [
-                {text: 'Czechia', value: 'cz'},
-                {text: 'Czechia2', value: 'cz2'},
-                {text: 'Czechia3', value: 'cz3'},
-                {text: 'Czechia4', value: 'cz4'},
-                {text: 'Czechia5', value: 'cz5'},
-            ]*/
+            // @todo Save options in sidebar component not store
         }
     },
 });
@@ -75,9 +72,9 @@ Vue.component('option-facet', {
             v-model="facet.checkedOptions"
         >
         <label :for="'option-facet-'+uid" class="form-check-label w-100">
-            <div class="facet-submenu-item">
+            <div class="has-right-badge">
                 <div class="d-inline-block text-truncate">{{ option.text }}</div>
-                <div><span class="badge badge-pill badge-secondary">{{ option.count }}</span></div>
+                <div><span class="badge badge-pill badge-light">{{ option.count }}x</span></div>
             </div>
         </label>
     </div>
