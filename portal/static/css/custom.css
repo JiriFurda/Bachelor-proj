@@ -94,6 +94,7 @@ em
 	width: 100%;
 	cursor: pointer;
     padding: 5px;
+	border-bottom: 1px solid #6c757d;
 }
 
 .facet-label:hover
@@ -129,9 +130,10 @@ em
 {
     margin-bottom: 10px;
     overflow-x: auto;
+	margin: 5px;
 }
 
-.facet-submenu-item
+.has-right-badge
 {
     width: 100%;
     display: flex;

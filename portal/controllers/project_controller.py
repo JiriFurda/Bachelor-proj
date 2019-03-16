@@ -8,6 +8,7 @@ from flask_paginate import Pagination, get_page_args
 from collections import OrderedDict
 from models.facet import Facet
 from topic_controller import index as topic_index
+import json
 
 project_controller = Blueprint('projects', __name__, url_prefix='/projects')
 client = Elasticsearch()
@@ -112,6 +113,25 @@ def index():
     for facet_name, facet_attributes in facets.items():
         facets_data[facet_name] = eval('response.aggregations.' + facet_name).buckets
 
+    facets = Facet.all()
+    vue_facets = ''
+    for facet in facets:
+        facet_dict = facet.toDict()
+        facet_dict.update({'checkedOptions': []})
+
+        option_list = []
+        for option in facets_data[facet.name]:
+            option_list.append({
+                'value': option.key,
+                'text': option.key,
+                'count': option.doc_count,
+            })
+        facet_dict.update({'mostFrequentOptions': option_list})
+
+        vue_facets += json.dumps(facet_dict)
+        vue_facets += ','
+    vue_facets = '['+vue_facets[:-1]+']'
+
     return render_template('projects/index.html',
                            results=response,
                            facets=Facet.all(),
@@ -121,6 +141,8 @@ def index():
                            per_page=per_page,
                            pagination=pagination,
                            search_dict=search_without_facets.to_dict(),
+                           es_query=json.dumps(search_without_facets.to_dict()),
+                           vue_facets=vue_facets,
                            debug=None)
 
 
