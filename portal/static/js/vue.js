@@ -163,6 +163,7 @@ Vue.component('modal-facet', {
 });
 
 Vue.component('search-input', {
+    props: ['old-value'],
     template: `
         <div class="input-group input-group-sm">
             <input name="query-new" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" :value="query">
@@ -176,22 +177,29 @@ Vue.component('search-input', {
             return store.state.facets;
         },
         query() {
+            let query = this.buildQuery();
+            console.log(query);
+            if(query === '')
+                return this.oldValue;
             return this.buildQuery();
         }
     },
     methods: {
         buildQuery() {
-            let queryString = '';
+            let facetQueryArr = [];
             this.facets.forEach(function(facet) {
                 if(facet.checkedOptions.length)
                 {
+
                     let values = facet.checkedOptions.map(function(option) {
                         return option.value;
                     });
-                    queryString += facet.name + ':(' + values.join(' OR ') + ')';
+                    facetQueryArr.push(facet.field + ':("' + values.join('" OR "') + '")');
                 }
             });
-            return queryString;
+            if(facetQueryArr.length === 0)
+                return '';
+            return facetQueryArr.join(' AND ');
         }
     }
 });

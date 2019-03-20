@@ -60,18 +60,32 @@ def index():
     ])
 
     search = Search(using=client, index='xstane34_projects')
-    # search = Search(using=client, index='xstane34_deliverables')
+    search_deliv = Search(using=client, index='xstane34_deliverables')
     search = search.highlight('objective')
+    search_deliv = search_deliv.highlight('deliv.plainText')
 
+    # Process query send through GET request
+    if request.args.has_key('query-new') and request.args.get('query-new') != '':
+         search = search.query(
+            Q('query_string', query=request.args.get('query-new'),
+              fields=['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb']))
+
+    if request.args.has_key('query-new') and request.args.get('query-new') != '':
+         search_deliv = search_deliv.query(
+            Q('query_string', query=request.args.get('query-new'),
+              fields=['deliv.plainText']))
+    """
     # Process query send through GET request
     if request.args.has_key('query') and request.args.get('query') != '':
         search = search.query(
             Q('multi_match', query=request.args.get('query'),
               fields=['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb']))
+    """
 
     # Process facet filters sent through GET request
     facets_query = None
 
+    """
     for arg_name, arg_value in request.args.iteritems(True):  # Walk through every GET argument
         if arg_name in facets:  # If GET argument key is in facets dictionary
             field = facets[arg_name]['field']
@@ -83,6 +97,7 @@ def index():
                 facets_query = Q("match", **{field: arg_value})  # Create new query
             else:
                 facets_query = facets_query | Q("match", **{field: arg_value})  # Append to existing query
+    """
 
     if facets_query is not None:  # If any facet is used
         search = search.query(facets_query)
@@ -103,6 +118,7 @@ def index():
     # Execute the search
 
     response = search.execute()
+    response_deliv = search_deliv.execute()
 
     total = response.hits.total
     pagination = Pagination(page=page, per_page=per_page, total=total,
@@ -143,6 +159,7 @@ def index():
                            search_dict=search_without_facets.to_dict(),
                            es_query=json.dumps(search_without_facets.to_dict()),
                            vue_facets=vue_facets,
+                           response_deliv=response_deliv,
                            debug=None)
 
 

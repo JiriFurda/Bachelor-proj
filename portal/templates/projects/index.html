@@ -11,7 +11,7 @@
             <button class="btn btn-secondary" type="submit">Apply filters</button>
         </div>
         <div class="col--main flex-grow-1 content">
-            <search-input></search-input>
+            <search-input :old-value="'{{ get_arguments.get('query-new', '') if get_arguments }}'"></search-input>
             <h1 class="h3">Search results</h1>
 
             {{ debug }}
@@ -20,19 +20,22 @@
             </div>
 
             <p>
-                Found {{ results.hits.total }} results
+                Found {{ results.hits.total }} projects<br>
+                Found {{ response_deliv.hits.total }} deliverables
             </p>
 
             <p>
                 {# @todo Hide when no facet is used #}
                 {# @todo Move logic to .py file #}
                 {# @todo Use real facets not GET arguments #}
+                <!--
                 Active filters:
                 {% for arg_name, arg_value in request.args.iteritems(True) %}
                     {% if arg_name != "query" and arg_name != "search" %}
                         <span class="badge badge-secondary">{{ arg_value }}{# <a href="{{ url_for(request.endpoint) }}">X</a> #}</span>
                     {% endif %}
                 {% endfor %}
+                -->
             </p>
 
             {% for result in results %}
