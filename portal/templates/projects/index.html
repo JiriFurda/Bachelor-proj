@@ -39,7 +39,6 @@
             </p>
 
             {% for result in results %}
-
                 <div class="card card--search_result card--small-padding rounded shadow-sm">
                     <div class="card-header bg-ec_dark_blue">
                         <a href="{{ url_for("projects.show", project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
@@ -63,6 +62,31 @@
             <div class="d-flex justify-content-center pt-1">
                 {{ pagination.links }}
             </div>
+
+
+            {% for result in response_deliv %}
+                <div class="card card--search_result card--small-padding rounded shadow-sm">
+                    <div class="card-header bg-ec_dark_blue">
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            {% if result.meta.highlight and result.meta.highlight.deliv and result.meta.highlight.deliv.plainText %}
+                                ...{{ " ... ".join(result.meta.highlight.deliv.plainText)|safe }}...
+                            {% else %}
+                                {% if result.deliv.plainText %}
+                                    {{ result.deliv.plainText[:300] }}...
+                                {% else %}
+                                    Content is missing
+                                {% endif %}
+                            {% endif %}
+                        </p>
+
+                    </div>
+                    <div class="card-footer text-muted">
+
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
     <init-vue-data
