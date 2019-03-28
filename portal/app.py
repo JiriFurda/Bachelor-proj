@@ -10,7 +10,7 @@ from controllers.search_controller import search_controller
 app = Flask(__name__)
 
 
-app.register_blueprint(homepage_controller)
+#app.register_blueprint(homepage_controller)
 app.register_blueprint(project_controller)
 app.register_blueprint(topic_controller)
 app.register_blueprint(search_controller)

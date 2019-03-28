@@ -9,6 +9,7 @@ class Facet:
     @staticmethod
     def all():
         facets_list = [
+                Facet('index', 'Index', '_index'),
                 Facet('programme', 'Programme', 'fundedUnder.programme.keyword'),
                 Facet('subprogramme', 'Subprogramme', 'fundedUnder.subprogramme.keyword'),
                 Facet('topic', 'Topic', 'topics.title.keyword'),

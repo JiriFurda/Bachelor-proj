@@ -14,6 +14,14 @@ project_controller = Blueprint('projects', __name__, url_prefix='/projects')
 client = Elasticsearch()
 
 
+def search(query):
+    es_search = Search(using=client, index='xstane34_projects')
+    es_search = es_search.highlight('objective')
+    es_search = es_search.query(
+        Q('query_string', query=request.args.get('query-new'),
+          fields=['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb']))
+
+
 @project_controller.route('/')
 def index():
     if request.args.has_key('search') and request.args.get('search') == 'topics':
