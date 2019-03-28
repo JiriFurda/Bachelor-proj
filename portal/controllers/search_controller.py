@@ -17,14 +17,6 @@ def index():
 
     return render_template('debug.html', debug=es_search.execute().aggregations.to_dict())
 
-    if request.args.has_key('search'):
-        if request.args.get('search') == 'topics':
-            return redirect(url_for('topics.index') + '?' + request.query_string)
-        if request.args.get('search') == 'topics':
-            return redirect(url_for('projects.index')+'?'+request.query_string)
-
-    abort(500, 'Invalid search type')
-
 def buildSearch():
     es_search = Search(using=client, index=['xstane34_projects', 'xstane34_deliverables'])
     es_search = es_search.query(
@@ -39,3 +31,4 @@ def appendAggregations(es_search):
         es_search.aggs.bucket(facet.name, 'terms', field=facet.field, size=6)
 
     return es_search
+

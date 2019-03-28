@@ -13,43 +13,64 @@
 		<link rel="stylesheet" href="/static/css/custom.css">
 	</head>
 	<body class="bg-light">
-		<form action="{{ url_for('projects.index') }}" method="GET" class="flex-grow-1">
-			<header class="header bg-ec_dark_blue">
-				<div class="container container--header">
-					<div class="col--side d-flex justify-content-between">
-                        <a href="/">
-                            <img src="/static/img/European_stars.svg" class="img-eu_flag">
-                        </a>
-                        <a href="/" class="link-unstyled">
-                            <div class="text-center">European Research Projects Portal</div>
-                        </a>
-					</div>
-					<div class="col--main">
-						<div class="input-group input-group-sm">
-							<div class="input-group-prepend">
-								<span class="input-group-text p-0">
-									<select name="search" class="bg-transparent border-0 custom-select" id="inputGroupSelect01">
-                                        {% for val, text in [('projects', 'Projects'), ('topics', 'Topics')] %}
-                                            {% if get_arguments|default(false) %}
-                                                <option value="{{ val }}" {{ 'selected' if get_arguments.get('search')|default('projects') == val }}>{{ text }}</option>
-                                            {% else %}
-                                                <option value="{{ val }}"}>{{ text }}</option>
-                                            {% endif %}
-                                        {% endfor %}
-									</select>
-								</span>
-							</div>
-							<input disabled name="query" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" value="{{ get_arguments.get('query', '') if get_arguments }}">
-							<div class="input-group-append">
-								<button class="btn btn-light" type="send">Search</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
+        <div id="vue">
+            <form action="{{ url_for('projects.index') }}" method="GET" class="flex-grow-1">
+                <header class="header bg-ec_dark_blue">
+                    <div class="container container--header">
+                        <div class="col--side d-flex justify-content-between">
+                            <a href="/">
+                                <img src="/static/img/European_stars.svg" class="img-eu_flag">
+                            </a>
+                            <a href="/" class="link-unstyled">
+                                <div class="text-center">European Research Projects Portal</div>
+                            </a>
+                        </div>
+                        <div class="col--main">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text p-0">
+                                        <select name="search" class="bg-transparent border-0 custom-select" id="inputGroupSelect01">
+                                            {% for val, text in [('projects', 'Projects'), ('topics', 'Topics')] %}
+                                                {% if get_arguments|default(false) %}
+                                                    <option value="{{ val }}" {{ 'selected' if get_arguments.get('search')|default('projects') == val }}>{{ text }}</option>
+                                                {% else %}
+                                                    <option value="{{ val }}"}>{{ text }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </span>
+                                </div>
+                                <input disabled name="query" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" value="{{ get_arguments.get('query', '') if get_arguments }}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-light" type="send">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
 
-			{% block body %}{% endblock %}
-		</form>
+
+                <div class="container container--main">
+                    <div class="col--side sidebar">
+                        <div v-if="!$data">
+                            Loading...
+                        </div>
+                        <sidebar-facet-list></sidebar-facet-list>
+                        <button class="btn btn-secondary" type="submit">Apply filters</button>
+                    </div>
+                    <div class="col--main flex-grow-1 content">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+
+
+            </form>
+
+            <init-vue-data
+                :facets='{}'
+                :es='{}'></init-vue-data>
+            <modal-facet-list></modal-facet-list>
+        </div>
 
 		<script src="/static/js/jquery-3.3.1.min.js"></script>
 		<!--<script src="/static/js/bootstrap.bundle.min.js"></script>-->
@@ -58,12 +79,7 @@
         <script src="/static/vendor/vuex.js"></script>
         <script src="/static/vendor/axios.min.js"></script>
         <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+        <script src="/static/js/vue.js"></script>
 		{% block javascript %}{% endblock %}
-        <script>
-            $(function ()
-            {
-                $('[data-toggle="popover"]').popover();
-            })
-        </script>
 	</body>
 </html>
