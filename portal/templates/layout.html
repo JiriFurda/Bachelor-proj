@@ -26,19 +26,7 @@
                             </a>
                         </div>
                         <div class="col--main">
-                            <div class="input-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text p-0">
-                                        <select name="search" class="bg-transparent border-0 custom-select" id="inputGroupSelect01">
-
-                                        </select>
-                                    </span>
-                                </div>
-                                <input disabled name="query" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" value="{{ get_arguments.get('query', '') if get_arguments }}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-light" type="send">Search</button>
-                                </div>
-                            </div>
+                            <search-input :old-value="'{{ layout_data['get_arguments'].get('query', '') if layout_data['get_arguments'] }}'"></search-input>
                         </div>
                     </div>
                 </header>

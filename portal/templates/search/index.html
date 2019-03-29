@@ -1,11 +1,32 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    {% for key, value in results.items() %}
-        {% if value %}
+    {% for key, response in results.items() %}
+        {% if response.hits %}
             <div>
                 <h2>{{ key }}</h2>
-                {{ value }}
+                <p>Found {{ response.hits.total }} results</p>
+
+                {% for result in response.hits %}
+                    <div class="card card--search_result card--small-padding rounded shadow-sm">
+                        <div class="card-header bg-ec_dark_blue">
+                            <a href="{{ url_for("projects.show", project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                {% if result.meta.highlight and result.meta.highlight.objective %}
+                                    ...{{ " ... ".join(result.meta.highlight.objective)|safe }}...
+                                {% elif result.objective %}
+                                    {{ result.objective[:300] }}...
+                                {% endif %}
+                            </p>
+                            <a href="{{ url_for("projects.show", project_id=result.id) }}">View details »</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         {% endif %}
     {% endfor %}

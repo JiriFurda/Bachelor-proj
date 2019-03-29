@@ -65,7 +65,8 @@ def prepareLayoutData(es_search_raw, es_response):
 
     result = {
         'vue_facets': vue_facets,
-        'vue_elastic_search': json.dumps(es_search_raw.to_dict())
+        'vue_elastic_search': json.dumps(es_search_raw.to_dict()),
+        'get_arguments': request.args
     }
 
     return result
