@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 
 from flask import Flask
-from controllers.homepage_controller import homepage_controller
+#from controllers.homepage_controller import homepage_controller
 from controllers.project_controller import project_controller
 from controllers.topic_controller import topic_controller
 from controllers.facet_controller import facet_controller
