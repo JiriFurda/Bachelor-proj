@@ -4,17 +4,15 @@ from flask import Blueprint, Flask, render_template, request, abort
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.query import MoreLikeThis
-from flask_paginate import Pagination, get_page_args
-from collections import OrderedDict
-from models.facet import Facet
-from topic_controller import index as topic_index
-import json
+from models.base_search import BaseSearch
 
 project_controller = Blueprint('projects', __name__, url_prefix='/projects')
 client = Elasticsearch()
 
 @project_controller.route('/<int:project_id>')
 def show(project_id):
+    baseSearch = BaseSearch()
+
     s = Search(using=client, index="xstane34_projects") \
         .query("match", id=project_id)
     response = s.execute()
@@ -30,6 +28,7 @@ def show(project_id):
 
 
     return render_template('projects/show.html',
+                           layout_data=baseSearch.layout_data,
                            project=project,
                            similar_projects=similar_response[:3]
                            )
