@@ -1,13 +1,40 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    {% for key, response in results.items() %}
-        {% if response.hits %}
-            <div>
-                <h2>{{ key }}</h2>
-                <p>Found {{ response.hits.total }} results</p>
+    {% if results['xstane34_projects'].hits.total %}
+        <div>
+            <h2>Projects</h2>
+            <p>Found {{ results['xstane34_projects'].hits.total }} projects</p>
 
-                {% for result in response.hits %}
+            {% for result in results['xstane34_projects'].hits %}
+                <div class="card card--search_result card--small-padding rounded shadow-sm">
+                    <div class="card-header bg-ec_dark_blue">
+                        <a href="{{ url_for("projects.show", project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            {% if result.meta.highlight and result.meta.highlight.objective %}
+                                ...{{ " ... ".join(result.meta.highlight.objective)|safe }}...
+                            {% elif result.objective %}
+                                {{ result.objective[:300] }}...
+                            {% endif %}
+                        </p>
+                        <a href="{{ url_for("projects.show", project_id=result.id) }}">View details »</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if results['xstane34_deliverables'].hits.total %}
+            <div>
+                <h2>Deliverables</h2>
+                <p>Found {{ results['xstane34_deliverables'].hits.total }} deliverables</p>
+
+                {% for result in results['xstane34_deliverables'].hits %}
                     <div class="card card--search_result card--small-padding rounded shadow-sm">
                         <div class="card-header bg-ec_dark_blue">
                             <a href="{{ url_for("projects.show", project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
@@ -21,13 +48,23 @@
                                 {% endif %}
                             </p>
                             <a href="{{ url_for("projects.show", project_id=result.id) }}">View details »</a>
+
                         </div>
                         <div class="card-footer text-muted">
-                            {{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
+                            <p>
+                            {% if result.meta.highlight and result.meta.highlight.deliv and result.meta.highlight.deliv.plainText %}
+                                ...{{ " ... ".join(result.meta.highlight.deliv.plainText)|safe }}...
+                            {% else %}
+                                {% if result.deliv.plainText %}
+                                    {{ result.deliv.plainText[:300] }}...
+                                {% else %}
+                                    Content is missing
+                                {% endif %}
+                            {% endif %}
+                        </p>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         {% endif %}
-    {% endfor %}
 {% endblock %}

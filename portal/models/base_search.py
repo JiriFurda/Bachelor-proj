@@ -19,6 +19,8 @@ class BaseSearch:
 
     def buildSearch(self):
         es_search = Search(using=client, index=self.indices)
+        #es_search = es_search.highlight('objective')
+        es_search = es_search.highlight('deliv.plainText')
         es_search = es_search.query(
             Q('query_string', query=request.args.get('query', '*'),
               fields=['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb']))
