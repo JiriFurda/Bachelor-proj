@@ -14,7 +14,7 @@
 	</head>
 	<body class="bg-light">
         <div id="vue">
-            <form action="{{ url_for('projects.index') }}" method="GET" class="flex-grow-1">
+            <form action="#" method="GET" class="flex-grow-1">
                 <header class="header bg-ec_dark_blue">
                     <div class="container container--header">
                         <div class="col--side d-flex justify-content-between">
@@ -30,13 +30,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text p-0">
                                         <select name="search" class="bg-transparent border-0 custom-select" id="inputGroupSelect01">
-                                            {% for val, text in [('projects', 'Projects'), ('topics', 'Topics')] %}
-                                                {% if get_arguments|default(false) %}
-                                                    <option value="{{ val }}" {{ 'selected' if get_arguments.get('search')|default('projects') == val }}>{{ text }}</option>
-                                                {% else %}
-                                                    <option value="{{ val }}"}>{{ text }}</option>
-                                                {% endif %}
-                                            {% endfor %}
+
                                         </select>
                                     </span>
                                 </div>
@@ -67,8 +61,8 @@
             </form>
 
             <init-vue-data
-                :facets='{}'
-                :es='{}'></init-vue-data>
+                :facets='{{ layout_data['vue_facets']|safe }}'
+                :es='{{ layout_data['vue_elastic_search']|safe }}'></init-vue-data>
             <modal-facet-list></modal-facet-list>
         </div>
 
