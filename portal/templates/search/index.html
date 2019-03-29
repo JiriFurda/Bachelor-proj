@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% for key, value in results.items() %}
+        {% if value %}
+            <div>
+                <h2>{{ key }}</h2>
+                {{ value }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
