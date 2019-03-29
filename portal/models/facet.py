@@ -12,6 +12,7 @@ class Facet:
                 Facet('index', 'Index', '_index'),
                 Facet('programme', 'Programme', 'fundedUnder.programme.keyword'),
                 Facet('subprogramme', 'Subprogramme', 'fundedUnder.subprogramme.keyword'),
+                Facet('call', 'Call for Proposal', 'callForPropos.keyword'),
                 Facet('topic', 'Topic', 'topics.title.keyword'),
                 Facet('funding', 'Funding scheme', 'fundingScheme.code.keyword'),
                 Facet('coordinator', 'Coordinator', 'coordinator.name.keyword'),
