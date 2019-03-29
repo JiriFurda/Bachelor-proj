@@ -5,6 +5,7 @@ class Facet:
         self.name = name
         self.title = title
         self.field = field
+        self.field_no_keyword = field.replace('.keyword', '')
 
     @staticmethod
     def all():
