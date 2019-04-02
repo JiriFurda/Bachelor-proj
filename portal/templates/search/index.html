@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    {{ debug }}
+
     {% if results['xstane34_projects'].hits.total %}
         <div>
             <h2>Projects</h2>
@@ -55,7 +57,7 @@
                             {% if result.meta.highlight and result.meta.highlight.deliv and result.meta.highlight.deliv.plainText %}
                                 ...{{ " ... ".join(result.meta.highlight.deliv.plainText)|safe }}...
                             {% else %}
-                                {% if result.deliv.plainText %}
+                                {% if result.deliv and result.deliv.plainText %}
                                     {{ result.deliv.plainText[:300] }}...
                                 {% else %}
                                     Content is missing

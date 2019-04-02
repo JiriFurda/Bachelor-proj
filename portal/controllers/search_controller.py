@@ -3,7 +3,7 @@
 from flask import Blueprint, request, abort, url_for, redirect, render_template
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
-from models.base_search import BaseSearch
+from models.index_search import IndexSearch
 import json, copy
 
 search_controller = Blueprint('search', __name__)
@@ -12,12 +12,23 @@ client = Elasticsearch()
 
 @search_controller.route('/')
 def index():
-    baseSearch = BaseSearch()
+    projectsSearch = IndexSearch('xstane34_projects',
+                              'objective',
+                              ['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb'])
 
-    results = groupResults(baseSearch)
+    deliverablesSearch = IndexSearch('xstane34_deliverables',
+                              'deliv.plainText',
+                              ['deliv.sourceInfo.title^3', 'deliv.plainText'])
+
+    results = {
+        'xstane34_projects': projectsSearch.response,
+        'xstane34_deliverables': deliverablesSearch.response
+    }
+    #results = groupResults(baseSearch)
 
     return render_template('search/index.html',
-                           layout_data=baseSearch.layout_data,
+                           #layout_data=baseSearch.layout_data,
+                           layout_data={},
                            results=results,
                            )
 
