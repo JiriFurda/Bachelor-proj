@@ -107,13 +107,11 @@ Vue.component('modal-facet-list', {
 Vue.component('modal-facet', {
     props: ['index'],
     template: `
-    <b-modal :id="'facetModal-' + facet.name" size="xl" scrollable :title="facet.title">
+    <b-modal :id="'facetModal-' + facet.name" size="xl" :title="facet.title" scrollable ok-only>
         <div class="in-facet-search">
             <input class="form-control form-control-sm" v-model="searchInput">
         </div>
         <div class="pt-2 facet-modal-options">
-            <option-facet v-for="option in facet.checkedOptions" :option="option" :facet="facet"></option-facet>
-            <hr>
             <option-facet v-for="option in modalOptions" :option="option" :facet="facet"></option-facet>
         </div>
     </b-modal>`,

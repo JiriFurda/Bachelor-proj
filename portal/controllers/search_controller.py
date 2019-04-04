@@ -27,8 +27,7 @@ def index():
     #results = groupResults(baseSearch)
 
     return render_template('search/index.html',
-                           #layout_data=baseSearch.layout_data,
-                           layout_data={},
+                           layout_data=projectsSearch.layout_data,
                            results=results,
                            )
 
