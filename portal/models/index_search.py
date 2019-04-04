@@ -24,10 +24,15 @@ class IndexSearch:
 
 
     def buildSearch(self):
+        if request.args.has_key('query') and request.args.get('query') != '':
+            query = request.args.get('query')
+        else:
+            query = '*'
+
         es_search = Search(using=client, index=self.index)
         es_search = es_search.highlight(self.highlight)
         es_search = es_search.query(
-            Q('query_string', query=request.args.get('query', '*'),
+            Q('query_string', query=query,
               fields=self.fields))
 
         return es_search
