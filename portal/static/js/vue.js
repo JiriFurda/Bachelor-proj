@@ -30,7 +30,7 @@ Vue.component('sidebar-facet', {
                 More...
             </b-button>                           
         </b-collapse>
-        <input v-for="option in facet.checkedOptions" type="hidden" :name="facet.name" :value="option.value">
+        <input v-if="facet.checkedOptions.length" type="hidden" :name="facet.name" :value="JSON.stringify(facet.checkedOptions)">
     </li>`,
     computed: {
         facet() {
@@ -224,6 +224,7 @@ Vue.component('init-vue-data', {
         store.commit('initEsQuery', JSON.stringify(this.es));
     }
 });
+
 
 var vue = new Vue({
     el: '#vue',

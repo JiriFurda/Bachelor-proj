@@ -10,6 +10,8 @@ client = Elasticsearch()
 
 class IndexSearch:
     def __init__(self, index, highlight, fields):
+        self.debug = None
+
         self.index = index
         self.highlight = highlight
         self.fields = fields
@@ -24,18 +26,43 @@ class IndexSearch:
 
 
     def buildSearch(self):
+        # Init Elasticsearch search instance
+        es_search = Search(using=client, index=self.index)
+        es_search = es_search.highlight(self.highlight)
+
+
+        # Prepare query string
         if request.args.has_key('query') and request.args.get('query') != '':
             query = request.args.get('query')
         else:
             query = '*'
 
-        es_search = Search(using=client, index=self.index)
-        es_search = es_search.highlight(self.highlight)
-        es_search = es_search.query(
-            Q('query_string', query=query,
-              fields=self.fields))
+        query_string_query = Q('query_string', query=query, fields=self.fields)
+        filters_query = IndexSearch.getFiltersQuery()
+
+        es_search = es_search.query('bool', must=[query_string_query, filters_query])
 
         return es_search
+
+
+    @staticmethod
+    def getFiltersQuery():
+        filter_queries = []
+
+        # Loop through every GET argument
+        for arg_name, arg_value in request.args.iteritems(True):
+            facet = Facet.getByName(arg_name)
+            if facet is not None: # If argument name corresponds to a facet
+                facet_values = json.loads(arg_value)
+                facet_name = facet.underscoreField()
+
+                value_queries = []
+                for facet_value in facet_values:
+                    value_queries.append(Q('match', **{facet_name: facet_value['value']}))
+
+                filter_queries.append(Q('bool', should=value_queries))
+
+        return Q('bool', must=filter_queries)
 
 
     def buildAggregationsSearch(self):

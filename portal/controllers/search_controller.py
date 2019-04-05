@@ -29,6 +29,7 @@ def index():
     return render_template('search/index.html',
                            layout_data=projectsSearch.layout_data,
                            results=results,
+                           debug=projectsSearch.debug
                            )
 
 def groupResults(baseSearch):

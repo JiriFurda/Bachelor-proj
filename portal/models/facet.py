@@ -7,6 +7,7 @@ class Facet:
         self.field = field
         self.field_no_keyword = field.replace('.keyword', '')
 
+
     @staticmethod
     def all():
         facets_list = [
@@ -22,12 +23,25 @@ class Facet:
             ]
         return facets_list
 
+
+    @staticmethod
+    def getByName(name):
+        facets = Facet.all()
+
+        for facet in facets:
+            if facet.name == name:
+                return facet
+
+        return None
+
+
     @classmethod
     def get(cls, searched_name):
         for facet in cls.all():
             if facet.name == searched_name:
                 return facet
         return None
+
 
     def toDict(self):
         dict = {
@@ -37,3 +51,7 @@ class Facet:
         }
 
         return dict
+
+
+    def underscoreField(self):
+        return self.field.replace('.', '__')

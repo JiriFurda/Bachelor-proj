@@ -50,7 +50,9 @@
 
             <init-vue-data
                 :facets='{{ layout_data['vue_facets']|safe }}'
-                :es='{{ layout_data['vue_elastic_search']|safe }}'></init-vue-data>
+                :es='{{ layout_data['vue_elastic_search']|safe }}'>
+                :get-arguments='{{ layout_data['vue_elastic_search']|safe }}'>
+            </init-vue-data>
             <modal-facet-list></modal-facet-list>
         </div>
 
@@ -60,6 +62,7 @@
         <script src="/static/vendor/vue.js"></script>
         <script src="/static/vendor/vuex.js"></script>
         <script src="/static/vendor/axios.min.js"></script>
+        <script src="https://unpkg.com/vue-router"></script>
         <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
         <script src="/static/js/vue.js"></script>
 		{% block javascript %}{% endblock %}
