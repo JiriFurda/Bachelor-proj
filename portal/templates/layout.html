@@ -1,70 +1,81 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>European Research Projects Portal</title>
-		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
-        <link
-          type="text/css"
-          rel="stylesheet"
-          href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"
-        >
-        <link rel="stylesheet" href="/static/css/teamcard.css">
-		<link rel="stylesheet" href="/static/css/custom.css">
-	</head>
-	<body class="bg-light">
-        <div id="vue">
-            <form action="#" method="GET" class="flex-grow-1">
-                <header class="header bg-ec_dark_blue">
-                    <div class="container container--header">
-                        <div class="col--side d-flex justify-content-between">
-                            <a href="/">
-                                <img src="/static/img/European_stars.svg" class="img-eu_flag">
-                            </a>
-                            <a href="/" class="link-unstyled">
-                                <div class="text-center">European Research Projects Portal</div>
-                            </a>
-                        </div>
-                        <div class="col--main">
-                            <search-input :old-value="'{{ layout_data['get_arguments'].get('query', '') if layout_data['get_arguments'] }}'"></search-input>
-                        </div>
-                    </div>
-                </header>
-
-
-                <div class="container container--main">
-                    <div class="col--side sidebar">
-                        <div v-if="!$data">
-                            Loading...
-                        </div>
-                        <sidebar-facet-list></sidebar-facet-list>
-                        <button class="btn btn-secondary" type="submit">Apply filters</button>
-                    </div>
-                    <div class="col--main flex-grow-1 content">
-                        {% block body %}{% endblock %}
-                    </div>
+<head>
+    <meta charset="utf-8">
+    <title>European Research Projects Portal</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link
+            type="text/css"
+            rel="stylesheet"
+            href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"
+    >
+    <link rel="stylesheet" href="/static/css/teamcard.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+</head>
+<body class="bg-light">
+<div id="vue">
+    <form action="#" method="GET" class="flex-grow-1">
+        <header class="header bg-ec_dark_blue">
+            <div class="container container--header">
+                <div class="col--side d-flex justify-content-between">
+                    <a href="/">
+                        <img src="/static/img/European_stars.svg" class="img-eu_flag">
+                    </a>
+                    <a href="/" class="link-unstyled">
+                        <div class="text-center">European Research Projects Portal</div>
+                    </a>
                 </div>
+                <div class="col--main">
+                    <search-input :old-value="'{{ layout_data['get_arguments'].get('query', '') if layout_data['get_arguments'] }}'"></search-input>
+                    <ul class="nav nav-tabs pt-1">
+                        <li class="nav-item">
+                            <a class="nav-link {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'projects' }}" href="{{ modify_query(type='projects') }}">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'deliverables' }}" href="{{ modify_query(type='deliverables') }}">Deliverables</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'calls' }}" href="{{ modify_query(type='calls') }}">Calls</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
 
 
-            </form>
-
-            <init-vue-data
-                :facets='{{ layout_data['vue_facets']|safe }}'
-                :es='{{ layout_data['vue_elastic_search']|safe }}'>
-                :get-arguments='{{ layout_data['vue_elastic_search']|safe }}'>
-            </init-vue-data>
-            <modal-facet-list></modal-facet-list>
+        <div class="container container--main">
+            <div class="col--side sidebar">
+                <div v-if="!$data">
+                    Loading...
+                </div>
+                <sidebar-facet-list></sidebar-facet-list>
+                <button class="btn btn-secondary" type="submit">Apply filters</button>
+            </div>
+            <div class="col--main flex-grow-1 content">
+                {% block body %}{% endblock %}
+            </div>
         </div>
 
-		<script src="/static/js/jquery-3.3.1.min.js"></script>
-		<!--<script src="/static/js/bootstrap.bundle.min.js"></script>-->
-        <script src="//unpkg.com/@babel/polyfill@latest/dist/polyfill.min.js"></script>
-        <script src="/static/vendor/vue.js"></script>
-        <script src="/static/vendor/vuex.js"></script>
-        <script src="/static/vendor/axios.min.js"></script>
-        <script src="https://unpkg.com/vue-router"></script>
-        <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
-        <script src="/static/js/vue.js"></script>
-		{% block javascript %}{% endblock %}
-	</body>
+
+    </form>
+
+    <init-vue-data
+            :facets='{{ layout_data['vue_facets']|safe }}'
+            :es='{{ layout_data['vue_elastic_search']|safe }}'>
+        :get-arguments='{{ layout_data['vue_elastic_search']|safe }}'>
+    </init-vue-data>
+    <modal-facet-list></modal-facet-list>
+</div>
+
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<!--<script src="/static/js/bootstrap.bundle.min.js"></script>-->
+<script src="//unpkg.com/@babel/polyfill@latest/dist/polyfill.min.js"></script>
+<script src="/static/vendor/vue.js"></script>
+<script src="/static/vendor/vuex.js"></script>
+<script src="/static/vendor/axios.min.js"></script>
+<script src="https://unpkg.com/vue-router"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+<script src="/static/js/vue.js"></script>
+{% block javascript %}{% endblock %}
+</body>
 </html>
