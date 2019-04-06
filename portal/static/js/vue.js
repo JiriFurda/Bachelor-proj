@@ -26,9 +26,16 @@ Vue.component('sidebar-facet', {
         </div>
         <b-collapse v-model="showCollapse" class="facet-submenu" :id="'collapse-'+facet.name">
             <option-facet v-for="option in visibleOptions" :option="option" :facet="facet"></option-facet>
-            <b-button v-b-modal="'facetModal-'+facet.name" variant="link" size="sm">
-                More...
-            </b-button>                           
+            <div class="d-flex justify-content-between">
+                <b-button v-b-modal="'facetModal-'+facet.name" variant="link" size="sm" class="p-0">
+                    More...
+                </b-button>      
+                <div>
+                    <b-button v-if="facet.checkedOptions.length" variant="link" size="sm" class="p-0" @click="unselectAll()">
+                       Unselect all
+                    </b-button>  
+                </div>                     
+            </div>
         </b-collapse>
         <input v-if="facet.checkedOptions.length" type="hidden" :name="facet.name" :value="JSON.stringify(facet.checkedOptions)">
     </li>`,
@@ -63,13 +70,18 @@ Vue.component('sidebar-facet', {
     },
     mounted () {
         this.showCollapse = Boolean(this.checkedOptionsCount);
+    },
+    methods: {
+        unselectAll() {
+            this.facet.checkedOptions = [];
+        }
     }
 });
 
 Vue.component('option-facet', {
     props: ['option', 'facet'],
     template: `
-    <div class="form-check w-100">
+    <div class="form-check w-100 facet-option">
         <input type="checkbox"
             class="form-check-input"
             :id="'option-facet-'+uid"

@@ -133,6 +133,11 @@ em
 	margin: 5px;
 }
 
+.facet-option
+{
+    cursor: pointer;
+}
+
 .has-right-badge
 {
     width: 100%;
