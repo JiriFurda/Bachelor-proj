@@ -41,8 +41,8 @@ Vue.component('sidebar-facet', {
             //let additionalOptions = this.mostFrequentOptions; // @todo Save options in sidebar component not store
             let additionalOptions = this.facet.mostFrequentOptions; // Retrieve additional options
             let checkedOptions = this.facet.checkedOptions;
-            additionalOptions = additionalOptions.filter(function (item, pos) {
-                return checkedOptions.indexOf(item) === -1;
+            additionalOptions = additionalOptions.filter(function (additionalOption, pos) {
+                return !checkedOptions.some(checkedOption => checkedOption.value === additionalOption.value);
             }); // Filter out those already selected
             additionalOptions = additionalOptions.slice(0, additionalOptionsCount); // Pick only the amount needed to show at least five
             let resultOptions = this.facet.checkedOptions.concat(additionalOptions); // Merge selected and filling options
@@ -212,7 +212,7 @@ const store = new Vuex.Store({
         },
         initEsQuery (state, payload) {
             state.esQuery = payload;
-        }
+        },
     }
 });
 

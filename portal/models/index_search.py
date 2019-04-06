@@ -81,7 +81,11 @@ class IndexSearch:
         vue_facets = ''
         for facet in facets:
             facet_dict = facet.toDict()
-            facet_dict.update({'checkedOptions': []})
+
+            checkedOptions = []
+            if facet.name in request.args:
+                checkedOptions = json.loads(request.args.get(facet.name))
+            facet_dict.update({'checkedOptions': checkedOptions})
 
             aggregation = eval('self.response.aggregations.' + facet.name).buckets
             option_list = []
