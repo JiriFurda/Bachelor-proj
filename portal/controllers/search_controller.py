@@ -12,25 +12,39 @@ client = Elasticsearch()
 
 @search_controller.route('/')
 def index():
-    projectsSearch = IndexSearch('xstane34_projects',
+    searches = {}
+    searches['projects'] = IndexSearch('xstane34_projects',
                               'objective',
                               ['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb'])
 
-    deliverablesSearch = IndexSearch('xstane34_deliverables',
+    searches['deliverables'] = IndexSearch('xstane34_deliverables',
                               'deliv.plainText',
                               ['deliv.sourceInfo.title^3', 'deliv.plainText'])
 
+    searches['topics'] = IndexSearch('xfurda00_topics',
+                              'description',
+                              ['identifier^6', 'title^5', 'tags^3', 'description'])
+
     results = {
-        'xstane34_projects': projectsSearch.response,
-        'xstane34_deliverables': deliverablesSearch.response
+        'projects': searches['projects'].response,
+        'deliverables': searches['deliverables'].response,
+        'topics': searches['topics'].response
     }
     #results = groupResults(baseSearch)
 
     return render_template('search/index.html',
-                           layout_data=projectsSearch.layout_data,
+                           layout_data=searches[getSearchType()].layout_data,
                            results=results,
-                           debug=projectsSearch.debug
+                           searches=searches,
+                           search_type=getSearchType(),
+                           debug=searches['projects'].debug
                            )
+
+def getSearchType():
+    if request.args.get('type') == 'deliverables' or request.args.get('type') == 'topics':
+        return request.args.get('type')
+
+    return 'projects'
 
 def groupResults(baseSearch):
     result = {}

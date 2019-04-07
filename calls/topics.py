@@ -12,14 +12,19 @@ if topics_index.exists():
     print('Index already exists!')
     topics_index.delete(ignore=404)
 
+class FundedUnder(InnerDoc):
+    subprogramme = Text()
+    programme = Text()
+
 class Topic(Document):
     identifier = Text()
     title = Text()
     tags = Text()
     ccm2Id = Integer()
-    call_identifier = Text()
+    callForPropos = Text()
     call_title = Text()
     description = Text()
+    fundedUnder = Nested(FundedUnder)
 
 topics_index.document(Topic)
 topics_index.create()
@@ -40,8 +45,12 @@ class Extractor:
             output_topic.identifier = input_topic['identifier']
             output_topic.title = input_topic['title']
             output_topic.ccm2Id = int(input_topic['ccm2Id'])
-            output_topic.call_identifier = input_topic['callIdentifier']
+            output_topic.callForPropos = input_topic['callIdentifier']
             output_topic.call_title = input_topic['callTitle']
+
+            output_topic.fundedUnder.programme = input_topic['callProgramme']
+            #output_topic.fundedUnder.subprogramme = input_topic['callProgramme']
+
             if 'tags' in input_topic:
                 output_topic.tags = input_topic['tags']
 
