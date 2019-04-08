@@ -27,6 +27,7 @@
                 </div>
                 <div class="col--main">
                     <search-input :old-value="'{{ layout_data['get_arguments'].get('query', '') if layout_data['get_arguments'] }}'"></search-input>
+                    <input type="hidden" name="type" value="{{ layout_data['get_arguments'].get('type', 'projects') }}">
                     <ul class="nav nav-tabs pt-1">
                         <li class="nav-item">
                             <a class="nav-link {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'projects' }}" href="{{ modify_query(type='projects') }}">Projects</a>

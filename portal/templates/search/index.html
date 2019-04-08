@@ -66,5 +66,22 @@
                 </div>
             {% endfor %}
         </div>
+    {% elif search_type == 'topics' %}
+        <div>
+            {{ searches[search_type].response.aggregations.to_dict() }}
+            <h2>Topics</h2>
+            <p>Found {{ searches[search_type].response.hits.total }} topics</p>
+
+            {% for result in searches[search_type].response.hits %}
+                <div class="card card--search_result card--small-padding rounded shadow-sm">
+                    <div class="card-header bg-ec_dark_blue">
+
+                    </div>
+                    <div class="card-body">
+                        {{ result.to_dict() }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
 {% endblock %}
