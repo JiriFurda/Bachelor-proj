@@ -144,6 +144,9 @@ Vue.component('modal-facet', {
         },
         esQuery() {
             return store.state.esQuery;
+        },
+        searchType() {
+            return store.state.searchType;
         }
     },
     methods: {
@@ -153,7 +156,8 @@ Vue.component('modal-facet', {
                 params:
                     {
                         search_val: this.searchInput,
-                        search_dict: this.esQuery
+                        search_dict: this.esQuery,
+                        search_type: this.searchType,
                     }
                 })
                 .then(response => this.modalOptions = response.data)
@@ -216,7 +220,8 @@ Vue.component('search-input', {
 const store = new Vuex.Store({
     state: {
         facets: [],
-        esQuery: null
+        esQuery: null,
+        searchType: null,
     },
     mutations: {
         initFacetsData (state, payload) {
@@ -225,15 +230,19 @@ const store = new Vuex.Store({
         initEsQuery (state, payload) {
             state.esQuery = payload;
         },
+        initSearchType (state, payload) {
+            state.searchType = payload;
+        },
     }
 });
 
 Vue.component('init-vue-data', {
-    props: ['facets', 'es'],
+    props: ['facets', 'es', 'type'],
     template: '<div></div>',
     mounted() {
         store.commit('initFacetsData', this.facets);
         store.commit('initEsQuery', JSON.stringify(this.es));
+        store.commit('initSearchType', this.type);
     }
 });
 

@@ -19,8 +19,16 @@ def showApi(facet_name):
     search_dict = ast.literal_eval(search_dict)  # Change single quotes to double quotes
     search_dict = json.loads(json.dumps(search_dict))
 
+    search_type = request.args.get('search_type')
+    if search_type == 'deliverables':
+        index = 'xstane34_projects'
+    elif search_type == 'topics':
+        index = 'xfurda00_topics'
+    else:
+        index = 'xstane34_projects'
+
     client = Elasticsearch()
-    search = Search(using=client, index='xstane34_projects')  # Set search env
+    search = Search(using=client, index=index)  # Set search env
     search = search.update_from_dict(search_dict)  # Use main search query used
     search.aggs.bucket(facet.name, 'terms', field=facet.field, size=100)  # Aggregate the field
 
