@@ -1,11 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-	<div class="container">
-        <div class="content">
-
-
-
+            {{ project.to_dict() }}
             <div class="card card--project-details card--small-padding">
                 <div class="card-header">
                     Project details
@@ -363,6 +359,4 @@
                 {% endfor %}
             </div>
         {% endif %}
-
-	</div>
 {% endblock %}

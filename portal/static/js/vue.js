@@ -26,11 +26,18 @@ Vue.component('sidebar-facet', {
         </div>
         <b-collapse v-model="showCollapse" class="facet-submenu" :id="'collapse-'+facet.name">
             <option-facet v-for="option in visibleOptions" :option="option" :facet="facet"></option-facet>
-            <b-button v-b-modal="'facetModal-'+facet.name" variant="link" size="sm">
-                More...
-            </b-button>                           
+            <div class="d-flex justify-content-between">
+                <b-button v-b-modal="'facetModal-'+facet.name" variant="link" size="sm" class="p-0">
+                    More...
+                </b-button>      
+                <div>
+                    <b-button v-if="facet.checkedOptions.length" variant="link" size="sm" class="p-0" @click="unselectAll()">
+                       Unselect all
+                    </b-button>  
+                </div>                     
+            </div>
         </b-collapse>
-        <input v-for="option in facet.checkedOptions" type="hidden" :name="facet.name" :value="option.value">
+        <input v-if="facet.checkedOptions.length" type="hidden" :name="facet.name" :value="JSON.stringify(facet.checkedOptions)">
     </li>`,
     computed: {
         facet() {
@@ -41,8 +48,8 @@ Vue.component('sidebar-facet', {
             //let additionalOptions = this.mostFrequentOptions; // @todo Save options in sidebar component not store
             let additionalOptions = this.facet.mostFrequentOptions; // Retrieve additional options
             let checkedOptions = this.facet.checkedOptions;
-            additionalOptions = additionalOptions.filter(function (item, pos) {
-                return checkedOptions.indexOf(item) === -1;
+            additionalOptions = additionalOptions.filter(function (additionalOption, pos) {
+                return !checkedOptions.some(checkedOption => checkedOption.value === additionalOption.value);
             }); // Filter out those already selected
             additionalOptions = additionalOptions.slice(0, additionalOptionsCount); // Pick only the amount needed to show at least five
             let resultOptions = this.facet.checkedOptions.concat(additionalOptions); // Merge selected and filling options
@@ -63,13 +70,18 @@ Vue.component('sidebar-facet', {
     },
     mounted () {
         this.showCollapse = Boolean(this.checkedOptionsCount);
+    },
+    methods: {
+        unselectAll() {
+            this.facet.checkedOptions = [];
+        }
     }
 });
 
 Vue.component('option-facet', {
     props: ['option', 'facet'],
     template: `
-    <div class="form-check w-100">
+    <div class="form-check w-100 facet-option">
         <input type="checkbox"
             class="form-check-input"
             :id="'option-facet-'+uid"
@@ -107,13 +119,11 @@ Vue.component('modal-facet-list', {
 Vue.component('modal-facet', {
     props: ['index'],
     template: `
-    <b-modal :id="'facetModal-' + facet.name" size="xl" scrollable :title="facet.title">
+    <b-modal :id="'facetModal-' + facet.name" size="xl" :title="facet.title" scrollable ok-only>
         <div class="in-facet-search">
             <input class="form-control form-control-sm" v-model="searchInput">
         </div>
         <div class="pt-2 facet-modal-options">
-            <option-facet v-for="option in facet.checkedOptions" :option="option" :facet="facet"></option-facet>
-            <hr>
             <option-facet v-for="option in modalOptions" :option="option" :facet="facet"></option-facet>
         </div>
     </b-modal>`,
@@ -134,6 +144,9 @@ Vue.component('modal-facet', {
         },
         esQuery() {
             return store.state.esQuery;
+        },
+        searchType() {
+            return store.state.searchType;
         }
     },
     methods: {
@@ -143,7 +156,8 @@ Vue.component('modal-facet', {
                 params:
                     {
                         search_val: this.searchInput,
-                        search_dict: this.esQuery
+                        search_dict: this.esQuery,
+                        search_type: this.searchType,
                     }
                 })
                 .then(response => this.modalOptions = response.data)
@@ -162,10 +176,52 @@ Vue.component('modal-facet', {
     }
 });
 
+Vue.component('search-input', {
+    props: ['old-value'],
+    template: `
+        <div class="input-group input-group-sm">
+            <input name="query" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-light" type="send">Search</button>
+            </div>
+        </div>
+    `,
+    computed: {
+        /*
+        query() {
+            let query = this.buildQuery();
+            console.log(query);
+            if(query === '')
+                return this.oldValue;
+            return this.buildQuery();
+        }
+        */
+    },
+    methods: {
+        buildQuery() {
+            let facetQueryArr = [];
+            this.facets.forEach(function(facet) {
+                if(facet.checkedOptions.length)
+                {
+
+                    let values = facet.checkedOptions.map(function(option) {
+                        return option.value;
+                    });
+                    facetQueryArr.push(facet.field + ':("' + values.join('" OR "') + '")');
+                }
+            });
+            if(facetQueryArr.length === 0)
+                return '';
+            return facetQueryArr.join(' AND ');
+        }
+    }
+});
+
 const store = new Vuex.Store({
     state: {
         facets: [],
-        esQuery: null
+        esQuery: null,
+        searchType: null,
     },
     mutations: {
         initFacetsData (state, payload) {
@@ -173,18 +229,23 @@ const store = new Vuex.Store({
         },
         initEsQuery (state, payload) {
             state.esQuery = payload;
-        }
+        },
+        initSearchType (state, payload) {
+            state.searchType = payload;
+        },
     }
 });
 
 Vue.component('init-vue-data', {
-    props: ['facets', 'es'],
+    props: ['facets', 'es', 'type'],
     template: '<div></div>',
     mounted() {
         store.commit('initFacetsData', this.facets);
         store.commit('initEsQuery', JSON.stringify(this.es));
+        store.commit('initSearchType', this.type);
     }
 });
+
 
 var vue = new Vue({
     el: '#vue',

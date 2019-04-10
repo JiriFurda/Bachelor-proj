@@ -22,8 +22,7 @@ body
 
 .header
 {
-	height: 50px;
-
+	height: 75px;
 	position: sticky;
 	top: 0;
 	z-index: 1;
@@ -68,8 +67,8 @@ body
 .sidebar
 {
 	position: sticky;
-	top: 50px;
-	height: calc(100vh - 50px);
+	top: 75px;
+	height: calc(100vh - 75px);
 	overflow-y: auto;
 }
 
@@ -131,6 +130,11 @@ em
     margin-bottom: 10px;
     overflow-x: auto;
 	margin: 5px;
+}
+
+.facet-option
+{
+    cursor: pointer;
 }
 
 .has-right-badge
