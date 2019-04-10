@@ -22,18 +22,12 @@ def index():
     #results = groupResults(baseSearch)
 
     return render_template('search/index.html',
-                           layout_data=searches[getSearchType()].layout_data,
+                           layout_data=searches[IndexSearch.getSearchType()].layout_data,
                            results=results,
                            searches=searches,
-                           search_type=getSearchType(),
+                           search_type=IndexSearch.getSearchType(),
                            debug=searches['projects'].debug
                            )
-
-def getSearchType():
-    if request.args.get('type') == 'deliverables' or request.args.get('type') == 'topics':
-        return request.args.get('type')
-
-    return 'projects'
 
 def groupResults(baseSearch):
     result = {}

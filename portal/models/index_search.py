@@ -132,3 +132,10 @@ class IndexSearch:
             'deliverables': IndexSearch.createForIndex('deliverables'),
             'topics': IndexSearch.createForIndex('topics')
         }
+
+    @staticmethod
+    def getSearchType():
+        if request.args.get('type') == 'deliverables' or request.args.get('type') == 'topics':
+            return request.args.get('type')
+
+        return 'projects'
