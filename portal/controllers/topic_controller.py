@@ -6,6 +6,7 @@ from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.query import MoreLikeThis
 from flask_paginate import Pagination, get_page_args
 from models.topic import Topic
+from models.base_search import BaseSearch
 
 topic_controller = Blueprint('topics', __name__, url_prefix='/topics')
 client = Elasticsearch()
@@ -43,6 +44,8 @@ def index():
 
 @topic_controller.route('/<string:topic_id>')
 def show(topic_id):
+    baseSearch = BaseSearch()
+
     s = Search(using=client, index="xfurda00_topics") \
         .query("match", identifier=topic_id)
     response = s.execute()
@@ -83,4 +86,5 @@ def show(topic_id):
                            similar_topics=similar_response,
                            projects_in_topic=projects_response,
                            countries=sorted_countries_count,
+                           layout_data=baseSearch.layout_data,
                            debug=None)

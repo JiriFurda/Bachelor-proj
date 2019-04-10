@@ -12,18 +12,7 @@ client = Elasticsearch()
 
 @search_controller.route('/')
 def index():
-    searches = {}
-    searches['projects'] = IndexSearch('xstane34_projects',
-                              'objective',
-                              ['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb'])
-
-    searches['deliverables'] = IndexSearch('xstane34_deliverables',
-                              'deliv.plainText',
-                              ['deliv.sourceInfo.title^3', 'deliv.plainText'])
-
-    searches['topics'] = IndexSearch('xfurda00_topics',
-                              'description',
-                              ['identifier^6', 'title^5', 'tags^3', 'description'])
+    searches = IndexSearch.createForEveryIndex()
 
     results = {
         'projects': searches['projects'].response,

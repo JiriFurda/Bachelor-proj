@@ -108,3 +108,27 @@ class IndexSearch:
         }
 
         return result
+
+    @staticmethod
+    def createForIndex(index):
+        if index == 'projects':
+            return IndexSearch('xstane34_projects',
+                              'objective',
+                              ['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb'])
+        if index == 'deliverables':
+            return IndexSearch('xstane34_deliverables',
+                              'deliv.plainText',
+                              ['deliv.sourceInfo.title^3', 'deliv.plainText'])
+
+        if index == 'topics':
+            return IndexSearch('xfurda00_topics',
+                              'description',
+                              ['identifier^6', 'title^5', 'tags^3', 'description'])
+
+    @staticmethod
+    def createForEveryIndex():
+        return {
+            'projects': IndexSearch.createForIndex('projects'),
+            'deliverables': IndexSearch.createForIndex('deliverables'),
+            'topics': IndexSearch.createForIndex('topics')
+        }

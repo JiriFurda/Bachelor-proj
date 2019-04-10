@@ -11,7 +11,7 @@ Vue.component('sidebar-facet-list', {
 Vue.component('sidebar-facet', {
     props: ['index'],
     template: `
-    <li>
+    <li v-if="visibleOptions.length">
         <div
           @click="showCollapse = !showCollapse"
           :class="'facet-label has-right-badge ' + (!showCollapse ? 'collapsed' : null)"
