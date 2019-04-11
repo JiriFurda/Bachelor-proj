@@ -44,8 +44,6 @@ def index():
 
 @topic_controller.route('/<string:topic_id>')
 def show(topic_id):
-    searches = IndexSearch.createForEveryIndex()
-
     s = Search(using=client, index="xfurda00_topics") \
         .query("match", identifier=topic_id)
     response = s.execute()
@@ -54,6 +52,16 @@ def show(topic_id):
         abort(404)
 
     topic = response.hits[0]
+
+
+    searches = IndexSearch.createForEveryIndex()
+    debug = None
+    for (name, search) in searches.items():
+        search.search_raw = search.search_raw.query('match', topics__code__keyword=topic.identifier)
+        search.search = search.search.query('match', topics__code__keyword=topic.identifier)
+        if debug is None:
+            debug = search.search.to_dict()
+    IndexSearch.executeMany(searches)
 
 
     similar_search = Search(using=client,
@@ -81,10 +89,16 @@ def show(topic_id):
 
     sorted_countries_count = sorted(countries_count.items(), key=lambda x: x[1], reverse=True)
 
+    test = Topic(topic_id).projects_query()  # Projects to search in
+    #test.aggs.bucket('inner', 'nested', path='participant') \
+    test.aggs.bucket('participant_country', 'terms', field='participant.country.keyword', size=1000)
+
+    test = test.execute()
+
     return render_template('topics/show.html',
                            topic=response.hits[0],
                            similar_topics=similar_response,
                            projects_in_topic=projects_response,
                            countries=sorted_countries_count,
                            layout_data=searches[IndexSearch.getSearchType()].layout_data,
-                           debug=None)
+                           debug=test.aggregations.to_dict())

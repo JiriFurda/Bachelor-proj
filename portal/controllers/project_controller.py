@@ -4,7 +4,7 @@ from flask import Blueprint, Flask, render_template, request, abort
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.query import MoreLikeThis
-from models.base_search import BaseSearch
+from models.index_search import IndexSearch
 
 project_controller = Blueprint('projects', __name__, url_prefix='/projects')
 client = Elasticsearch()

@@ -13,6 +13,7 @@ client = Elasticsearch()
 @search_controller.route('/')
 def index():
     searches = IndexSearch.createForEveryIndex()
+    IndexSearch.executeMany(searches)
 
     results = {
         'projects': searches['projects'].response,
@@ -26,7 +27,7 @@ def index():
                            results=results,
                            searches=searches,
                            search_type=IndexSearch.getSearchType(),
-                           debug=searches['projects'].debug
+                           debug=searches[IndexSearch.getSearchType()].search.to_dict()
                            )
 
 def groupResults(baseSearch):

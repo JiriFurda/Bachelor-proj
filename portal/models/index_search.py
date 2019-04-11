@@ -18,11 +18,16 @@ class IndexSearch:
 
         self.search_raw = self.buildSearch()    # Raw query
         self.search = self.buildAggregationsSearch()  # Query with facets aggregations
+        #self.response = self.search.execute()
+        self.response = None
+
+        #self.layout_data = self.prepareLayoutData()
+        self.layout_data = None
+
+
+    def execute(self):
         self.response = self.search.execute()
-
         self.layout_data = self.prepareLayoutData()
-
-        
 
 
     def buildSearch(self):
@@ -139,3 +144,8 @@ class IndexSearch:
             return request.args.get('type')
 
         return 'projects'
+
+    @staticmethod
+    def executeMany(searches):
+        for (name, search) in searches.items():
+            search.execute()

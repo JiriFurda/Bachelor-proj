@@ -18,7 +18,7 @@ class FundedUnder(InnerDoc):
 class Topic(Document):
     identifier = Text(fields={'keyword': Keyword()})
     title = Text(fields={'keyword': Keyword()})
-    tags = Text()
+    tags = Text(fields={'keyword': Keyword()})
     ccm2Id = Integer()
     callForPropos = Text(fields={'keyword': Keyword()})
     call_title = Text(fields={'keyword': Keyword()})

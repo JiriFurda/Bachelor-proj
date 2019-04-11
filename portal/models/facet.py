@@ -15,11 +15,14 @@ class Facet:
                 Facet('programme', 'Programme', 'fundedUnder.programme.keyword'),
                 Facet('subprogramme', 'Subprogramme', 'fundedUnder.subprogramme.keyword'),
                 Facet('call', 'Call for Proposal', 'callForPropos.keyword'),
-                Facet('topic', 'Topic', 'topics.title.keyword'),
+                Facet('topic', 'Topic', 'topics.code.keyword'),
                 Facet('funding', 'Funding scheme', 'fundingScheme.code.keyword'),
                 Facet('coordinator', 'Coordinator', 'coordinator.name.keyword'),
                 Facet('coordcountry', 'Coord. Country', 'coordinator.country.keyword'),
-                Facet('year', 'Year', 'year')
+                Facet('participant', 'Participant', 'participant.name.keyword'),
+                Facet('partcountry', 'Part. Country', 'participant.country.keyword'),
+                Facet('year', 'Year', 'year'),
+                Facet('tag', 'Tag', 'tags.keyword'),
             ]
         return facets_list
 
