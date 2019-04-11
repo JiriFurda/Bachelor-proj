@@ -21,7 +21,7 @@ def showApi(facet_name):
 
     search_type = request.args.get('search_type')
     if search_type == 'deliverables':
-        index = 'xstane34_projects'
+        index = 'xstane34_deliverables'
     elif search_type == 'topics':
         index = 'xfurda00_topics'
     else:
