@@ -52,8 +52,8 @@
                     </div>
                     <div class="card-footer text-muted">
                         <p>
-                        {% if result.meta.highlight and result.meta.highlight.deliv and result.meta.highlight.deliv.plainText %}
-                            ...{{ " ... ".join(result.meta.highlight.deliv.plainText)|safe }}...
+                        {% if result.meta.highlight and result.meta.highlight['deliv.plainText'] %}
+                            ...{{ " ... ".join(result.meta.highlight['deliv.plainText'])|safe }}...
                         {% else %}
                             {% if result.deliv and result.deliv.plainText %}
                                 {{ result.deliv.plainText[:300] }}...
