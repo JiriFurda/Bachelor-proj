@@ -22,21 +22,22 @@
                         <img src="/static/img/European_stars.svg" class="img-eu_flag">
                     </a>
                     <a href="/" class="link-unstyled">
-                        <div class="text-center">European Research Projects Portal</div>
+                        <div class="text-center small ">European Research Projects Portal</div>
                     </a>
                 </div>
                 <div class="col--main">
                     <search-input :old-value="'{{ layout_data['get_arguments'].get('query', '') if layout_data['get_arguments'] }}'"></search-input>
                     <input type="hidden" name="type" value="{{ layout_data['get_arguments'].get('type', 'projects') }}">
                     <ul class="nav nav-tabs pt-1">
+                        <li class="nav-item"><span class="nav-link disabled text-white pl-0" py-1>Search for:</span></li>
                         <li class="nav-item">
-                            <a class="nav-link {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'projects' }}" href="{{ modify_query(type='projects') }}">Projects</a>
+                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'projects' else 'text-white' }}" href="{{ modify_query(type='projects') }}">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'deliverables' }}" href="{{ modify_query(type='deliverables') }}">Deliverables</a>
+                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'deliverables' else 'text-white' }}" href="{{ modify_query(type='deliverables') }}">Deliverables</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'topics' }}" href="{{ modify_query(type='topics') }}">Topics</a>
+                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'topics' else 'text-white' }}" href="{{ modify_query(type='topics') }}">Topics</a>
                         </li>
                     </ul>
                 </div>

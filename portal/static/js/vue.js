@@ -179,7 +179,7 @@ Vue.component('modal-facet', {
 Vue.component('search-input', {
     props: ['old-value'],
     template: `
-        <div class="input-group input-group-sm">
+        <div class="input-group input-group-sm mt-3">
             <input name="query" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-light" type="send">Search</button>
