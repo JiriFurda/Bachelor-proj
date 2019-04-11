@@ -21,7 +21,7 @@
                                 {{ result.objective[:300] }}...
                             {% endif %}
                         </p>
-                        <a href="{{ url_for("projects.show", project_id=result.id) }}">View details »</a>
+                        <a href="{{ url_for("projects.show", project_id=result.id) }}">View project »</a>
                     </div>
                     <div class="card-footer text-muted">
                         {{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
@@ -37,31 +37,25 @@
             {% for result in searches[search_type].response.hits %}
                 <div class="card card--search_result card--small-padding rounded shadow-sm">
                     <div class="card-header bg-ec_dark_blue">
-                        <a href="{{ url_for("projects.show", project_id=result.id) }}"><strong>{{ result.acronym }}</strong> - {{ result.title }}</a>
+                        <a href="{{ result.deliv.sourceInfo[0].url }}">{{ result.deliv.sourceInfo[0].title }}</a>
                     </div>
                     <div class="card-body">
                         <p>
-                            {% if result.meta.highlight and result.meta.highlight.objective %}
-                                ...{{ " ... ".join(result.meta.highlight.objective)|safe }}...
-                            {% elif result.objective %}
-                                {{ result.objective[:300] }}...
+                            {% if result.meta.highlight and result.meta.highlight['deliv.plainText'] %}
+                                ...{{ " ... ".join(result.meta.highlight['deliv.plainText'])|safe }}...
+                            {% else %}
+                                {% if result.deliv and result.deliv.plainText %}
+                                    {{ result.deliv.plainText[:300] }}...
+                                {% else %}
+                                    Content is missing
+                                {% endif %}
                             {% endif %}
                         </p>
-                        <a href="{{ url_for("projects.show", project_id=result.id) }}">View details »</a>
+                        <a href="{{ result.deliv.sourceInfo[0].url }}">View deliverable »</a>
 
                     </div>
                     <div class="card-footer text-muted">
-                        <p>
-                        {% if result.meta.highlight and result.meta.highlight['deliv.plainText'] %}
-                            ...{{ " ... ".join(result.meta.highlight['deliv.plainText'])|safe }}...
-                        {% else %}
-                            {% if result.deliv and result.deliv.plainText %}
-                                {{ result.deliv.plainText[:300] }}...
-                            {% else %}
-                                Content is missing
-                            {% endif %}
-                        {% endif %}
-                    </p>
+                        From project <span class="font-italic">"{{ result.acronym }} - {{ result.title }}"</span>
                     </div>
                 </div>
             {% endfor %}
@@ -90,7 +84,7 @@
                                 {% endif %}
                             {% endif %}
                         </p>
-                        <a href="{{ url_for("topics.show", topic_id=result.identifier) }}">View details »</a>
+                        <a href="{{ url_for("topics.show", topic_id=result.identifier) }}">View topic »</a>
                     </div>
                 </div>
             {% endfor %}
