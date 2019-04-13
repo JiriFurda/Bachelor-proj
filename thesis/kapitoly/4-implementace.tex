@@ -1,1 +1,12 @@
 \chapter{Implementace}
+
+\section{Portál}
+
+\subsection{Fasetové vyhledávání}
+Některé s využívaných faset obsahují i stovky položek a jejich hodnoty mají často dlouhé názvy. Jejich zobrazení v postranním panelu jsem považoval za nedostatečné, proto jsem se rozhodl toto řešení oproti předchozímu portálu přepracovat s využitím technologie Vue. Pro každou z faset jsem vytvořil dvě komponenty - položku v postranním panelu a modálové okno.
+
+\subsubsection{Postranní panel}
+Ve výchozím stavu tento panel nabízí nejvýše pět nejčastěji vyskytujících se hodnot. Ty jsou postupně nahrazovány zvolenými hodnotami.
+
+\subsubsection{Modálové okno}
+Rozsáhlejší výpis možností daného fasetu se nyní zobrazují v modálovém okně. Zde je možnost současně vidět podstatně více možností a také je možné vypsat jejich hodnoty v plném znění. V tomto okně je také možné v možnostech vyhledávat.
