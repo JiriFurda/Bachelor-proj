@@ -130,8 +130,8 @@
   supervisor.title.p={doc. RNDr.},   %titul před jménem (nepovinné) / title before the name (optional)
   supervisor.title.a={Ph.D.},    %titul za jménem (nepovinné) / title after the name (optional)
   % Klíčová slova / keywords
-  keywords.cs={Sem budou zapsána jednotlivá klíčová slova v českém (slovenském) jazyce, oddělená čárkami.}, % klíčová slova v českém či slovenském jazyce / keywords in czech or slovak language
-  keywords.en={Sem budou zapsána jednotlivá klíčová slova v anglickém jazyce, oddělená čárkami.}, % klíčová slova v anglickém jazyce / keywords in english
+  keywords.cs={Python, Elasticsearch, Vue, Flask, facet}, % klíčová slova v českém či slovenském jazyce / keywords in czech or slovak language
+  keywords.en={Python, Elasticsearch, Vue, Flask, facet}, % klíčová slova v anglickém jazyce / keywords in english
   %keywords.en={Here, individual keywords separated by commas will be written in English.},
   % Abstrakt / Abstract
   abstract.cs={Do tohoto odstavce bude zapsán výtah (abstrakt) práce v českém (slovenském) jazyce.}, % abstrakt v českém či slovenském jazyce / abstract in czech or slovak language
@@ -154,8 +154,8 @@ Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.},
   %faculty={FIT}, % FIT/FEKT/FSI/FA/FCH/FP/FAST/FAVU/USI/DEF
   faculty.cs={Fakulta informačních technologií}, % Fakulta v češtině - pro využití této položky výše zvolte fakultu DEF / Faculty in Czech - for use of this entry select DEF above
   faculty.en={Faculty of Information Technology}, % Fakulta v angličtině - pro využití této položky výše zvolte fakultu DEF / Faculty in English - for use of this entry select DEF above
-  department.cs={Ústav matematiky}, % Ústav v češtině - pro využití této položky výše zvolte ústav DEF nebo jej zakomentujte / Department in Czech - for use of this entry select DEF above or comment it out
-  department.en={Institute of Mathematics} % Ústav v angličtině - pro využití této položky výše zvolte ústav DEF nebo jej zakomentujte / Department in English - for use of this entry select DEF above or comment it out
+  department.cs={Ústav počítačové grafiky a multimédií}, % Ústav v češtině - pro využití této položky výše zvolte ústav DEF nebo jej zakomentujte / Department in Czech - for use of this entry select DEF above or comment it out
+  department.en={Department of Computer Graphics and Multimedia} % Ústav v angličtině - pro využití této položky výše zvolte ústav DEF nebo jej zakomentujte / Department in English - for use of this entry select DEF above or comment it out
 }
 
 % Rozšířený abstrakt (cca 3 normostrany) - lze definovat zde nebo výše / Extended abstract (approximately 3 standard pages) - can be defined here or above
@@ -216,7 +216,12 @@ Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.},
 
   % Text prace / Thesis text
   % ----------------------------------------------
-  \input{projekt-01-kapitoly-chapters}
+  % \input{projekt-01-kapitoly-chapters}
+  \input{kapitoly/1-uvod}
+  \input{kapitoly/2-dosavadni-stav}
+  \input{kapitoly/3-soucasny-stav}
+  \input{kapitoly/4-implementace}
+  \input{kapitoly/5-zaver}
   
   % Kompilace po částech (viz výše, nutno odkomentovat)
   % Compilation piecewise (see above, it is necessary to uncomment it)
@@ -306,7 +311,7 @@ Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.},
   \fi
   
   % Přílohy / Appendices
-  \input{projekt-30-prilohy-appendices}
+  %\input{projekt-30-prilohy-appendices}
   
   % Kompilace po částech (viz výše, nutno odkomentovat)
   % Compilation piecewise (see above, it is necessary to uncomment it)
