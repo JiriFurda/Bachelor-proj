@@ -1,0 +1,23 @@
+\chapter{Dosavadní stav}
+
+\section{Elasticsearch}
+TODO: Data jsou uložena...
+
+Elasticsearch nabízí alternativu k běžným relačním databázím. Jeho hlavní výhodou je rychlé zpracování dotazů a hojně se využívá pro fulltextové vyhledávání. Pro komunikaci s touto databází se využívají dotazy aplikačního rozhraní REST ve formátu JSON.
+
+\subsection{Příklad dotazu}
+Obsah dotazu může vypadat například následovně:
+\begin{verbatim}
+{
+    "query": {
+        "match": {
+            "address": "mill lane"
+        }
+    }
+}
+\end{verbatim}
+
+Na tento dotaz můžeme od serveru dostat tuto odpověď
+\begin{verbatim}
+TODO: kód zde
+\end{verbatim}

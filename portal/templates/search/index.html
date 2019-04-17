@@ -69,10 +69,9 @@
             {% for result in searches[search_type].response.hits %}
                 <div class="card card--search_result card--small-padding rounded shadow-sm">
                     <div class="card-header bg-ec_dark_blue">
-                        {{ result.call_title }}
+                        {{ result.title }}
                     </div>
                     <div class="card-body">
-                    {{ result.to_dict() }}
                         <p>
                             {% if result.meta.highlight and result.meta.highlight.description %}
                                 ...{{ " ... ".join(result.meta.highlight.description)|safe }}...

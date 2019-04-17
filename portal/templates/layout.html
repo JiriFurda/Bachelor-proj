@@ -28,7 +28,7 @@
                 <div class="col--main">
                     <search-input :old-value="'{{ layout_data['get_arguments'].get('query', '') if layout_data['get_arguments'] }}'"></search-input>
                     <input type="hidden" name="type" value="{{ layout_data['get_arguments'].get('type', 'projects') }}">
-                    <ul class="nav nav-tabs pt-1">
+                    <ul class="nav nav-tabs pt-1 border-bottom-0">
                         <li class="nav-item"><span class="nav-link disabled text-white pl-0" py-1>Search for:</span></li>
                         <li class="nav-item">
                             <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'projects' else 'text-white' }}" href="{{ modify_query(type='projects') }}">Projects</a>
@@ -58,9 +58,7 @@
             </div>
         </div>
 
-
     </form>
-{{ layout_data['get_arguments'].get('type', 'projects') }}
     <init-vue-data
             :facets='{{ layout_data['vue_facets']|safe }}'
             :es='{{ layout_data['vue_elastic_search']|safe }}'
