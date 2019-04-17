@@ -87,11 +87,7 @@ class IndexSearch:
         for facet in facets:
             facet_dict = facet.toDict()
 
-            checkedOptions = []
-            if facet.name in request.args:
-                checkedOptions = json.loads(request.args.get(facet.name))
-            facet_dict.update({'checkedOptions': checkedOptions})
-
+            # Parse Elasticsearch aggreagation data
             aggregation = eval('self.response.aggregations.' + facet.name).buckets
             option_list = []
             for option in aggregation:
@@ -101,6 +97,26 @@ class IndexSearch:
                     'count': option.doc_count,
                 })
             facet_dict.update({'mostFrequentOptions': option_list})
+
+            # Parse checked options in GET arguments
+            checkedOptions = []
+            if facet.name in request.args:
+                checkedOptions = json.loads(request.args.get(facet.name))
+
+            # Update the options count to correspond with current search
+            for k, checkedOption in enumerate(checkedOptions):
+                count = 0
+                for option in option_list:
+                    if option['value'] == checkedOption['value']:
+                        count = option['count']
+
+                checkedOptions[k]['count'] = count
+
+            # Sort checked options from highest
+            checkedOptions.sort(key=lambda x: x['count'], reverse=True)
+
+            facet_dict.update({'checkedOptions': checkedOptions})
+
 
             vue_facets += json.dumps(facet_dict)
             vue_facets += ','
