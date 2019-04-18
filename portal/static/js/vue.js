@@ -180,7 +180,7 @@ Vue.component('search-input', {
     props: ['old-value'],
     template: `
         <div class="input-group input-group-sm mt-3">
-            <input name="query" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+            <input name="query" type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" :value="oldValue">
             <div class="input-group-append">
                 <button class="btn btn-light" type="send">Search</button>
             </div>
@@ -237,7 +237,7 @@ const store = new Vuex.Store({
 });
 
 Vue.component('init-vue-data', {
-    props: ['facets', 'es', 'type'],
+    props: ['facets', 'es', 'type', 'query'],
     template: '<div></div>',
     mounted() {
         store.commit('initFacetsData', this.facets);
