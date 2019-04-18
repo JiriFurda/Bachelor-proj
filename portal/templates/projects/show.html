@@ -46,7 +46,7 @@
                 <b>Topic</b>
                 <ul>
                     {% for topic in project.topics %}
-                        <li>{{ topic.code }} - {{ topic.title }}</li>
+                        <li><a href="{{ url_for("topics.show", topic_id=topic.code) }}">{{ topic.code }}</a> - {{ topic.title }}</li>
                     {% endfor %}
                 </ul>
             {% endif %}
@@ -143,100 +143,70 @@
     {% endif %}
 
     {% if project.coordinator %}
-
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
-
-        <!-- Team -->
-        <section class="pb-5">
+        <section class="pb-2">
+        <h3 class="pb-2">Coordinator{% if project.coordinator|length > 1 %}s{% endif %}</h3>
             <div class="container">
                 <div class="row">
                     {% for coordinator in project.coordinator %}
-                        <!-- Team member -->
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                                <div class="mainflip">
-                                    <div class="frontside">
-                                        <div class="card">
-                                            <div class="card-body text-center">
-                                                <p><img class=" img-fluid" src="https://pngimage.net/wp-content/uploads/2018/06/placeholder-png.png" alt="card image"></p>
-                                                <h6 class="card-title">{{ coordinator.name.title() }}
-                                                    {% if coordinator.shortName %}
-                                                        <span style="color:gray;">({{ coordinator.shortName.title() }})</span>
-                                                    {% endif %}
-                                                </h6>
-                                                {% if coordinator.country %}
-                                                    <p class="card-text">
-                                                        {{ coordinator.country }}<br>
-                                                        <i>Coordinator</i>
-                                                    </p>
-                                                {% endif %}
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="backside">
-                                        <div class="card">
-                                            <div class="card-body text-center mt-4">
-                                                <h6 class="card-title">{{ coordinator.name.title() }}</h6>
-                                                <p class="card-text">
-                                                    {# if coordinator.address %}
-                                           <div>{{ coordinator.addresproject.title() }}</div>
-                                        {% endif #}
+                        <div class="card">
+                            <div class="card-header bg-ec_dark_blue p-2">
+                                <span class="mb-0">
+                                    {% if coordinator.shortName %}
+                                        <strong>{{ coordinator.shortName.title() }}</strong> -
+                                    {% endif %}
+                                    {{ coordinator.name.title() }}
+                                    {% if coordinator.country %}
+                                        <i>({{ coordinator.country }})</i>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="card-body p-2">
+                                <ul class="list-unstyled mb-0">
+                                    {% if coordinator.postalCode or coordinator.city %}
+                                        <li>
+                                            {% if coordinator.postalCode %}
+                                                {{ coordinator.postalCode }}
+                                            {% endif %}
 
-                                                    {% if coordinator.postalCode or coordinator.city %}
-                                                        <div>
-                                                            {% if coordinator.postalCode %}
-                                                                {{ coordinator.postalCode }}
-                                                            {% endif %}
+                                            {% if coordinator.city %}
+                                                {{ coordinator.city.title() }}
+                                            {% endif %}
+                                        </li>
+                                    {% endif %}
 
-                                                            {% if coordinator.city %}
-                                                                {{ coordinator.city.title() }}
-                                                            {% endif %}
-                                                        </div>
-                                                    {% endif %}
+                                    {% if coordinator.country %}
+                                        <li>{{ coordinator.country }}</li>
+                                    {% endif %}
 
-                                                {% if coordinator.country %}
-                                                    <div>{{ coordinator.country }}</div>
-                                                {% endif %}
+                                    {% if coordinator.firstName %}
+                                        <li>Administrative contact: {{ coordinator.firstName }} {{ coordinator.lastName }}</li>
+                                    {% endif %}
 
-                                                {% if coordinator.firstName %}
-                                                    <div>Administrative contact: {{ coordinator.firstName }} {{ coordinator.lastName }}</div>
-                                                {% endif %}
+                                    {% if coordinator.tel %}
+                                        <li>Tel.: {{ coordinator.tel }}</li>
+                                    {% endif %}
 
-                                                {% if coordinator.tel %}
-                                                    <div>Tel.: {{ coordinator.tel }}</div>
-                                                {% endif %}
-
-                                                {% if coordinator.fax %}
-                                                    <div>Fax: {{ coordinator.fax }}</div>
-                                                {% endif %}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    {% if coordinator.fax %}
+                                        <li>Fax: {{ coordinator.fax }}</li>
+                                    {% endif %}
+                                </ul>
                             </div>
                         </div>
-                        <!-- ./Team member -->
                     {% endfor %}
                 </div>
             </div>
         </section>
-        <!-- Team -->
-
         {#<h3> if project.flagproject.projType == 'withPartCoord' %}Coordinator{% else %}Host Institution{% endif %}{% if project.coordinator|length > 1 %}s{% endif %} ({{ project.coordinator|length)</h3> #}
 
     {% endif %}
 
     {% if project.participant %}
+        <h3 class="pb-2">Participant{% if project.participant|length > 1 %}s{% endif %}</h3>
         {# <h3>{ if project.flagproject.projType == 'withPartCoord' %}Participant{% if project.participant|length > 1 %}s{% endif %}{% else %}Beneficiar{% if project.participant|length == 1 %}y{% else %}ies{% endif %}{% endif %} ({{ project.participant|length }}) </h3>#}
         <div class="accordion mb-4" id="participants-accordion">
             {% for participant in project.participant %}
                 <div class="card">
-                    <h5 class="mb-0">
+                    <span class="mb-0">
                         <b-button block href="#" v-b-toggle.participants-accordion-{{ loop.index }} variant="info" :class="bg-ec_dark_blue">
                             {% if participant.shortName %}
                                 <strong>{{ participant.shortName.title() }}</strong> -
@@ -246,10 +216,10 @@
                                 <i>({{ participant.country }})</i>
                             {% endif %}
                         </b-button>
-                    </h5>
+                    </span>
                     <b-collapse id="participants-accordion-{{ loop.index }}" accordion="participants-accordion" role="tabpanel">
                         <div class="card-body">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled mb-0">
                                 {% if participant.postalCode or participant.city %}
                                     <li>
                                         {% if participant.postalCode %}
@@ -341,7 +311,7 @@
     {% endif %}
 
     {% if similar_projects %}
-        <h3>Similar projects</h3>
+        <h3 class="pb-2">Similar projects</h3>
         <div class="row">
             {% for similar_project in similar_projects %}
                 <div class="col-md-4">

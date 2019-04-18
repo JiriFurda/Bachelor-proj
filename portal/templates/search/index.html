@@ -24,7 +24,7 @@
                         <a href="{{ url_for("projects.show", project_id=result.id) }}">View project »</a>
                     </div>
                     <div class="card-footer text-muted">
-                        {{ result.statusDetails }} - From {{ result.startDate }} to {{ result.endDate }}
+                        {% if result.statusDetails %}{{ result.statusDetails }} - {% endif %}From {{ result.startDate }} to {{ result.endDate }}
                     </div>
                 </div>
             {% endfor %}
@@ -68,7 +68,9 @@
             {% for result in searches[search_type].response.hits %}
                 <div class="card card--search_result card--small-padding rounded shadow-sm">
                     <div class="card-header bg-ec_dark_blue">
-                        {{ result.title }}
+                        <a href="{{ url_for("topics.show", topic_id=result.identifier) }}">
+                            <strong>{{ result.identifier }}</strong> - {{ result.title }}
+                        </a>
                     </div>
                     <div class="card-body">
                         <p>

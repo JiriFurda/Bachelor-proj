@@ -3,14 +3,13 @@
 {% block body %}
 	<div class="container">
         <div class="content">
-            {# debug #}
-
 
             <div class="card card--project-details card--small-padding">
                 <div class="card-header">
                     Topic details
                 </div>
                 <div class="card-body">
+                    {#
 					<b>Type of action</b>
 					<ul>
 						<li></li>
@@ -35,6 +34,17 @@
 					<ul>
 						<li></li>
 					</ul>
+                    #}
+
+                    <b>Funded under</b>
+                    <ul>
+                        <li>{{ topic.fundedUnder.programme }}-{{ topic.fundedUnder.subprogramme }}</li>
+                    </ul>
+
+                    <b>CCM2ID</b>
+					<ul>
+						<li>{{ topic.ccm2Id }}</li>
+					</ul>
 
 					<b>Call name</b>
 					<ul>
@@ -43,14 +53,19 @@
 
 					<b>Call ID</b>
 					<ul>
-						<li>{{ topic.call_identifier }}</li>
+						<li>{{ topic.callForPropos }}</li>
 					</ul>
 
-
+                    <b>Tags</b>
+					<ul>
+                        {% for tag in topic.tags %}
+						    <li>{{ tag }}</li>
+                        {% endfor %}
+					</ul>
                 </div>
             </div>
 
-            <h1 class="h2">{{ topic.title }}</h1>
+            <h1 class="h2"><strong>{{ topic.identifier }}</strong> - {{ topic.title }}</h1>
             {{ topic.description|safe }}
 
             <h2 class="h4 pt-4 pb-2">Related topics statistics</h2>
