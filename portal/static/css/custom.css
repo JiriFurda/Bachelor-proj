@@ -203,3 +203,11 @@ em
 	background-color: #ffffff;
 	z-index: 1;
 }
+
+.btn-info,
+.btn-info:hover
+/* Overriding bootstrap-vue accordion */
+{
+	border-color: #004494!important;
+	background-color: #004494!important;
+}
