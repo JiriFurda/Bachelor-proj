@@ -98,5 +98,4 @@ def show(topic_id):
                            similar_topics=similar_response,
                            projects_in_topic=projects_response,
                            countries=sorted_countries_count,
-                           layout_data=searches[IndexSearch.getSearchType()].layout_data,
-                           debug=debug)
+                           layout_data=searches[IndexSearch.getSearchType()].layout_data)
