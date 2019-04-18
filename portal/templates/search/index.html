@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    {{ debug }}
+    {# debug #}
 
     {% if search_type == 'projects' %}
         <div>
@@ -62,7 +62,6 @@
         </div>
     {% elif search_type == 'topics' %}
         <div>
-            {{ searches[search_type].response.aggregations.to_dict() }}
             <h2>Topics</h2>
             <p>Found {{ searches[search_type].response.hits.total }} topics</p>
 
@@ -89,4 +88,6 @@
             {% endfor %}
         </div>
     {% endif %}
+
+    {{ searches[search_type].pagination.links }}
 {% endblock %}

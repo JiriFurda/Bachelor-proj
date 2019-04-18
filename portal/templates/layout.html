@@ -31,13 +31,13 @@
                     <ul class="nav nav-tabs pt-1 border-bottom-0">
                         <li class="nav-item"><span class="nav-link disabled text-white pl-0" py-1>Search for:</span></li>
                         <li class="nav-item">
-                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'projects' else 'text-white' }}" href="{{ modify_query(type='projects') }}">Projects</a>
+                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'projects' else 'text-white' }}" href="{{ modify_query(type='projects', page=1) }}">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'deliverables' else 'text-white' }}" href="{{ modify_query(type='deliverables') }}">Deliverables</a>
+                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'deliverables' else 'text-white' }}" href="{{ modify_query(type='deliverables', page=1) }}">Deliverables</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'topics' else 'text-white' }}" href="{{ modify_query(type='topics') }}">Topics</a>
+                            <a class="nav-link py-1 {{ 'active' if layout_data['get_arguments'].get('type', 'projects') == 'topics' else 'text-white' }}" href="{{ modify_query(type='topics', page=1) }}">Topics</a>
                         </li>
                     </ul>
                 </div>

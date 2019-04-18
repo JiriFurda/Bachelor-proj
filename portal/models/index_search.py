@@ -2,6 +2,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 from flask import request
 from models.facet import Facet
+from flask_paginate import Pagination, get_page_args
 import copy, json
 
 
@@ -16,6 +17,9 @@ class IndexSearch:
         self.highlight = highlight
         self.fields = fields
 
+        self.per_page = 10
+        self.page = 1
+
         self.search_raw = self.buildSearch()    # Raw query
         self.search = self.buildAggregationsSearch()  # Query with facets aggregations
         #self.response = self.search.execute()
@@ -23,11 +27,16 @@ class IndexSearch:
 
         #self.layout_data = self.prepareLayoutData()
         self.layout_data = None
+        self.pagination = None
 
 
     def execute(self):
         self.response = self.search.execute()
         self.layout_data = self.prepareLayoutData()
+        self.pagination = Pagination(page=self.page,
+                                     per_page=self.per_page,
+                                     total=self.response.hits.total,
+                                     css_framework='bootstrap4')
 
 
     def buildSearch(self):
@@ -47,8 +56,19 @@ class IndexSearch:
 
         es_search = es_search.query('bool', must=[query_string_query, filters_query])
 
+        es_search = self.preparePagination(es_search)
+
         return es_search
 
+
+    def preparePagination(self, es_search):
+        self.page, self.per_page, offset = get_page_args(page_parameter='page',
+                                               per_page_parameter='per_page')
+        paginate_from = (self.page - 1) * self.per_page
+        paginate_to = paginate_from + self.per_page
+        es_search = es_search[paginate_from:paginate_to]  # @todo Change to scan API becuase of large amount of data
+
+        return es_search
 
     @staticmethod
     def getFiltersQuery():

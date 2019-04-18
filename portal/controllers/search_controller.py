@@ -20,6 +20,7 @@ def index():
         'deliverables': searches['deliverables'].response,
         'topics': searches['topics'].response
     }
+
     #results = groupResults(baseSearch)
 
     return render_template('search/index.html',
