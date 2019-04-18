@@ -7,6 +7,7 @@ from elasticsearch_dsl.query import MoreLikeThis
 from flask_paginate import Pagination, get_page_args
 from models.topic import Topic
 from models.index_search import IndexSearch
+import json
 
 topic_controller = Blueprint('topics', __name__, url_prefix='/topics')
 client = Elasticsearch()
@@ -55,13 +56,16 @@ def show(topic_id):
 
 
     searches = IndexSearch.createForEveryIndex()
-    debug = None
     for (name, search) in searches.items():
         search.search_raw = search.search_raw.query('match', topics__code__keyword=topic.identifier)
         search.search = search.search.query('match', topics__code__keyword=topic.identifier)
-        if debug is None:
-            debug = search.search.to_dict()
     IndexSearch.executeMany(searches)
+
+    parsed_vue_facets = json.loads(searches['projects'].layout_data['vue_facets'])
+    for k, vue_facet in enumerate(parsed_vue_facets):
+        if vue_facet['name'] == 'topic':
+            parsed_vue_facets[k]['checkedOptions'] = vue_facet['mostFrequentOptions']
+    searches['projects'].layout_data['vue_facets'] = json.dumps(parsed_vue_facets)
 
 
     similar_search = Search(using=client,
@@ -89,16 +93,10 @@ def show(topic_id):
 
     sorted_countries_count = sorted(countries_count.items(), key=lambda x: x[1], reverse=True)
 
-    test = Topic(topic_id).projects_query()  # Projects to search in
-    #test.aggs.bucket('inner', 'nested', path='participant') \
-    test.aggs.bucket('participant_country', 'terms', field='participant.country.keyword', size=1000)
-
-    test = test.execute()
-
     return render_template('topics/show.html',
                            topic=response.hits[0],
                            similar_topics=similar_response,
                            projects_in_topic=projects_response,
                            countries=sorted_countries_count,
                            layout_data=searches[IndexSearch.getSearchType()].layout_data,
-                           debug=test.aggregations.to_dict())
+                           debug=debug)
