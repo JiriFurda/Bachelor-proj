@@ -11,7 +11,7 @@ class Facet:
     @staticmethod
     def all():
         facets_list = [
-                Facet('index', 'Index', '_index'),
+                #Facet('index', 'Index', '_index'),
                 Facet('programme', 'Programme', 'fundedUnder.programme.keyword'),
                 Facet('subprogramme', 'Subprogramme', 'fundedUnder.subprogramme.keyword'),
                 Facet('call', 'Call for Proposal', 'callForPropos.keyword'),
