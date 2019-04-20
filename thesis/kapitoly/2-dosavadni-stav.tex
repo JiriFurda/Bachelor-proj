@@ -1,11 +1,26 @@
 \chapter{Dosavadní stav}
 
+\section{Webové portály}
+Webový portál je druh webové stránky, která shromažďuje informace z vícero různých zdrojů a uživateli ty nejrelevantnější informace prezentuje na jednom místě [https://www.liferay.com/resources/l/web-portal 20. 4.]
+Zpravidla je umožněno na portálu v těchto informací vyhledávat.
+\blindtext[2]
+
+\subsection{Cordis}
+[https://cordis.europa.eu/about/]
+The Community Research and Development Information Service je portál provozovaný Evropskou Unií (dále jen EU) sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o těchto projektech, tak i o jejích účastnících, o hlášeních, vědeckých zprávách a publikacích.
+\blindtext
+
+\subsection{Funding and Tenders}
+\blindtext
+
 \section{Elasticsearch}
-TODO: Data jsou uložena...
+Elasticsearch je volně šiřitelný vyhledávač umožňující rychlé vyhledávání ve velkém množství dat. 
 
-Elasticsearch nabízí alternativu k běžným relačním databázím. Jeho hlavní výhodou je rychlé zpracování dotazů a hojně se využívá pro fulltextové vyhledávání. Pro komunikaci s touto databází se využívají dotazy aplikačního rozhraní REST ve formátu JSON.
+Oproti relačním databázím nenabízí propojovací dotazy, a proto je nutné ukládaná data denormalizovat. Díky tomu jsou ale data a jejich metadata v těsné blízkosti a tím je docíleno rychlé fulltextové vyhledávání. [https://qbox.io/blog/what-is-elasticsearch 20.4.]
 
-\subsection{Příklad dotazu}
+\subsection{Dotazy}
+Pro komunikaci s touto databází se využívá Query DSL - dotazy aplikačního rozhraní REST ve formátu JSON.
+
 Obsah dotazu může vypadat například následovně:
 \begin{verbatim}
 {
@@ -19,5 +34,39 @@ Obsah dotazu může vypadat například následovně:
 
 Na tento dotaz můžeme od serveru dostat tuto odpověď
 \begin{verbatim}
-TODO: kód zde
-\end{verbatim}
+\blindtext
+\end{verbatim} 
+
+
+\subsection{Základní struktura}
+\subsubsection*{Uzel a shluk}
+Pod pojmem uzel (anglicky node) se skrývá server, ve kterém jsou uložena data. Uzel v rámci databáze může být jeden nebo jich může být i více a každý bude obsahovat pouze určitou část dat. Tyto uzly jsou seskupeny do shluku (anglicky cluster).
+
+
+\subsubsection*{Dokument}
+Dokument je základní jednotka dat, které může být zaindexována. Obsah dokumentu je zapsán ve formátu JSON.
+
+\subsubsection*{Index}
+Skupina dokumentů s podobnou strukturou se nazývá index. Ekvivalentem v relačních databázich by v tomto případě byla tabulka.
+
+\subsubsection*{Střepy}
+Elasticsearch nabízí možnost index rozdělit na střepy (anglicky shards), které mohou být uloženy v různých uzlech. Tuto možnost je vhodné využít především při práci s indexy s velkým obsahem dat. Díky rozdělení docílíme distribuování zátěže a lze využít paralelní zpracování, tudíž bude zpracování dotazu odbaveno výrazně rychleji. 
+Přístup k takto rozděleným indexům se nijak nemění a pro uživatele je tento proces naprosto transparentní.
+
+\subsubsection*{Repliky}
+Obdobně lze využít i repliky. Zde se ovšem data indexu nerozdělují, ale naopak duplikují. Díky uložení těchto replik mezi více uzly může systém být robustnější a dokáže fungovat i v případě selhání části shluku. I v tomto případě je umožněno vyhledávat paralelně. 
+
+\subsection{Fasetové vyhledávání}
+\blindtext[2]
+
+\subsection{Plnotextové vyhledávání}
+\blindtext[2]
+
+
+
+\section{Vývoj webu}
+\subsection{MVC architektura}
+\blindtext[2]
+
+\subsection{Responsivita}
+\blindtext[2]
