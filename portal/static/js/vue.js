@@ -91,8 +91,10 @@ Vue.component('option-facet', {
         >
         <label :for="'option-facet-'+uid" class="form-check-label w-100">
             <div class="has-right-badge">
-                <div class="d-inline-block text-truncate">{{ option.text }}</div>
-                <div><span class="badge badge-pill badge-light">{{ option.count }}x</span></div>
+                <div class="d-inline-block text-truncate" :title="option.text">{{ option.text }}</div>
+                <div>
+                    <span class="badge badge-pill badge-light">{{ option.count }}x</span>
+                </div>
             </div>
         </label>
     </div>
@@ -119,13 +121,24 @@ Vue.component('modal-facet-list', {
 Vue.component('modal-facet', {
     props: ['index'],
     template: `
-    <b-modal :id="'facetModal-' + facet.name" size="xl" :title="facet.title" scrollable ok-only>
+    <b-modal :id="'facetModal-' + facet.name" size="xl" scrollable :title="facet.title" ok-only>
+    <template slot="modal-header" slot-scope="{ close }">
+        <div class="d-flex flex-column w-100">
+            <div class="d-flex pb-2">
+                <h5 class="modal-title">Part. Country</h5>
+                <button type="button" aria-label="Close" class="close" @click="close()">×</button>
+            </div>
+            <input class="form-control form-control-sm d-block" v-model="searchInput">
+        </div>
+    </template>
+    <template slot="default">
         <div class="in-facet-search">
-            <input class="form-control form-control-sm" v-model="searchInput">
+            
         </div>
         <div class="pt-2 facet-modal-options">
             <option-facet v-for="option in modalOptions" :option="option" :facet="facet"></option-facet>
         </div>
+        </template>
     </b-modal>`,
     watch: {
         searchInput(after, before) {
@@ -154,14 +167,14 @@ Vue.component('modal-facet', {
             console.log(this.searchInput);
             axios.get('/facets/api/' + this.facet.name, {
                 params:
-                    {
-                        search_val: this.searchInput,
-                        search_dict: this.esQuery,
-                        search_type: this.searchType,
-                    }
-                })
-                .then(response => this.modalOptions = response.data)
-                .catch(error => {});
+                        {
+                            search_val: this.searchInput,
+                            search_dict: this.esQuery,
+                            search_type: this.searchType,
+                        }
+            })
+                    .then(response => this.modalOptions = response.data)
+                    .catch(error => {});
         },
         resetContent() {
             this.searchInput = null;
@@ -169,10 +182,10 @@ Vue.component('modal-facet', {
         }
     },
     mounted() {
-      this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
-          if(modalId === 'facetModal-' + this.facet.name) // @todo not exactly the best method to listen the open event
-              this.resetContent();
-      })
+        this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+            if(modalId === 'facetModal-' + this.facet.name) // @todo not exactly the best method to listen the open event
+                this.resetContent();
+        })
     }
 });
 
