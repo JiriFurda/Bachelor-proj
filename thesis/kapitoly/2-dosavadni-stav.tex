@@ -45,10 +45,31 @@ Mezi oficiálně podporované knihovny patří například Vue Router, umožňuj
 \subsection{Vuex}
 %[https://vuex.vuejs.org/ 24.4.]
 Dalším oficiálním rozšířením je Vuex, knihovna pro správu stavu. Pokud se v aplikaci používá více komponent, které využívají stejnou proměnnou, brzy se zdrojový kód stává neudržitelným. 
+V tuto chvíli je vhodné využit knihovnu Vuex. Jejím účelem je udržovat centrální stav proměnných, které jsou sdíleny napříč různými komponentami v aplikaci. Tohoto je docíleno díky dodržování návrhového vzoru jménem Flux. Mezi základní pilíře návrhového vzoru Flux patří několik následujících pravidel, kterých se Vuex drží. 
+%TODO: Reference na MVC
 
-V této chvíli je vhodné využit knihovnu Vuex. Jejím účelem je udržovat centrální stav proměnných, které jsou sdíleny napříč různými komponentami v aplikaci.
 
-\includegraphics[width=\textwidth]{images/vuex.png}
+%[https://medium.com/js-dojo/vuex-for-the-clueless-the-missing-primer-on-vues-application-data-store-33fa51ffc3af 25.4.]
+\subsubsection*{Jediný zdroj pravdy}
+Data, která jsou sdílena více komponentami jsou uložena na jednom místě - sklad (anglicky \emph{store}) a jsou oddělena od komponent, které jé využívají. Komponenty mohou stále mít svá lokální data, ale nesmějí mít svou kopií sdílených dat, ty se vždy musí číst ze skladu.
+
+\subsubsection*{Data pouze ke čtení}
+Komponenty nesmějí přímo upravovat data ve skladu. V případě potřeby změny těchto dat sklad pouze informují a ten se sám o postará o provedení změny pomocí tzv. mutací (Reprezentovány uzlem \emph{Mutations} v grafu \ref{vuex-dataflow}). Díky tomu se minimalizuje šance nepředpokládaných změn těchto dat a funkce, starající se o tyto změny jsou jednodušeji dohledatelné.
+
+%TODO: AddToCart mutation example?
+
+\subsubsection*{Změny dat jsou synchronní}
+Asynchronní provádění operací mnohdy přináší spoustu výhod, v tomto případě je ale vyžadováno mutace provádět synchronně kvůli odstranění závislosti na pořadí a načasování různých událostí.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/vuex.png}
+	\caption{Diagram znázorňující životní cyklus dat v knihovně Vuex}
+	%TODO: Popsat v obrázku nebo v textu?
+	%[https://vuex.vuejs.org/ 24.4.]
+	\label{vuex-dataflow}
+\end{figure}
 
 \blindtext
 
