@@ -56,6 +56,15 @@ class IndexSearch:
 
         es_search = es_search.query('bool', must=[query_string_query, filters_query])
 
+        if query == '*' and self.getSearchType() in ['projects', 'deliverables']:
+            es_search = es_search.sort({
+                'lastUpdate.keyword':
+                    {
+                        'order': 'desc',
+                        'unmapped_type': 'keyword' # Do not fail in case of missing value
+                    }
+            })
+
         es_search = self.preparePagination(es_search)
 
         return es_search

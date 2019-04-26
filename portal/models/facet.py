@@ -21,7 +21,7 @@ class Facet:
                 Facet('coordcountry', 'Coord. Country', 'coordinator.country.keyword'),
                 Facet('participant', 'Participant', 'participant.name.keyword'),
                 Facet('partcountry', 'Part. Country', 'participant.country.keyword'),
-                Facet('year', 'Year', 'year'),
+                Facet('year', 'Beginning year', 'year'),
                 Facet('tag', 'Tag', 'tags.keyword'),
             ]
         return facets_list

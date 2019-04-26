@@ -55,7 +55,7 @@
 
                     </div>
                     <div class="card-footer text-muted">
-                        From project <span class="font-italic">"{{ result.acronym }} - {{ result.title }}"</span>
+                        From project <a href="{{ url_for("projects.show", project_id=result.id) }}"><span class="font-italic">"{{ result.acronym }} - {{ result.title }}"</span></a>
                     </div>
                 </div>
             {% endfor %}
