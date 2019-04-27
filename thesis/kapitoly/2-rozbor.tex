@@ -1,13 +1,15 @@
 \chapter{Rozbor řešené problematiky}
 
 \section{Webové portály}
-Webový portál je druh webové stránky, která shromažďuje informace z vícero různých zdrojů a uživateli ty nejrelevantnější informace prezentuje uživateli shromážděné na jednom místě %[https://www.liferay.com/resources/l/web-portal 20. 4.]. 
-Zpravidla je umožněno na portálu v těchto informací vyhledávat. Velmi časté je také zakomponování autentizace uživatele a podle jeho role jsou mu zpřístupněny různé části daného portálu. %[https://kb.iu.edu/d/ajbd]
+Webový portál je druh webové stránky, která shromažďuje informace z vícero různých zdrojů a uživateli ty nejrelevantnější informace prezentuje uživateli shromážděné na jednom místě~\cite{bib:portal-liferay}.
+
+Zpravidla je umožněno na portálu v těchto informací vyhledávat. Velmi časté je také zakomponování autentizace uživatele a podle jeho role jsou mu zpřístupněny různé části daného portálu~\cite{bib:portal-indiana}. 
+
 \blindtext[2]
 
-\subsection{Cordis}
-%[https://cordis.europa.eu/about/]
-The Community Research and Development Information Service je portál provozovaný Evropskou Unií (dále jen EU) sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o těchto projektech, tak i o jejích účastnících, o hlášeních, vědeckých zprávách a publikacích.
+\subsection{CORDIS}
+\emph{Tato kapitola čerpá z~\cite{bib:cordis}}.
+CORDIS (The Community Research and Development Information Service) je portál provozovaný Evropskou Unií (dále jen EU) sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o těchto projektech, tak i o jejích účastnících, o hlášeních, vědeckých zprávách a publikacích.
 \blindtext
 
 \subsection{Funding and Tenders}
@@ -16,12 +18,10 @@ The Community Research and Development Information Service je portál provozovan
 
 
 \section{Vývoj webu}
-%[https://www.codeconquest.com/what-is-coding/web-programming/ 27.4.]
+\emph{Tato kapitola čerpá z~\cite{bib:web-development}}.
 Tvorba webových stránek se obecně rozlišuje do dvou celků zvaných \emph{frontend} a \emph{backend}.
 
-Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v žádném případě neobejde bez značkovacího jazyka HTML %(Hypertext Markup Language)
-, který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS %( Cascading Style Sheets)
-. Ty se starají o to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o interaktivitu.
+Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v žádném případě neobejde bez značkovacího jazyka HTML (Hypertext Markup Language), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS ( Cascading Style Sheets).Ty se starají o to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o interaktivitu.
 Zpracování této části webu probíhá v klientovi - tedy internetovému prohlížeči uživatele. Na základě toto faktu se lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy frontendové části zobrazit, ve většině případů i rovnou v internetovém prohlížeči upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům se tyto změnu neprojeví.
 
 Oproti tomu backendová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou frontendovou část. Výběr technologie implementace backendové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C#, C++, .NET, Ruby a další. Díky prostředí Node.js lze ale využít i dříve zmiňovaný JavaScript, který sám o sobě pro tento účel není primárně určen. 
@@ -39,7 +39,7 @@ Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhran�
 
 \begin{itemize}
 \item Pojmem pohled (\emph{view}) se označuje uživatelské rozhraní (například stránka zobrazená v prohlížeči), tato vrstva prezentuje data a je to také jediná vrstva, s kterou uživatel přímo komunikuje. Akce provedené v pohledu se předají kontroleru ke zpracovaní.
-\item Kontroler ((\emph{controller}) se chová jako prostředník mezi daty a rozhraním, zpracovává požadavky uživatele a provede s modelem potřebné akce. Ve většině případu po provedené akci kontroler znovu obnoví pohled.
+\item Kontroler (\emph{controller}) se chová jako prostředník mezi daty a rozhraním, zpracovává požadavky uživatele a provede s modelem potřebné akce. Ve většině případu po provedené akci kontroler znovu obnoví pohled.
 \item Model je obvykle objekt obsahující patřičná data z databáze. Zprostředkovává jak jejich získání, tak i ukládání. Mimo to může být objekt obohacen i o funkce, zpracovávající tyto data (například může převádět Unixový čas do formátu lépe čitelného pro člověka). 
 \end{itemize}
 
