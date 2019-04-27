@@ -44,8 +44,12 @@ Jednotlivé fasetové možnosti jsou reprezentovány komponentou \texttt{option-
 Na každé stránce portálu se vyskytuje právě jednou komponenta \texttt{init-facet-data}, která jednorázově obstará naplnění proměnných programovacího jazyka JavaScript.
 
 \subsection{Vyhledávání}
-Samotné vyhledávání obstarává třída \texttt{IndexSearch}, při svém vytvoření uloží vstupní parametry a sestaví dotazy pro Elasticsearch
-
+Samotné vyhledávání obstarává třída \texttt{IndexSearch}, při svém vytvoření uloží vstupní parametry a sestaví dotazy pro Elasticsearch. Mezi tyto parametry patří
+\begin{itemize}
+    \item index, ve kterém se bude hledat
+    \item pole dokumentu, ve kterém budou v případě shody zvýrazněna klíčová slova
+    \item pole dokumentu, ve kterých se budou klíčová slova hledat
+\end{itemize}
 \subsubsection*{buildSearch()}
 První z dotazů je vytvořen tuto metodou, která zpracuje všechny GET parametry protokolu HTML a v případě shody jejich názvů s některým z faset, přidá tuto hodnotu do dotazu. Tento dotaz se využívá pro hledání v modálním okně fasetu. 
 
@@ -88,6 +92,12 @@ Poté co byly výše zmíněné dotazy vykonány je třeba výsledky zpracovat a
      ]
 }
 \end{verbatim}
+
+\subsubsection*{createForIndex()}
+Protože se v portálu vytváří hledání na vícero místech, byla vytvořena statická metoda třídy \texttt{IndexSearch}, která vrací předpřipravenou instanci této třidy pro hledání v jednom z typů obsahu portálu. Tato funkce očekává ve svém jediném parametru řetězec, určující typ hledání (\texttt{projects}, \texttt{deliverables} nebo \texttt{topics})
+
+\subsubsection*{Hromadné akce}
+Pro případy, kdy je potřeba pracovat s několika hledáními naráz, si lze práci ušetřit využitím dalších statických metod třídy \texttt{IndexSearch} a to konkrétně metoda \texttt{createForEveryIndex()}, která vrací slovník se všemi třemi možnými typy hledání, a poté také \texttt{executeMany()}, která vykoná hledání všech instancí \texttt{IndexSearch} ve slovníku předaném této funkci v parametru. 
 
 \subsection{Vyhledávání hodnot faset}
 Protože ve fasetách lze asynchronně vyhledávat, bylo nutné napsat aplikační rozhraní propojující databázi Elasticsearch s Vue komponentou reprezentující toto vyhledávání. Tuto činnost obstarává funkce \texttt{showApi} v kontroleru \texttt{facet\_controller}.

@@ -58,12 +58,12 @@ Flask je open source webový micro-framework napsaný v programovacím jazyce Py
 Flask si si klade za cíl udržet co nejjednodušší jádro, ale zároveň se soustředí na možnost tento základ jednoduše rozšířit.
 Smyslem Flasku je být základním kamenem pro jakoukoliv webovou aplikaci. Z tohoto důvodu na rozdíl od ostatních frameworků neobsahuje žádnou abstrakci databázové vrstvy nebo knihovnu pro formuláře. Tohoto lze docílit použitím některého z rozšíření %[http://flask.pocoo.org/docs/1.0/design/ 23. 4.] 
 
-Ve svém základu využívá šablonovací jazyk Jinja2 zjednodušující udržení konzistentní struktury stránek. Poskytuje například dědičnost šablon nebo znovupoužitelné bloky a dokáže se vypořádat s bezpečnostními útoky typu XSS (Cross Site Scripting). %[http://jinja.pocoo.org/docs/2.10/]
+Ve svém základu využívá šablonovací jazyk Jinja2\footnote{Jinja2: \url{http://jinja.pocoo.org/}} zjednodušující udržení konzistentní struktury stránek. Poskytuje například dědičnost šablon nebo znovupoužitelné bloky a dokáže se vypořádat s bezpečnostními útoky typu XSS (Cross Site Scripting). %[http://jinja.pocoo.org/docs/2.10/]
 Druhou knihovnou, kterou Flask využívá je Werkzeug - jedna z nejpokročilejších knihoven pro rozhraní brány webového serveru (anglicky WSGI neboli Web Server Gateway Interface), které umožňuje webovou aplikaci provozovat nezávisle na technologii použité na serveru. %[https://www.python.org/dev/peps/pep-0333/#rationale-and-goals]
 
-Tento framework využívá například sociální síť Pinterest %[https://www.quora.com/What-challenges-has-Pinterest-encountered-with-Flask/answer/Steve-Cohen?share=1&srid=hXZd 23.4.]
-nebo síťová dopravní společnost Lyft %[https://www.youtube.com/watch?v=aetoXWRt24k]
-(podobná službě Uber)
+Tento framework využívá například sociální síť Pinterest\footnote{Pinterest: \url{https://cz.pinterest.com/}}~\cite{bib:flask-pinterest}
+nebo síťová dopravní společnost Lyft\footnote{Lyft: \url{https://www.lyft.com/}}~\cite{bib:flask-lyft} 
+(podobná službě Uber\footnote{Uber: \url{https://www.uber.com/cz/cs/}})
 
 \section{Vue.js}\label{section:Vue.js}
 V dnešní době jsou webové prohlížeče stále schopnější a výkonnější. Díky tomu se stává trendem přenášet stále větší části webové aplikace ze serveru na stranu klienta. Toho je docíleno pomocí programovacího jazyku JavaScript. V současné době se nejvíce využívá knihovna jQuery, %[Todo: najít zdroj]
@@ -78,14 +78,14 @@ V praxi může být tato funkce využita například v internetovém obchodě, k
 \subsection{Vue Router}
 Mezi oficiálně podporované knihovny patří například Vue Router, umožňující tvorbu jednostránkové aplikace, kdy se načte pouze jedná jediná stránka a pomocí JavaScriptu a asynchroniích požadavků se mění části obsahu webu. Server v takovém případě slouží pouze jako úložiště dat a veškerou prezentaci se stará strana klienta. %[https://msdn.microsoft.com/en-us/magazine/dn463786.aspx 24.4.]
 
+\subsection{Nuxt.js}
+\blindtext
+
 \subsection{Vuex}
 %[https://vuex.vuejs.org/ 24.4.]
 Dalším oficiálním rozšířením je Vuex, knihovna pro správu stavu. Pokud se v aplikaci používá více komponent, které využívají stejnou proměnnou, brzy se zdrojový kód stává neudržitelným. 
 V tuto chvíli je vhodné využit knihovnu Vuex. Jejím účelem je udržovat centrální stav proměnných, které jsou sdíleny napříč různými komponentami v aplikaci. Tohoto je docíleno díky dodržování návrhového vzoru jménem Flux. Mezi základní pilíře návrhového vzoru Flux patří několik následujících pravidel, kterých se Vuex drží. 
 %TODO: Reference na MVC
-
-\subsection{Nuxt.js}
-\blindtext
 
 
 %[https://medium.com/js-dojo/vuex-for-the-clueless-the-missing-primer-on-vues-application-data-store-33fa51ffc3af 25.4.]
@@ -148,10 +148,10 @@ Základní struktura databáze Elasticsearch se na první pohled od tradičních
 Pod pojmem uzel (anglicky node) se skrývá server, ve kterém jsou uložena data. Uzel v rámci databáze může být jeden nebo jich může být i více a každý bude obsahovat pouze určitou část dat. Tyto uzly jsou seskupeny do shluku (anglicky cluster).
 
 
-\subsubsection*{Dokument}
+\subsubsection*{Dokument}\label{section:dokument}
 Dokument je základní jednotka dat, které může být zaindexována. Obsah dokumentu je zapsán ve formátu JSON. V relační databázi lze dokument přirovnat k řádku tabulky.
 
-\subsubsection*{Index}
+\subsubsection*{Index}\label{section:index}
 Skupina dokumentů s podobnou strukturou se nazývá index. Ekvivalentem v relačních databázich by v tomto případě byla tabulka.
 
 \subsubsection*{Střepy}
