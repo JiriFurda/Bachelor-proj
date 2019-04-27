@@ -1,4 +1,14 @@
-\chapter{Implementace}
+\chapter{Návrh a implementace systému}
+
+\section{Podoba portálu}
+
+\subsection{Fasetové vyhledávání}
+Některé s využívaných faset obsahují i stovky položek a jejich hodnoty mají často dlouhé názvy. Jejich zobrazení v postranním panelu jsem považoval za nedostatečné, proto jsem se rozhodl toto řešení oproti předchozímu portálu přepracovat s využitím technologie Vue. Pro každou z faset jsem vytvořil dvě komponenty - položku v postranním panelu a modální okno.
+
+\section{Obsah portálu}
+Stávající portál umožňoval vyhledávat pouze projekty a vědecké zprávy. Tento obsah lze rozšířit o výzvy Evropské komise k předkládání návrhů [https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-search;programCode=null;typeCodes=1]. Samotné výzvy ale zaštiťují mnoho témat a sami o sobě neobsahují mnoho informací, ty se vztahují až ke konkrétním tématům. Proto jsem se rozhodl do portálu nepřidat výzvy ale témata.
+
+Pro tyto účely jsem využil aplikační rozhraní nabízené přímo portálem Fundings and Tenders [https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/support/apis], které potřebná data nabízí ve formátu JSON
 
 \section{Portál}
 

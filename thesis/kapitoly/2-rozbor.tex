@@ -1,4 +1,4 @@
-\chapter{Dosavadní stav}
+\chapter{Rozbor řešené problematiky}
 
 \section{Webové portály}
 Webový portál je druh webové stránky, která shromažďuje informace z vícero různých zdrojů a uživateli ty nejrelevantnější informace prezentuje uživateli shromážděné na jednom místě %[https://www.liferay.com/resources/l/web-portal 20. 4.]. 
@@ -132,11 +132,30 @@ Jednoduše řečeno, se pro dokumenty vytvoří kyblíky, kde každý z kyblíku
 \subsection{Plnotextové vyhledávání}
 \blindtext[2]
 
+\subsection{Podobnostní hledání}
+\blindtext[2]
 
 
 \section{Vývoj webu}
 \subsection{MVC architektura}
-\blindtext[2]
+%[https://pdfs.semanticscholar.org/9077/6c1fd8c2c4dbd13b85f22e7c8c8f83331758.pdf 27.4.]
+Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhraní a logiku. V anglickém jazyce se tyto celky dají nazvat pomocí slov \emph{model}, \emph{view} a \emph{controller} (zkratka MVC). Historie této architektury sahá až do sedmdesátých let, nicméně je tato architektura v dnešním světe stále naprostým standardem vývoje.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/mvc.png}
+	\caption{Diagram toku akcí při využití MVC architektury}
+	\label{mvc}
+\end{figure}
+
+\begin{itemize}
+\item Pojmem pohled (\emph{view}) se označuje uživatelské rozhraní (například stránka zobrazená v prohlížeči), tato vrstva prezentuje data a je to také jediná vrstva, s kterou uživatel přímo komunikuje. Akce provedené v pohledu se předají kontroleru ke zpracovaní.
+\item Kontroler ((\emph{controller}) se chová jako prostředník mezi daty a rozhraním, zpracovává požadavky uživatele a provede s modelem potřebné akce. Ve většině případu po provedené akci kontroler znovu obnoví pohled.
+\item Model je obvykle objekt obsahující patřičná data z databáze. Zprostředkovává jak jejich získání, tak i ukládání. Mimo to může být objekt obohacen i o funkce, zpracovávající tyto data (například může převádět Unixový čas do formátu lépe čitelného pro člověka). 
+\end{itemize}
+
+
+Oddělením těchto celků je zajištěna lepší organizovanost zdrojových kódů a tím je usnadněn rychlejší vývoj. Jednotlivé celky jsou také lehčeji znovupoužitelné a práce programátorů na nich může probíhat souběžně. Rozdělením je také možné pro jeden pohled mít pohledů hned několik. Další pohledy mohou přibývat nebo naopak ty stávající mohou být smazány a na databázi aplikace to nebude mít žádný vliv.
 
 \subsection{Responsivita}
 \blindtext[2]
