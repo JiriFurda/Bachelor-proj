@@ -13,6 +13,42 @@ The Community Research and Development Information Service je portál provozovan
 \subsection{Funding and Tenders}
 \blindtext
 
+
+
+\section{Vývoj webu}
+%[https://www.codeconquest.com/what-is-coding/web-programming/ 27.4.]
+Tvorba webových stránek se obecně rozlišuje do dvou celků zvaných \emph{frontend} a \emph{backend}.
+
+Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v žádném případě neobejde bez značkovacího jazyka HTML %(Hypertext Markup Language)
+, který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS %( Cascading Style Sheets)
+. Ty se starají o to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o interaktivitu.
+Zpracování této části webu probíhá v klientovi - tedy internetovému prohlížeči uživatele. Na základě toto faktu se lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy frontendové části zobrazit, ve většině případů i rovnou v internetovém prohlížeči upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům se tyto změnu neprojeví.
+
+Oproti tomu backendová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou frontendovou část. Výběr technologie implementace backendové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C#, C++, .NET, Ruby a další. Díky prostředí Node.js lze ale využít i dříve zmiňovaný JavaScript, který sám o sobě pro tento účel není primárně určen. 
+
+\subsection{MVC architektura}
+%[https://pdfs.semanticscholar.org/9077/6c1fd8c2c4dbd13b85f22e7c8c8f83331758.pdf 27.4.]
+Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhraní a logiku. V anglickém jazyce se tyto celky dají nazvat pomocí slov \emph{model}, \emph{view} a \emph{controller} (zkratka MVC). Historie této architektury sahá až do sedmdesátých let, nicméně je tato architektura v dnešním světe stále naprostým standardem vývoje.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/mvc.png}
+	\caption{Diagram toku akcí při využití MVC architektury}
+	\label{mvc}
+\end{figure}
+
+\begin{itemize}
+\item Pojmem pohled (\emph{view}) se označuje uživatelské rozhraní (například stránka zobrazená v prohlížeči), tato vrstva prezentuje data a je to také jediná vrstva, s kterou uživatel přímo komunikuje. Akce provedené v pohledu se předají kontroleru ke zpracovaní.
+\item Kontroler ((\emph{controller}) se chová jako prostředník mezi daty a rozhraním, zpracovává požadavky uživatele a provede s modelem potřebné akce. Ve většině případu po provedené akci kontroler znovu obnoví pohled.
+\item Model je obvykle objekt obsahující patřičná data z databáze. Zprostředkovává jak jejich získání, tak i ukládání. Mimo to může být objekt obohacen i o funkce, zpracovávající tyto data (například může převádět Unixový čas do formátu lépe čitelného pro člověka). 
+\end{itemize}
+
+
+Oddělením těchto celků je zajištěna lepší organizovanost zdrojových kódů a tím je usnadněn rychlejší vývoj. Jednotlivé celky jsou také lehčeji znovupoužitelné a práce programátorů na nich může probíhat souběžně. Rozdělením je také možné pro jeden pohled mít pohledů hned několik. Další pohledy mohou přibývat nebo naopak ty stávající mohou být smazány a na databázi aplikace to nebude mít žádný vliv.
+
+\subsection{Responsivita}
+\blindtext[2]
+
 \section{Python}
 \blindtext[2]
 
@@ -47,6 +83,9 @@ Mezi oficiálně podporované knihovny patří například Vue Router, umožňuj
 Dalším oficiálním rozšířením je Vuex, knihovna pro správu stavu. Pokud se v aplikaci používá více komponent, které využívají stejnou proměnnou, brzy se zdrojový kód stává neudržitelným. 
 V tuto chvíli je vhodné využit knihovnu Vuex. Jejím účelem je udržovat centrální stav proměnných, které jsou sdíleny napříč různými komponentami v aplikaci. Tohoto je docíleno díky dodržování návrhového vzoru jménem Flux. Mezi základní pilíře návrhového vzoru Flux patří několik následujících pravidel, kterých se Vuex drží. 
 %TODO: Reference na MVC
+
+\subsection{Nuxt.js}
+\blindtext
 
 
 %[https://medium.com/js-dojo/vuex-for-the-clueless-the-missing-primer-on-vues-application-data-store-33fa51ffc3af 25.4.]
@@ -133,29 +172,4 @@ Jednoduše řečeno, se pro dokumenty vytvoří kyblíky, kde každý z kyblíku
 \blindtext[2]
 
 \subsection{Podobnostní hledání}
-\blindtext[2]
-
-
-\section{Vývoj webu}
-\subsection{MVC architektura}
-%[https://pdfs.semanticscholar.org/9077/6c1fd8c2c4dbd13b85f22e7c8c8f83331758.pdf 27.4.]
-Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhraní a logiku. V anglickém jazyce se tyto celky dají nazvat pomocí slov \emph{model}, \emph{view} a \emph{controller} (zkratka MVC). Historie této architektury sahá až do sedmdesátých let, nicméně je tato architektura v dnešním světe stále naprostým standardem vývoje.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{images/mvc.png}
-	\caption{Diagram toku akcí při využití MVC architektury}
-	\label{mvc}
-\end{figure}
-
-\begin{itemize}
-\item Pojmem pohled (\emph{view}) se označuje uživatelské rozhraní (například stránka zobrazená v prohlížeči), tato vrstva prezentuje data a je to také jediná vrstva, s kterou uživatel přímo komunikuje. Akce provedené v pohledu se předají kontroleru ke zpracovaní.
-\item Kontroler ((\emph{controller}) se chová jako prostředník mezi daty a rozhraním, zpracovává požadavky uživatele a provede s modelem potřebné akce. Ve většině případu po provedené akci kontroler znovu obnoví pohled.
-\item Model je obvykle objekt obsahující patřičná data z databáze. Zprostředkovává jak jejich získání, tak i ukládání. Mimo to může být objekt obohacen i o funkce, zpracovávající tyto data (například může převádět Unixový čas do formátu lépe čitelného pro člověka). 
-\end{itemize}
-
-
-Oddělením těchto celků je zajištěna lepší organizovanost zdrojových kódů a tím je usnadněn rychlejší vývoj. Jednotlivé celky jsou také lehčeji znovupoužitelné a práce programátorů na nich může probíhat souběžně. Rozdělením je také možné pro jeden pohled mít pohledů hned několik. Další pohledy mohou přibývat nebo naopak ty stávající mohou být smazány a na databázi aplikace to nebude mít žádný vliv.
-
-\subsection{Responsivita}
 \blindtext[2]
