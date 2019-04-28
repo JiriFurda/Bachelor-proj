@@ -15,6 +15,28 @@ Rozhraní nabízí potřebná data ve formátu JSON, čímž bylo značně zjedn
 \subsection{Návrh}
 \blindtext
 
+\subsection{Schéma}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
+	\caption{TODO}
+	\label{mvc}
+\end{figure}
+
+\blindtext[2]
+
+\subsection{Podoba}
+\blindtext
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
+	\caption{\blindtext}
+	\label{mvc}
+\end{figure}
+
+\blindtext[2]
+
 \subsection{Struktura adresáře}
 Veškeré zdrojové kódy portálu se nachází v adresáři \texttt{portal}. Uvnitř této složky se nachází adresáře odpovídající architektuře MVC.
 \begin{itemize}
@@ -32,6 +54,14 @@ Některé z využívaných faset obsahují i stovky položek a jejich hodnoty ma
 Tento panel je tvořen Vue komponentou \texttt{sidebar-facet-list}, která pro každou fasetu vytvoří instanci komponenty \texttt{sidebar-facet}.
 
 Každá komponenta \texttt{sidebar-facet} ve výchozím stavu nabízí nejvýše pět nejčastěji vyskytujících se hodnot dané fasety. Ty jsou postupně nahrazovány zvolenými hodnotami dané fasety. Další hodnoty s menším výskytem jsou dostupné v modálním okně, které se zobrazí po kliknutí na tlačítko \uv{\emph{More...}}. Obsahem této komponenty je mimo jiné dílčí komponenta frameworku BoostrapVue \texttt{b-collapse}, která v případě potřeby umožňuje danou fasetu minimalizovat. Pokud se takto stane a faseta má zvolené některé ze svých možností, objeví se vedle jejího názvu počet vybraných možností, aby měl uživatel i při minimalizovaných fasetách přehled o tom, které možnosti filtrování právě zvolil.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{obrazky-figures/placeholder.pdf}
+	\caption{TODO}
+	\label{mvc}
+\end{figure}
+
 
 \subsubsection*{Modální okno}
 Okna jednotlivých faset jsou tvořena instancemi Vue komponenty \texttt{modal-facet}. O jejich vytvoření se stará komponenta \texttt{modal-facet-list}.
@@ -122,3 +152,4 @@ Jako parametr, který je předán cestou URL adresy očekává platný název fa
 Po úspěšném dotazu funkce vrací strukturu JSON ve stejném tvaru jako například v \texttt{checkedOptions} zmiňovaném v kapitole Vyhledávání %TODO: reference
 
 \subsection{Model fasety}
+\blindtext[2]

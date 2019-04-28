@@ -9,7 +9,7 @@ Zpravidla je umožněno na portálu v těchto informací vyhledávat. Velmi čas
 
 \subsection{CORDIS}
 \emph{Tato kapitola čerpá z~\cite{bib:cordis}}.
-CORDIS (The Community Research and Development Information Service) je portál provozovaný Evropskou Unií (dále jen EU) sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o těchto projektech, tak i o jejích účastnících, o hlášeních, vědeckých zprávách a publikacích.
+CORDIS (\emph{The Community Research and Development Information Service}) je portál provozovaný Evropskou Unií (dále jen EU) sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o těchto projektech, tak i o jejích účastnících, o hlášeních, vědeckých zprávách a publikacích.
 \blindtext
 
 \subsection{Funding and Tenders}
@@ -22,7 +22,7 @@ CORDIS (The Community Research and Development Information Service) je portál p
 
 Tvorba webových stránek se obecně rozlišuje do dvou celků zvaných \emph{frontend} a \emph{backend}.
 
-Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v žádném případě neobejde bez značkovacího jazyka HTML (Hypertext Markup Language), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS ( Cascading Style Sheets).Ty se starají o to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o interaktivitu.
+Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v žádném případě neobejde bez značkovacího jazyka HTML (\emph{Hypertext Markup Language}), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS (\emph{Cascading Style Sheets}).Ty se starají o to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o interaktivitu.
 Zpracování této části webu probíhá v klientovi - tedy internetovému prohlížeči uživatele. Na základě toto faktu se lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy frontendové části zobrazit, ve většině případů i rovnou v internetovém prohlížeči upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům se tyto změnu neprojeví.
 
 Oproti tomu backendová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou frontendovou část. Výběr technologie implementace backendové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C#, C++, .NET, Ruby a další. Díky prostředí Node.js\footnote{Node.js: \url{https://nodejs.org/en/}} lze ale využít i dříve zmiňovaný JavaScript, který sám o sobě pro tento účel není primárně určen. 
@@ -47,7 +47,7 @@ Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhran�
 
 Oddělením těchto celků je zajištěna lepší organizovanost zdrojových kódů a tím je usnadněn rychlejší vývoj. Jednotlivé celky jsou také lehčeji znovupoužitelné a práce programátorů na nich může probíhat souběžně. Rozdělením je také možné pro jeden pohled mít pohledů hned několik. Další pohledy mohou přibývat nebo naopak ty stávající mohou být smazány a na databázi aplikace to nebude mít žádný vliv.
 
-\subsection{Responsivita}
+\subsection{Responzivita}
 \blindtext[2]
 
 \section{Boostrap}
@@ -131,7 +131,7 @@ Obsah dotazu může vypadat například následovně
 {
     "query": {
         "match": {
-            "address": "mill lane"
+            "address": "todo"
         }
     }
 }
@@ -142,7 +142,7 @@ Na tento dotaz můžeme od serveru dostat odpověď s obsahem
 \blindtext
 
 \subsubsection*{Kontext}
-Dotazy v Elasticsearch se rozlišují na dva základní typy - kontext dotazu (query) a kontext filtru.
+Dotazy v Elasticsearch se rozlišují na dva základní typy - kontext dotazu (\emph{query}) a kontext filtru.
 První z nich se dá lidsky přeložit do otázky \uv{Jak moc dokument splňuje dotaz?}. V tomto případě se u každého výsledku počítá skóre relevance, podle kterého jsou ve výsledné odpovědi dokumenty sestupně řazeny.
 
 
@@ -150,7 +150,7 @@ První z nich se dá lidsky přeložit do otázky \uv{Jak moc dokument splňuje 
 Základní struktura databáze Elasticsearch se na první pohled od tradičních relačních databázi velmi neliší, ke spoustě pojmů se dá najít ekvivalent.
 
 \subsubsection*{Uzel a shluk}
-Pod pojmem uzel (anglicky node) se skrývá server, ve kterém jsou uložena data. Uzel v rámci databáze může být jeden nebo jich může být i více a každý bude obsahovat pouze určitou část dat. Tyto uzly jsou seskupeny do shluku (anglicky cluster).
+Pod pojmem uzel (anglicky \emph{node}) se skrývá server, ve kterém jsou uložena data. Uzel v rámci databáze může být jeden nebo jich může být i více a každý bude obsahovat pouze určitou část dat. Tyto uzly jsou seskupeny do shluku (anglicky cluster).
 
 
 \subsubsection*{Dokument}\label{section:dokument}
@@ -160,7 +160,7 @@ Dokument je základní jednotka dat, které může být zaindexována. Obsah dok
 Skupina dokumentů s podobnou strukturou se nazývá index. Ekvivalentem v relačních databázich by v tomto případě byla tabulka.
 
 \subsubsection*{Střepy}
-Elasticsearch nabízí možnost index rozdělit na střepy (anglicky shards), které mohou být uloženy v různých uzlech. Tuto možnost je vhodné využít především při práci s indexy s velkým obsahem dat. Díky rozdělení docílíme distribuování zátěže a lze využít paralelní zpracování, tudíž bude zpracování dotazu odbaveno výrazně rychleji. 
+Elasticsearch nabízí možnost index rozdělit na střepy (anglicky \emph{shards}), které mohou být uloženy v různých uzlech. Tuto možnost je vhodné využít především při práci s indexy s velkým obsahem dat. Díky rozdělení docílíme distribuování zátěže a lze využít paralelní zpracování, tudíž bude zpracování dotazu odbaveno výrazně rychleji. 
 Přístup k takto rozděleným indexům se nijak nemění a pro uživatele je tento proces naprosto transparentní.
 
 \subsubsection*{Repliky}
