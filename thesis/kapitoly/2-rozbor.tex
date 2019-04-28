@@ -19,16 +19,17 @@ CORDIS (The Community Research and Development Information Service) je portál p
 
 \section{Vývoj webu}
 \emph{Tato kapitola čerpá z~\cite{bib:web-development}}.
+
 Tvorba webových stránek se obecně rozlišuje do dvou celků zvaných \emph{frontend} a \emph{backend}.
 
 Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v žádném případě neobejde bez značkovacího jazyka HTML (Hypertext Markup Language), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS ( Cascading Style Sheets).Ty se starají o to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o interaktivitu.
 Zpracování této části webu probíhá v klientovi - tedy internetovému prohlížeči uživatele. Na základě toto faktu se lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy frontendové části zobrazit, ve většině případů i rovnou v internetovém prohlížeči upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům se tyto změnu neprojeví.
 
-Oproti tomu backendová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou frontendovou část. Výběr technologie implementace backendové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C#, C++, .NET, Ruby a další. Díky prostředí Node.js lze ale využít i dříve zmiňovaný JavaScript, který sám o sobě pro tento účel není primárně určen. 
+Oproti tomu backendová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou frontendovou část. Výběr technologie implementace backendové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C#, C++, .NET, Ruby a další. Díky prostředí Node.js\footnote{Node.js: \url{https://nodejs.org/en/}} lze ale využít i dříve zmiňovaný JavaScript, který sám o sobě pro tento účel není primárně určen. 
 
 \subsection{MVC architektura}
 %[https://pdfs.semanticscholar.org/9077/6c1fd8c2c4dbd13b85f22e7c8c8f83331758.pdf 27.4.]
-Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhraní a logiku. V anglickém jazyce se tyto celky dají nazvat pomocí slov \emph{model}, \emph{view} a \emph{controller} (zkratka MVC). Historie této architektury sahá až do sedmdesátých let, nicméně je tato architektura v dnešním světe stále naprostým standardem vývoje.
+Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhraní a logiku. V anglickém jazyce se tyto celky dají nazvat pomocí slov \emph{model}, \emph{view} a \emph{controller} (zkratka MVC). Historie této architektury sahá až do sedmdesátých let, nicméně je v dnešním světe stále naprostým standardem vývoje.
 
 \begin{figure}[H]
 	\centering
@@ -49,10 +50,13 @@ Oddělením těchto celků je zajištěna lepší organizovanost zdrojových kó
 \subsection{Responsivita}
 \blindtext[2]
 
+\section{Boostrap}
+\blindtext[2]
+
 \section{Python}
 \blindtext[2]
 
-\section{Flask}
+\subsection{Flask}
 %[http://flask.pocoo.org/docs/1.0/foreword/ 21.4.]
 Flask je open source webový micro-framework napsaný v programovacím jazyce Python. Klíčový znak micro-frameworků je co nejmenší nebo i nulová závislost na externích knihovnách %[https://pymbook.readthedocs.io/en/latest/flask.html 23.4.]
 Flask si si klade za cíl udržet co nejjednodušší jádro, ale zároveň se soustředí na možnost tento základ jednoduše rozšířit.
@@ -112,6 +116,8 @@ Asynchronní provádění operací mnohdy přináší spoustu výhod, v tomto p�
 
 \blindtext
 
+\subsubsection*{BootstrapVue}
+
 \section{Elasticsearch}
 Elasticsearch je volně šiřitelný vyhledávač umožňující rychlé vyhledávání ve velkém množství dat. 
 
@@ -120,7 +126,7 @@ Oproti relačním databázím nenabízí propojovací dotazy, a proto je nutné 
 \subsection{Dotazy}
 Pro komunikaci s touto databází se využívá Query DSL - dotazy aplikačního rozhraní REST ve formátu JSON.
 
-Obsah dotazu může vypadat například následovně:
+Obsah dotazu může vypadat například následovně
 \begin{verbatim}
 {
     "query": {
@@ -129,12 +135,11 @@ Obsah dotazu může vypadat například následovně:
         }
     }
 }
-\end{verbatim}
+\end{verbatim} %TODO: Jiny priklad
 
-Na tento dotaz můžeme od serveru dostat tuto odpověď
-\begin{verbatim}
+Na tento dotaz můžeme od serveru dostat odpověď s obsahem
+
 \blindtext
-\end{verbatim} 
 
 \subsubsection*{Kontext}
 Dotazy v Elasticsearch se rozlišují na dva základní typy - kontext dotazu (query) a kontext filtru.
@@ -162,9 +167,9 @@ Přístup k takto rozděleným indexům se nijak nemění a pro uživatele je te
 Obdobně lze využít i repliky. Zde se ovšem data indexu nerozdělují, ale naopak duplikují. Díky uložení těchto replik mezi více uzly může systém být robustnější a dokáže fungovat i v případě selhání části shluku. I v tomto případě je umožněno vyhledávat paralelně. 
 
 \subsection{Fasetové vyhledávání}
-S velkým množstvím dat přichází potřeba obsah podle určitých kriterií zúžit. K tomotu účelu slouží filtry a fasetové vyhledávání (někdy také označována jako fastová navigace - anglicky faceted search nebo faceted navigation). Využití faset je ale pokročilejší než použít filtry, protože fasetová navigace umožňuje využít hned několik filtrů najednou. %[https://www.nngroup.com/articles/filters-vs-facets/ 21.4.]
+S velkým množstvím dat přichází potřeba obsah podle určitých kriterií zúžit. K tomutu účelu slouží filtry a fasetové vyhledávání (někdy také označována jako fastová navigace - anglicky \emph{faceted search} nebo \emph{faceted navigation}). Využití faset je ale pokročilejší než použít filtry, protože fasetová navigace umožňuje využít hned několik filtrů najednou. %[https://www.nngroup.com/articles/filters-vs-facets/ 21.4.]
 
-V Elasticsearch je možné tuto navigaci vytvořit pomocí tzv. kyblíkových agreagací (angl. bucket aggregations).
+V Elasticsearch je možné tuto navigaci vytvořit pomocí tzv. kyblíkových agreagací (angl. \emph{bucket aggregations}).
 Jednoduše řečeno, se pro dokumenty vytvoří kyblíky, kde každý z kyblíku odpovídá určitému kriteriu. Pokud dokument toto kriterium splňuje, je do kyblíku vložen.
 %[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html 21.4.]
 
