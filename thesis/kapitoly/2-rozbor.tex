@@ -119,9 +119,33 @@ Asynchronní provádění operací mnohdy přináší spoustu výhod, v tomto p�
 \subsubsection*{BootstrapVue}
 
 \section{Elasticsearch}
-Elasticsearch je volně šiřitelný vyhledávač umožňující rychlé vyhledávání ve velkém množství dat. 
+%[https://books.google.cz/books?hl=cs&lr=&id=d19aBgAAQBAJ&oi=fnd&pg=PR3&dq=elasticsearch&ots=NzhZuNHtgB&sig=zWUdusVrNdR1BvbOtj8YZ43G-oM&redir_esc=y#v=onepage&q=elasticsearch&f=false 29.4.]
+Elasticsearch je volně šiřitelný vyhledávač umožňující distribuované vyhledávání a analýzu v reálném čase. Umožňuje rychle pracovat s rozsáhlými daty (anglicky \emph{big data}) a provádět nad nimi plnotextové vyhledávání, strukturované vyhledávání a nebo zmiňovanou analýzu.
 
-Oproti relačním databázím nenabízí propojovací dotazy, a proto je nutné ukládaná data denormalizovat. Díky tomu jsou ale data a jejich metadata v těsné blízkosti a tím je docíleno rychlé fulltextové vyhledávání. %[https://qbox.io/blog/what-is-elasticsearch 20.4.]
+Tento vyhledávač je hojně využíván jak menšími projekty, tak i světoznámými organizacemi. Za zmínku stojí například internetová encyklopedie Wikipedia\footnote{Wikipedia: \url{https://www.wikipedia.org/}}, britský deník The~Guardian\footnote{The Guardian: \url{https://www.theguardian.com/international}}, komunitní stránka pro výměnu rad programátorů StackOverflow\footnote{StackOverflow: \url{https://stackoverflow.com/}} nebo populární webová služba pro verzovací nástroj Git a to GitHub\footnote{GitHub: \url{https://github.com/}}.
+
+Elasticsearch je postavený na knihovně Apache Lucene\footnote{Apache Lucene: \url{https://lucene.apache.org/}}, využívá především její funkce plnotextového vyhledávání, ale oproti této knihovně samotné Elasticsearch nabízí o mnoho přívětivější způsob používání, především pro začínající uživatele. 
+
+Jedná se o bezschémovou databázi, oproti relačním databázím nenabízí propojovací dotazy, a proto je nutné ukládaná data denormalizovat. Díky tomu jsou ale data a jejich metadata v těsné blízkosti a tím je docíleno rychlé fulltextové vyhledávání. %[https://qbox.io/blog/what-is-elasticsearch 20.4.]
+
+\subsection{Základní struktura}
+Základní struktura databáze Elasticsearch se na první pohled od tradičních relačních databázi velmi neliší, ke spoustě pojmů se dá najít ekvivalent.
+
+\subsubsection*{Uzel a shluk}
+Pod pojmem uzel (anglicky \emph{node}) se skrývá server, ve kterém jsou uložena data. Uzel v rámci databáze může být jeden nebo jich může být i více a každý bude obsahovat pouze určitou část dat. Tyto uzly jsou seskupeny do shluku (anglicky cluster).
+
+\subsubsection*{Dokument}\label{section:dokument}
+Dokument je základní jednotka dat, které může být zaindexována. Obsah dokumentu je zapsán ve formátu JSON. V relační databázi lze dokument přirovnat k řádku tabulky.
+
+\subsubsection*{Index}\label{section:index}
+Skupina dokumentů s podobnou strukturou se nazývá index. Ekvivalentem v relačních databázích by v tomto případě byla tabulka.
+
+\subsubsection*{Střepy}
+Elasticsearch nabízí možnost index rozdělit na střepy (anglicky \emph{shards}), které mohou být uloženy v různých uzlech. Tuto možnost je vhodné využít především při práci s indexy s velkým obsahem dat. Díky rozdělení docílíme distribuování zátěže a lze využít paralelní zpracování, tudíž bude zpracování dotazu odbaveno výrazně rychleji. 
+Přístup k takto rozděleným indexům se nijak nemění a pro uživatele je tento proces naprosto transparentní.
+
+\subsubsection*{Repliky}
+Obdobně lze využít i repliky. Zde se ovšem data indexu nerozdělují, ale naopak duplikují. Díky uložení těchto replik mezi více uzly může systém být robustnější a dokáže fungovat i v případě selhání části shluku. I v tomto případě je umožněno vyhledávat paralelně. 
 
 \subsection{Dotazy}
 Pro komunikaci s touto databází se využívá Query DSL - dotazy aplikačního rozhraní REST ve formátu JSON.
@@ -145,26 +169,8 @@ Na tento dotaz můžeme od serveru dostat odpověď s obsahem
 Dotazy v Elasticsearch se rozlišují na dva základní typy - kontext dotazu (\emph{query}) a kontext filtru.
 První z nich se dá lidsky přeložit do otázky \uv{Jak moc dokument splňuje dotaz?}. V tomto případě se u každého výsledku počítá skóre relevance, podle kterého jsou ve výsledné odpovědi dokumenty sestupně řazeny.
 
-
-\subsection{Základní struktura}
-Základní struktura databáze Elasticsearch se na první pohled od tradičních relačních databázi velmi neliší, ke spoustě pojmů se dá najít ekvivalent.
-
-\subsubsection*{Uzel a shluk}
-Pod pojmem uzel (anglicky \emph{node}) se skrývá server, ve kterém jsou uložena data. Uzel v rámci databáze může být jeden nebo jich může být i více a každý bude obsahovat pouze určitou část dat. Tyto uzly jsou seskupeny do shluku (anglicky cluster).
-
-
-\subsubsection*{Dokument}\label{section:dokument}
-Dokument je základní jednotka dat, které může být zaindexována. Obsah dokumentu je zapsán ve formátu JSON. V relační databázi lze dokument přirovnat k řádku tabulky.
-
-\subsubsection*{Index}\label{section:index}
-Skupina dokumentů s podobnou strukturou se nazývá index. Ekvivalentem v relačních databázich by v tomto případě byla tabulka.
-
-\subsubsection*{Střepy}
-Elasticsearch nabízí možnost index rozdělit na střepy (anglicky \emph{shards}), které mohou být uloženy v různých uzlech. Tuto možnost je vhodné využít především při práci s indexy s velkým obsahem dat. Díky rozdělení docílíme distribuování zátěže a lze využít paralelní zpracování, tudíž bude zpracování dotazu odbaveno výrazně rychleji. 
-Přístup k takto rozděleným indexům se nijak nemění a pro uživatele je tento proces naprosto transparentní.
-
-\subsubsection*{Repliky}
-Obdobně lze využít i repliky. Zde se ovšem data indexu nerozdělují, ale naopak duplikují. Díky uložení těchto replik mezi více uzly může systém být robustnější a dokáže fungovat i v případě selhání části shluku. I v tomto případě je umožněno vyhledávat paralelně. 
+\subsection{Metadata}
+\blindtext
 
 \subsection{Fasetové vyhledávání}
 S velkým množstvím dat přichází potřeba obsah podle určitých kriterií zúžit. K tomutu účelu slouží filtry a fasetové vyhledávání (někdy také označována jako fastová navigace - anglicky \emph{faceted search} nebo \emph{faceted navigation}). Využití faset je ale pokročilejší než použít filtry, protože fasetová navigace umožňuje využít hned několik filtrů najednou. %[https://www.nngroup.com/articles/filters-vs-facets/ 21.4.]
@@ -174,6 +180,14 @@ Jednoduše řečeno, se pro dokumenty vytvoří kyblíky, kde každý z kyblíku
 %[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html 21.4.]
 
 \subsection{Plnotextové vyhledávání}
+%[https://books.google.cz/books?hl=cs&lr=&id=d19aBgAAQBAJ&oi=fnd&pg=PR3&dq=elasticsearch&ots=NzhZuNHtgB&sig=zWUdusVrNdR1BvbOtj8YZ43G-oM&redir_esc=y#v=snippet&q=full&f=false 29.4.]
+Uložená data se dělí na dva typy - přesné hodnoty a plnotextové hodnoty (anglicky \emph{full-text}). Přesné hodnoty jsou určeny pro data, jako například identifikátor uživatele. Pokud totiž vyhledáváme uživatele s identifikátorem 42, jako výsledek neočekáváme uživatele, který má identifikátor 420, ale očekáváme výsledek, který bude přesně splňovat hledanou položku.
+Pokud ale člověk pracuje s textovými položkami, nemusí nutně hledat stoprocentní shodu. Lidský jazyk je velice rozmanitý a umožňuje slova časovat, skloňovat, či vyjádřit jednu věc vícero synonyma. %todo sklonuju spravne?
+V těchto případech hledání totožných hodnot selhává, i když má text z pohledu člověka stejný nebo podobný význam. Pro tento typ hledání slouží právě plnotextové hledání. Můžeme se s ním setkat například při hledání článku v internetovém magazínu.
+Elasticsearch pro takové hledání musí text nejprve analyzovat a vytvořit pro něj obrácené indexy.
+
+\subsubsection*{Obrácený index}
+Obrácený index (anglicky \emph{inverted index})
 \blindtext[2]
 
 \subsection{Podobnostní hledání}
