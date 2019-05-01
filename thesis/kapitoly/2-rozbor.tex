@@ -22,7 +22,7 @@ CORDIS (\emph{The Community Research and Development Information Service}) je po
 
 Tvorba webových stránek se obecně rozlišuje do dvou celků zvaných \emph{frontend} a \emph{backend}.
 
-Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v žádném případě neobejde bez značkovacího jazyka HTML (\emph{Hypertext Markup Language}), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS (\emph{Cascading Style Sheets}).Ty se starají o to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o interaktivitu.
+Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v žádném případě neobejde bez značkovacího jazyka HTML (\emph{Hypertext Markup Language}), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS (\emph{Cascading Style Sheets}). Ty se starají o to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o interaktivitu.
 Zpracování této části webu probíhá v klientovi - tedy internetovému prohlížeči uživatele. Na základě toto faktu se lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy frontendové části zobrazit, ve většině případů i rovnou v internetovém prohlížeči upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům se tyto změnu neprojeví.
 
 Oproti tomu backendová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou frontendovou část. Výběr technologie implementace backendové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C#, C++, .NET, Ruby a další. Díky prostředí Node.js\footnote{Node.js: \url{https://nodejs.org/en/}} lze ale využít i dříve zmiňovaný JavaScript, který sám o sobě pro tento účel není primárně určen. 
@@ -51,7 +51,19 @@ Oddělením těchto celků je zajištěna lepší organizovanost zdrojových kó
 \blindtext[2]
 
 \section{Boostrap}
+%[https://books.google.cz/books?hl=cs&lr=&id=iktVCgAAQBAJ&oi=fnd&pg=PP1&dq=bootstrap+css&ots=ZsIQ6TuKo-&sig=8AdB4nVzidu9ou2fX0LWq4TAn_U&redir_esc=y#v=onepage&q=bootstrap%20css&f=true 1.5.]
+Bootstrap\footnote{Bootstrap: \url{https://getbootstrap.com/}} je frontendový framework pro snadný vývoj webových stránek. Je vyvíjen společností Twitter, která jej v roce 2010 vydala jako otevřený software. Jen dva roky poté se Bootstrap stal nejoblíbenějším projektem na stránce GitHub. Bootstrap se skládá převážně z kaskádových stylů, ale interaktivní prvky využívají programovací jazyk JavaScript s knihovnou jQuery. Pro interaktivní část ale existují i další alternativy využívající například Vue.js\footnote{BootstrapVue: \url{https://bootstrap-vue.js.org/}}, React\footnote{React Bootstrap: \url{https://react-bootstrap.github.io/}} nebo Angular\footnote{NG Bootstrap: \url{https://ng-bootstrap.github.io/#/home/}}.
+
+Bootstrap se drží moderních zásad jako například přístup mobile-first.  
+\begin{itemize}
+\item Drží se přístupu mobile-first
+\item Nabízí podporu mnoha prohlížečů
+\item Umožňuje tvořit responzivní design
+\end{itemize}
+
 \blindtext[2]
+
+
 
 \section{Python}
 \blindtext[2]
@@ -187,8 +199,42 @@ V těchto případech hledání totožných hodnot selhává, i když má text z
 Elasticsearch pro takové hledání musí text nejprve analyzovat a vytvořit pro něj obrácené indexy.
 
 \subsubsection*{Obrácený index}
-Obrácený index (anglicky \emph{inverted index})
-\blindtext[2]
+Obrácený index (anglicky \emph{inverted index}) je struktura obsahující seznam všech unikátních slov vyskytujících se v uložených dokumentech. Pro každé z těchto slov uchovává informaci, ve kterých dokumentech se vyskytovalo. Díky tomu je možné v textových položkách rychle provádět plnotextové hledání.
+
+Příkladem mohou být dva dokumenty, kde každý obsahuje právě jednu z následujících vět.
+\begin{itemize}
+    \item 
+    \item 
+\end{itemize}
+Zpracování těchto dokumentů tedy může vzniknout následující obrácený index
+%TODO table
+Takovýto index by byl ale v praxi nepoužitelný. Text nestačí pouze strojově rozdělit do tokenů, ale musí proběhnout celá analýza textu.
+
+\subsubsection*{Analýza}
+Analýza představuje proces, kdy se kus textu rozdělí do jednotlivých tokenů a následně se tyto tokeny upraví do podoby vhodné pro použití plnotextového vyhledávání. Tento proces obstarává analyzér, který se skládá ze tří části:
+\begin{itemize}
+    \item \emph{Filtry znaků} upraví zpracovávaný řetězec ještě před samotným rozdělením do tokenů. Jeho úkolem může například být odstranění HTML značek z textu.
+    \item \emph{Tokenizér} z textu sestaví jednotlivé tokeny. Tokeny ve většině případů představují jednotlivá slova, ale nemusí tomu tak vždy být. 
+    \item \emph{Filtry tokenů} na konec projde všechny vytvořené tokeny, může některé odstranit, přidat a nebo jen upravit. 
+\end{itemize}
+Filtrů může být v jednom analyzéru použitá celá řada a to jak filtrů znaků, tak i filtrů tokenů. Tokenizér je ale v rámci analyzéru vždy použit jen jeden jediný.
+
+Elasticsearch již ve svém základu nabízí škálu různých analyzéru. Tyto analyzéry jsou různé složitosti, mezi ty nejjednodušší patří analyzér bílých znaků, který text rozdělí striktně podle mezer, tudíž je i tečka na konci věty vnímána jako část slova. Nejčastěji se ale člověk může setkat s jazykovým analyzérem, který je uzpůsoben lidské řeči. Elasticsearch takový analyzér nabízí pro mnoho jazyků mezi které patří i jazyk český.
+
+\subsubsection*{Filtry tokenů}
+%https://www.ludekvesely.cz/serial-elasticsearch-4-fulltextove-vyhledavani-v-cestine/ 2.4.
+
+Velmi častou filtrací bývá změna velkých písmen na malé, díky tomu nejsou slova na začátku věty vnímána jako jiná slova, než ty v jiné části věty. Pro český jazyk je také typické odstranění diakritiky.
+
+Součástí analyzátorů bývá často odstranění tokenů, které obsahují nepodstatná slova. Jedná se především o spojky a předložky. Taková slova se v plnotextovém vyhledávání označují jako \emph{stop slova} (anglicky \emph{stop words}). Tento seznam je vždy specifický pro konkrétní jazyk textu, použít výchozí anglická stop slova nad česky psaným textem by ztrácelo význam.
+
+Další nedílnou součástí pokročilejších analyzátorů je \emph{stematizace}, aneb převod slov do jejich základního tvaru. Pro tuto operaci lze využit dva způsoby a to algoritmus nebo slovník. Každý z těchto způsobů má své pro a proti.
+Využitím algoritmické stematizace sice analyzátor nemusí znát všechna slova v daném jazyce, protože slova převádí do základního tvaru pouze na základě sady pravidel, ale zase dochází k určité nepřesnosti. Elasticsearch v případě využití české algoritmické stematizace ze slov odstraňuje všechny přípony.
+Druhým způsobem, který lze využít je stematizace na základě slovníku. Díky tomu jsou převedené tvary přesnější než ty získané algoritmem, ale hlavním předpokladem je využití vhodného slovníku s dostatečnou zásobou slov.
+%TODO priklad
 
 \subsection{Podobnostní hledání}
+\blindtext[2]
+
+\subsection{Knihovny}
 \blindtext[2]
