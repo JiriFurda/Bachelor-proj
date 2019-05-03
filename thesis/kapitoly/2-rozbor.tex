@@ -1,10 +1,12 @@
 \chapter{Rozbor řešené problematiky}
+\blindtext
 
 \section{Webové portály}
 Webový portál je druh webové stránky, která shromažďuje informace z vícero různých zdrojů a uživateli ty nejrelevantnější informace prezentuje uživateli shromážděné na jednom místě~\cite{bib:portal-liferay}.
 
-Zpravidla je umožněno na portálu v těchto informací vyhledávat. Velmi časté je také zakomponování autentizace uživatele a podle jeho role jsou mu zpřístupněny různé části daného portálu~\cite{bib:portal-indiana}. 
+Zpravidla je umožněno na portálu v těchto informací vyhledávat. Velmi časté je také zakomponování autentizace uživatele a podle jeho role jsou mu zpřístupněny různé části daného portálu~\cite{bib:portal-indiana}.
 
+% mozna vzit neco z https://books.google.cz/books?hl=cs&lr=&id=UMrhZfRpd8wC&oi=fnd&pg=PR6&dq=web+portals&ots=9bYmjTd1n2&sig=kw9YCnyaFh9n87y2VY05lITcZFc&redir_esc=y#v=onepage&q=web%20portals&f=false
 \blindtext[2]
 
 \subsection{CORDIS}
@@ -34,7 +36,7 @@ Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhran�
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{images/mvc.png}
-	\caption{Diagram toku akcí při využití MVC architektury}
+	\caption{Diagram toku akcí při využití architektury MVC}
 	\label{mvc}
 \end{figure}
 
@@ -73,7 +75,7 @@ Takto obalené styly budou aplikovány jen v případě, že zobrazovací zaří
 	\label{vuex-dataflow}
 \end{figure}
 
-\subsection{Princip nejdřív mobil}
+\subsection{Princip nejdřív mobil}\label{section:mobile-first}
 Ustálenou technikou, jak vyvíjet responzivní design webových stránek je princip \ul{nejdříve mobil} (anglicky \emph{mobile-first}). Jak název vypovídá, základní myšlenkou tohoto principu je nejdříve myslet na mobilní zařízení a až poté na desktopová zařízení. Tento přístup je možné aplikovat jak pro samotný návrh designu, tak i pro jeho následnou implementaci.
 
 Protože mobilní zařízení nabízejí o mnoho menší zobrazovací plochu než desktop, je zde každý kus prostoru drahocenný. Designér si proto musí nejprve ujasnit, které části webové stránky jsou pro uživatele prioritní a na základě těchto priorit sestavit návrh.
@@ -86,12 +88,9 @@ V případě využití tohoto principu při samotné implementaci designu se pos
 %[https://books.google.cz/books?hl=cs&lr=&id=iktVCgAAQBAJ&oi=fnd&pg=PP1&dq=bootstrap+css&ots=ZsIQ6TuKo-&sig=8AdB4nVzidu9ou2fX0LWq4TAn_U&redir_esc=y#v=onepage&q=bootstrap%20css&f=true 1.5.]
 Bootstrap\footnote{Bootstrap: \url{https://getbootstrap.com/}} je frontendový framework pro snadný vývoj webových stránek. Je vyvíjen společností Twitter, která jej v roce 2010 vydala jako otevřený software. Jen dva roky poté se Bootstrap stal nejoblíbenějším projektem na stránce GitHub. Bootstrap se skládá převážně z kaskádových stylů, ale interaktivní prvky využívají programovací jazyk JavaScript s knihovnou jQuery. Pro interaktivní část ale existují i další alternativy využívající například Vue.js\footnote{BootstrapVue: \url{https://bootstrap-vue.js.org/}}, React\footnote{React Bootstrap: \url{https://react-bootstrap.github.io/}} nebo Angular\footnote{NG Bootstrap: \url{https://ng-bootstrap.github.io/#/home/}}.
 
-Bootstrap se drží moderních zásad jako například přístup mobile-first.  
-\begin{itemize}
-\item Drží se přístupu mobile-first
-\item Nabízí podporu mnoha prohlížečů
-\item Umožňuje tvořit responzivní design
-\end{itemize}
+Bootstrap se drží moderních zásad jako princip \emph{nejdřív mobil} (uvedený v kapitole \ref{section:mobile-first}) a nabízí snadnou možnost tvorby responzivního designu. Mimo to také nabízí možnost využít moderně působící vzhled základních HTML elementů jako jsou například vstupní pole formuláře nebo tlačítka. Bootstrap ale poskytuje i celou řadu nových předpřipravených komponent a to ku příkladu karty, modální okna, stránkování, informační hlášky a spoustu dalších.
+
+Vzhledem ke své rozsáhlé komunitě lze nalézt mnoho dalších uživateli tvořených komponent nebo dokonce celých hotových šablon postavených na tomto frameworku. Jedna ze stránek určená pro sdílení takového obsahu ze nazývá Bootsnipp\footnote{Bootsnipp: \url{https://bootsnipp.com/}}.
 
 \blindtext[2]
 
@@ -161,6 +160,7 @@ Asynchronní provádění operací mnohdy přináší spoustu výhod, v tomto p�
 \blindtext
 
 \subsubsection*{BootstrapVue}
+\blindtext
 
 \section{Elasticsearch}
 %[https://books.google.cz/books?hl=cs&lr=&id=d19aBgAAQBAJ&oi=fnd&pg=PR3&dq=elasticsearch&ots=NzhZuNHtgB&sig=zWUdusVrNdR1BvbOtj8YZ43G-oM&redir_esc=y#v=onepage&q=elasticsearch&f=false 29.4.]
@@ -222,6 +222,15 @@ S velkým množstvím dat přichází potřeba obsah podle určitých kriterií 
 V Elasticsearch je možné tuto navigaci vytvořit pomocí tzv. kyblíkových agreagací (angl. \emph{bucket aggregations}).
 Jednoduše řečeno, se pro dokumenty vytvoří kyblíky, kde každý z kyblíku odpovídá určitému kriteriu. Pokud dokument toto kriterium splňuje, je do kyblíku vložen.
 %[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html 21.4.]
+
+S tímto typem vyhledávání se lze setkat velmi často v seznamech produktů například v internetových obchodech nebo cenových srovnávačích.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.35\textwidth]{images/heureka-facet.png}
+	\caption{Příklad využití fasetového vyhledávání na cenovém srovnávači Heureka\footnote{Heureka: \url{https://www.heureka.cz/}}}
+\end{figure}
+
 
 \subsection{Plnotextové vyhledávání}
 %[https://books.google.cz/books?hl=cs&lr=&id=d19aBgAAQBAJ&oi=fnd&pg=PR3&dq=elasticsearch&ots=NzhZuNHtgB&sig=zWUdusVrNdR1BvbOtj8YZ43G-oM&redir_esc=y#v=snippet&q=full&f=false 29.4.]

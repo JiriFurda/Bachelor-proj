@@ -1,21 +1,9 @@
 \chapter{Návrh a implementace systému}
-Předchozí řešení mých kolegů umožňovalo vyhledávat pouze projekty a vědecké zprávy. Nabízelo se tento obsah rozšířit o výzvy k předkládání návrhů, na základě kterých Evropská komise vybírá organizace či fyzické osoby pro uskutečnění projektů se spolufinancováním Evropské unie.
+Předchozí řešení mých kolegů a kolegyň umožňovalo vyhledávat pouze projekty a vědecké zprávy. Nabízelo se tento obsah rozšířit o výzvy k předkládání návrhů, na základě kterých Evropská komise vybírá organizace či fyzické osoby pro uskutečnění projektů se spolufinancováním Evropské unie.
 %[https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home 27.4.].
 Samotné výzvy jsou ale hodně obecné a zaštiťují mnoho témat napříč různými oblastmi. Dalším úskalím byl nedostatek informací v popisu výzev. Rozsáhlý slovní popis se vztahovat až ke konkrétním tématům. Proto jsem se rozhodl portál nerozšiřovat o výzvy ale právě o zmiňovaná témata.
 
-\section{Extrakce dat}
-\blindtext
-
-Pro tyto účely jsem využil aplikační rozhraní nabízené přímo portálem Fundings and Tenders %[https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/support/apis]
-Rozhraní nabízí potřebná data ve formátu JSON, čímž bylo značně zjednodušeno jejich dolování.
-
-\section{Webový portál}
-\blindtext
-
-\subsection{Návrh}
-\blindtext
-
-\subsection{Schéma}
+\section{Schéma}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
@@ -25,15 +13,45 @@ Rozhraní nabízí potřebná data ve formátu JSON, čímž bylo značně zjedn
 
 \blindtext[2]
 
-\subsection{Podoba}
+\section{Extrakce dat}
 \blindtext
+Pro tyto účely jsem využil aplikační rozhraní nabízené přímo portálem Fundings and Tenders %[https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/support/apis]
+Rozhraní nabízí potřebná data ve formátu JSON, čímž bylo značně zjednodušeno jejich dolování.
+
+\subsection{Témata výzev}
+\blindtext
+
+\subsection{Projekty}
+\blindtext
+
+\subsection{Odevzdávané zprávy}
+\blindtext
+
+
+
+\section{Webový portál}
+\blindtext
+
+\subsection{Návrh}
+\blindtext
+
+\subsection{Podoba}
+Vizuální struktura vytvořeného webového portálu lze rozdělit do tří hlavních celků - hlavičky, postranního panelu a hlavního obsahu stránky. První dva z těchto celků jsou určeny pro specifikaci vyhledávání. Aby bylo vyhledávání při procházení portálu vždy dostupné, pozice těchto celků v desktopovém zobrazení zůstává neměnná i při rolování zobrazené stránky.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
-	\caption{\blindtext}
-	\label{mvc}
+	\caption{TODO}
 \end{figure}
+\begin{enumerate}
+    \item Logo a název portálu se dle konvence nachází v levém horním rohu. Zároveň funguje jako odkaz na hlavní stránku.
+    \item Zbylá část hlavičky obsahuje vyhledávací pole. Do něj může být vložen i velmi komplexní dotaz, proto byl při návrhu kladen důraz na co největší šířku tohoto pole. Pod tímto polem se nachází odkazy určující jaký typ výsledků je od vyhledávání očekáván.
+    \item V levé části portálu se nachází postranní panel s fasetovou navigací. Slouží především pro méně pokročilé uživatele portálu, kterým postačí tvořit jednoduché dotazy. Zároveň lze informace v tomto panelu využít jako přehled informací typu \uv{Které země se nejčastěji podílí na projektech splňujících dané kriteria?}. Postranní panel je podrobněji popsán v kapitole~\ref{section:sidebar}.\
+    \item TODO obsah
+\end{enumerate}
+\blindtext
+
+
 
 \blindtext[2]
 
@@ -50,7 +68,7 @@ Veškeré zdrojové kódy portálu se nachází v adresáři \texttt{portal}. Uv
 \subsection{Vue komponenty}
 Některé z využívaných faset obsahují i stovky položek a jejich hodnoty mají často dlouhé názvy. Jejich zobrazení pouze v postranním panelu jsem považoval za nedostatečné, proto jsem se rozhodl toto řešení oproti předchozímu řešení portálu přepracovat s využitím technologie Vue.js (představenou v kapitole~\ref{section:Vue.js}) a několika prvků z frameworku BootsrapVue\footnote{BootstrapVue: \url{https://bootstrap-vue.js.org/}}. Pro každou z faset jsem vytvořil dvě komponenty - položku v postranním panelu a modální okno.
 
-\subsubsection*{Postranní panel}
+\subsubsection*{Postranní panel}\label{section:sidebar}
 Tento panel je tvořen Vue komponentou \texttt{sidebar-facet-list}, která pro každou fasetu vytvoří instanci komponenty \texttt{sidebar-facet}.
 
 Každá komponenta \texttt{sidebar-facet} ve výchozím stavu nabízí nejvýše pět nejčastěji vyskytujících se hodnot dané fasety. Ty jsou postupně nahrazovány zvolenými hodnotami dané fasety. Další hodnoty s menším výskytem jsou dostupné v modálním okně, které se zobrazí po kliknutí na tlačítko \uv{\emph{More...}}. Obsahem této komponenty je mimo jiné dílčí komponenta frameworku BoostrapVue \texttt{b-collapse}, která v případě potřeby umožňuje danou fasetu minimalizovat. Pokud se takto stane a faseta má zvolené některé ze svých možností, objeví se vedle jejího názvu počet vybraných možností, aby měl uživatel i při minimalizovaných fasetách přehled o tom, které možnosti filtrování právě zvolil.
