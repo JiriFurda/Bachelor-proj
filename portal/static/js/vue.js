@@ -125,7 +125,7 @@ Vue.component('modal-facet', {
     <template slot="modal-header" slot-scope="{ close }">
         <div class="d-flex flex-column w-100">
             <div class="d-flex pb-2">
-                <h5 class="modal-title">Part. Country</h5>
+                <h5 class="modal-title">{{ facet.title }}</h5>
                 <button type="button" aria-label="Close" class="close" @click="close()">×</button>
             </div>
             <input class="form-control form-control-sm d-block" v-model="searchInput">
