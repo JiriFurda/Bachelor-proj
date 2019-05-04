@@ -1,5 +1,7 @@
 \chapter{Návrh a implementace systému}
-Předchozí řešení mých kolegů a kolegyň umožňovalo vyhledávat pouze projekty a vědecké zprávy. Nabízelo se tento obsah rozšířit o výzvy k předkládání návrhů, na základě kterých Evropská komise vybírá organizace či fyzické osoby pro uskutečnění projektů se spolufinancováním Evropské unie.
+Tato kapitola popisuje \blindtext
+
+Předchozí řešení mých kolegů umožňovalo vyhledávat pouze projekty a vědecké zprávy. Nabízelo se tento obsah rozšířit o výzvy k předkládání návrhů, na základě kterých Evropská komise vybírá organizace či fyzické osoby pro uskutečnění projektů se spolufinancováním Evropské unie.
 %[https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home 27.4.].
 Samotné výzvy jsou ale hodně obecné a zaštiťují mnoho témat napříč různými oblastmi. Dalším úskalím byl nedostatek informací v popisu výzev. Rozsáhlý slovní popis se vztahovat až ke konkrétním tématům. Proto jsem se rozhodl portál nerozšiřovat o výzvy ale právě o zmiňovaná témata.
 
@@ -75,15 +77,32 @@ Každá komponenta \texttt{sidebar-facet} ve výchozím stavu nabízí nejvýše
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{obrazky-figures/placeholder.pdf}
-	\caption{TODO}
-	\label{mvc}
+	\includegraphics[width=0.3\textwidth]{images/my-facet.png}
+	\caption{Část postranního panelu implementovaného portálu}
 \end{figure}
+%TODO doplnit cisla do obrazku
+\begin{enumerate}
+    \item Otevřená faseta \uv{Coord. Country} s jednou zvolenou možností a dalšími čtyřmi nejčastěji vyskytujícími se hodnoty. %TODO vyskytujícími se nebo vyskytujícími-se
+    \item Minimalizovaná faseta \uv{Participant} se třemi vybranými možnostmi indikovanými číslem v právé části fasety.
+    \item Minimalizovaná faseta \uv{Part. Country} bez zvolených možností.
+\end{enumerate}
 
 
 \subsubsection*{Modální okno}
 Okna jednotlivých faset jsou tvořena instancemi Vue komponenty \texttt{modal-facet}. O jejich vytvoření se stará komponenta \texttt{modal-facet-list}.
 Rozsáhlejší výpis možností daného fasetu se nyní zobrazují v modálním okně. Zde je možnost současně vidět podstatně více možností a také je možné vypsat jejich hodnoty v plném znění. V tomto okně je také obsaženo vstupní pole, které asynchronními dotazy na databázi Elasticsearch vyhledává mezi možnostmi daného fasetu. Samotné modální okno komponenta frameworku BootstrapVue, rozšířená o prvky nutné pro tento portál (například zmiňované vyhledávací pole) 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/my-modal.png}
+	\caption{Modální okno s dalšími hodnoty fasety s názevem \uv{Part. Country}}
+\end{figure}
+%TODO doplnit cisla do obrazku
+\begin{enumerate}
+    \item Jméno fasety.
+    \item Vstupní pole pro vyhledávání v hodnotách fasety.
+    \item Fasetové hodnoty odpovídající hledané frázi z bodu 2. Výsledky se mění v reálném čase v závislosti na obsahu vstupního pole.
+\end{enumerate}
 
 \subsubsection*{Fasetová možnost}
 Jednotlivé fasetové možnosti jsou reprezentovány komponentou \texttt{option-facet}, která zobrazuje zaškrtávací pole, název dané možnosti a počet výsledků aktuálního vyhledávání obsahující tuto možnost. Při zaškrtnutí možnosti se její data zkopírují do proměnné \texttt{checkedOptions} příslušného fasetu. Tato komponenta se vyskytuje jak v modálním okně, tak i v postranním panelu.
