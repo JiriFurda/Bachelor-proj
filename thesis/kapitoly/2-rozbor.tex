@@ -11,6 +11,7 @@ Zpravidla je umožněno na portálu v těchto informací vyhledávat. Velmi čas
 
 \subsection{CORDIS}
 \emph{Tato kapitola čerpá z~\cite{bib:cordis}}.
+
 CORDIS (\emph{The Community Research and Development Information Service}) je portál provozovaný Evropskou Unií (dále jen EU) sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o těchto projektech, tak i o jejích účastnících, o hlášeních, vědeckých zprávách a publikacích.
 \blindtext
 
@@ -80,7 +81,7 @@ Ustálenou technikou, jak vyvíjet responzivní design webových stránek je pri
 
 Protože mobilní zařízení nabízejí o mnoho menší zobrazovací plochu než desktop, je zde každý kus prostoru drahocenný. Designér si proto musí nejprve ujasnit, které části webové stránky jsou pro uživatele prioritní a na základě těchto priorit sestavit návrh.
 
-V případě využití tohoto principu při samotné implementaci designu se postupuje obdobně. Pokud jsou všechny kaskádové styly jak pro mobilní, tak pro desktopová zařízení zapsána v jednom souboru, bude tento soubor nejprve obsahovat styly společné pro obě tyto zařízení a styly určené pouze pro mobilní zařízení. Až po těchto stylech se budou v soboru objevovat \emph{media queries} s podmínkou \textt{min-width}, které budou od určité šířky displeje aplikovat styly určené pro desktopová zařízení. Díky tomu bude samotný kód stylů zjednodušen. U mobilních zařízení bývá z pravidla potřeba méně stylů a často lze využít některé z výchozích vlastností daných elementů.
+V případě využití tohoto principu při samotné implementaci designu se postupuje obdobně. Pokud jsou všechny kaskádové styly jak pro mobilní, tak pro desktopová zařízení zapsána v jednom souboru, bude tento soubor nejprve obsahovat styly společné pro obě tyto zařízení a styly určené pouze pro mobilní zařízení. Až po těchto stylech se budou v soboru objevovat \emph{media queries} s podmínkou \textt{min-width}, které budou od určité šířky displeje aplikovat styly určené pro desktopová zařízení. Díky tomu bude samotný kód stylů zjednodušen. U mobilních zařízení bývá z pravidla potřeba méně stylů a často lze využít některé z výchozích vlastností daných prvků.
 %[https://zellwk.com/blog/how-to-write-mobile-first-css/ 3.5.]
 
 
@@ -88,7 +89,7 @@ V případě využití tohoto principu při samotné implementaci designu se pos
 %[https://books.google.cz/books?hl=cs&lr=&id=iktVCgAAQBAJ&oi=fnd&pg=PP1&dq=bootstrap+css&ots=ZsIQ6TuKo-&sig=8AdB4nVzidu9ou2fX0LWq4TAn_U&redir_esc=y#v=onepage&q=bootstrap%20css&f=true 1.5.]
 Bootstrap\footnote{Bootstrap: \url{https://getbootstrap.com/}} je frontendový framework pro snadný vývoj webových stránek. Je vyvíjen společností Twitter, která jej v roce 2010 vydala jako otevřený software. Jen dva roky poté se Bootstrap stal nejoblíbenějším projektem na stránce GitHub. Bootstrap se skládá převážně z kaskádových stylů, ale interaktivní prvky využívají programovací jazyk JavaScript s knihovnou jQuery. Pro interaktivní část ale existují i další alternativy využívající například Vue.js\footnote{BootstrapVue: \url{https://bootstrap-vue.js.org/}}, React\footnote{React Bootstrap: \url{https://react-bootstrap.github.io/}} nebo Angular\footnote{NG Bootstrap: \url{https://ng-bootstrap.github.io/#/home/}}.
 
-Bootstrap se drží moderních zásad jako princip \emph{nejdřív mobil} (uvedený v kapitole \ref{section:mobile-first}) a nabízí snadnou možnost tvorby responzivního designu. Mimo to také nabízí možnost využít moderně působící vzhled základních HTML elementů jako jsou například vstupní pole formuláře nebo tlačítka. Bootstrap ale poskytuje i celou řadu nových předpřipravených komponent a to ku příkladu karty, modální okna, stránkování, informační hlášky a spoustu dalších.
+Bootstrap se drží moderních zásad jako princip \emph{nejdřív mobil} (uvedený v kapitole \ref{section:mobile-first}) a nabízí snadnou možnost tvorby responzivního designu. Mimo to také nabízí možnost využít moderně působící vzhled základních HTML prvků jako jsou například vstupní pole formuláře nebo tlačítka. Bootstrap ale poskytuje i celou řadu nových předpřipravených komponent a to ku příkladu karty, modální okna, stránkování, informační hlášky a spoustu dalších.
 
 Vzhledem ke své rozsáhlé komunitě lze nalézt mnoho dalších uživateli tvořených komponent nebo dokonce celých hotových šablon postavených na tomto frameworku. Jedna ze stránek určená pro sdílení takového obsahu ze nazývá Bootsnipp\footnote{Bootsnipp: \url{https://bootsnipp.com/}}.
 
@@ -125,7 +126,7 @@ V praxi může být tato funkce využita například v internetovém obchodě, k
 \subsection{Vue Router}
 Mezi oficiálně podporované knihovny patří například Vue Router, umožňující tvorbu jednostránkové aplikace, kdy se načte pouze jedná jediná stránka a pomocí JavaScriptu a asynchroniích požadavků se mění části obsahu webu. Server v takovém případě slouží pouze jako úložiště dat a veškerou prezentaci se stará strana klienta. %[https://msdn.microsoft.com/en-us/magazine/dn463786.aspx 24.4.]
 
-\subsection{Nuxt.js}
+\subsection{Nuxt.js} % TODO asi odstranit
 \blindtext
 
 \subsection{Vuex}
@@ -160,7 +161,46 @@ Asynchronní provádění operací mnohdy přináší spoustu výhod, v tomto p�
 \blindtext
 
 \subsubsection*{BootstrapVue}
-\blindtext
+%[https://books.google.cz/books?hl=cs&lr=&id=Zu1mDwAAQBAJ&oi=fnd&pg=PP1&dq=bootstrapvue&ots=oH8FcV9nqi&sig=GVmwURLvMPHxCsX8G7Tmv1faTGc&redir_esc=y#v=onepage&q=bootstrapvue&f=false 4.5.]
+BoostrapVue je frontendový framework založený na frameworku Boostrap, který pro svou plnou funkčnost vyžaduje použít také knihovnu jQuery. Pokud ale webová aplikace již pracuje s frameworkem Vue.js, mnohdy odpadá potřeba jQuery v aplikaci využívat. Vzhledem k tomu, že se jedná o poměrně rozsáhlou knihovnu, není žádoucí ji používat jen z důvodu, že je apliakce postavená na frameworku Boostrap.
+
+V tuto chvíli je vhodné použít alternativu jménem BoostrapVue, která závislost na jQuery nahrazuje za závislost na Vue.js. Tento framework nabízí všechny komponenty původního frameworku, některé dokonce vylepšuje a také nabízí komponenty úplně nové.
+
+Mimo to využití této knihovny také přináší větší pohodlí pro vývojáře. Dlouhý zápis některých komponent, tvořených pomocí množství vnořených prvků \texttt{<div>} lze díky Vue.js značně zjednodušit. Dokáže totiž prvek struktury HTML nahradit za rozsáhlejší strukturu na základě šablony komponenty. Konvencí frameworku je takové prvky pojménovávat s předponou \texttt{b-}, například tedy \texttt{b-button}.
+Přímo učebnicovým příkladem takového zjednodušení je zápis modálního okna, které se klasickým způsobem tvoří následovně:
+
+\begin{verbatim}
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+\end{verbatim}
+%[https://getbootstrap.com/docs/4.3/components/modal/ 4.5.] 
+
+Pomocí BoostrapVue lze identickou komponentu zapsat mnohem elegantnějším způsobem a to konrkétně:
+
+\begin{verbatim}
+<b-modal title="Modal title">
+  <p>Modal body text goes here.</p>
+</b-modal>
+\end{verbatim}
 
 \section{Elasticsearch}
 %[https://books.google.cz/books?hl=cs&lr=&id=d19aBgAAQBAJ&oi=fnd&pg=PR3&dq=elasticsearch&ots=NzhZuNHtgB&sig=zWUdusVrNdR1BvbOtj8YZ43G-oM&redir_esc=y#v=onepage&q=elasticsearch&f=false 29.4.]
