@@ -5,7 +5,7 @@
 # Edited by: dytrych AT fit vutbr cz
 #===========================================
 # asi budete chtit prejmenovat / you will probably rename:
-CO=projekt
+CO=xfurda00
 
 all: $(CO).pdf
 
@@ -46,9 +46,9 @@ rename:
 	
 # Pozor, vlna neresi vse (viz popis.txt) / Warning - vlna is not solving all problems (see description.txt)
 vlna:
-	vlna -l -m -n kapitoly/*.tex
+	vlna -l $(CO)-*.tex
 
 # Spocita normostrany / Count of standard pages
 normostrany:
-	echo "scale=2; `detex -n kapitoly/*.tex | wc -c`/1800;" | bc
+	echo "scale=2; `detex -n $(CO)-[01]*.tex | wc -c`/1800;" | bc
 
