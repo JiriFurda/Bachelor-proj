@@ -1,0 +1,46 @@
+\select@language {czech}
+\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}Rozbor \IeC {\v r}e\IeC {\v s}en\IeC {\'e} problematiky}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Webov\IeC {\'e} port\IeC {\'a}ly}{3}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}CORDIS}{4}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}The Funding \& Tenders Portal}{4}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}V\IeC {\'y}voj webu}{4}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}MVC architektura}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Responzivita}{6}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Princip nejd\IeC {\v r}\IeC {\'\i }v mobil}{7}{subsection.2.2.3}
+\contentsline {section}{\numberline {2.3}Boostrap}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}Python}{8}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Flask}{9}{subsection.2.4.1}
+\contentsline {section}{\numberline {2.5}Vue.js}{9}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Vue Router}{10}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Vuex}{10}{subsection.2.5.2}
+\contentsline {section}{\numberline {2.6}Elasticsearch}{12}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Z\IeC {\'a}kladn\IeC {\'\i } struktura}{13}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Dotazy}{14}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Metadata}{15}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.6.4}Fasetov\IeC {\'e} vyhled\IeC {\'a}v\IeC {\'a}n\IeC {\'\i }}{15}{subsection.2.6.4}
+\contentsline {subsection}{\numberline {2.6.5}Plnotextov\IeC {\'e} vyhled\IeC {\'a}v\IeC {\'a}n\IeC {\'\i }}{16}{subsection.2.6.5}
+\contentsline {subsection}{\numberline {2.6.6}Podobnostn\IeC {\'\i } hled\IeC {\'a}n\IeC {\'\i }}{18}{subsection.2.6.6}
+\contentsline {subsection}{\numberline {2.6.7}Knihovny}{18}{subsection.2.6.7}
+\contentsline {chapter}{\numberline {3}N\IeC {\'a}vrh a implementace syst\IeC {\'e}mu}{21}{chapter.3}
+\contentsline {section}{\numberline {3.1}Sch\IeC {\'e}ma}{22}{section.3.1}
+\contentsline {section}{\numberline {3.2}Extrakce dat}{22}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}T\IeC {\'e}mata v\IeC {\'y}zev}{23}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Projekty}{23}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Odevzd\IeC {\'a}van\IeC {\'e} zpr\IeC {\'a}vy}{23}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Webov\IeC {\'y} port\IeC {\'a}l}{23}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}N\IeC {\'a}vrh}{24}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Podoba}{24}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Struktura adres\IeC {\'a}\IeC {\v r}e}{26}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Vue komponenty}{26}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Vyhled\IeC {\'a}v\IeC {\'a}n\IeC {\'\i }}{29}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Vyhled\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } hodnot faset}{30}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {3.3.7}Model fasety}{31}{subsection.3.3.7}
+\contentsline {chapter}{\numberline {4}Experimenty a vyhodnocen\IeC {\'\i }}{32}{chapter.4}
+\contentsline {section}{\numberline {4.1}Testov\IeC {\'a}n\IeC {\'\i } na u\IeC {\v z}ivatel\IeC {\'\i }ch}{32}{section.4.1}
+\contentsline {section}{\numberline {4.2}Z\IeC {\'a}t\IeC {\v e}\IeC {\v z}ov\IeC {\'e} testy}{32}{section.4.2}
+\contentsline {section}{\numberline {4.3}Rychlost obnovy dat}{33}{section.4.3}
+\contentsline {section}{\numberline {4.4}Mo\IeC {\v z}nost \IeC {\'u}prav}{33}{section.4.4}
+\contentsline {chapter}{\numberline {5}Z\IeC {\'a}v\IeC {\v e}r}{35}{chapter.5}
+\ttl@starttoc {chapters@1}
+\contentsfinish 

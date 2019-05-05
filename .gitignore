@@ -1,3 +1,5 @@
 \.idea/
 stanek/
 ignore/
+
+*.te~
