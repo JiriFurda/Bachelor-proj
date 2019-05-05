@@ -1,3 +1,20 @@
+\chapter{Úvod}
+Webové portály jsou v~současné době nedílnou součástí internetu \blindtext
+
+Pro toto téma jsem se rozhodl, protože mám k~webovým technologiím blízko již od dětství a chci v~tomto směru nadále rozvíjet své znalosti.
+
+Cílem je \blindtext
+
+Tato práce vychází z~bakalářské práce \emph{Automaticky aktualizovaný webový portál} Petra Staňka~\cite{bib:stanek}.
+Webový portál byl od základu implementován znovu s~použitím modernějších technologií. Extrakce dat zůstala zachována, pouze byla rozšířena o~extrakci témat výzev k~předkládání návrhů.
+
+V~druhé kapitole nazvané \uv{Rozbor řešené problematiky} nejprve stručně shrnu základní znaky webových portálu a uvedu několik příkladů stávajících portálů, dále se budu věnovat základním principům vývoje webových stránek obecně. Dále přiblížím několik technologií, kterých jsem při tvorbě této bakalářské práce využil.
+Ve třetí kapitole s~názvem \uv{Návrh a implementace systému} se již zaměřím na konkrétní návrh a řešení dané problematiky, uvedu několik obrázků z~výsledného portálu, jež je výsledkem této práce a popíšu několik zajímavých částí samotného kódu.
+Ve čtvrté kapitole nesoucí označení \uv{Experimenty a vyhodnocení} TODO. V~samém závěru pak stručně zhodnotím výsledky této práce.
+
+
+
+
 \chapter{Rozbor řešené problematiky}
 Tato kapitola v~úvodu popisuje několik existujících portálu. Dále přibližuje základní koncepcí vývoje webu a praktiky, které jsou při tomto vývoji často využívány. Následně jsou v~této kapitole popsány jazyky a knihovny, využívané při implementaci této bakalářské práce.
 
@@ -32,7 +49,7 @@ Tvorba webových stránek se obecně rozlišuje do dvou celků zvaných \emph{fr
 Frontendová část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v~žádném případě neobejde bez značkovacího jazyka HTML (\emph{Hypertext Markup Language}), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS (\emph{Cascading Style Sheets}). Ty se starají o~to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o~interaktivitu.
 Zpracování této části webu probíhá v~klientovi - tedy internetovému prohlížeči uživatele. Na základě toto faktu se lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy frontendové části zobrazit, ve většině případů i rovnou v~internetovém prohlížeči upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům se tyto změnu neprojeví.
 
-Oproti tomu backendová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou frontendovou část. Výběr technologie implementace backendové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C#, C++, .NET, Ruby a další. Díky prostředí Node.js\footnote{Node.js: \url{https://nodejs.org/en/}} lze ale využít i dříve zmiňovaný JavaScript, který sám o~sobě pro tento účel není primárně určen. 
+Oproti tomu backendová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou frontendovou část. Výběr technologie implementace backendové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C\#, C++, .NET, Ruby a další. Díky prostředí Node.js\footnote{Node.js: \url{https://nodejs.org/en/}} lze ale využít i dříve zmiňovaný JavaScript, který sám o~sobě pro tento účel není primárně určen. 
 
 
 \subsection{MVC architektura}
@@ -42,7 +59,7 @@ Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhran�
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{images/mvc.png}
+	\includegraphics[width=\textwidth]{obrazky-figures/mvc.png}
 	\caption{Diagram toku akcí při využití architektury MVC~\cite{bib:mvc}}
 	\label{mvc}
 \end{figure}
@@ -77,10 +94,10 @@ Takto obalené styly budou aplikovány jen v~případě, že zobrazovací zaří
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth-0.4cm]{images/fb-hamburger-1.png}
+	\includegraphics[width=0.5\textwidth-0.4cm]{obrazky-figures/fb-hamburger-1.png}
 	\hspace{0.5cm}
-	\includegraphics[width=0.5\textwidth-0.4cm]{images/fb-hamburger-2.png}
-	\caption{Hamburgerové menu použité v~mobilní aplikaci sociální sítě Facebook\footnote{Mobílní aplikace Facebook v~obchodě Google Play: \url{https://play.google.com/store/apps/details?id=com.facebook.katana&hl=cs}}}
+	\includegraphics[width=0.5\textwidth-0.4cm]{obrazky-figures/fb-hamburger-2.png}
+	\caption{Hamburgerové menu použité v~mobilní aplikaci sociální sítě Facebook\protect\footnote{Mobílní aplikace Facebook v~obchodě Google Play: \url{https://play.google.com/store/apps/details?id=com.facebook.katana&hl=cs}}}
 	%TODO zakryt jmeno
 \end{figure}
 
@@ -97,7 +114,7 @@ V~případě využití tohoto principu při samotné implementaci designu se pos
 \section{Boostrap}
 \emph{Tato kapitola čerpá z~\cite{bib:bootstrap}}.
 
-Bootstrap\footnote{Bootstrap: \url{https://getbootstrap.com/}} je frontendový framework pro snadný vývoj webových stránek. Je vyvíjen společností Twitter\footnote{Twitter: \url{https://twitter.com/}}, která jej v~roce 2010 vydala jako otevřený software. Jen dva roky poté se Bootstrap stal nejoblíbenějším projektem na stránce GitHub\footnote{GitHub: \url{https://github.com/}}. Bootstrap se skládá převážně z~kaskádových stylů, ale interaktivní prvky využívají programovací jazyk JavaScript s~knihovnou jQuery\footnote{jQuery: \url{https://jquery.com/}}. Pro interaktivní část ale existují i další alternativy využívající například Vue.js\footnote{BootstrapVue: \url{https://bootstrap-vue.js.org/}}, React\footnote{React Bootstrap: \url{https://react-bootstrap.github.io/}} nebo Angular\footnote{NG Bootstrap: \url{https://ng-bootstrap.github.io/#/home/}}.
+Bootstrap\footnote{Bootstrap: \url{https://getbootstrap.com/}} je frontendový framework pro snadný vývoj webových stránek. Je vyvíjen společností Twitter\footnote{Twitter: \url{https://twitter.com/}}, která jej v~roce 2010 vydala jako otevřený software. Jen dva roky poté se Bootstrap stal nejoblíbenějším projektem na stránce GitHub\footnote{GitHub: \url{https://github.com/}}. Bootstrap se skládá převážně z~kaskádových stylů, ale interaktivní prvky využívají programovací jazyk JavaScript s~knihovnou jQuery\footnote{jQuery: \url{https://jquery.com/}}. Pro interaktivní část ale existují i další alternativy využívající například Vue.js\footnote{BootstrapVue: \url{https://bootstrap-vue.js.org/}}, React\footnote{React Bootstrap: \url{https://react-bootstrap.github.io/}} nebo Angular\footnote{NG Bootstrap: \url{https://ng-bootstrap.github.io/\#/home/}}.
 
 Bootstrap se drží moderních zásad jako princip \uv{nejdřív mobil} (uvedený v~kapitole \ref{section:mobile-first}) a nabízí snadnou možnost tvorby responzivního designu. Mimo to také nabízí možnost využít moderně působící vzhled základních HTML prvků jako jsou například vstupní pole formuláře nebo tlačítka. Bootstrap ale poskytuje i celou řadu nových předpřipravených komponent a to ku příkladu karty, modální okna, stránkování, informační hlášky a spoustu dalších.
 
@@ -159,7 +176,7 @@ Mezi základní pilíře návrhového vzoru Flux patří několik následující
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{images/vuex.png}
+	\includegraphics[width=\textwidth]{obrazky-figures/vuex.png}
 	\caption{Diagram znázorňující životní cyklus dat v~knihovně Vuex~\cite{bib:vuex-doc}}
 	%TODO: Popsat v obrázku nebo v textu?
 	\label{img:vuex-dataflow}
@@ -234,7 +251,7 @@ Základní struktura databáze Elasticsearch se na první pohled od tradičních
 Pod pojmem uzel (anglicky \emph{node}) se skrývá server, ve kterém jsou uložena data. Uzel v~rámci databáze může být jeden nebo jich může být i více a každý bude obsahovat pouze určitou část dat. Tyto uzly jsou seskupeny do shluku (anglicky \emph{cluster}).
 
 \subsubsection*{Dokument}\label{section:dokument}
-Dokument je základní jednotka dat, které může být zaindexována. Obsah dokumentu je zapsán ve formátu JSON (anglicky \emph{JavaScript Object Notation}). V~relační databázi lze dokument přirovnat k~řádku tabulky.
+Dokument je základní jednotka dat, které může být zaindexována. Obsah dokumentu je zapsán ve formátu (anglicky \emph{JavaScript Object Notation}). V~relační databázi lze dokument přirovnat k~řádku tabulky.
 
 \subsubsection*{Index}\label{section:index}
 Skupina dokumentů s~podobnou strukturou se nazývá index. Ekvivalentem v~relačních databázích by v~tomto případě byla tabulka.
@@ -268,7 +285,7 @@ Obsah dotazu může vypadat například následovně:
 
 \blindtext
 
-Na tento dotaz můžeme od serveru dostat odpověď s~obsahem:
+Na tento dotaz můžeme server odpověď zprávou s~obsahem:
 
 \begin{verbatim}
 {
@@ -316,8 +333,8 @@ S~tímto typem vyhledávání se lze setkat velmi často v~seznamech produktů n
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.35\textwidth]{images/heureka-facet.png}
-	\caption{Příklad využití fasetového vyhledávání na cenovém srovnávači Heureka\footnote{Heureka: \url{https://www.heureka.cz/}}}
+	\includegraphics[width=0.35\textwidth]{obrazky-figures/heureka-facet.png}
+	\caption{Příklad využití fasetového vyhledávání na cenovém srovnávači Heureka\protect\footnote{Heureka: \url{https://www.heureka.cz/}}}
 \end{figure}
 
 
@@ -424,3 +441,236 @@ response = s.execute()
 %TODO zkontrolovat
 
 \blindtext[2]
+
+
+
+
+
+\chapter{Návrh a implementace systému}
+Tato kapitola popisuje \blindtext
+
+Předchozí řešení mých kolegů umožňovalo vyhledávat pouze projekty a vědecké zprávy. Nabízelo se tento obsah rozšířit o~výzvy k~předkládání návrhů, na základě kterých Evropská komise vybírá organizace či fyzické osoby pro uskutečnění projektů se spolufinancováním Evropské unie.
+%[https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home 27.4.].
+Samotné výzvy jsou ale hodně obecné a zaštiťují mnoho témat napříč různými oblastmi. Dalším úskalím byl nedostatek informací v~popisu výzev. Rozsáhlý slovní popis se vztahovat až ke konkrétním tématům. Proto jsem se rozhodl portál nerozšiřovat o~výzvy ale právě o~zmiňovaná témata.
+
+\section{Schéma}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
+	\caption{TODO}
+	\label{mvc}
+\end{figure}
+
+\blindtext[2]
+
+\section{Extrakce dat}
+\blindtext
+Pro tyto účely jsem využil aplikační rozhraní nabízené přímo portálem Fundings and Tenders %[https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/support/apis]
+Rozhraní nabízí potřebná data ve formátu JSON, čímž bylo značně zjednodušeno jejich dolování.
+
+\subsection{Témata výzev}
+\blindtext
+
+\subsection{Projekty}
+\blindtext
+
+\subsection{Odevzdávané zprávy}
+\blindtext
+
+
+
+\section{Webový portál}
+\blindtext
+
+\subsection{Návrh}
+\blindtext
+
+\subsection{Podoba}
+Vizuální struktura vytvořeného webového portálu lze rozdělit do tří hlavních celků - hlavičky, postranního panelu a hlavního obsahu stránky. První dva z~těchto celků jsou určeny pro specifikaci vyhledávání. Aby bylo vyhledávání při procházení portálu vždy dostupné, pozice těchto celků v~desktopovém zobrazení zůstává neměnná i při rolování zobrazené stránky.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
+	\caption{TODO}
+	\label{image:portal-results}
+\end{figure}
+\begin{enumerate}
+    \item Logo a název portálu se dle konvence nachází v~levém horním rohu. Zároveň funguje jako odkaz na hlavní stránku.
+    \item Zbylá část hlavičky obsahuje vyhledávací pole. Do něj může být vložen i velmi komplexní dotaz, proto byl při návrhu kladen důraz na co největší šířku tohoto pole. Pod tímto polem se nachází odkazy určující jaký typ výsledků je od vyhledávání očekáván.
+    \item V~levé části portálu se nachází postranní panel s~fasetovou navigací. Slouží především pro méně pokročilé uživatele portálu, kterým postačí tvořit jednoduché dotazy. Zároveň lze informace v~tomto panelu využít jako přehled informací typu \uv{Které země se nejčastěji podílí na projektech splňujících dané kriteria?}. Postranní panel je podrobněji popsán v~kapitole~\ref{section:sidebar}.\
+    \item TODO obsah
+\end{enumerate}
+
+Portál obsahuje obecně dva typy stránek. Prvním typem jsou stránky obsahující výsledky vyhledávání, které lze vidět na snímku~\ref{image:portal-results}. V~případě úspěšného hledání lze z~těchto výsledků pomocí odkazů \uv{View topic} nebo \uv{View project} přejít na detailní stránku konkrétního výsledku. Tento typ stránek ovšem existuje pouze pro témata a projekty. U~odevzdaných zpráv se místo stránky detailu zobrazí přímo daný dokument. Příklad stránky detailu výsledku je vyobrazen na snímku~\ref{image:portal-detail}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
+	\caption{TODO}
+	\label{image:portal-detail}
+\end{figure}
+\begin{enumerate}
+    \item TODO
+\end{enumerate}
+
+\blindtext[2]
+
+\subsection{Struktura adresáře}
+Veškeré zdrojové kódy portálu se nachází v~adresáři \texttt{portal}. Uvnitř této složky se nachází adresáře odpovídající architektuře MVC.
+\begin{itemize}
+  \item Složka \texttt{models} obsahuje modely
+  \item Složka \texttt{controllers} obsahuje kontrolery
+  \item Složka \texttt{templates} obsahuje pohledy
+  \item Složka \texttt{static} obsahuje kaskádové styly a zdrojové kódy Vue komponent
+  \item Soubor \texttt{app.py} sloužící ke spuštění portálu
+\end{itemize}
+
+\subsection{Vue komponenty}
+Některé z~využívaných faset obsahují i stovky položek a jejich hodnoty mají často dlouhé názvy. Jejich zobrazení pouze v~postranním panelu jsem považoval za nedostatečné, proto jsem se rozhodl toto řešení oproti předchozímu řešení portálu přepracovat s~využitím technologie Vue.js (představenou v~kapitole~\ref{section:Vue.js}) a několika prvků z~frameworku BootsrapVue. Pro každou z~faset jsem vytvořil dvě komponenty - položku v~postranním panelu a modální okno.
+
+\subsubsection*{Postranní panel}\label{section:sidebar}
+Tento panel je tvořen Vue komponentou \texttt{sidebar-facet-list}, která pro každou fasetu vytvoří instanci komponenty \texttt{sidebar-facet}.
+
+Každá komponenta \texttt{sidebar-facet} ve výchozím stavu nabízí nejvýše pět nejčastěji vyskytujících se hodnot dané fasety. Ty jsou postupně nahrazovány zvolenými hodnotami dané fasety. Další hodnoty s~menším výskytem jsou dostupné v~modálním okně, které se zobrazí po kliknutí na tlačítko \uv{\emph{More...}}. Obsahem této komponenty je mimo jiné dílčí komponenta frameworku BoostrapVue \texttt{b-collapse}, která v~případě potřeby umožňuje danou fasetu minimalizovat. Pokud se takto stane a faseta má zvolené některé ze svých možností, objeví se vedle jejího názvu počet vybraných možností, aby měl uživatel i při minimalizovaných fasetách přehled o~tom, které možnosti filtrování právě zvolil.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{obrazky-figures/my-facet.png}
+	\caption{Část postranního panelu implementovaného portálu}
+\end{figure}
+%TODO doplnit cisla do obrazku
+\begin{enumerate}
+    \item Otevřená faseta \uv{Coord. Country} s~jednou zvolenou možností a dalšími čtyřmi nejčastěji vyskytujícími se hodnoty. %TODO vyskytujícími se nebo vyskytujícími-se
+    \item Minimalizovaná faseta \uv{Participant} se třemi vybranými možnostmi indikovanými číslem v~právé části fasety.
+    \item Minimalizovaná faseta \uv{Part. Country} bez zvolených možností.
+\end{enumerate}
+
+
+\subsubsection*{Modální okno}
+Okna jednotlivých faset jsou tvořena instancemi Vue komponenty \texttt{modal-facet}. O~jejich vytvoření se stará komponenta \texttt{modal-facet-list}.
+Rozsáhlejší výpis možností daného fasetu se nyní zobrazují v~modálním okně. Zde je možnost současně vidět podstatně více možností a také je možné vypsat jejich hodnoty v~plném znění. V~tomto okně je také obsaženo vstupní pole, které asynchronními dotazy na databázi Elasticsearch vyhledává mezi možnostmi daného fasetu. Samotné modální okno komponenta frameworku BootstrapVue, rozšířená o~prvky nutné pro tento portál (například zmiňované vyhledávací pole) 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{obrazky-figures/my-modal.png}
+	\caption{Modální okno s~dalšími hodnoty fasety s~názevem \uv{Coordinator}}
+\end{figure}
+%TODO doplnit cisla do obrazku
+\begin{enumerate}
+    \item Nadpis značící ke které fasetě se modální okno vztahuje.
+    \item Vstupní pole pro vyhledávání v~hodnotách fasety.
+    \item Fasetové hodnoty odpovídající hledané frázi z~bodu 2. Výsledky se mění v~reálném čase v~závislosti na obsahu tohoto vstupního pole.
+\end{enumerate}
+
+\subsubsection*{Fasetová možnost}
+Jednotlivé fasetové možnosti jsou reprezentovány komponentou \texttt{option-facet}, která zobrazuje zaškrtávací pole, název dané možnosti a počet výsledků aktuálního vyhledávání obsahující tuto možnost. Při zaškrtnutí možnosti se její data zkopírují do proměnné \texttt{checkedOptions} příslušného fasetu. Tato komponenta se vyskytuje jak v~modálním okně, tak i v~postranním panelu.
+
+\subsubsection*{Inicializace dat}
+Na každé stránce portálu se vyskytuje právě jednou komponenta \texttt{init-facet-data}, která jednorázově obstará naplnění proměnných programovacího jazyka JavaScript.
+
+\subsection{Vyhledávání}
+Samotné vyhledávání obstarává třída \texttt{IndexSearch}, při svém vytvoření uloží vstupní parametry a sestaví dotazy pro Elasticsearch. Mezi tyto parametry patří
+\begin{itemize}
+    \item index, ve kterém se bude hledat
+    \item pole dokumentu, ve kterém budou v~případě shody zvýrazněna klíčová slova
+    \item pole dokumentu, ve kterých se budou klíčová slova hledat
+\end{itemize}
+\subsubsection*{buildSearch()}
+První z~dotazů je vytvořen tuto metodou, která zpracuje všechny parametry typu GET protokolu HTML a v~případě shody jejich názvů s~některým z~faset, přidá tuto hodnotu do dotazu. Tento dotaz se využívá pro hledání v~modálním okně fasetu. 
+
+\subsubsection*{buildAggregationsSearch()}
+Druhý dotaz vzniká rozšířením dotazu z~metody \texttt{buildSearch()}. Je obohacen o~agregaci fasetových hodnot, které jsou poté zobrazeny v~postranním panelu.
+
+\subsubsection*{prepareLayoutData()}
+Poté co byly výše zmíněné dotazy vykonány je třeba výsledky zpracovat a připravit pro předání do odpovídajících Vue komponent. Výsledkem této funkce jsou tři struktury JSON, obsahující data využívané pro inicalizaci komponent v~šabloně, zabalení ve slovníku.
+
+Jedna ze struktur, které je poté uložena do skladu knihovny Vuex může vypadat například následovně
+
+\begin{verbatim}
+{
+    "facets":[
+    {
+        "mostFrequentOptions":[  
+            {  
+               "count":8748,
+               "text":"United Kingdom",
+               "value":"United Kingdom"
+            },
+            {  
+               "count":5276,
+               "text":"Germany",
+               "value":"Germany"
+            },
+            ...
+         ],
+         "field":"coordinator.country.keyword",
+         "name":"coordcountry",
+         "checkedOptions":[  
+            {  
+               "count":4692,
+               "text":"Spain",
+               "value":"Spain"
+            },
+         ],
+         "title":"Coord. Country"
+     },
+     ...
+     ]
+}
+\end{verbatim}
+Každá z~faset má svůj objekt obsažený v~poli s~klíčem \texttt{facets}.
+\begin{itemize}
+\item \texttt{mostFrequentOptions} obsahuje pole s~nejvýše pěti nejčastějšími hodnotami fasety
+%\item \texttt{field} TODO: Už se nepoužívá!
+\item \texttt{name} značí unikátní interní název, díky kterému je portál schopný fasetu identifikovat
+\item \texttt{checkedOptions} je pole, kde se udržují zvolené hodnoty fasety
+\item \texttt{title} nese název fasety, který je zobrazován uživateli
+\end{itemize}
+Každá z~hodnot faset je zase reprezentována objektem o~třech atributech
+\begin{itemize}
+\item \texttt{count} udává množství výsledků hlavního hledání s~výskytem této hodnoty fasety
+\item \texttt{text} je název hodnoty, která se zobrazuje uživateli
+\item \texttt{value} obsahuje reálnou hodnotu, která se aplikuje do dotazu hledání. Od atributu \texttt{text} se mnohdy neliší, ale je třeba mít tyto dvě informace rozdělené například pro použití možností s~názvem sloučených ze dvou polí databáze (příkladem může být název a zkratka instituce)
+\end{itemize}
+
+\subsubsection*{createForIndex()}
+Protože se v~portálu vytváří hledání na vícero místech, byla vytvořena statická metoda třídy \texttt{IndexSearch}, která vrací předpřipravenou instanci této třidy pro hledání v~jednom z~typů obsahu portálu. Tato funkce očekává ve svém jediném parametru řetězec, určující typ hledání (\texttt{projects}, \texttt{deliverables} nebo \texttt{topics})
+
+\subsubsection*{Hromadné akce}
+Pro případy, kdy je potřeba pracovat s~několika hledáními naráz, si lze práci ušetřit využitím dalších statických metod třídy \texttt{IndexSearch} a to konkrétně metoda \texttt{createForEveryIndex()}, která vrací slovník se všemi třemi možnými typy hledání, a poté také \texttt{executeMany()}, která vykoná hledání všech instancí \texttt{IndexSearch} ve slovníku předaném této funkci v~parametru. 
+
+\subsection{Vyhledávání hodnot faset}
+Protože ve fasetách lze asynchronně vyhledávat, bylo nutné napsat aplikační rozhraní propojující databázi Elasticsearch s~Vue komponentou reprezentující toto vyhledávání. Tuto činnost obstarává funkce \texttt{showApi} v~kontroleru \texttt{facet\_controller}.
+
+Jako parametr, který je předán cestou URL adresy očekává platný název fasety, pro kterou existuje model třídy \texttt{Facet}. Další parametry jsou předávány metodou GET protokolu HTTP. Prvním povinným parametrem je znění původního dotazu na Elasticsearch, díky tomuto parametru výsledky funkce korespondují s~kontextem aktuálního vyhledávání v~portálu. Dalším parametrem je pak klíčové slovo nebo jeho část, které se hledá v~dostupných hodnotách fasety. 
+
+Po úspěšném dotazu funkce vrací strukturu JSON ve stejném tvaru jako například v~\texttt{checkedOptions} zmiňovaném v~kapitole Vyhledávání %TODO: reference
+
+\subsection{Model fasety}
+\blindtext[2]
+
+
+
+\chapter{Experimenty a vyhodnocení}
+\blindtext
+
+\section{Testování na uživatelích}
+\blindtext[2]
+
+\section{Zátěžové testy}
+\blindtext[2]
+
+\section{Rychlost obnovy dat}
+\blindtext[2]
+
+\section{Možnost úprav}
+\blindtext[2]
+
+
+
+\chapter{Závěr}
+Cílem této práce bylo \blindtext
+
+\blindtext % TODO zhodnocení
+
+Řešení této práce mi bylo přínosné především rozšířením obzorů v~oblasti práce s~nerelační databází a také využitím moderní technologie Vue.js.
