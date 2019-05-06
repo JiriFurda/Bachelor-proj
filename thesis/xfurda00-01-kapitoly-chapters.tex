@@ -417,7 +417,7 @@ response = client.search(
   }
 \end{verbatim}
 
-Tento poměrně zdlouhavý dotaz lze se stejným výsledkem přepsat za použití knihovny Elasticsearch DSL do následující formy:
+Tento poměrně zdlouhavý dotaz lze se stejným výsledkem přepsat za použití knihovny Elasticsearch DSL do následující, mnohem elegantnější formy:
 
 \begin{verbatim}
 from elasticsearch import Elasticsearch
@@ -490,26 +490,28 @@ Portál obsahuje obecně dva typy stránek. Prvním typem jsou stránky obsahuj�
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
-	\caption{TODO}
+	\includegraphics[width=\textwidth]{obrazky-figures/my-results.png}
+	\caption{Stránka vytvořeného portálu zobrazující výsledky hledání výzev s klíčovým slovem \uv{robot} v programu \uv{H2020} a podprogramu \uv{E.2.}}
 	\label{image:portal-results}
 \end{figure}
 \begin{enumerate}
     \item Logo a název portálu se dle konvence nachází v~levém horním rohu. Zároveň funguje jako odkaz na hlavní stránku.
     \item Zbylá část hlavičky obsahuje vyhledávací pole. Do něj může být vložen i~velmi komplexní dotaz, proto byl při návrhu kladen důraz na co největší šířku tohoto pole. Pod tímto polem se nachází odkazy určující jaký typ výsledků je od vyhledávání očekáván.
-    \item V~levé části portálu se nachází postranní panel s~fasetovou navigací. Slouží především pro méně pokročilé uživatele portálu, kterým postačí tvořit jednoduché dotazy. Zároveň lze informace v~tomto panelu využít jako přehled informací typu \uv{Které země se nejčastěji podílí na projektech splňujících dané kriteria?}. Postranní panel je podrobněji popsán v~kapitole~\ref{section:sidebar}.\
+    \item V~levé části portálu se nachází postranní panel s~fasetovou navigací. Slouží především pro méně pokročilé uživatele portálu, kterým postačí tvořit jednoduché dotazy. Zároveň lze informace v~tomto panelu využít jako přehled informací typu \uv{Které země se nejčastěji podílí na projektech splňujících dané kriteria?}. Postranní panel je podrobněji popsán v~kapitole~\ref{section:sidebar}.
     \item TODO obsah
 \end{enumerate}
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
-	\caption{TODO}
+	\includegraphics[width=\textwidth]{obrazky-figures/my-topic.png}
+	\caption{Snímek vytvořeného portálu zobrazující detailní popis výzvy k předkládání návrhů na téma \uv{Space portal.}}
 	\label{image:portal-detail}
 \end{figure}
 \begin{enumerate}
-    \item TODO
+    \item Plné znění obsahu výzvy a instrukce pro předkládání návrhů na toto téma.
+    \item Klíčové specifikace dané výzvy stručně zobrazené v postranní kartě.
+    \item Postranní panel s fasetovým vyhledáváním má ve výchozím stavu pro fasetu \uv{Topic} zvolenou možnost právě toho tématu, který je předmětem právě zobrazeného detailu.
 \end{enumerate}
 
 \blindtext[2]
@@ -554,7 +556,7 @@ Rozsáhlejší výpis možností dané fasety se nyní oproti původnímu řeše
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/my-modal.png}
-	\caption{Modální okno s~dalšími hodnoty fasety s~názvem \uv{Coordinator}}
+	\caption{Modální okno s~dalšími hodnoty fasety s~názvem \uv{Coordinator.}}
 	\label{img:modal}
 \end{figure}
 %TODO doplnit cisla do obrazku
