@@ -61,10 +61,11 @@
 %-----------------------------------------------------------------------------
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage[]{opensans}
 \usepackage[czech,slovak,english]{babel}
 \usepackage[utf8]{inputenc} %kodovani / encoding
-\usepackage[T1]{fontenc}
 \usepackage{cmap}
+\usepackage[T1]{fontenc}
 \usepackage{url}
 \usepackage{ragged2e}
 \usepackage{color}
@@ -218,6 +219,14 @@
 % \ifEqString{#1}{DP}{Vedúci práce}{\@supervisor@SK}%
  \ifEqString{#1}{DP}{Vedoucí práce}{\@supervisor@SK}%
  \ifEqString{#1}{DP}{Supervisor}{\@supervisor@EN}%
+ \ifEqString{#1}{DT}{Teze disertační práce}{\@projecttype@CS}%
+% \ifEqString{#1}{DT}{Tézy dizertačnej práce}{\@projecttype@SK}%
+ \ifEqString{#1}{DT}{Teze disertační práce}{\@projecttype@SK}%
+ \ifEqString{#1}{DT}{PhD thesis proposal}{\@projecttype@EN}%
+ \ifEqString{#1}{DT}{Školitel}{\@supervisor@CS}%
+% \ifEqString{#1}{DT}{Školiteľ}{\@supervisor@SK}%
+ \ifEqString{#1}{DT}{Školitel}{\@supervisor@SK}%
+ \ifEqString{#1}{DT}{Supervisor}{\@supervisor@EN}%
  \ifEqString{#1}{DR}{Disertační práce}{\@projecttype@CS}%
 % \ifEqString{#1}{DR}{Dizertačná práca}{\@projecttype@SK}%
  \ifEqString{#1}{DR}{Disertační práce}{\@projecttype@SK}%
@@ -563,7 +572,7 @@ Management}{\@fit@EN}%
   \noindent\MakeUppercase{\@author@s}, \@author@n. \it\@title\rm. Brno, \@year. \ifczech\@projecttype@CS\else\@projecttype@EN\fi. \ifczech\@vut@CS\else\@vut@EN\fi, \ifczech\@fit@CS\else\@fit@EN\fi. {\ifczech\@supervisor@CS\else\@supervisor@EN\fi} {\@supervisor@tp} {\@supervisor@n} {\@supervisor@s}{\ifx\undefined\@supervisor@ta\else,~\@supervisor@ta\fi}
 }
 %===================================================
-\newpage
+{\sloppy\newpage\fussy}
 
 }
 
@@ -950,20 +959,13 @@ Management}{\@fit@EN}%
 
 % Balíčky
 % Packages
-\usepackage[czech,slovak,english]{babel}
-\usepackage[]{opensans}
-\usepackage[utf8]{inputenc} %kodovani / encoding
-\usepackage[T1]{fontenc}
-\usepackage{cmap}
 \usepackage{float}
 \usepackage{calc}
 \usepackage{longtable,booktabs}
 \usepackage{xcolor,colortbl}
 \usepackage{multirow}
 \usepackage{tabularx}
-\usepackage{ragged2e}
 \usepackage{graphicx}
-\usepackage{url}
 \DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
 \def\UrlBreaks{\do\/\do-}
 

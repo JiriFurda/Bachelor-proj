@@ -1,3 +1,7 @@
 \.idea/
 stanek/
 ignore/
+
+*.te~
+
+sablona2018/
