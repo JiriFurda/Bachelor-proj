@@ -29,7 +29,7 @@ Zpravidla je umožněno na portálu v~těchto informacích vyhledávat. Velmi č
 \subsection{CORDIS}
 CORDIS\footnote{CORDIS: \url{https://cordis.europa.eu/}} (\emph{The Community Research and Development Information Service}) je portál provozovaný Evropskou Unií (dále jen EU) sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v~rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o~těchto projektech, tak i~o~jejích účastnících, vědeckých zprávách a publikacích~\cite{bib:cordis}.
 
-\subsection{The Funding \& Tenders Portal}
+\subsection{The Funding \& Tenders Portal}\label{section:funding}
 
 The Funding \& Tenders Portal\footnote{The Funding \& Tenders Portal: \url{https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home}} je webový portál spravován převážně Evropskou komisí. Portál zprostředkovává informace určené hlavně expertům a účastníkům v~programech financovaných EU~\cite{bib:funding-about}.
 V~případě zájmu o~zažádání financování výzkumu je nutné nejprve prostřednictvím toho portálu najít výzvu k~předkládání návrhů v~odpovídajícím odvětví a dodržet konkrétní postup pro podání žádosti~\cite{bib:funding-find}.
@@ -416,14 +416,14 @@ Druhým způsobem, který lze využít je stematizace na základě slovníku. D�
 Elasticsearch také vyvíjí několik oficiálně podporovaných nízkoúrovňových klientů pro mnoho populárních programovacích jazyků. Patří mezi ně například Java, JavaScript, Go, .NET, PHP, Perl nebo Python~\cite{bib:elastic-clients}.
 Klientů vyvíjených komunitou lze samozřejmě nalézt o~mnoho více\footnote{Komunitní klienti Elasticsearch: \url{https://www.elastic.co/guide/en/elasticsearch/client/community/current/index.html}}.
 
-Práce s~nízkoúrovňovými klienty pro programátory nebývá příliš pohodlná, z~tohoto důvodu vznikají komunitou vyvíjení klienti, kteří nabízí vysokoúrovňový přístup. Konkrétně pro programovací jazyk Python byl do roku 2015 společností Mozilla\footnote{Mozzila: \url{https://www.mozilla.org/}} vyvíjen klient jménem \emph{ElasticUtils}\footnote{ElasticUtils: \url{https://elasticutils.readthedocs.io/en/latest/}}. Za nástupce toho klienta je považována knihovna \emph{Elasticsearch DSL}~\cite{bib:elastic-utils}.
+Práce s~nízkoúrovňovými klienty pro programátory nebývá příliš pohodlná, z~tohoto důvodu vznikají komunitou vyvíjení klienti, kteří nabízí vysokoúrovňový přístup. Konkrétně pro programovací jazyk Python byl do roku 2015 společností Mozilla\footnote{Mozzila: \url{https://www.mozilla.org/}} vyvíjen klient jménem \emph{ElasticUtils}\footnote{ElasticUtils: \url{https://elasticutils.readthedocs.io/en/latest/}}. Za nástupce toho klienta je považována knihovna Elasticsearch DSL\footnote{Elasticsearch DSL: \url{https://elasticsearch-dsl.readthedocs.io/en/latest/}}~\cite{bib:elastic-utils}.
 
 \subsubsection*{Elasticsearch DSL}
 \emph{Tato kapitola čerpá z~\cite{bib:elastic-dsl}}.
 
-Elasticsearch DSL je rovněž knihovna pro programovací jazyk Python. Jedná se o~vysokoúrovňovou knihovnu postavenou na oficiální nízkoúrovňové knihovně \texttt{elasticsearch-py}. Díky tomu lze s~dokumenty v~databázi Elasticsearch pracovat jako s~objekty, ale zároveň je stále možné použít původní přístup oficiálního klienta  ku příkladu ke zjištění zdraví shluku.
+Elasticsearch DSL je rovněž knihovna pro programovací jazyk Python. Jedná se o~vysokoúrovňovou knihovnu postavenou na oficiální nízkoúrovňové knihovně Python Elasticsearch Client\footnote{Python Elasticsearch Client: \url{https://elasticsearch-py.readthedocs.io/en/master/}}. Díky tomu lze s~dokumenty v~databázi Elasticsearch pracovat jako s~objekty, ale zároveň je stále možné použít původní přístup oficiálního klienta ku příkladu ke zjištění zdraví shluku.
 
-Jako příklad mějme následující dotaz, napsaný s~využitím oficiální knihovny \texttt{elasticsearch-py}.
+Jako příklad mějme následující dotaz, napsaný s~využitím oficiální knihovny Python Elasticsearch Client:
 \begin{verbatim}
 from elasticsearch import Elasticsearch
 client = Elasticsearch()
@@ -466,7 +466,9 @@ response = s.execute()
 \end{verbatim}
 %TODO zkontrolovat
 
-\blindtext[2]
+Práce s dotazy je tedy mnohem snadnější a vývojářům alespoň částečně ubývá rutinní činnost. Obrovskou výhodou je sestrojování dotazu pomocí zřetězených funkcí. Díky této funkci knihovny lze dotaz v průběhu programu jednoduše rozšiřovat a kód se tak nemusí stát těžko čitelným.
+
+Objekt dotazu je v knihovně reprezentován třídou \texttt{Search}. Tu lze ale kdykoliv převést do slovníku odpovídajícímu klasickému dotazu ve formátu JSON pomocí metody \texttt{to\_dict()}. Stejně tak je možné dotaz napsaný ve slovníku převést do objektu knihovny Elasticsearch DSL použitím metody \texttt{from\_dict()}. Tato funkcionalita zajišťuje zpětnou kompatibilitu bez nutností zásahu do stávajícího kódu s programy využívajícími například jen nízkoúrovňového klienta Python Elasticsearch Client.
 
 
 
@@ -493,11 +495,12 @@ Samotné výzvy jsou ale hodně obecné a zaštiťují mnoho témat napříč r�
 
 \section{Extrakce dat}
 \blindtext
-Pro tyto účely jsem využil aplikační rozhraní nabízené přímo portálem Fundings and Tenders %[https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/support/apis]
-Rozhraní nabízí potřebná data ve formátu JSON, čímž bylo značně zjednodušeno jejich dolování.
 
 \subsection{Témata výzev}
-\blindtext
+Témata výzev jsou čerpána z portálu Fundings and Tenders (představeném v~kapitole~\ref{section:funding}).
+Ten pro tyto účely nabízí aplikační rozhraní, kde je možné získat potřebná data ve formátu JSON, čímž bylo značně zjednodušeno jejich dolování. 
+
+Pro indexaci dat z~toho portálu je nejprve použit dotaz pro získání souhrnného seznam témat. Ten je poté extraktorem postupně celý zpracován. Z~toho seznamu lze získat základní informace o~tématech. Pro každé jedno téma je odeslán nový dotaz, který na základě identifikátoru vrátí podrobnější informace vztahující se k~tématu, jako například jeho slovní popis.
 
 \subsection{Projekty}
 \blindtext
@@ -602,7 +605,7 @@ Jednotlivé fasetové možnosti jsou reprezentovány komponentou \texttt{option-
 \subsubsection*{Inicializace dat}
 Na každé stránce portálu se vyskytuje právě jednou komponenta \texttt{init-facet-data}, která jednorázově obstará naplnění proměnných programovacího jazyka JavaScript.
 
-\subsection{Vyhledávání}
+\subsection{Implementace vyhledávání}
 Samotné vyhledávání obstarává třída \texttt{IndexSearch}, při svém vytvoření uloží vstupní parametry a sestaví dotazy pro Elasticsearch. Mezi tyto parametry patří
 \begin{itemize}
     \item index, ve kterém se bude hledat
@@ -680,8 +683,26 @@ Jako parametr, který je předán cestou URL adresy očekává platný název fa
 
 Po úspěšném dotazu funkce vrací strukturu JSON ve stejném tvaru jako například v~\texttt{checkedOptions} zmiňovaném v~kapitole Vyhledávání %TODO: reference
 
-\subsection{Model fasety}
+\subsection{Dotazovací jazyk}
 \blindtext[2]
+
+\subsection{Model fasety}
+Jednotlivé fasety jsou v portálu implementovány modelovou třídou \texttt{Facet} i přes to, že se jedná o poměrně jednoduché entity, Tento přístup jsem zvolil zejména kvůli větší modulárnosti zdrojových kódů. Metody této třídy jsou většinou statické a usnadňují práci s fasetami napříč portálem.
+
+K vytvoření instance této třídy stačí zadat tři parametry obsahující interní jméno fasety, jméno fasety zobrazované uživateli a také odpovídající pole v dokumentech uložených v databázi Elasticsearch. 
+
+Navázání na pole v databázi je záměrně uváděno bez odpovídajícího indexu. Je předpokladem, že pole použitá pro fasetové vyhledávání jsou ve všech indexech stejně pojmenována. Tento předpoklad umožňuje zachovat zvolené hodnoty fasetového vyhledávání i při přepnutí kontextu hledání. 
+
+Při vytvoření instance se automaticky připraví název toho pole vhodný pro použití jako parametr funkce při sestrojování dotazu (tečky ve vnořených polích je nutné nahradit symboly \texttt{__}). 
+
+\subsubsection*{all()}
+Tato statická metoda slouží jako jednotný seznam všech faset dostupných v portálu. Volání metody způsobí vytvoření seznamu obsahující instanci třídy \texttt{Facet} pro všechny dostupné fasety.
+
+\subsubsection*{get()}
+Tato třídní metoda se pokusí nalézt odpovídající instanci třídy \texttt{Facet} v seznamu z metody \texttt{all()}. Metoda je využita hlavně při vyhledávání hodnot faset.
+
+\subsubsection*{toDict()}
+Jednoduchá metoda převádějící data uvedená v konstruktoru objektu do slovníku. Je určená především k předání informací ze serverové části do Vue komponent v uživatelské části.
 
 
 
