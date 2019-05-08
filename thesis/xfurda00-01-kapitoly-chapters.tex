@@ -3,7 +3,7 @@ Webové portály jsou v~současné době nedílnou součástí internetu \blindt
 
 Pro toto téma jsem se rozhodl, protože mám k~webovým technologiím blízko již od dětství a chci v~tomto směru nadále rozvíjet své znalosti.
 
-Cílem je \blindtext
+Cílem práce je rozšíření stávajícího portálu, zaměřeného na výsledky evropských projektů. Od vytvoření tohoto portálu již uplynulo několik let, a proto bylo třeba jej upravit pro použití novějších verzí knihoven. Při této činnosti bylo kompletně přepracováno uživatelské rozhraní portálu. Dále byl obsah tohoto portálu rozšířen o témata nově vypsaných výzev.
 
 Tato práce vychází z~bakalářské práce \emph{Automaticky aktualizovaný webový portál} Petra Staňka~\cite{bib:stanek}.
 Webový portál byl od základu implementován znovu s~použitím modernějších technologií. Extrakce dat zůstala zachována, pouze byla rozšířena o~extrakci témat výzev k~předkládání návrhů.
@@ -40,7 +40,7 @@ V~případě zájmu o~zažádání financování výzkumu je nutné nejprve pros
 \section{Vývoj webu}
 \emph{Tato kapitola čerpá z~\cite{bib:web-development}}.
 
-Z pohledu vývoje nejen webových stránek je zvykem projekt rozlišovat do dvou vrstev - klientská část (anglicky \emph{frontend}) a serverová část (anglicky \emph{backend}).
+Z pohledu vývoje nejen webových stránek je zvykem projekt rozlišovat do dvou vrstev. Tou první je klientská část (anglicky \emph{frontend}) a druhou je serverová část (anglicky \emph{backend}).
 
 Klientská část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v~žádném případě neobejde bez značkovacího jazyka HTML (\emph{Hypertext Markup Language}), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS (\emph{Cascading Style Sheets}). Ty se starají o~to, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu, je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o~interaktivitu.
 Zpracování této části webu probíhá v~klientovi - tedy internetovému prohlížeči uživatele. Na základě tohoto faktu lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy klientské části zobrazit, ve většině případů i~rovnou v~internetovém prohlížeči upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům se tyto změnu neprojeví.
@@ -351,18 +351,40 @@ V~těchto případech hledání totožných hodnot selhává, i~když má text z
 Elasticsearch pro takové hledání musí text nejprve analyzovat a vytvořit pro něj obrácené indexy.
 
 \subsubsection*{Obrácený index}
-Obrácený index (anglicky \emph{inverted index}) je struktura obsahující seznam všech unikátních slov vyskytujících se v~uložených dokumentech. Pro každé z~těchto slov uchovává informaci, ve kterých dokumentech se vyskytovalo. Díky tomu je možné v~textových položkách rychle provádět plnotextové hledání.
+Obrácený index (anglicky \emph{inverted index}) je datová struktura obsahující seznam všech unikátních slov vyskytujících se v~uložených dokumentech. Pro každé z~těchto slov uchovává informaci, ve kterých dokumentech se vyskytovalo. Díky tomu je možné v~textových položkách rychle provádět plnotextové hledání.
 
 Příkladem mohou být dva dokumenty, kde každý obsahuje právě jednu z~následujících vět:
 \begin{itemize}
-    \item TODO
-    \item TODO
+    \item Na moskevském letišti se stala havárie letadla.
+    \item Moskvu silně zasáhla včerejší havárie na letišti.
 \end{itemize}
-Zpracování těchto dokumentů tedy může vzniknout následující obrácený index:
+Zpracováním těchto dvou dokumentů tedy může vzniknout následující obrácený index:
 
-TODO table
 
-Takovýto index by byl ale v~praxi nepoužitelný. Text nestačí pouze strojově rozdělit do tokenů, ale musí proběhnout celá analýza textu.
+\begin{table}[h!]
+\centering
+\begin{tabular}{ |l|c|c| } 
+\hline
+Token & Dokument č. 1 & Dokument č. 2 \\
+\hline
+Moskvu & Ne & Ano \\
+Na & Ano & Ne \\
+havárie & Ano & Ano \\
+letadla & Ano & Ne \\
+letišti & Ano & Ano \\
+moskevském & Ano & Ne \\
+na & Ne & Ano \\
+se & Ano & Ne \\
+silně & Ne & Ano \\
+stala & Ano & Ne \\
+včerejší & Ne & Ano \\
+zasáhla & Ano & Ne \\
+\hline
+\end{tabular}
+\caption{Ilustrační příklad obraceného indexu pro dva dokumenty.}
+\end{table}
+
+Takovýto index by byl ale v~praxi nepoužitelný. Hledání slova \uv{havárie} by sice za výsledek označilo oba dva dokumenty, ale ku příkladu hledání fráze \uv{letiště Moskva} by v tomto případě nenalezlo žádnou shodnu i~když z~lidského pohledu se oba dva dokumenty hledané fráze týkají. Z tohoto důvodu text nestačí pouze strojově rozdělit do tokenů, ale musí proběhnout kompletní analýza textu.
 
 \subsubsection*{Analýza}
 Analýza představuje proces, kdy se kus textu rozdělí do jednotlivých tokenů a následně se tyto tokeny upraví do podoby vhodné pro použití plnotextového vyhledávání. Tento proces obstarává analyzér, který se skládá ze tří části:
