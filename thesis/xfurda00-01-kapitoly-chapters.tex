@@ -472,6 +472,38 @@ Objekt dotazu je v knihovně reprezentován třídou \texttt{Search}. Tu lze ale
 
 
 
+\section{Podobnostní hledání}
+Je zvykem uživateli doporučovat další obsah na základě sdílených charakteristik s právě prohlíženým obsahem. Příkladem může být čtení článku na zpravodajském webu.
+\blindtext
+
+\subsection{Hledání souvisejících dokumentů}
+\blindtext[2]
+
+\subsection{Kontextové procházení kolekcí}
+\emph{Tato kapitola čerpá z~\cite{bib:similarity-context}}.
+
+
+
+Pro zobrazení relevantnějších výsledků vyhledávání lze využít kontext hledání uživatele. V takovém případě se při počítání skóre relevantnosti nepracuje pouze s aktuálním hledáním, ale i s historií uživatele. Díky tomu je docíleno přizpůsobení výsledků přímo pro daného uživatele.
+Pro tyto účely je možné brát v potaz předchozí hledání uživatele nebo podobnost s dříve otevřenými dokumenty.
+
+Výhodou kontextového hledání je zpřesnění výsledků hledání bez nucení uživatele manuálně dané hledání blíže specifikovat. O tuto možnost ovšem uživatel nepřijde, tento typ hledání se s použitím fasetové navigace nijak nevylučuje. 
+Mimo to je díky tomuto přístupu možné objevit podobnost i mezi dokumenty, které spolu přímo nesdílí podstatná metadata. 
+
+%shorterm/longterm
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{obrazky-figures/contextual.png}
+	\caption{Schéma kontextuálního hledání. Převzato z~\cite{bib:similarity-context}.}
+	\label{img:contextual}
+\end{figure}
+
+V prvních dvou krocích uživatel hledal pojem \uv{violence} a prohlédl si dva výsledky. Poté v kroku 3 hledání rozšířil a vyhledal pojem \uv{violence and sports}. Z výsledků v kroku 4 zvolil dokument, který si zobrazí podrobněji. Tento proces probíhá v současnosti a je reprezentován krokem 5. Krok 6 tvoří kontext pro budoucí hledání. V kroku 7 jsou znázorněna další hledání, kde budou v počítání skóre relevance brána v potaz metadata z právě zobrazeného dokumentu z kroku 5.
+
+
+
 
 
 \chapter{Návrh a implementace systému}
@@ -693,7 +725,7 @@ K vytvoření instance této třídy stačí zadat tři parametry obsahující i
 
 Navázání na pole v databázi je záměrně uváděno bez odpovídajícího indexu. Je předpokladem, že pole použitá pro fasetové vyhledávání jsou ve všech indexech stejně pojmenována. Tento předpoklad umožňuje zachovat zvolené hodnoty fasetového vyhledávání i při přepnutí kontextu hledání. 
 
-Při vytvoření instance se automaticky připraví název toho pole vhodný pro použití jako parametr funkce při sestrojování dotazu (tečky ve vnořených polích je nutné nahradit symboly \texttt{__}). 
+Při vytvoření instance se automaticky připraví název toho pole vhodný pro použití jako parametr funkce při sestrojování dotazu (tečky ve vnořených polích je nutné nahradit symboly \texttt{\_\_}). 
 
 \subsubsection*{all()}
 Tato statická metoda slouží jako jednotný seznam všech faset dostupných v portálu. Volání metody způsobí vytvoření seznamu obsahující instanci třídy \texttt{Facet} pro všechny dostupné fasety.
