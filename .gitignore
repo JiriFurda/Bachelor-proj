@@ -5,3 +5,5 @@ ignore/
 *.te~
 
 sablona2018/
+
+*.xlsx#
