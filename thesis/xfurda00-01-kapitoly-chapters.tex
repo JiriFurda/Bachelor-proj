@@ -341,7 +341,9 @@ S~tímto typem vyhledávání se lze setkat velmi často v~seznamech produktů n
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.35\textwidth]{obrazky-figures/heureka-facet.png}
-	\caption{Příklad využití fasetového vyhledávání na cenovém srovnávači Heureka\protect\footnote{Heureka: \url{https://www.heureka.cz/}}}
+	\hspace{0.5cm}
+	\includegraphics[width=0.35\textwidth]{obrazky-figures/czc-facet.png}
+	\caption{Příklad využití fasetového vyhledávání na cenovém srovnávači Heureka\protect\footnote{Heureka: \url{https://www.heureka.cz/}} (vlevo) a internetovém obchodě CZC.cz\protect\footnote{CZC.cz: \url{https://www.czc.cz/}} (vpravo).}
 \end{figure}
 
 
@@ -392,9 +394,9 @@ Takovýto index by byl ale v~praxi nepoužitelný. Hledání slova \uv{havárie}
 \subsubsection*{Analýza}
 Analýza představuje proces, kdy se kus textu rozdělí do jednotlivých tokenů a následně se tyto tokeny upraví do podoby vhodné pro použití plnotextového vyhledávání. Tento proces obstarává analyzér, který se skládá ze tří části:
 \begin{itemize}
-    \item \emph{Filtry znaků} upraví zpracovávaný řetězec ještě před samotným rozdělením do tokenů. Jeho úkolem může například být odstranění HTML značek z~textu.
-    \item \emph{Tokenizér} z~textu sestaví jednotlivé tokeny. Tokeny ve většině případů představují jednotlivá slova, ale nemusí tomu tak vždy být. 
-    \item \emph{Filtry tokenů} na konec projde všechny vytvořené tokeny, může některé odstranit, přidat a nebo jen upravit. 
+    \item \textbf{Filtry znaků} upraví zpracovávaný řetězec ještě před samotným rozdělením do tokenů. Jeho úkolem může například být odstranění HTML značek z~textu.
+    \item \textbf{Tokenizér} z~textu sestaví jednotlivé tokeny. Tokeny ve většině případů představují jednotlivá slova, ale nemusí tomu tak vždy být. 
+    \item \textbf{Filtry tokenů} na konec projde všechny vytvořené tokeny, může některé odstranit, přidat a nebo jen upravit. 
 \end{itemize}
 Filtrů může být v~jednom analyzéru použitá celá řada a to jak filtrů znaků, tak i~filtrů tokenů. Tokenizér je ale v~rámci analyzéru vždy použit jen jeden jediný.
 
@@ -503,7 +505,7 @@ Mimo to je díky tomuto přístupu možné objevit podobnost i mezi dokumenty, k
 	\label{img:contextual}
 \end{figure}
 
-V prvních dvou krocích uživatel hledal pojem \uv{violence} a prohlédl si dva výsledky. Poté v kroku 3 hledání rozšířil a vyhledal pojem \uv{violence and sports}. Z výsledků v kroku 4 zvolil dokument, který si zobrazí podrobněji. Tento proces probíhá v současnosti a je reprezentován krokem 5. Krok 6 tvoří kontext pro budoucí hledání. V kroku 7 jsou znázorněna další hledání, kde budou v počítání skóre relevance brána v potaz metadata z právě zobrazeného dokumentu z kroku 5.
+Na obrázku~\ref{img:contextual} uživatel v prvních dvou krocích hledal pojem \uv{violence} a prohlédl si dva výsledky. Poté v kroku 3 hledání rozšířil a vyhledal pojem \uv{violence and sports}. Z výsledků v kroku 4 zvolil dokument, který si zobrazí podrobněji. Tento proces probíhá v současnosti a je reprezentován krokem 5. Krok 6 tvoří kontext pro budoucí hledání. V kroku 7 jsou znázorněna další hledání, kde budou v počítání skóre relevance brána v potaz metadata z právě zobrazeného dokumentu z kroku 5.
 
 
 
@@ -740,48 +742,73 @@ Jednoduchá metoda převádějící data uvedená v konstruktoru objektu do slov
 
 
 \chapter{Experimenty a vyhodnocení}
-Tato kapitola popisuje experimenty pro zhodnocení výsledku práce. Část testování byla směřována přímo na uživatele a skládala se jak z implicitní, tak z explicitní zpětné vazby. V závěru kapitoly jsou diskutována možná vylepšení portálu do budoucna.
+Tato kapitola popisuje experimenty pro zhodnocení výsledku práce. Část testování byla směřována přímo na uživatele a skládala se jak z implicitní, tak z explicitní zpětné vazby. V závěru kapitoly jsou diskutována možná vylepšení portálu v budoucnu.
 
 \section{Testování na uživatelích}
-Do testování portálů uživatelů se zapojilo TODO uživatelů. Chování všech těchto uživatelů bylo sledováno pro vytvoření statistik používání. TODO z uživatelů navíc vyplnilo dotazník a tím poskytly přímé sdělení svého dojmu z portálu. 
+Do testování portálu se zapojilo TODO uživatelů. Během procházení webového portálu bylo sledováno chování všech těchto uživatelů a následně tato data sloužila pro vytvoření statistik používání. TODO z uživatelů navíc vyplnilo dotazník a tím poskytli přímé sdělení svých dojmů z portálu. 
 
 \subsection{Dotazník uživatelského prožitku}
-Dotazník se skládal z 26 otázek zaměřených na šest různých aspektů portálu. Tyto aspekty jsou atraktivnost, přesvědčivost, efektivita, spolehlivost, stimulaci a novotu. Na všechny otázky bylo možné odpovědět pomocí škály od 1 do 5, přičemž na každé straně škály byly postaveny vzájemně protikladné fráze zaměřené právě na jeden z uvedených aspektů. Respondent pomocí číselné škály volil, ke které frázi mají jeho pocity z portálu blíže.
+\emph{Tato kapitola čerpá z~\cite{bib:ueq}}.
 
-Obsah dotazníku vycházel z UEQ\footnote{UEQ: \url{https://www.ueq-online.org/}} (\emph{User Experience Questionnaire}) a respondetům byl prezetován pomocí nástroje Google Formuláře\footnote{Google Formuláře: \url{https://www.google.com/intl/cs_CZ/forms/about/}}.
+Dotazník, zaměřený na uživatelský prožitek (UX neboli \emph{user experience}), se skládal z 26 otázek zaměřených na šest různých aspektů portálu.
+\begin{itemize}
+    \item \textbf{Atraktivnost} - Celkový dojem.
+    \item \textbf{Přesvědčivost} - Je snadné se s ním naučit pracovat?
+    \item \textbf{Efektivita} - Lze jej používat bez zbytečného úsilí?
+    \item \textbf{Spolehlivost} - Má uživatel pocit, že má vše pod kontrolou?
+    \item \textbf{Stimulace} - Je jeho používání vzrušující?
+    \item \textbf{Novota} - Je inovativní? Dokáže zaujmout?
+\end{itemize}
+Tyto aspekty lze rozdělit do dvou skupin. První čtyři uvedené aspekty spadají do skupiny pragmatické kvality, která je zaměřena na technickou efektivnost a splnění cílů. Stimulace a novota jsou oproti tomu aspekty označované jako hedonická kvalita, která je spojovaná s požitkem a potěšením~\cite{bib:hedonic}.
 
+Na všechny otázky bylo možné odpovědět pomocí škály od 1 do 7, přičemž na každé straně škály byly postaveny vzájemně protikladné fráze zaměřené právě na jeden z uvedených aspektů. Respondent pomocí číselné škály volil, ke které frázi mají jeho pocity z portálu blíže.
+
+Obsah dotazníku vycházel z UEQ\footnote{UEQ: \url{https://www.ueq-online.org/}} (\emph{User Experience Questionnaire}) a respondentům byl prezentován pomocí nástroje Google Formuláře\footnote{Google Formuláře: \url{https://www.google.com/intl/cs_CZ/forms/about/}}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
-	\caption{TODO}
+	\includegraphics[width=\textwidth]{obrazky-figures/ueq.pdf}
+	\caption{Graf prezentující výsledky dotazníků uživatelského prožitku}
+    \label{img:ueq}
 \end{figure}
 
-\blindtext
-\cite{bib:ueq}
+Z grafu~\ref{img:ueq} lze usoudit, že většina aspektů portálu je vnímána pozitivně. Za povšimnutí stojí především výborný výsledek v oblasti přehlednosti, což považuji za velký úspěch. Na druhou stranu dotazník odhalil průměrné hodnoty v oblasti stimulace a poukázal především na slabou stránku portálu a to originalitu.
 
-\subsection{Sledování chování uživatelů}
+V souhrnu lze tedy portál označit jako pragmaticky kvalitní, s podprůměrnou hedonickou kvalitou.
+Vzhledem k zaměření portálu ovšem nepovažuji hedonickou kvalitu za tolik podstatnou, proto výsledek uživatelského testování vnímám pozitivně.
+
+
+
+
+\subsection{Sledování chování uživatelů}\label{section:behaviour}
 Pro získání analýzy chování uživatelů byl využit nástroj Smartlook\footnote{Smatlook: \url{https://www.smartlook.com/cs/}}. K analýze bylo díky tomu dostupných hned několik typů tepelných map sledujících buď klikání uživatele, pohyb kurzoru myši nebo rolování po stránce. Navíc bylo možné sledovat nahrávky chování uživatelů a přímo tak pozorovat jejich interakci s portálem.
 
-\blindtext
-
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{obrazky-figures/placeholder.pdf}
-	\caption{TODO}
+	\includegraphics[width=\textwidth]{obrazky-figures/heatmap.png}
+	\caption{Tepelná mapa klikání uživatelů na hlavní stránce portálu.}
+	\label{img:heatmap}
 \end{figure}
-\blindtext[2]
+
+Výsledky tepelné mapy z obrázku~\ref{img:heatmap}, založené na statistice klikání uživatelů na hlavní stránce, jsou ovlivněny zaznamenáním interakce nejen s vyobrazenou stránkou, ale i částečně i interakcí s modálním oknem, překrývajícím tento obsah. Z toho důvodu se v tepelné mapě vyskytují i zdánlivě nelogické oblasti zájmu uživatelů.
+
+Z mapy je patrné, že fasetová navigace je mezi uživateli velmi oblíbená. Uživatelé dále jeví zájem především o první zobrazený výsledek vyhledávání, část z nich si ale podobněji prohlédne i výsledek umístěný na druhém místě.
+
+Dále lze z mapy vyvodit i nedostatky uživatelského prostředí. Konkrétně ve výběru typu výsledků (\uv{Projects}, \uv{Deliverables}, \uv{Topics}) se uživatelé často snažili kliknout i na informativní popis \uv{Search for:}. Dalším poznatkem je nezájem uživatelů o vyhledávací pole. Napravení těchto nedostatků bude diskutováno v kapitole~\ref{section:improvements}.
+
 
 \section{Rychlost obnovy dat}
 Prázdnou databázi je možné naplnit 3483 dostupnými tématy výzev za TODO minut. Periodická obnova, prováděna jednou za TODO dní doplní v průměru TODO výzev a TODO jich aktualizuje. Tento proces trvá přibližně TODO minut.
 
 
-\section{Možnost úprav}
+\section{Možnost úprav}\label{section:improvements}
 Současné řešení práce nabízí prostor pro další vylepšení. Za zmínku stojí například implementace našeptávače vyhledávacího vstupní pole pro jednodušší sepisování pokročilejších dotazů. Našeptávač by mohl uživateli nabízet jak názvy jednotlivých polí dokumentů, tak případně i hodnoty těchto polí. Přínosné by mohlo také být zvýraznění dvojice závorek nebo ověřování správnosti vstupu v reálném čase.
 
 Vzhledem k automatickému plnění obsahu portálu může docházet k ukládání nepřesných informací. Pokud uživatel takovou informaci nalezne, bylo by vhodné dát mu možnost tuto situaci nahlásit. Tyto hlášení by mohly být vypsány v přehledu určeném pouze pro správce portálu, který by manuálně provedl nápravu. 
 
 Dále by mohlo být užitečné přidat funkcionalitu \uv{hlídacího psa}, kdy by uživatel měl možnost zadat obory jeho zájmu a v případě otevření nové výzvy v daném oboru, by byl uživatel o této příležitosti bezprostředně informován.
+
+V reakci na poznatky uvedené v kapitole~\ref{section:behaviour} lze upravit \blindtext
 
 
 
