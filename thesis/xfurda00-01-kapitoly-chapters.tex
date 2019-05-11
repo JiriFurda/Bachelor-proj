@@ -806,6 +806,15 @@ Z mapy je patrné, že fasetová navigace je mezi uživateli velmi oblíbená. U
 
 Dále lze z mapy vyvodit i nedostatky uživatelského prostředí. Konkrétně ve výběru typu výsledků (\uv{Projects}, \uv{Deliverables}, \uv{Topics}) se uživatelé často snažili kliknout i na informativní popis \uv{Search for:}. Dalším poznatkem je nezájem uživatelů o vyhledávací pole. Napravení těchto nedostatků bude diskutováno v kapitole~\ref{section:improvements}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{obrazky-figures/scroll-graph.pdf}
+	\caption{Graf znázorňující míru zobrazení výsledků v závislosti na jejich pořadí při zobrazení. Založeno na hodnotách z tepelné mapy~\ref{img:heatmap-scroll}.}
+	\label{img:scroll-graph}
+\end{figure}
+
+Z grafu~\ref{img:scroll-graph} lze vypozorovat, že k zobrazení pátého výsledku vyhledávání se dostane průměrně pouze každý pátý uživatel. Možné řešení bude taktéž probráno v kapitole~\ref{section:improvements}.
+
 
 \section{Rychlost obnovy dat}
 Prázdnou databázi je možné naplnit 3483 dostupnými tématy výzev za TODO minut. Periodická obnova, prováděna jednou za TODO dní doplní v průměru TODO výzev a TODO jich aktualizuje. Tento proces trvá přibližně TODO minut.
@@ -818,7 +827,10 @@ Vzhledem k automatickému plnění obsahu portálu může docházet k ukládán�
 
 Dále by mohlo být užitečné přidat funkcionalitu \uv{hlídacího psa}, kdy by uživatel měl možnost zadat obory jeho zájmu a v případě otevření nové výzvy v daném oboru, by byl uživatel o této příležitosti bezprostředně informován.
 
-V reakci na poznatky uvedené v kapitole~\ref{section:behaviour} lze upravit \blindtext
+V reakci na poznatky uvedené v kapitole~\ref{section:behaviour} se nabízí několik úprav uživatelského rozhraní. Především je třeba v hlavicče webu graficky odlišit nabízené odkazy pro výběr typu hledání (\uv{Projects}, \uv{Deliverables}, \uv{Topics}) od textového popisu \uv{Search for:}.
+Dále by bylo vhodné vyvolat v uživatelích větší zájem o vyhledávací pole. Toho se lze pokusit docílit například nabízením náhodně vybraných frází, které lze hledat. Tyto fráze by sloužily pouze jako zástupný text (atribut \texttt{placeholder}) a po kliknutí do pole by se skryl. 
+
+Zapracovat by se dalo i na zvýšení viditelnosti níže umístěných výsledků vyhledávání. Pomoci by mohlo kompaktnější prezentování jednotlivých výsledků, alespoň co se týče výšky těchto prvků. Za pokus by stálo prezentovat na jedné stránce více výsledků. Dle průzkumu by tato úprava mohla vést ke značnému zvýšení viditelnosti výsledků, pro jejichž zobrazení je nutné stránku rolovat~\cite{bib:scroll}.
 
 
 
