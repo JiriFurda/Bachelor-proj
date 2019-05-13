@@ -1,7 +1,7 @@
 \chapter{Úvod}
 Webové portály jsou v~současné době nedílnou součástí internetu. Umožňují jejím návštěvníkům získat na jednom místě relevantní informace shromážděné z~vícero různých zdrojů~\cite{bib:portal-liferay}.
 
-Cílem této bakalářské práce je rozšíření stávajícího portálu, zaměřeného na výsledky evropských projektů. Od vytvoření tohoto portálu již uplynulo několik let, a proto bylo třeba jej upravit pro použití novějších verzí knihoven. Při této činnosti bylo kompletně přepracováno uživatelské rozhraní a obsah tohoto portálu byl rozšířen o témata nově vypsaných výzev.
+Cílem této bakalářské práce je rozšíření stávajícího portálu, zaměřeného na výsledky evropských projektů. Od vytvoření tohoto portálu již uplynulo několik let, a proto bylo třeba jej upravit pro použití novějších verzí knihoven. Při této činnosti bylo kompletně přepracováno uživatelské rozhraní a obsah tohoto portálu byl rozšířen o~témata nově vypsaných výzev.
 
 Pro toto téma jsem se rozhodl, protože mám k~webovým technologiím blízko již od dětství a chci v~tomto směru nadále rozvíjet své znalosti.
 
@@ -10,21 +10,21 @@ Webový portál byl od základu implementován znovu s~použitím modernějšíc
 
 V~druhé kapitole práce, nazvané \uv{Rozbor řešené problematiky}, nejprve stručně shrnu základní principy vývoje webových stránek a poté přiblížím několik technologií, které jsem při tvorbě této bakalářské práce využil.
 Ve třetí kapitole s~názvem \uv{Návrh a implementace systému} se již zaměřím na konkrétní řešení této práce, uvedu několik obrázků z~výsledného portálu, jež je výsledkem této práce, a popíšu několik zajímavých částí samotného kódu.
-Ve čtvrté kapitole pojmenované \uv{Experimenty a vyhodnocení} provedu s výsledným portálem několik experimentů, následně vyhodnotím jejich výstupy a vyvodím z nich možná rozšíření portálu.
+Ve čtvrté kapitole pojmenované \uv{Experimenty a vyhodnocení} provedu s~výsledným portálem několik experimentů, následně vyhodnotím jejich výstupy a vyvodím z~nich možná rozšíření portálu.
 V~samém závěru práce pak stručně zhodnotím výsledky této práce.
 
 
 
 
 \chapter{Rozbor řešené problematiky}
-Tato kapitola v~úvodu přibližuje základní koncepci vývoje webu a praktiky, které jsou při tomto vývoji často využívány. Následně jsou v~této kapitole popsány jazyky a knihovny, využívané při implementaci této bakalářské práce. V samém závěru kapitoly je přiblížena koncepce podobnostního hledání.
+Tato kapitola v~úvodu přibližuje základní koncepci vývoje webu a praktiky, které jsou při tomto vývoji často využívány. Následně jsou v~této kapitole popsány jazyky a knihovny, využívané při implementaci této bakalářské práce. V~samém závěru kapitoly je přiblížena koncepce podobnostního hledání.
 
 
 
 \section{Vývoj webu}
 \emph{Tato kapitola čerpá z~\cite{bib:web-development}}.
 
-Z pohledu vývoje nejen webových stránek je zvykem projekt rozlišovat do dvou vrstev. Tou první je klientská část (anglicky \emph{frontend}) a druhou je serverová část (anglicky \emph{backend}).
+Z~pohledu vývoje nejen webových stránek je zvykem projekt rozlišovat do dvou vrstev. Tou první je klientská část (anglicky \emph{frontend}) a druhou je serverová část (anglicky \emph{backend}).
 
 Klientská část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v~žádném případě neobejde bez značkovacího jazyka HTML (\emph{Hypertext Markup Language}), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS (\emph{Cascading Style Sheets}). Ty ovlivňují, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu, je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o~interaktivitu.
 Zpracování této části webu probíhá na straně klienta - tedy internetovému prohlížeči uživatele. Na základě tohoto faktu lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy klientské části zobrazit. Ve většině případů je možné i~rovnou v~internetovém prohlížeči tyto kódy upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům webu se tyto změny nijak neprojeví.
@@ -61,9 +61,9 @@ Responzivní design, jak název vypovídá, je design, který je schopný reagov
 
 Před několika lety bylo zvykem tvořit webové stránky s~pevnou šířkou obsahu. Tato šířka byla volena tak, aby bylo možné stránku zobrazit jak na starších monitorech s~poměrem stran 4:3, tak i~na modernějších širokoúhlých monitorech. 
 
-Se stále rostoucí oblibou a dostupností chytrých telefonu se ale pro vývojáře a designéry objevila nová výzva. Bylo potřeba webové stránky přizpůsobit i~pro tyto zařízení s~různorodou velikostí obrazovky. Webovou stránku, která nenabízí responzivní design, sice je možné zobrazit i na mobilním zařízením, ale prohlížení takové stránky zpravidla není pro uživatele nikterak přívětivé. Uživatel může být nucen stránku neustále přibližovat a oddalovat, aby se dostal k~části, s~kterou zrovna potřebuje pracovat, nebo aby se mu podařilo stisknout konkretní tlačítko či odkaz. V některých případech může být dokonce část obsahu stránky překrytá jiným prvkem a uživateli bude tento obsah skryt. Kromě toho faktu může mít nevyužití responzivního designu také negativní vliv na pořadí stránky ve výsledcích internetových vyhledávačů.
+Se stále rostoucí oblibou a dostupností chytrých telefonu se ale pro vývojáře a designéry objevila nová výzva. Bylo potřeba webové stránky přizpůsobit i~pro tyto zařízení s~různorodou velikostí obrazovky. Webovou stránku, která nenabízí responzivní design, sice je možné zobrazit i na mobilním zařízením, ale prohlížení takové stránky zpravidla není pro uživatele nikterak přívětivé. Uživatel může být nucen stránku neustále přibližovat a oddalovat, aby se dostal k~části, s~kterou zrovna potřebuje pracovat, nebo aby se mu podařilo stisknout konkretní tlačítko či odkaz. V~některých případech může být dokonce část obsahu stránky překrytá jiným prvkem a uživateli bude tento obsah skryt. Kromě toho faktu může mít nevyužití responzivního designu také negativní vliv na pořadí stránky ve výsledcích internetových vyhledávačů.
 
-Díky nástupu nových verzí jazyků HTML5 a CSS3 je možné tuto situaci řešit bez nutnosti použití některého ze serverových řešení. Nejpřínosnější novinkou v tomto směru jsou tzv.~\emph{media queries} v~kaskádových stylech, díky kterým je možné aplikovat odlišné styly na základě specifikací zobrazovacího zařízení. Jak již bylo v~úvodu zmíněno, design stránky se nejčastěji odvíjí od šířky obrazovky zařízení. V~souboru s~kaskádovými styly se tedy lze potkat například s~následující specifikací stylů.
+Díky nástupu nových verzí jazyků HTML5 a CSS3 je možné tuto situaci řešit bez nutnosti použití některého ze serverových řešení. Nejpřínosnější novinkou v~tomto směru jsou tzv.~\emph{media queries} v~kaskádových stylech, díky kterým je možné aplikovat odlišné styly na základě specifikací zobrazovacího zařízení. Jak již bylo v~úvodu zmíněno, design stránky se nejčastěji odvíjí od šířky obrazovky zařízení. V~souboru s~kaskádovými styly se tedy lze potkat například s~následující specifikací stylů.
 
 \begin{verbatim}
     @media(max-width: 640px)
@@ -79,7 +79,7 @@ Takto obalené styly budou aplikovány jen v~případě, že zobrazovací zaří
 	\includegraphics[width=0.5\textwidth-0.4cm]{obrazky-figures/fb-hamburger-1.png}
 	\hspace{0.5cm}
 	\includegraphics[width=0.5\textwidth-0.4cm]{obrazky-figures/fb-hamburger-2.png}
-	\caption{Hamburgerové menu použité v~mobilní aplikaci sociální sítě Facebook\protect\footnote{Mobilní aplikace Facebook v~obchodě Google Play: \url{https://play.google.com/store/apps/details?id=com.facebook.katana&hl=cs}}. Jeho zobrazení je ovládáno tlačítkem v horní pravé části obrázků, znázorněným třemi vodorovnými čárami. Na levém snímku je možné vidět aplikaci se skrytým menu a v pravém snímku zase se zobrazeným.}
+	\caption{Hamburgerové menu použité v~mobilní aplikaci sociální sítě Facebook\protect\footnote{Mobilní aplikace Facebook v~obchodě Google Play: \url{https://play.google.com/store/apps/details?id=com.facebook.katana&hl=cs}}. Jeho zobrazení je ovládáno tlačítkem v~horní pravé části obrázků, znázorněným třemi vodorovnými čárami. Na levém snímku je možné vidět aplikaci se skrytým menu a v~pravém snímku zase se zobrazeným.}
 \end{figure}
 
 
@@ -89,7 +89,7 @@ Ustálenou technikou, jak vyvíjet responzivní design webových stránek, je pr
 
 Protože mobilní zařízení nabízejí o~mnoho menší zobrazovací plochu než desktop, je zde každý kus prostoru drahocenný. Designér si proto musí nejprve ujasnit, které části webové stránky jsou pro uživatele prioritní a na základě těchto priorit sestavit návrh.
 
-V~případě využití tohoto principu při samotné implementaci designu se postupuje obdobně. Pokud jsou všechny kaskádové styly jak pro mobilní, tak pro desktopová zařízení zapsána v~jednom souboru, bude tento soubor na začátku nejprve obsahovat styly společné pro obě zařízení a styly určené pouze pro mobilní zařízení. Až poté se budou v~souboru objevovat specifické styly, nejpravděpodobněji podmíněné hodnotou vlastnosti \texttt{min-width}. Tyto styly budou aplikovány od určité šířky displeje a budou zaměřené na zobrazení například v desktopových zařízeních. Díky tomuto přístupu bude samotný kód stylů zjednodušen. U~mobilních zařízení bývá zpravidla potřeba méně stylů a často lze využít některé z~výchozích vlastností daných prvků~\cite{bib:mobile-first}.
+V~případě využití tohoto principu při samotné implementaci designu se postupuje obdobně. Pokud jsou všechny kaskádové styly jak pro mobilní, tak pro desktopová zařízení zapsána v~jednom souboru, bude tento soubor na začátku nejprve obsahovat styly společné pro obě zařízení a styly určené pouze pro mobilní zařízení. Až poté se budou v~souboru objevovat specifické styly, nejpravděpodobněji podmíněné hodnotou vlastnosti \texttt{min-width}. Tyto styly budou aplikovány od určité šířky displeje a budou zaměřené na zobrazení například v~desktopových zařízeních. Díky tomuto přístupu bude samotný kód stylů zjednodušen. U~mobilních zařízení bývá zpravidla potřeba méně stylů a často lze využít některé z~výchozích vlastností daných prvků~\cite{bib:mobile-first}.
 
 
 \section{Boostrap}
@@ -104,14 +104,14 @@ Vzhledem ke své rozsáhlé komunitě lze nalézt mnoho dalších, uživateli tv
 
 
 \section{Python}
-Python\footnote{Python: \url{https://www.python.org/}} je vysokoúrovňový interpretovaný objektově orientovaný programovací jazyk. Byl vytvořen roku 1990 a jeho autorem je \emph{Guido van Rossum}. Samotné jádro tohoto jazyka je velmi malé, ale nabízí využití spousty nástrojů pro nejrůznější účely. Tato rozšíření jsou psaná jak v~samotném jazyce Python, tak i~v jazyce C nebo C++~\cite{bib:python}. Specifikem tohoto jazyka je nepoužívání středníku jako oddělovače instrukcí a také striktní pravidla pro odsazení kódu. Dle odsazení se totiž rozlišují bloky kódu, na rozdíl od většiny ostatních jazyků, kde k tomuto účelu slouží symboly složených závorek. 
+Python\footnote{Python: \url{https://www.python.org/}} je vysokoúrovňový interpretovaný objektově orientovaný programovací jazyk. Byl vytvořen roku 1990 a jeho autorem je \emph{Guido van Rossum}. Samotné jádro tohoto jazyka je velmi malé, ale nabízí využití spousty nástrojů pro nejrůznější účely. Tato rozšíření jsou psaná jak v~samotném jazyce Python, tak i~v~jazyce C nebo C++~\cite{bib:python}. Specifikem tohoto jazyka je nepoužívání středníku jako oddělovače instrukcí a také striktní pravidla pro odsazení kódu. Dle odsazení se totiž rozlišují bloky kódu, na rozdíl od většiny ostatních jazyků, kde k~tomuto účelu slouží symboly složených závorek. 
 
 
 \subsection{Flask}
-Flask\footnote{Flask: \url{http://flask.pocoo.org/}} je systém s otevřeným zdrojovým kódem určený pro tvorbu systémové části webových stránek. Tento systém je napsaný v~programovacím jazyce Python a jedná se o systém typu \emph{micro-framework}. Klíčový znak tohoto typu systémů je co nejmenší nebo i~nulová závislost na externích knihovnách~\cite{bib:flask-doc}.
+Flask\footnote{Flask: \url{http://flask.pocoo.org/}} je systém s~otevřeným zdrojovým kódem určený pro tvorbu systémové části webových stránek. Tento systém je napsaný v~programovacím jazyce Python a jedná se o~systém typu \emph{micro-framework}. Klíčový znak tohoto typu systémů je co nejmenší nebo i~nulová závislost na externích knihovnách~\cite{bib:flask-doc}.
 Flask si klade za cíl udržet si co nejjednodušší jádro, ale zároveň se soustředí na možnost tento základ jednoduše rozšířit~\cite{bib:flask-pym}.
 
-Smyslem systému Flask je být základním kamenem pro jakýkoliv typ webové aplikace. Z~tohoto důvodu na rozdíl od ostatních systémů neobsahuje žádnou abstrakci databázové vrstvy nebo knihovnu pro formuláře. V případě potřeby využití takovýchto funkcí, lze použít některé z~dostupných rozšíření~\cite{bib:flask-design}.
+Smyslem systému Flask je být základním kamenem pro jakýkoliv typ webové aplikace. Z~tohoto důvodu na rozdíl od ostatních systémů neobsahuje žádnou abstrakci databázové vrstvy nebo knihovnu pro formuláře. V~případě potřeby využití takovýchto funkcí, lze použít některé z~dostupných rozšíření~\cite{bib:flask-design}.
 
 Ve svém základu systém využívá šablonovací jazyk Jinja2\footnote{Jinja2: \url{http://jinja.pocoo.org/}} zjednodušující udržení konzistentní struktury stránek. Poskytuje například dědičnost šablon nebo znovupoužitelné bloky a dokáže se vypořádat s~bezpečnostními útoky typu XSS (\emph{Cross Site Scripting})~\cite{bib:jinja}.
 Druhou knihovnou, kterou systém Flask využívá, je Werkzeug\footnote{Werkzeug: \url{https://pypi.org/project/Werkzeug/}} - jedna z~nejpokročilejších knihoven pro rozhraní brány webového serveru (WSGI neboli \emph{Web Server Gateway Interface}), které umožňuje webovou aplikaci provozovat nezávisle na technologii použité na serveru~\cite{bib:flask-pep}.
@@ -155,7 +155,7 @@ Mezi základní pilíře návrhového vzoru Flux patří několik následující
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/vuex.png}
-	\caption{Diagram znázorňující životní cyklus dat v~knihovně Vuex. \emph{Převzato z~\cite{bib:vuex-doc}}. Komponenty vysílají znamení o provedení akce (\emph{Dispatch}). Tyto akce (\emph{Actions}) jsou provedeny a následuje zápis změn (\emph{Commit}). Tento zápis vede k mutacím (\emph{Mutations} a \emph{Mutate}), kde proběhne samotná úprava dat uložených na skladě. Tím je upraven stav aplikace (\emph{State}) a pokud jsou na změněných datech závislé některé z komponent, proběhne jejich překreslení (\emph{Render}).}
+	\caption{Diagram znázorňující životní cyklus dat v~knihovně Vuex. \emph{Převzato z~\cite{bib:vuex-doc}}. Komponenty vysílají znamení o~provedení akce (\emph{Dispatch}). Tyto akce (\emph{Actions}) jsou provedeny a následuje zápis změn (\emph{Commit}). Tento zápis vede k~mutacím (\emph{Mutations} a \emph{Mutate}), kde proběhne samotná úprava dat uložených na skladě. Tím je upraven stav aplikace (\emph{State}) a pokud jsou na změněných datech závislé některé z~komponent, proběhne jejich překreslení (\emph{Render}).}
 	\label{img:vuex-dataflow}
 \end{figure}
 
@@ -166,7 +166,7 @@ Mezi základní pilíře návrhového vzoru Flux patří několik následující
 
 BoostrapVue je systém klientské části webových stránek založený na systému Bootstrap, který pro svou plnou funkčnost vyžaduje použít také knihovnu jQuery. Pokud ale webová aplikace již pracuje se systémem Vue.js, mnohdy odpadá potřeba jQuery v~aplikaci využívat. Vzhledem k~faktu, že se jedná o~poměrně rozsáhlou knihovnu, není žádoucí ji používat jen z~důvodu, že je aplikace postavená na systému Bootstrap.
 
-V~tuto chvíli je vhodné využít alternativu jménem BoostrapVue, která závislost na knihovně jQuery nahrazuje závislostí na systému Vue.js. Systém BootstrapVue nabízí všechny komponenty původního systému, část z nich ještě vylepšuje a také nabízí komponenty úplně nové.
+V~tuto chvíli je vhodné využít alternativu jménem BoostrapVue, která závislost na knihovně jQuery nahrazuje závislostí na systému Vue.js. Systém BootstrapVue nabízí všechny komponenty původního systému, část z~nich ještě vylepšuje a také nabízí komponenty úplně nové.
 
 Mimo to, využití tohoto systému přináší větší pohodlí pro vývojáře. Dlouhý zápis některých komponent, tvořených pomocí množství vnořených prvků \texttt{<div>} lze díky Vue.js značně zjednodušit. Je využito funkce systému Vue.js nahradit prvek struktury HTML za rozsáhlejší strukturu na základě šablony dané komponenty. Konvencí systému je takové prvky pojmenovávat s~předponou \texttt{b-}, například tedy \texttt{b-button}.
 Přímo učebnicovým příkladem takového zjednodušení je zápis modálního okna, které se klasickým způsobem tvoří následovně:
@@ -210,7 +210,7 @@ Pomocí BoostrapVue lze identickou komponentu zapsat mnohem kratším a elegantn
 \section{Elasticsearch}
 \emph{Tato kapitola čerpá z~\cite{bib:elastic-defnitive}}.
 
-Elasticsearch\footnote{Elasticsearch: \url{https://www.elastic.co/products/elasticsearch}} je vyhledávač s otevřeným zdrojovým kódem umožňující distribuované vyhledávání a analýzu v~reálném čase. Umožňuje velmi rychle pracovat s~rozsáhlými daty (anglicky \emph{big data}) a provádět nad nimi plnotextové vyhledávání, strukturované vyhledávání a nebo zmiňovanou analýzu.
+Elasticsearch\footnote{Elasticsearch: \url{https://www.elastic.co/products/elasticsearch}} je vyhledávač s~otevřeným zdrojovým kódem umožňující distribuované vyhledávání a analýzu v~reálném čase. Umožňuje velmi rychle pracovat s~rozsáhlými daty (anglicky \emph{big data}) a provádět nad nimi plnotextové vyhledávání, strukturované vyhledávání a nebo zmiňovanou analýzu.
 
 Tento vyhledávač je hojně využíván jak menšími projekty, tak i~světoznámými organizacemi. Za zmínku stojí například internetová encyklopedie Wikipedia\footnote{Wikipedia: \url{https://www.wikipedia.org/}}, britský deník The~Guardian\footnote{The Guardian: \url{https://www.theguardian.com/international}}, komunitní stránka pro výměnu rad programátorů StackOverflow\footnote{StackOverflow: \url{https://stackoverflow.com/}} nebo populární webová služba pro verzovací nástroj Git\footnote{Git: \url{https://git-scm.com/}} - GitHub.
 
@@ -221,7 +221,7 @@ Systém pracuje s~bezschémovým typem databázi. Oproti relačním databázím 
 \subsection{Základní struktura}
 \emph{Tato kapitola čerpá z~\cite{bib:elastic-concept}}.
 
-Základní struktura databáze Elasticsearch se na první pohled od tradičních relačních databázi velmi neliší, ke spoustě pojmů užívaných v systému Elasticsearch lze nalézt ekvivalent právě z~tohoto typu databází.
+Základní struktura databáze Elasticsearch se na první pohled od tradičních relačních databázi velmi neliší, ke spoustě pojmů užívaných v~systému Elasticsearch lze nalézt ekvivalent právě z~tohoto typu databází.
 
 \subsubsection*{Index}\label{section:index}
 Skupina dokumentů s~podobnou strukturou se nazývá index. Ekvivalentem v~relačních databázích by v~tomto případě byla tabulka.
@@ -250,7 +250,7 @@ Obsah dotazu může vypadat například následovně:
 }
 \end{verbatim}
 
-Uvedený dotaz požaduje od databáze výsledky obsahující ve svém nadpisu buď \uv{Virtual Reality} nebo \uv{Augmented Reality}, jejichž partnerem byla některá z organizací sídlících v České Republice.
+Uvedený dotaz požaduje od databáze výsledky obsahující ve svém nadpisu buď \uv{Virtual Reality} nebo \uv{Augmented Reality}, jejichž partnerem byla některá z~organizací sídlících v~České Republice.
 
 Na tento dotaz může server odpověď například zprávou začínající obsahem:
 
@@ -280,7 +280,7 @@ Na tento dotaz může server odpověď například zprávou začínající obsah
     ...
 \end{verbatim}
 
-V úvodu odpovědi jsou uvedeny stručné statistiky vyhodnocení dotazu a pod klíčem \texttt{hits} se nachází informace o nalezených dokumenty. Ty jsou obohaceny kromě svého původního obsahu i o metadata označená podtržítkem  v prvním znaku. Za zmínku stojí například položka \texttt{\_score}, udávající skóre relevance.
+V~úvodu odpovědi jsou uvedeny stručné statistiky vyhodnocení dotazu a pod klíčem \texttt{hits} se nachází informace o~nalezených dokumenty. Ty jsou obohaceny kromě svého původního obsahu i o~metadata označená podtržítkem  v~prvním znaku. Za zmínku stojí například položka \texttt{\_score}, udávající skóre relevance.
 
 \subsubsection*{Kontext}
 \emph{Tato kapitola čerpá z~\cite{bib:elastic-context}}.
@@ -289,9 +289,9 @@ Dotazy v~Elasticsearch se rozlišují na dva základní typy - kontext dotazu (\
 
 První z~nich se dá lidsky přeložit do otázky \uv{Jak moc dokument splňuje dotaz?}. V~tomto případě se u~každého výsledku počítá skóre relevance, podle kterého jsou ve většině případu ve výsledné odpovědi dokumenty sestupně řazeny.
 
-Druhý typ dotazů, jak název vypovídá, je určen především k filtrování. V lidské řeči by se tento typ dotazů mohl zformulovat do věty \uv{Splňuje dokument dotaz?}. Vyhodnocení tohoto typu dotazů je mnohem rychlejší, díky absence nutnosti počítat skóre relevance. Mimo to jsou takovéto dotazy automaticky ukládány do mezipaměti, což výrazně urychluje jejích opětovné využití. 
+Druhý typ dotazů, jak název vypovídá, je určen především k~filtrování. V~lidské řeči by se tento typ dotazů mohl zformulovat do věty \uv{Splňuje dokument dotaz?}. Vyhodnocení tohoto typu dotazů je mnohem rychlejší, díky absence nutnosti počítat skóre relevance. Mimo to jsou takovéto dotazy automaticky ukládány do mezipaměti, což výrazně urychluje jejích opětovné využití. 
 
-V jednom složeném dotazu je možné oba tyto typy kombinovat.
+V~jednom složeném dotazu je možné oba tyto typy kombinovat.
 
 \subsection{Fasetové vyhledávání}
 S~velkým množstvím dat přichází potřeba obsah dle určitých kriterií zúžit. K~tomuto účelu slouží filtry a fasetové vyhledávání (někdy také označováno jako fastová navigace - anglicky \emph{faceted search} nebo \emph{faceted navigation}). Využití faset je pokročilejší než použití filtrů, jelikož fasetová navigace umožňuje využít hned několik filtrů najednou~\cite{bib:facet}.
@@ -313,7 +313,7 @@ S~tímto typem vyhledávání se lze setkat velmi často v~seznamech produktů n
 \subsection{Plnotextové vyhledávání}
 \emph{Tato kapitola čerpá z~\cite{bib:elastic-defnitive}}.
 
-Uložená textová data v dokumentech se dělí na dva typy - přesné hodnoty a plnotextové hodnoty (anglicky \emph{full-text}). Přesné hodnoty jsou určeny pro data, jako například identifikátor uživatele. Pokud totiž vyhledáváme uživatele s~identifikátorem \uv{jiri furda}, jako výsledek neočekáváme uživatele, který má identifikátor \uv{martin furda}, ale očekáváme výsledek, který bude přesně splňovat hledanou položku.
+Uložená textová data v~dokumentech se dělí na dva typy - přesné hodnoty a plnotextové hodnoty (anglicky \emph{full-text}). Přesné hodnoty jsou určeny pro data, jako například identifikátor uživatele. Pokud totiž vyhledáváme uživatele s~identifikátorem \uv{jiri furda}, jako výsledek neočekáváme uživatele, který má identifikátor \uv{martin furda}, ale očekáváme výsledek, který bude přesně splňovat hledanou položku.
 Pokud ovšem člověk pracuje s~textovými položkami, nemusí nutně hledat stoprocentní shodu. Lidský jazyk je velice rozmanitý a umožňuje slova časovat, skloňovat, či vyjádřit jednu věc vícero různými slovy.
 V~těchto případech hledání přesných hodnot selhává, i~když má text z~pohledu člověka stejný nebo podobný význam. Pro tento typ hledání slouží právě plnotextové hledání. Můžeme se s~ním setkat například při hledání článku v~internetovém magazínu.
 Elasticsearch pro takové hledání musí text nejprve analyzovat a vytvořit pro něj obrácené indexy.
@@ -352,7 +352,7 @@ zasáhla & Ano & Ne \\
 \caption{Ilustrační příklad obraceného indexu pro dva různé dokumenty.}
 \end{table}
 
-Takovýto index by byl ale v~praxi nepoužitelný. Hledání slova \uv{havárie} by sice za výsledek označilo oba dva dokumenty, ale ku příkladu hledání fráze \uv{letiště Moskva} by v tomto případě nenalezlo žádnou shodu, i~přesto, že z~lidského pohledu se oba dva dokumenty hledané fráze týkají. Z tohoto důvodu text nestačí pouze strojově rozdělí, ale musí proběhnout kompletní analýza textu.
+Takovýto index by byl ale v~praxi nepoužitelný. Hledání slova \uv{havárie} by sice za výsledek označilo oba dva dokumenty, ale ku příkladu hledání fráze \uv{letiště Moskva} by v~tomto případě nenalezlo žádnou shodu, i~přesto, že z~lidského pohledu se oba dva dokumenty hledané fráze týkají. Z~tohoto důvodu text nestačí pouze strojově rozdělí, ale musí proběhnout kompletní analýza textu.
 
 \subsubsection*{Analýza}
 Analýza představuje proces, kdy se kus textu rozdělí do jednotlivých tokenů a následně se tyto tokeny upraví do podoby vhodné pro použití plnotextového vyhledávání. Tento proces obstarává analyzér, který se skládá ze tří části:
@@ -376,7 +376,7 @@ Další nedílnou součástí pokročilejších analyzátorů je \emph{stematiza
 
 Při využití algoritmické stematizace sice analyzátor nemusí znát všechna slova v~daném jazyce, protože slova převádí do požadovaného tvaru pouze na základě sady pravidel, na durhou stranu ale dochází k~větší nepřesnosti. Elasticsearch v~případě využití české algoritmické stematizace ze slov odstraňuje všechny přípony.
 
-Druhým způsobem, který lze využít je stematizace na základě slovníku. Díky tomu jsou převedené tvary přesnější než ty získané algoritmem. Hlavním předpokladem v této metodě je ovšem využití vhodného slovníku s~dostatečnou zásobou slov.
+Druhým způsobem, který lze využít je stematizace na základě slovníku. Díky tomu jsou převedené tvary přesnější než ty získané algoritmem. Hlavním předpokladem v~této metodě je ovšem využití vhodného slovníku s~dostatečnou zásobou slov.
 
 \subsection{Podobnostní hledání}
 \blindtext[2]
@@ -434,14 +434,14 @@ s.aggs.bucket("coordinator_coutry", "terms",  \
 response = s.execute()
 \end{verbatim}
 
-Práce s dotazy je tedy mnohem snadnější a vývojářům alespoň částečně ubývá rutinní činnost. Obrovskou výhodou je možnost sestrojení dotazu pomocí zřetězených funkcí. Díky této funkci knihovny lze dotaz v průběhu programu jednoduše rozšiřovat a kód se tak nemusí stát těžko čitelným.
+Práce s~dotazy je tedy mnohem snadnější a vývojářům alespoň částečně ubývá rutinní činnost. Obrovskou výhodou je možnost sestrojení dotazu pomocí zřetězených funkcí. Díky této funkci knihovny lze dotaz v~průběhu programu jednoduše rozšiřovat a kód se tak nemusí stát těžko čitelným.
 
-Objekt dotazu je v knihovně reprezentován třídou \texttt{Search}. Tu lze ale kdykoliv převést do slovníku odpovídajícímu klasickému dotazu ve formátu JSON pomocí metody \texttt{to\_dict()}. Stejně tak je možné dotaz napsaný ve slovníku převést do objektu knihovny Elasticsearch DSL použitím metody \texttt{from\_dict()}. Tato funkcionalita zajišťuje zpětnou kompatibilitu s programy využívajícími například jen nízkoúrovňového klienta Python Elasticsearch Client bez nutností zásahu do stávajícího kódu.
+Objekt dotazu je v~knihovně reprezentován třídou \texttt{Search}. Tu lze ale kdykoliv převést do slovníku odpovídajícímu klasickému dotazu ve formátu JSON pomocí metody \texttt{to\_dict()}. Stejně tak je možné dotaz napsaný ve slovníku převést do objektu knihovny Elasticsearch DSL použitím metody \texttt{from\_dict()}. Tato funkcionalita zajišťuje zpětnou kompatibilitu s~programy využívajícími například jen nízkoúrovňového klienta Python Elasticsearch Client bez nutností zásahu do stávajícího kódu.
 
 
 
 \section{Podobnostní hledání}
-Na webových stránkách je zvykem uživateli doporučovat další obsah na základě sdílených charakteristik s právě prohlíženým obsahem. Příkladem může být čtení článku na zpravodajském webu. Pro takové doporučení se používá několik různých přístupů.
+Na webových stránkách je zvykem uživateli doporučovat další obsah na základě sdílených charakteristik s~právě prohlíženým obsahem. Příkladem může být čtení článku na zpravodajském webu. Pro takové doporučení se používá několik různých přístupů.
 
 \subsection{Hledání souvisejících dokumentů}
 \blindtext[2]
@@ -449,10 +449,10 @@ Na webových stránkách je zvykem uživateli doporučovat další obsah na zák
 \subsection{Kontextové procházení}
 \emph{Tato kapitola čerpá z~\cite{bib:similarity-context}}.
 
-Pro zobrazení relevantnějších výsledků vyhledávání lze využít kontext hledání uživatele. V takovém případě se při počítání skóre relevantnosti nepracuje pouze s aktuálním hledáním, ale i s historií uživatele. Díky tomu je docíleno přizpůsobení výsledků přímo pro daného uživatele.
-Pro tyto účely je možné brát v potaz předchozí hledání nebo podobnost s dříve otevřenými dokumenty.
+Pro zobrazení relevantnějších výsledků vyhledávání lze využít kontext hledání uživatele. V~takovém případě se při počítání skóre relevantnosti nepracuje pouze s~aktuálním hledáním, ale i s~historií uživatele. Díky tomu je docíleno přizpůsobení výsledků přímo pro daného uživatele.
+Pro tyto účely je možné brát v~potaz předchozí hledání nebo podobnost s~dříve otevřenými dokumenty.
 
-Výhodou kontextového hledání je zpřesnění výsledků hledání bez nucení uživatele manuálně toto hledání blíže specifikovat. O takovou možnost ovšem uživatel nepřijde, tento typ hledání se s použitím fasetové navigace nijak nevylučuje. 
+Výhodou kontextového hledání je zpřesnění výsledků hledání bez nucení uživatele manuálně toto hledání blíže specifikovat. O~takovou možnost ovšem uživatel nepřijde, tento typ hledání se s~použitím fasetové navigace nijak nevylučuje. 
 Mimo to je díky tomuto přístupu možné objevit podobnost i mezi dokumenty, které spolu přímo nesdílí podstatná metadata. 
 
 
@@ -463,21 +463,21 @@ Mimo to je díky tomuto přístupu možné objevit podobnost i mezi dokumenty, k
 	\label{img:contextual}
 \end{figure}
 
-Na obrázku~\ref{img:contextual} uživatel v prvních dvou krocích hledal pojem \uv{violence} a prohlédl si dva výsledky. Poté v kroku 3 hledání rozšířil a vyhledal pojem \uv{violence and sports}. Z výsledků v kroku 4 zvolil dokument, který si zobrazí podrobněji. Tento proces probíhá již v současnosti a je reprezentován krokem 5. Krok 6 tvoří kontext pro budoucí hledání. V kroku 7 jsou znázorněna další hledání, ve kterých budou při počítání skóre relevance brána v potaz metadata z právě zobrazeného dokumentu z kroku 5.
+Na obrázku~\ref{img:contextual} uživatel v~prvních dvou krocích hledal pojem \uv{violence} a prohlédl si dva výsledky. Poté v~kroku 3 hledání rozšířil a vyhledal pojem \uv{violence and sports}. Z~výsledků v~kroku 4 zvolil dokument, který si zobrazí podrobněji. Tento proces probíhá již v~současnosti a je reprezentován krokem 5. Krok 6 tvoří kontext pro budoucí hledání. V~kroku 7 jsou znázorněna další hledání, ve kterých budou při počítání skóre relevance brána v~potaz metadata z~právě zobrazeného dokumentu z~kroku 5.
 
 
 
 
 
 \chapter{Návrh a implementace systému}
-Tato kapitola popisuje můj přístup k řešení daného systému, popisuje principy fungování systému a konkrétně rozebírá jeho implementaci.
+Tato kapitola popisuje můj přístup k~řešení daného systému, popisuje principy fungování systému a konkrétně rozebírá jeho implementaci.
 
 Předchozí řešení mých kolegů umožňovalo vyhledávat pouze projekty a vědecké zprávy. Nabízelo se tento obsah rozšířit o~výzvy k~předkládání návrhů, na základě kterých Evropská komise vybírá projekty, které budou uskutečněny se spolufinancováním Evropské unie~\cite{bib:funding-about}.
 
 Samotné výzvy jsou ale hodně obecné a zaštiťují mnoho témat napříč různými oblastmi. Dalším úskalím byl nedostatek informací v~popisu výzev, rozsáhlý slovní popis se vztahoval až ke konkrétním tématům. Proto jsem se rozhodl portál nerozšiřovat o~výzvy, ale právě o~zmiňovaná témata.
 
 \section{Schéma systému}
-Schéma jednotlivých částí systému a jejich návaznost je možné vidět na obrázku~\ref{img:scheme}. Ve vrchní části obrázku jsou znázorněny zdroje dat, které jsou zpracovávány extraktorem dat. Extrakce probíhá bez zásahu správce periodicky za pomoci plánovače úloh (anglicky \emph{cron}). Správce má však možnost extrakci spustit i~manuálně. Zpracovaná data jsou ukládána do databáze, odkud je čerpá webový portál a následně je prezentuje uživateli. V blocích modulů systému (\uv{databáze}, \uv{extraktor dat} a \uv{webový portál}) jsou znázorněna loga klíčových technologií využitích pro fungování daného modulu.
+Schéma jednotlivých částí systému a jejich návaznost je možné vidět na obrázku~\ref{img:scheme}. Ve vrchní části obrázku jsou znázorněny zdroje dat, které jsou zpracovávány extraktorem dat. Extrakce probíhá bez zásahu správce periodicky za pomoci plánovače úloh (anglicky \emph{cron}). Správce má však možnost extrakci spustit i~manuálně. Zpracovaná data jsou ukládána do databáze, odkud je čerpá webový portál a následně je prezentuje uživateli. V~blocích modulů systému (\uv{databáze}, \uv{extraktor dat} a \uv{webový portál}) jsou znázorněna loga klíčových technologií využitích pro fungování daného modulu.
 
 \begin{figure}[H]
 	\centering
@@ -487,10 +487,10 @@ Schéma jednotlivých částí systému a jejich návaznost je možné vidět na
 \end{figure}
 
 \section{Extraktor dat}
-Extrakce dat získává tři typy informací. Shromažďuje témata výzev, projekty a odevzdávané zprávy. Většina informací je čerpána přímo z portálu Evropské komise, část dat se ale získává i přímo ze stránek jednotlivých účástníků.
+Extrakce dat získává tři typy informací. Shromažďuje témata výzev, projekty a odevzdávané zprávy. Většina informací je čerpána přímo z~portálu Evropské komise, část dat se ale získává i přímo ze stránek jednotlivých účástníků.
 
 \subsection{Témata výzev}
-Témata výzev jsou čerpána z portálu Fundings and Tenders.
+Témata výzev jsou čerpána z~portálu Fundings and Tenders.
 Ten pro podobné účely nabízí aplikační rozhraní, kde je možné získat potřebná data ve formátu JSON, čímž bylo značně zjednodušeno jejich dolování. 
 
 Pro indexaci dat z~toho portálu je nejprve použit dotaz pro získání souhrnného seznamu témat. Ten je následně extraktorem postupně celý zpracován. Z~toho seznamu lze získat základní informace o~tématech. Pro každé jedno téma je odeslán nový dotaz, který na základě identifikátoru vrátí podrobnější informace vztahující se k~tématu, jako například jeho slovní popis.
@@ -509,7 +509,7 @@ CORDIS\footnote{CORDIS: \url{https://cordis.europa.eu/}} (\emph{The Community Re
 
 
 \section{Webový portál}
-Výsledný webový portál umožňuje uživateli prohlížet a vyhledávat data získána extraktorem dat. Jeho finální podoba je dostupná online na školním serveru athena17\footnote{Portál na serveru athena17: \url{http://athena17.fit.vutbr.cz:2021/}}. V této kapitole je výsledný portál podrobně rozebrán.
+Výsledný webový portál umožňuje uživateli prohlížet a vyhledávat data získána extraktorem dat. Jeho finální podoba je dostupná online na školním serveru athena17\footnote{Portál na serveru athena17: \url{http://athena17.fit.vutbr.cz:2021/}}. V~této kapitole je výsledný portál podrobně rozebrán.
 
 \subsection{Vizuální podoba}
 Vizuální struktura vytvořeného webového portálu lze rozdělit do tří hlavních celků - hlavičky, postranního panelu a hlavního obsahu stránky. První dva z~těchto celků jsou určeny pro specifikaci vyhledávání. Aby bylo vyhledávání při procházení portálu vždy dostupné, pozice těchto celků v~desktopovém zobrazení zůstává neměnná i~při rolování zobrazené stránky.
@@ -519,31 +519,31 @@ Portál obsahuje obecně dva typy stránek. Prvním typem jsou stránky obsahuj�
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/my-results.png}
-	\caption{Stránka vytvořeného portálu zobrazující výsledky hledání výzev obsahující klíčové slovo \uv{robot}, financované v rámci programu \uv{H2020} a podprogramu \uv{E.2.}}.
+	\caption{Stránka vytvořeného portálu zobrazující výsledky hledání výzev obsahující klíčové slovo \uv{robot}, financované v~rámci programu \uv{H2020} a podprogramu \uv{E.2.}}.
 	\label{image:portal-results}
 \end{figure}
 \begin{enumerate}
     \item Logo a název portálu se dle konvence nachází v~levém horním rohu. Zároveň funguje jako odkaz na hlavní stránku.
     \item Zbylá část hlavičky obsahuje vyhledávací pole. Do něj může být vložen i~velmi komplexní dotaz, proto byl při návrhu kladen důraz na co největší šířku tohoto pole. Pod polem se nachází odkazy určující jaký typ výsledků je od vyhledávání očekáván.
     \item V~levé části portálu se nachází postranní panel s~fasetovou navigací. Slouží především pro méně pokročilé uživatele portálu, kterým postačí tvořit jednoduché dotazy. Zároveň lze informace v~tomto panelu využít jako přehled informací typu \uv{Které země se nejčastěji podílí na projektech splňujících dané kriteria?}. Postranní panel je podrobněji popsán v~kapitole~\ref{section:sidebar}.
-    \item Největší část stránky je věnována právě výsledkům daného hledání. Pokud žádné hledání prozatím neproběhlo, stránka místo výsledků vyhledávání prezentuje data s nejpozdějším datem obnovy.
+    \item Největší část stránky je věnována právě výsledkům daného hledání. Pokud žádné hledání prozatím neproběhlo, stránka místo výsledků vyhledávání prezentuje data s~nejpozdějším datem obnovy.
 \end{enumerate}
 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/my-topic.png}
-	\caption{Snímek vytvořeného portálu zobrazující detailní popis výzvy k předkládání návrhů na téma \uv{Space portal}.}
+	\caption{Snímek vytvořeného portálu zobrazující detailní popis výzvy k~předkládání návrhů na téma \uv{Space portal}.}
 	\label{image:portal-detail}
 \end{figure}
 
-Základní struktura tohoto typu stránek je sdílena se snímkem~\ref{image:portal-results}. Místo výsledků vyhledávání však prezentuje informace o konkretním tématu výzvy. Tyto informace se skládají z následujících částí:
+Základní struktura tohoto typu stránek je sdílena se snímkem~\ref{image:portal-results}. Místo výsledků vyhledávání však prezentuje informace o~konkretním tématu výzvy. Tyto informace se skládají z~následujících částí:
 \begin{enumerate}
     \item Plné znění obsahu výzvy a instrukce pro předkládání návrhů na toto téma.
-    \item Klíčové specifikace dané výzvy stručně zobrazené v postranní kartě (vpravo).
+    \item Klíčové specifikace dané výzvy stručně zobrazené v~postranní kartě (vpravo).
 \end{enumerate}
 
-Mimo to má postranní panel s fasetovým vyhledáváním ve výchozím stavu pro fasetu \uv{Topic} zvolenou hodnotu právě zobrazeného tématu. Díky tomu lze snadno provést hledání projektů nebo odevzdaných zpráv právě s tímto tématem.
+Mimo to má postranní panel s~fasetovým vyhledáváním ve výchozím stavu pro fasetu \uv{Topic} zvolenou hodnotu právě zobrazeného tématu. Díky tomu lze snadno provést hledání projektů nebo odevzdaných zpráv právě s~tímto tématem.
 
 \subsection{Struktura adresáře}
 Veškeré zdrojové kódy portálu se nachází v~adresáři \texttt{portal}. Uvnitř této složky se nachází adresáře odpovídající architektuře MVC uvedené v~kapitole~\ref{section:mvc}.
@@ -680,50 +680,50 @@ Po úspěšném dotazu funkce vrací strukturu JSON ve stejném tvaru jako např
 \blindtext[2]
 
 \subsection{Model fasety}
-Jednotlivé fasety jsou v portálu implementovány modelovou třídou \texttt{Facet} i přes to, že se jedná o poměrně jednoduché entity, Tento přístup jsem zvolil zejména kvůli větší modulárnosti zdrojových kódů. Metody této třídy jsou většinou statické a usnadňují práci s fasetami napříč portálem.
+Jednotlivé fasety jsou v~portálu implementovány modelovou třídou \texttt{Facet} i přes to, že se jedná o~poměrně jednoduché entity, Tento přístup jsem zvolil zejména kvůli větší modulárnosti zdrojových kódů. Metody této třídy jsou většinou statické a usnadňují práci s~fasetami napříč portálem.
 
-K vytvoření instance této třídy stačí zadat tři parametry obsahující interní jméno fasety, jméno fasety zobrazované uživateli a také odpovídající pole v dokumentech uložených v~databázi Elasticsearch. 
+K~vytvoření instance této třídy stačí zadat tři parametry obsahující interní jméno fasety, jméno fasety zobrazované uživateli a také odpovídající pole v~dokumentech uložených v~databázi Elasticsearch. 
 
-Navázání na pole v databázi je záměrně uváděno bez odpovídajícího indexu. Je předpokladem, že pole použitá pro fasetové vyhledávání jsou ve všech indexech stejně pojmenována. Tento předpoklad umožňuje zachovat zvolené hodnoty fasetového vyhledávání i při přepnutí kontextu hledání. 
+Navázání na pole v~databázi je záměrně uváděno bez odpovídajícího indexu. Je předpokladem, že pole použitá pro fasetové vyhledávání jsou ve všech indexech stejně pojmenována. Tento předpoklad umožňuje zachovat zvolené hodnoty fasetového vyhledávání i při přepnutí kontextu hledání. 
 
 Při vytvoření instance se automaticky připraví název toho pole vhodný pro použití jako parametr funkce při sestrojování dotazu (tečky ve vnořených polích je nutné nahradit symboly \texttt{\_\_}). 
 
 \subsubsection*{all()}
-Tato statická metoda slouží jako jednotný seznam všech faset dostupných v portálu. Volání metody způsobí vytvoření seznamu obsahující instanci třídy \texttt{Facet} pro všechny dostupné fasety.
+Tato statická metoda slouží jako jednotný seznam všech faset dostupných v~portálu. Volání metody způsobí vytvoření seznamu obsahující instanci třídy \texttt{Facet} pro všechny dostupné fasety.
 
 \subsubsection*{get()}
-Tato třídní metoda se pokusí nalézt odpovídající instanci třídy \texttt{Facet} v seznamu z metody \texttt{all()}. Metoda je využita hlavně při vyhledávání hodnot faset.
+Tato třídní metoda se pokusí nalézt odpovídající instanci třídy \texttt{Facet} v~seznamu z~metody \texttt{all()}. Metoda je využita hlavně při vyhledávání hodnot faset.
 
 \subsubsection*{toDict()}
-Jednoduchá metoda převádějící data uvedená v konstruktoru objektu do slovníku. Je určená především k předání informací ze serverové části do komponent v uživatelské části.
+Jednoduchá metoda převádějící data uvedená v~konstruktoru objektu do slovníku. Je určená především k~předání informací ze serverové části do komponent v~uživatelské části.
 
 
 
 \chapter{Experimenty a vyhodnocení}
-Tato kapitola popisuje experimenty prováděné za účelem zhodnocení výsledku práce. Část testování byla směřována přímo na uživatele a skládala se jak z jejich implicitní, tak z i explicitní zpětné vazby. V závěru kapitoly jsou diskutována možná budoucí vylepšení portálu.
+Tato kapitola popisuje experimenty prováděné za účelem zhodnocení výsledku práce. Část testování byla směřována přímo na uživatele a skládala se jak z~jejich implicitní, tak z~i explicitní zpětné vazby. V~závěru kapitoly jsou diskutována možná budoucí vylepšení portálu.
 
 \section{Testování na uživatelích}
-Do testování portálu se zapojilo 25 uživatelů. Během procházení webového portálu bylo sledováno chování všech těchto uživatelů a následně tato data sloužila pro vytvoření statistik oblastí zájmů. 19 z uživatelů navíc vyplnilo dotazník a tím poskytli přímé sdělení svých dojmů z portálu. 
+Do testování portálu se zapojilo 25 uživatelů. Během procházení webového portálu bylo sledováno chování všech těchto uživatelů a následně tato data sloužila pro vytvoření statistik oblastí zájmů. 19 z~uživatelů navíc vyplnilo dotazník a tím poskytli přímé sdělení svých dojmů z~portálu. 
 
 \subsection{Dotazník uživatelského prožitku}
 \emph{Tato kapitola čerpá z~\cite{bib:ueq}}.
 
-Dotazník, zaměřený na uživatelský prožitek (UX neboli \emph{user experience}), se skládal z 26 otázek zaměřených na šest různých aspektů portálu.
+Dotazník, zaměřený na uživatelský prožitek (UX neboli \emph{user experience}), se skládal z~26 otázek zaměřených na šest různých aspektů portálu.
 \begin{itemize}
     \item \textbf{Atraktivita} - Celkový dojem.
-    \item \textbf{Přesvědčivost} - Je snadné se s ním naučit pracovat?
+    \item \textbf{Přesvědčivost} - Je snadné se s~ním naučit pracovat?
     \item \textbf{Efektivita} - Lze jej používat bez zbytečného úsilí?
     \item \textbf{Spolehlivost} - Má uživatel pocit, že má vše pod kontrolou?
     \item \textbf{Stimulace} - Je jeho používání vzrušující a zábavné?
     \item \textbf{Novota} - Je inovativní? Dokáže zaujmout?
 \end{itemize}
-Celkový dojem lze rozdělit do dvou různých kvalit. Přesvědčivost, efektivita a spolehlivost jsou aspekty spadající do skupiny pragmatické kvality, která je zaměřena na technickou efektivnost a splnění cílů. Stimulace a novota jsou oproti tomu aspekty označované jako hedonická kvalita, která je spojovaná s požitkem a potěšením~\cite{bib:hedonic}.
+Celkový dojem lze rozdělit do dvou různých kvalit. Přesvědčivost, efektivita a spolehlivost jsou aspekty spadající do skupiny pragmatické kvality, která je zaměřena na technickou efektivnost a splnění cílů. Stimulace a novota jsou oproti tomu aspekty označované jako hedonická kvalita, která je spojovaná s~požitkem a potěšením~\cite{bib:hedonic}.
 
-Na všechny otázky bylo možné odpovědět pomocí škály od 1 do 7, přičemž na každé straně škály byly postaveny vzájemně protikladné fráze zaměřené právě na jeden z uvedených aspektů. Respondent pomocí číselné škály volil, ke které frázi mají jeho pocity z portálu blíže.
+Na všechny otázky bylo možné odpovědět pomocí škály od 1 do 7, přičemž na každé straně škály byly postaveny vzájemně protikladné fráze zaměřené právě na jeden z~uvedených aspektů. Respondent pomocí číselné škály volil, ke které frázi mají jeho pocity z~portálu blíže.
 
-Obsah dotazníku vycházel z otázek UEQ\footnote{UEQ: \url{https://www.ueq-online.org/}} (\emph{User Experience Questionnaire}) a respondentům byl prezentován pomocí nástroje Google Formuláře\footnote{Google Formuláře: \url{https://www.google.com/intl/cs_CZ/forms/about/}}.
+Obsah dotazníku vycházel z~otázek UEQ\footnote{UEQ: \url{https://www.ueq-online.org/}} (\emph{User Experience Questionnaire}) a respondentům byl prezentován pomocí nástroje Google Formuláře\footnote{Google Formuláře: \url{https://www.google.com/intl/cs_CZ/forms/about/}}.
 
-Dotazník vyplnilo 19 respondentů, nejčastěji se jednalo o muže v období ranní dospělosti. Vzorek účastníku byl složen z pokročilých uživatelů internetu a pouze několik jedinců mělo předchozí zkušenost s portály podobného zaměření. Výsledky dotazníku jsou zobrazeny v grafu~\ref{img:ueq-result}.
+Dotazník vyplnilo 19 respondentů, nejčastěji se jednalo o~muže v~období ranní dospělosti. Vzorek účastníku byl složen z~pokročilých uživatelů internetu a pouze několik jedinců mělo předchozí zkušenost s~portály podobného zaměření. Výsledky dotazníku jsou zobrazeny v~grafu~\ref{img:ueq-result}.
 
 \begin{figure}[H]
 	\centering
@@ -732,12 +732,12 @@ Dotazník vyplnilo 19 respondentů, nejčastěji se jednalo o muže v období ra
     \label{img:ueq-result}
 \end{figure}
 
-Pro relevantnější vyhodnocení odpovědí je k dispozici oficiální srovnání dotazníku s výsledky dalších 246 produktů s celkovým počtem 9905 respondentů. 
+Pro relevantnější vyhodnocení odpovědí je k~dispozici oficiální srovnání dotazníku s~výsledky dalších 246 produktů s~celkovým počtem 9905 respondentů. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/ueq.pdf}
-	\caption{Graf prezentující výsledky dotazníku uživatelského prožitku portálu ve srovnání s hodnotami dalších produktů.}
+	\caption{Graf prezentující výsledky dotazníku uživatelského prožitku portálu ve srovnání s~hodnotami dalších produktů.}
     \label{img:ueq}
 \end{figure}
 
@@ -756,65 +756,65 @@ Stimulace    & 0.69   & Podprůměrný & 50\% výsledků je lepších, 25\% je h
 Originalita  & -0.35  & Špatný      & Patří mezi 25\% nejhorších výsledků       \\  
 \hline
 \end{tabular}
-\caption{Interpretace výsledků dotazníků uživatelského prožitku portálu ve srovnání s průměrnými hodnotami dalších produktů.}
+\caption{Interpretace výsledků dotazníků uživatelského prožitku portálu ve srovnání s~průměrnými hodnotami dalších produktů.}
 \label{table:ueq}
 \end{table}
 
 
 
-Z výsledků zobrazených v tabulce~\ref{table:ueq} a grafu~\ref{img:ueq} lze usoudit, že většina aspektů portálu je vnímána pozitivně. Za povšimnutí stojí především výborný výsledek v oblasti přehlednosti, což považuji za velký úspěch. Na druhou stranu dotazník odhalil lehce podprůměrné hodnoty v oblasti stimulace a poukázal především na slabou stránku portálu a to jeho originalitu.
+Z~výsledků zobrazených v~tabulce~\ref{table:ueq} a grafu~\ref{img:ueq} lze usoudit, že většina aspektů portálu je vnímána pozitivně. Za povšimnutí stojí především výborný výsledek v~oblasti přehlednosti, což považuji za velký úspěch. Na druhou stranu dotazník odhalil lehce podprůměrné hodnoty v~oblasti stimulace a poukázal především na slabou stránku portálu a to jeho originalitu.
 
-V souhrnu lze tedy portál označit jako pragmaticky velmi kvalitní, s podprůměrnou hedonickou kvalitou.
-Vzhledem k zaměření portálu ovšem nepovažuji hedonickou kvalitu za tolik podstatnou, proto výsledek uživatelského testování vnímám pozitivně.
+V~souhrnu lze tedy portál označit jako pragmaticky velmi kvalitní, s~podprůměrnou hedonickou kvalitou.
+Vzhledem k~zaměření portálu ovšem nepovažuji hedonickou kvalitu za tolik podstatnou, proto výsledek uživatelského testování vnímám pozitivně.
 
 
 
 
 \subsection{Sledování chování uživatelů}\label{section:behaviour}
-Pro získání analýzy chování uživatelů byl využit nástroj Smartlook\footnote{Smatlook: \url{https://www.smartlook.com/cs/}}. K analýze bylo díky tomu dostupných hned několik typů tepelných map sledujících klikání uživatele, pohyb kurzoru myši nebo rolování po stránce. Navíc bylo možné sledovat nahrávky chování uživatelů a přímo tak pozorovat jejich interakci s portálem.
+Pro získání analýzy chování uživatelů byl využit nástroj Smartlook\footnote{Smatlook: \url{https://www.smartlook.com/cs/}}. K~analýze bylo díky tomu dostupných hned několik typů tepelných map sledujících klikání uživatele, pohyb kurzoru myši nebo rolování po stránce. Navíc bylo možné sledovat nahrávky chování uživatelů a přímo tak pozorovat jejich interakci s~portálem.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/heatmap.png}
-	\caption{Tepelná mapa klikání uživatelů na hlavní stránce portálu. Některé části obsahu stránky byly nástrojem pro sledování nahrazeny symbolem \uv{*} z důvodu možného výskytu citlivých údajů.}
+	\caption{Tepelná mapa klikání uživatelů na hlavní stránce portálu. Některé části obsahu stránky byly nástrojem pro sledování nahrazeny symbolem \uv{*} z~důvodu možného výskytu citlivých údajů.}
 	\label{img:heatmap}
 \end{figure}
 
-Výsledky tepelné mapy z obrázku~\ref{img:heatmap}, založené na statistice klikání uživatelů na hlavní stránce, jsou ovlivněny zaznamenáním interakce nejen s vyobrazenou stránkou, ale částečně interakcí i s modálním oknem, překrývajícím tento obsah. Z toho důvodu se v tepelné mapě vyskytují i zdánlivě neopodstatněné oblasti zájmu uživatelů.
+Výsledky tepelné mapy z~obrázku~\ref{img:heatmap}, založené na statistice klikání uživatelů na hlavní stránce, jsou ovlivněny zaznamenáním interakce nejen s~vyobrazenou stránkou, ale částečně interakcí i s~modálním oknem, překrývajícím tento obsah. Z~toho důvodu se v~tepelné mapě vyskytují i zdánlivě neopodstatněné oblasti zájmu uživatelů.
 
-Z mapy je patrné, že fasetová navigace je mezi uživateli velmi oblíbená. Uživatelé dále jeví zájem především o první zobrazený výsledek vyhledávání, část z nich si ale podrobněji prohlédne i níže umístěné výsledky.
+Z~mapy je patrné, že fasetová navigace je mezi uživateli velmi oblíbená. Uživatelé dále jeví zájem především o~první zobrazený výsledek vyhledávání, část z~nich si ale podrobněji prohlédne i níže umístěné výsledky.
 
-Dále lze z mapy vyvodit i nedostatky uživatelského prostředí. Konkrétně ve výběru typu výsledků (\uv{Projects}, \uv{Deliverables}, \uv{Topics}) se uživatelé často snažili kliknout i na informativní popis \uv{Search for:}. Dalším poznatkem je nezájem uživatelů o vyhledávací pole. Napravení těchto nedostatků bude diskutováno v kapitole~\ref{section:improvements}.
+Dále lze z~mapy vyvodit i nedostatky uživatelského prostředí. Konkrétně ve výběru typu výsledků (\uv{Projects}, \uv{Deliverables}, \uv{Topics}) se uživatelé často snažili kliknout i na informativní popis \uv{Search for:}. Dalším poznatkem je nezájem uživatelů o~vyhledávací pole. Napravení těchto nedostatků bude diskutováno v~kapitole~\ref{section:improvements}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{obrazky-figures/scroll-graph.pdf}
-	\caption{Graf znázorňující míru zobrazení výsledků v závislosti na jejich pořadí při zobrazení. Založeno na hodnotách z tepelné mapy~\ref{img:heatmap-scroll}.}
+	\caption{Graf znázorňující míru zobrazení výsledků v~závislosti na jejich pořadí při zobrazení. Založeno na hodnotách z~tepelné mapy~\ref{img:heatmap-scroll}.}
 	\label{img:scroll-graph}
 \end{figure}
 
-Z grafu~\ref{img:scroll-graph} lze vypozorovat, že k zobrazení pátého výsledku vyhledávání se dostane průměrně pouze každý pátý uživatel. Možné řešení bude taktéž probráno v kapitole~\ref{section:improvements}.
+Z~grafu~\ref{img:scroll-graph} lze vypozorovat, že k~zobrazení pátého výsledku vyhledávání se dostane průměrně pouze každý pátý uživatel. Možné řešení bude taktéž probráno v~kapitole~\ref{section:improvements}.
 
 
 \section{Rychlost obnovy dat}
-Prázdnou databázi je možné naplnit 3483 dostupnými tématy výzev za TODO minut. Periodická obnova, prováděna jednou za TODO dní doplní v průměru TODO výzev a TODO jich aktualizuje. Tento proces trvá přibližně TODO minut.
+Prázdnou databázi je možné naplnit 3483 dostupnými tématy výzev za TODO minut. Periodická obnova, prováděna jednou za TODO dní doplní v~průměru TODO výzev a TODO jich aktualizuje. Tento proces trvá přibližně TODO minut.
 
 
 \section{Možnost úprav}\label{section:improvements}
-Současné řešení práce nabízí prostor pro další vylepšení. Za zmínku stojí například implementace našeptávače vyhledávacího vstupní pole pro jednodušší sepisování pokročilejších dotazů. Našeptávač by mohl uživateli nabízet jak názvy jednotlivých polí dokumentů, tak případně i hodnoty těchto polí. Přínosné by mohlo také být zvýraznění dvojice závorek nebo ověřování správnosti vstupu v reálném čase.
+Současné řešení práce nabízí prostor pro další vylepšení. Za zmínku stojí například implementace našeptávače vyhledávacího vstupní pole pro jednodušší sepisování pokročilejších dotazů. Našeptávač by mohl uživateli nabízet jak názvy jednotlivých polí dokumentů, tak případně i hodnoty těchto polí. Přínosné by mohlo také být zvýraznění dvojice závorek nebo ověřování správnosti vstupu v~reálném čase.
 
-Vzhledem k automatickému plnění obsahu portálu může docházet k ukládání nepřesných informací. Pokud uživatel takovou informaci nalezne, bylo by vhodné dát mu možnost tuto situaci nahlásit. Tyto hlášení by mohly být sepsány v přehledu určeném pouze pro správce portálu, který by manuálně provedl nápravu. 
+Vzhledem k~automatickému plnění obsahu portálu může docházet k~ukládání nepřesných informací. Pokud uživatel takovou informaci nalezne, bylo by vhodné dát mu možnost tuto situaci nahlásit. Tyto hlášení by mohly být sepsány v~přehledu určeném pouze pro správce portálu, který by manuálně provedl nápravu. 
 
-Dále by mohlo být užitečné přidat funkcionalitu \uv{hlídacího psa}, kdy by uživatel měl možnost zadat obory jeho zájmu a v případě otevření nové výzvy v daném oboru, by byl uživatel o této příležitosti bezprostředně informován.
+Dále by mohlo být užitečné přidat funkcionalitu \uv{hlídacího psa}, kdy by uživatel měl možnost zadat obory jeho zájmu a v~případě otevření nové výzvy v~daném oboru, by byl uživatel o~této příležitosti bezprostředně informován.
 
-V reakci na poznatky uvedené v kapitole~\ref{section:behaviour} se nabízí několik úprav uživatelského rozhraní. Především je třeba v hlavicče webu graficky odlišit nabízené odkazy pro výběr typu hledání (\uv{Projects}, \uv{Deliverables}, \uv{Topics}) od textového popisu \uv{Search for:}.
-Dále by bylo vhodné vyvolat v uživatelích větší zájem o vyhledávací pole. Toho se lze pokusit docílit například nabízením náhodně vybraných frází, které lze hledat. Tyto fráze by sloužily pouze jako zástupný text (atribut \texttt{placeholder}) a po kliknutí do pole by byl skryt. 
+V~reakci na poznatky uvedené v~kapitole~\ref{section:behaviour} se nabízí několik úprav uživatelského rozhraní. Především je třeba v~hlavicče webu graficky odlišit nabízené odkazy pro výběr typu hledání (\uv{Projects}, \uv{Deliverables}, \uv{Topics}) od textového popisu \uv{Search for:}.
+Dále by bylo vhodné vyvolat v~uživatelích větší zájem o~vyhledávací pole. Toho se lze pokusit docílit například nabízením náhodně vybraných frází, které lze hledat. Tyto fráze by sloužily pouze jako zástupný text (atribut \texttt{placeholder}) a po kliknutí do pole by byl skryt. 
 
 Další možné zlepšení by se mohlo týkat zvýšení viditelnosti níže umístěných výsledků vyhledávání. Pomoci by mohlo kompaktnější prezentování jednotlivých výsledků, alespoň co se týče výšky těchto prvků. Za pokus by stálo prezentovat na jedné stránce více výsledků. Dle průzkumu by tato úprava mohla vést ke značnému zvýšení viditelnosti výsledků, pro jejichž zobrazení je nutné stránku rolovat~\cite{bib:scroll}.
 
 
 
 \chapter{Závěr}
-Hlavním cílem této bakalářské práce bylo navrhnout a realizovat úpravu stávajícího portálu zaměřeného na výsledky evropských projektů. Portál byl úspěšně inovován s použitím novějších verzí technologií použitých v původním řešení. Mimo to byly využity i technologie úplně nové jako například Vue.js. Do obsahu portálu byly úspěšně zakomponovány témata výzev pro podávání návrhů nových projektů. Nad obsahem portálu lze provádět jak plnotextové tak i fasetové hledání. V případě potřeby je možné pomocí dotazovacího jazyka sestrojit pokročilejší dotazy. Úspěšné řešení práce bylo potvrzeno několika experimenty. Pro další rozvoj práce bylo předloženo několik návrhů.
+Hlavním cílem této bakalářské práce bylo navrhnout a realizovat úpravu stávajícího portálu zaměřeného na výsledky evropských projektů. Portál byl úspěšně inovován s~použitím novějších verzí technologií použitých v~původním řešení. Mimo to byly využity i technologie úplně nové jako například Vue.js. Do obsahu portálu byly úspěšně zakomponovány témata výzev pro podávání návrhů nových projektů. Nad obsahem portálu lze provádět jak plnotextové tak i fasetové hledání. V~případě potřeby je možné pomocí dotazovacího jazyka sestrojit pokročilejší dotazy. Úspěšné řešení práce bylo potvrzeno několika experimenty. Pro další rozvoj práce bylo předloženo několik návrhů.
 
-Řešení této práce mi bylo přínosné především rozšířením obzorů v~oblasti nerelačních databázi, hlubším pohledem do principů plnotextového vyhledávání a také seznámením se s používáním systému Vue.js.
+Řešení této práce mi bylo přínosné především rozšířením obzorů v~oblasti nerelačních databázi, hlubším pohledem do principů plnotextového vyhledávání a také seznámením se s~používáním systému Vue.js.
