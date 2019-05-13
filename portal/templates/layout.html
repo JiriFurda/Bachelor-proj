@@ -84,11 +84,6 @@
         </div>
 
     </form>
-    <init-vue-data
-            :facets='{{ layout_data['vue_facets']|safe }}'
-            :es='{{ layout_data['vue_elastic_search']|safe }}'
-            :type="'{{ layout_data['get_arguments'].get('type', 'projects') }}'">
-    </init-vue-data>
     <modal-facet-list></modal-facet-list>
 </div>
 
@@ -101,6 +96,11 @@
 <script src="http://unpkg.com/portal-vue"></script>
 <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
 <script src="/static/js/vue.js"></script>
+<script>
+    vue.$store.commit('initFacetsData', {{ layout_data['vue_facets']|safe }});
+    vue.$store.commit('initEsQuery', {{ layout_data['vue_elastic_search']|safe }});
+    vue.$store.commit('initSearchType', {{ layout_data['get_arguments'].get('type', 'projects') }});
+</script>
 {% block javascript %}{% endblock %}
 </body>
 </html>

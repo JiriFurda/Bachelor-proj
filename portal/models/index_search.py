@@ -168,9 +168,11 @@ class IndexSearch:
             vue_facets += ','
         vue_facets = '[' + vue_facets[:-1] + ']'
 
+        vue_elastic_search = json.dumps(self.search_raw.to_dict())
+
         result = {
             'vue_facets': vue_facets,
-            'vue_elastic_search': json.dumps(self.search_raw.to_dict()),
+            'vue_elastic_search': vue_elastic_search,
             'get_arguments': request.args
         }
 
