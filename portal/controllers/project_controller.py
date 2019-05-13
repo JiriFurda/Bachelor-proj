@@ -44,6 +44,7 @@ def show(project_id):
     similar_response = similar_search.execute()
 
     index_search = IndexSearch.createForIndex(IndexSearch.getSearchType())
+    index_search.execute()
 
     return render_template('projects/show.html',
                            layout_data=index_search.layout_data,
