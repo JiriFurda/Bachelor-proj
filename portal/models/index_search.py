@@ -1,3 +1,21 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+#---------------------------------------------------------------------------#
+#-----------------             BAKALÁŘSKÁ PRÁCE            -----------------#
+#----------------- Aktualizace portálu evropských projektů -----------------#
+#-----------------     a jeho rozšíření o identifikaci     -----------------#
+#-----------------     výsledků, souvisejících s tématy    -----------------#
+#-----------------          nově vypisovaných výzev        -----------------#
+#-----------------              FIT VUT v Brně             -----------------#
+#----------------- Autor: Jiří Furda (2018-2019)           -----------------#
+#----------------- Vedoucí: Doc. RNDr. Pavel Smrž, Ph.D.   -----------------#
+#----------------------- Poslední úpravy: 13.5.2019 ------------------------#
+#--- Soubor: index_search.py                                  Verze: 1.0 ---#
+#-------- http://knot.fit.vutbr.cz/wiki/index.php/rrs_eu_projects14 --------#
+#--------------------- Licence: BUT Open source licence --------------------#
+#---------------------------------------------------------------------------#
+
+
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 from flask import request
@@ -22,10 +40,8 @@ class IndexSearch:
 
         self.search_raw = self.buildSearch()    # Raw query
         self.search = self.buildAggregationsSearch()  # Query with facets aggregations
-        #self.response = self.search.execute()
-        self.response = None
 
-        #self.layout_data = self.prepareLayoutData()
+        self.response = None
         self.layout_data = None
         self.pagination = None
 
@@ -78,6 +94,7 @@ class IndexSearch:
         es_search = es_search[paginate_from:paginate_to]  # @todo Change to scan API becuase of large amount of data
 
         return es_search
+
 
     @staticmethod
     def getFiltersQuery():
@@ -159,12 +176,14 @@ class IndexSearch:
 
         return result
 
+
     @staticmethod
     def createForIndex(index):
         if index == 'projects':
             return IndexSearch('xstane34_projects',
                               'objective',
                               ['acronym^6', 'title^5', 'objective^3', 'fundedUnder.subprogramme^2', 'website.origWeb'])
+
         if index == 'deliverables':
             return IndexSearch('xstane34_deliverables',
                               'deliv.plainText',
@@ -175,6 +194,18 @@ class IndexSearch:
                               'description',
                               ['identifier^6', 'title^5', 'tags^3', 'description'])
 
+        return None
+
+
+    @staticmethod
+    def getSearchType():
+        if request.args.get('type') == 'deliverables' or request.args.get('type') == 'topics':
+            return request.args.get('type')
+
+        return 'projects'
+
+
+    # Mass action methods
     @staticmethod
     def createForEveryIndex():
         return {
@@ -183,12 +214,6 @@ class IndexSearch:
             'topics': IndexSearch.createForIndex('topics')
         }
 
-    @staticmethod
-    def getSearchType():
-        if request.args.get('type') == 'deliverables' or request.args.get('type') == 'topics':
-            return request.args.get('type')
-
-        return 'projects'
 
     @staticmethod
     def executeMany(searches):

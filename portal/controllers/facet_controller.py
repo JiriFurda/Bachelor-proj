@@ -1,4 +1,20 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+#---------------------------------------------------------------------------#
+#-----------------             BAKALÁŘSKÁ PRÁCE            -----------------#
+#----------------- Aktualizace portálu evropských projektů -----------------#
+#-----------------     a jeho rozšíření o identifikaci     -----------------#
+#-----------------     výsledků, souvisejících s tématy    -----------------#
+#-----------------          nově vypisovaných výzev        -----------------#
+#-----------------              FIT VUT v Brně             -----------------#
+#----------------- Autor: Jiří Furda (2018-2019)           -----------------#
+#----------------- Vedoucí: Doc. RNDr. Pavel Smrž, Ph.D.   -----------------#
+#----------------------- Poslední úpravy: 13.5.2019 ------------------------#
+#--- Soubor: facet_controller.py                              Verze: 1.0 ---#
+#-------- http://knot.fit.vutbr.cz/wiki/index.php/rrs_eu_projects14 --------#
+#--------------------- Licence: BUT Open source licence --------------------#
+#---------------------------------------------------------------------------#
+
 
 from flask import Blueprint, Flask, render_template, request, abort, jsonify
 from elasticsearch import Elasticsearch
@@ -6,8 +22,10 @@ from elasticsearch_dsl import Search, Q
 import json, ast
 from models.facet import Facet
 
+
 facet_controller = Blueprint('facets', __name__, url_prefix='/facets')
 client = Elasticsearch()
+
 
 @facet_controller.route('/api/<string:facet_name>')
 def showApi(facet_name):

@@ -1,3 +1,20 @@
+/*
+#---------------------------------------------------------------------------#
+#-----------------             BAKALÁŘSKÁ PRÁCE            -----------------#
+#----------------- Aktualizace portálu evropských projektů -----------------#
+#-----------------     a jeho rozšíření o identifikaci     -----------------#
+#-----------------     výsledků, souvisejících s tématy    -----------------#
+#-----------------          nově vypisovaných výzev        -----------------#
+#-----------------              FIT VUT v Brně             -----------------#
+#----------------- Autor: Jiří Furda (2018-2019)           -----------------#
+#----------------- Vedoucí: Doc. RNDr. Pavel Smrž, Ph.D.   -----------------#
+#----------------------- Poslední úpravy: 13.5.2019 ------------------------#
+#--- Soubor: vue.js                                           Verze: 1.0 ---#
+#-------- http://knot.fit.vutbr.cz/wiki/index.php/rrs_eu_projects14 --------#
+#--------------------- Licence: BUT Open source licence --------------------#
+#---------------------------------------------------------------------------#
+*/
+
 
 Vue.component('sidebar-facet-list', {
     template: `<ul class="list-unstyled"><sidebar-facet v-for="(facet, index) in facets" :index="index"></sidebar-facet></ul>`,
@@ -7,6 +24,7 @@ Vue.component('sidebar-facet-list', {
         }
     }
 });
+
 
 Vue.component('sidebar-facet', {
     props: ['index'],
@@ -78,6 +96,7 @@ Vue.component('sidebar-facet', {
     }
 });
 
+
 Vue.component('option-facet', {
     props: ['option', 'facet'],
     template: `
@@ -109,14 +128,16 @@ Vue.component('option-facet', {
     },
 });
 
+
 Vue.component('modal-facet-list', {
-    template: `<div><modal-facet v-for="(facet, index) in facets" :index="index"></modal-facet></div>`, // <div v-for="facet in store.facets">TEST</div><
+    template: `<div><modal-facet v-for="(facet, index) in facets" :index="index"></modal-facet></div>`,
     computed: {
         facets() {
             return store.state.facets;
         }
     }
 });
+
 
 Vue.component('modal-facet', {
     props: ['index'],
@@ -189,6 +210,7 @@ Vue.component('modal-facet', {
     }
 });
 
+
 Vue.component('search-input', {
     props: ['old-value'],
     template: `
@@ -199,17 +221,6 @@ Vue.component('search-input', {
             </div>
         </div>
     `,
-    computed: {
-        /*
-        query() {
-            let query = this.buildQuery();
-            console.log(query);
-            if(query === '')
-                return this.oldValue;
-            return this.buildQuery();
-        }
-        */
-    },
     methods: {
         buildQuery() {
             let facetQueryArr = [];
@@ -230,6 +241,7 @@ Vue.component('search-input', {
     }
 });
 
+
 const store = new Vuex.Store({
     state: {
         facets: [],
@@ -248,6 +260,7 @@ const store = new Vuex.Store({
         },
     }
 });
+
 
 Vue.component('init-vue-data', {
     props: ['facets', 'es', 'type', 'query'],

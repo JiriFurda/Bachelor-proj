@@ -1,4 +1,20 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+#---------------------------------------------------------------------------#
+#-----------------             BAKALÁŘSKÁ PRÁCE            -----------------#
+#----------------- Aktualizace portálu evropských projektů -----------------#
+#-----------------     a jeho rozšíření o identifikaci     -----------------#
+#-----------------     výsledků, souvisejících s tématy    -----------------#
+#-----------------          nově vypisovaných výzev        -----------------#
+#-----------------              FIT VUT v Brně             -----------------#
+#----------------- Autor: Jiří Furda (2018-2019)           -----------------#
+#----------------- Vedoucí: Doc. RNDr. Pavel Smrž, Ph.D.   -----------------#
+#----------------------- Poslední úpravy: 13.5.2019 ------------------------#
+#--- Soubor: topic_controller.py                              Verze: 1.0 ---#
+#-------- http://knot.fit.vutbr.cz/wiki/index.php/rrs_eu_projects14 --------#
+#--------------------- Licence: BUT Open source licence --------------------#
+#---------------------------------------------------------------------------#
+
 
 from flask import Blueprint, Flask, render_template, request, abort
 from elasticsearch import Elasticsearch
@@ -9,8 +25,10 @@ from models.topic import Topic
 from models.index_search import IndexSearch
 import json
 
+
 topic_controller = Blueprint('topics', __name__, url_prefix='/topics')
 client = Elasticsearch()
+
 
 @topic_controller.route('/')
 def index():
@@ -29,7 +47,6 @@ def index():
     search = search[paginate_from:paginate_to]  # @todo Change to scan API becuase of large amount of data
 
     # Execute the search
-
     response = search.execute()
 
     total = response.hits.total
