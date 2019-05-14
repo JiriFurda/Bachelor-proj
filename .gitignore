@@ -7,3 +7,5 @@ ignore/
 sablona2018/
 
 *.xlsx#
+
+*.odt#
