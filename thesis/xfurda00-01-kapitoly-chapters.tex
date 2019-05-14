@@ -13,6 +13,8 @@ Ve třetí kapitole s~názvem \uv{Návrh a implementace systému} se již zamě�
 Ve čtvrté kapitole pojmenované \uv{Experimenty a vyhodnocení} provedu s~výsledným portálem několik experimentů, následně vyhodnotím jejich výstupy a vyvodím z~nich možná rozšíření portálu.
 V~samém závěru práce pak stručně zhodnotím výsledky této práce.
 
+Výsledek práce je k nahlédnutí online\footnote{European Research Projects Portal: \url{http://athena17.fit.vutbr.cz:2021/}}.
+
 
 
 
@@ -97,9 +99,9 @@ V~případě využití tohoto principu při samotné implementaci designu se pos
 
 Bootstrap\footnote{Bootstrap: \url{https://getbootstrap.com/}} je systém usnadňující vývoj klientské části webových stránek. Byl vyvinut společností Twitter\footnote{Twitter: \url{https://twitter.com/}}, která jej v~roce 2010 vydala jako otevřený software. Pouhé dva roky poté se Bootstrap stal nejoblíbenějším projektem na stránce GitHub\footnote{GitHub: \url{https://github.com/}}. Bootstrap se skládá převážně z~kaskádových stylů. Interaktivní prvky systému využívají skriptovací jazyk JavaScript s~knihovnou jQuery\footnote{jQuery: \url{https://jquery.com/}}. Existují ovšem i další alternativy, které místo jQuery využívají například Vue.js\footnote{BootstrapVue: \url{https://bootstrap-vue.js.org/}}, React\footnote{React Bootstrap: \url{https://react-bootstrap.github.io/}} nebo Angular\footnote{NG Bootstrap: \url{https://ng-bootstrap.github.io/\#/home/}}.
 
-Bootstrap se drží moderních zásad jako je princip \uv{nejdříve mobil} (uvedený v~kapitole~\ref{section:mobile-first}) a nabízí snadnou možnost tvorby responzivního designu (popsaného v~kapitole~\ref{section:responsive}). Mimo to také nabízí možnost využít moderně působící vzhled základních HTML prvků jako jsou například vstupní pole formulářů nebo tlačítka. Bootstrap dále poskytuje i~celou řadu nových předpřipravených komponent, a to ku příkladu karty, modální okna, stránkování, informační hlášky a spoustu dalších.
+Bootstrap se drží moderních zásad jako je princip \uv{nejdříve mobil} (uvedený v~kapitole~\ref{section:mobile-first}) a nabízí snadnou možnost tvorby responzivního designu (popsaného v~kapitole~\ref{section:responsive}). Mimo to také nabízí možnost využít moderně působící vzhled základních HTML prvků jako jsou například vstupní pole formulářů nebo tlačítka. Bootstrap dále poskytuje i~celou řadu nových předem připravených komponent, a to ku příkladu karty, modální okna, stránkování, informační hlášky a spoustu dalších.
 
-Vzhledem ke své rozsáhlé komunitě lze nalézt mnoho dalších, uživateli tvořených komponent nebo dokonce celých hotových šablon webů postavených na tomto systému. Jedna ze stránek, určená pro sdílení takového obsahu, se nazývá Bootsnipp\footnote{Bootsnipp: \url{https://bootsnipp.com/}}.
+Vzhledem ke své rozsáhlé komunitě lze nalézt mnoho dalších uživateli tvořených komponent nebo dokonce celých hotových šablon webů postavených na tomto systému. Jedna ze stránek, určená pro sdílení takového obsahu, se nazývá Bootsnipp\footnote{Bootsnipp: \url{https://bootsnipp.com/}}.
 
 
 
@@ -436,7 +438,7 @@ response = s.execute()
 
 Práce s~dotazy je tedy mnohem snadnější a vývojářům alespoň částečně ubývá rutinní činnost. Obrovskou výhodou je možnost sestrojení dotazu pomocí zřetězených funkcí. Díky této funkci knihovny lze dotaz v~průběhu programu jednoduše rozšiřovat a kód se tak nemusí stát těžko čitelným.
 
-Objekt dotazu je v~knihovně reprezentován třídou \texttt{Search}. Tu lze ale kdykoliv převést do slovníku odpovídajícímu klasickému dotazu ve formátu JSON pomocí metody \texttt{to\_dict()}. Stejně tak je možné dotaz napsaný ve slovníku převést do objektu knihovny Elasticsearch DSL použitím metody \texttt{from\_dict()}. Tato funkcionalita zajišťuje zpětnou kompatibilitu s~programy využívajícími například jen nízkoúrovňového klienta Python Elasticsearch Client bez nutností zásahu do stávajícího kódu.
+Objekt dotazu je v~knihovně reprezentován třídou \texttt{Search}. Tu lze ale kdykoliv převést do slovníku odpovídajícímu klasickému dotazu ve formátu JSON pomocí metody \texttt{to\_dict()}. Stejně tak je možné dotaz napsaný ve slovníku převést do objektu knihovny Elasticsearch DSL použitím metody \texttt{from\_dict()}. Tato funkcionalita umožňuje bez nutnosti zásahu do stávajícího kódu zpětnou kompatibilitu s~aplikacemi využívajícími například jen nízkoúrovňového klienta Python Elasticsearch Client.
 
 
 
@@ -598,9 +600,6 @@ Rozsáhlejší výpis možností dané fasety se nyní oproti původnímu řeše
 \subsubsection*{Fasetová možnost}
 Jednotlivé fasetové možnosti jsou reprezentovány komponentou \texttt{option-facet}, která zobrazuje zaškrtávací pole, název dané možnosti a počet výsledků aktuálního vyhledávání obsahující tuto možnost. Při zaškrtnutí možnosti se její data zkopírují do proměnné \texttt{checkedOptions} příslušné fasety. Tato komponenta se vyskytuje jak v~modálním okně, tak i~v~postranním panelu.
 
-\subsubsection*{Inicializace dat}
-Na každé stránce portálu se vyskytuje právě jednou komponenta \texttt{init-facet-data}, která jednorázově obstará naplnění proměnných skriptovacího jazyka JavaScript.
-
 \subsection{Implementace vyhledávání}\label{section:search}
 Samotné vyhledávání obstarává třída \texttt{IndexSearch}, při svém vytvoření uloží vstupní parametry a sestaví dotazy pro Elasticsearch. Mezi tyto parametry patří
 \begin{itemize}
@@ -615,7 +614,7 @@ První z~dotazů je vytvořen tuto metodou, která zpracuje všechny parametry t
 Druhý dotaz vzniká rozšířením dotazu z~metody \texttt{buildSearch()}. Je obohacen o~agregaci fasetových hodnot, které jsou poté zobrazeny v~postranním panelu.
 
 \subsubsection*{prepareLayoutData()}
-Poté ,co byly výše zmíněné dotazy vykonány, je třeba výsledky zpracovat a připravit pro předání do odpovídajících komponent. Výsledkem této funkce jsou tři struktury formátu JSON zabalené ve slovníku, obsahující data využívané pro inicializaci komponent v~šabloně.
+Poté, co byly výše zmíněné dotazy vykonány, je třeba výsledky zpracovat a připravit pro předání do odpovídajících komponent. Výsledkem této funkce jsou tři struktury formátu JSON zabalené ve slovníku, obsahující data využívané pro inicializaci komponent v~šabloně.
 
 Jedna ze struktur, které je poté uložena do skladu knihovny Vuex může vypadat například následovně:
 
@@ -664,17 +663,17 @@ Každá z~hodnot faset je zase reprezentována objektem o~třech atributech:
 \end{itemize}
 
 \subsubsection*{createForIndex()}
-Protože se v~portálu vytváří hledání na vícero místech, vytvořil jsem statickou metodu třídy \texttt{IndexSearch}, která vrací předpřipravenou instanci této třídy pro hledání v~jednom z~typů obsahu portálu. Tato funkce očekává ve svém jediném parametru řetězec, určující typ hledání (\texttt{projects}, \texttt{deliverables} nebo \texttt{topics})
+Protože se v~portálu vytváří hledání na vícero místech, vytvořil jsem statickou metodu třídy \texttt{IndexSearch}, která vrací předem připravenou instanci této třídy, určenou pro hledání v~jednom z~typů obsahu portálu. Tato funkce očekává ve svém jediném parametru řetězec, určující typ hledání (\texttt{projects}, \texttt{deliverables} nebo \texttt{topics})
 
 \subsubsection*{Hromadné akce}
 Pro případy, kdy je potřeba pracovat s~několika hledáními naráz, si lze práci ušetřit využitím dalších statických metod třídy \texttt{IndexSearch} a to konkrétně metoda \texttt{createForEveryIndex()}, která vrací slovník se všemi třemi možnými typy hledání, a poté také \texttt{executeMany()}, která vykoná hledání všech instancí \texttt{IndexSearch} ve slovníku předaném této funkci v~parametru. 
 
 \subsection{Vyhledávání hodnot faset}
-Protože ve fasetách lze asynchronně vyhledávat, bylo nutné napsat aplikační rozhraní propojující databázi Elasticsearch s~Vue komponentou reprezentující toto vyhledávání. Tuto činnost obstarává funkce \texttt{showApi()} v~kontroleru \texttt{facet\_controller}.
+Protože ve fasetách lze asynchronně vyhledávat, bylo nutné napsat aplikační rozhraní propojující databázi Elasticsearch s~komponentou systému Vue.js reprezentující toto vyhledávání. Tuto činnost obstarává funkce \texttt{showApi()} v~kontroleru \texttt{facet\_controller}.
 
 Jako parametr, který je předán cestou URL adresy očekává platný název fasety, pro kterou existuje model třídy \texttt{Facet}. Další parametry jsou předávány metodou GET protokolu HTTP. Prvním povinným parametrem je znění původního dotazu na Elasticsearch. Díky tomuto parametru výsledky funkce korespondují s~kontextem aktuálního vyhledávání v~portálu. Dalším parametrem je pak klíčové slovo nebo jeho část, které se hledá v~dostupných hodnotách fasety. 
 
-Po úspěšném dotazu funkce vrací strukturu JSON ve stejném tvaru jako například v~\texttt{checkedOptions} zmiňovaném v~kapitole~\ref{section:search}.
+Po úspěšném dotazu funkce vrací strukturu formátu JSON ve stejném tvaru jako například v~\texttt{checkedOptions} zmiňovaném v~kapitole~\ref{section:search}.
 
 \subsection{Dotazovací jazyk}
 \blindtext[2]
@@ -702,11 +701,11 @@ Jednoduchá metoda převádějící data uvedená v~konstruktoru objektu do slov
 \chapter{Experimenty a vyhodnocení}
 Tato kapitola popisuje experimenty prováděné za účelem zhodnocení výsledku práce. Část testování byla směřována přímo na uživatele a skládala se jak z~jejich implicitní, tak z~i explicitní zpětné vazby. V~závěru kapitoly jsou diskutována možná budoucí vylepšení portálu.
 
-\section{Testování na uživatelích}
-Do testování portálu se zapojilo 25 uživatelů. Během procházení webového portálu bylo sledováno chování všech těchto uživatelů a následně tato data sloužila pro vytvoření statistik oblastí zájmů. 19 z~uživatelů navíc vyplnilo dotazník a tím poskytli přímé sdělení svých dojmů z~portálu. 
+\section{Testování s uživateli}
+Do testování portálu se zapojilo 27~uživatelů. Během procházení webového portálu bylo sledováno chování všech těchto uživatelů a následně tato data sloužila pro vytvoření statistik oblastí zájmů. Z~těchto uživatelů navíc 23 vyplnilo dotazník, a tím poskytli přímé sdělení svých dojmů z~portálu. 
 
 \subsection{Dotazník uživatelského prožitku}
-\emph{Tato kapitola čerpá z~\cite{bib:ueq}}.
+\emph{Návrh dotazníku čerpá z~\cite{bib:ueq}}.
 
 Dotazník, zaměřený na uživatelský prožitek (UX neboli \emph{user experience}), se skládal z~26 otázek zaměřených na šest různých aspektů portálu.
 \begin{itemize}
@@ -723,11 +722,11 @@ Na všechny otázky bylo možné odpovědět pomocí škály od 1 do 7, přičem
 
 Obsah dotazníku vycházel z~otázek UEQ\footnote{UEQ: \url{https://www.ueq-online.org/}} (\emph{User Experience Questionnaire}) a respondentům byl prezentován pomocí nástroje Google Formuláře\footnote{Google Formuláře: \url{https://www.google.com/intl/cs_CZ/forms/about/}}.
 
-Dotazník vyplnilo 19 respondentů, nejčastěji se jednalo o~muže v~období ranní dospělosti. Vzorek účastníku byl složen z~pokročilých uživatelů internetu a pouze několik jedinců mělo předchozí zkušenost s~portály podobného zaměření. Výsledky dotazníku jsou zobrazeny v~grafu~\ref{img:ueq-result}.
+Dotazník vyplnilo 23~respondentů, nejčastěji se jednalo o~muže v~období rané dospělosti. Vzorek účastníku byl složen z~pokročilých uživatelů internetu a pouze několik jedinců mělo předchozí zkušenost s~portály podobného zaměření. Výsledky dotazníku jsou zobrazeny v~grafu~\ref{img:ueq-result}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{obrazky-figures/ueq-result.pdf}
+	\includegraphics[width=0.9\textwidth]{obrazky-figures/ueq-result.pdf}
 	\caption{Graf prezentující výsledky dotazníku uživatelského prožitku portálu. Hodnoty větší než 0.8 (znázorněny zeleným pozadím) jsou považovaný za pozitivní, hodnoty mezi 0.8 a -0.8 jsou označovaný za neutrální (žluté pozadí) a hodnoty pod -0.8 (červené pozadí) značí negativní výsledek.}
     \label{img:ueq-result}
 \end{figure}
@@ -736,7 +735,7 @@ Pro relevantnější vyhodnocení odpovědí je k~dispozici oficiální srovnán
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{obrazky-figures/ueq.pdf}
+	\includegraphics[width=\textwidth]{obrazky-figures/ueq-benchmark.pdf}
 	\caption{Graf prezentující výsledky dotazníku uživatelského prožitku portálu ve srovnání s~hodnotami dalších produktů.}
     \label{img:ueq}
 \end{figure}
@@ -748,12 +747,12 @@ Pro relevantnější vyhodnocení odpovědí je k~dispozici oficiální srovnán
 \hline
 Aspekt       & Průměr & Výsledek    & Interpretace                              \\
 \hline
-Atraktivita  & 1.38   & Nadprůměrný & 25\% výsledků je lepších, 50\% je horších \\
-Přehlednost  & 2.06   & Vynikající  & Patří mezi 10\% nejlepších výsledků       \\
-Účinnost     & 1.83   & Vynikající  & Patří mezi 10\% nejlepších výsledků       \\
-Spolehlivost & 1.71   & Vynikající  & Patří mezi 10\% nejlepších výsledků       \\
-Stimulace    & 0.69   & Podprůměrný & 50\% výsledků je lepších, 25\% je horších \\
-Originalita  & -0.35  & Špatný      & Patří mezi 25\% nejhorších výsledků       \\  
+Atraktivita  & 1.57   & Dobrý       & 10\% výsledků je lepších, 75\% je horších \\
+Přehlednost  & 1.97   & Vynikající  & Patří mezi 10\% nejlepších výsledků       \\
+Účinnost     & 2.08   & Vynikající  & Patří mezi 10\% nejlepších výsledků       \\
+Spolehlivost & 1.70   & Vynikající  & Patří mezi 10\% nejlepších výsledků       \\
+Stimulace    & 0.97   & Podprůměrný & 50\% výsledků je lepších, 25\% je horších \\
+Originalita  & -0.11  & Špatný      & Patří mezi 25\% nejhorších výsledků       \\  
 \hline
 \end{tabular}
 \caption{Interpretace výsledků dotazníků uživatelského prožitku portálu ve srovnání s~průměrnými hodnotami dalších produktů.}
@@ -775,7 +774,7 @@ Pro získání analýzy chování uživatelů byl využit nástroj Smartlook\foo
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{obrazky-figures/heatmap.png}
+	\includegraphics[width=\textwidth]{obrazky-figures/heatmap-click.png}
 	\caption{Tepelná mapa klikání uživatelů na hlavní stránce portálu. Některé části obsahu stránky byly nástrojem pro sledování nahrazeny symbolem \uv{*} z~důvodu možného výskytu citlivých údajů.}
 	\label{img:heatmap}
 \end{figure}
@@ -818,3 +817,5 @@ Další možné zlepšení by se mohlo týkat zvýšení viditelnosti níže um�
 Hlavním cílem této bakalářské práce bylo navrhnout a realizovat úpravu stávajícího portálu zaměřeného na výsledky evropských projektů. Portál byl úspěšně inovován s~použitím novějších verzí technologií použitých v~původním řešení. Mimo to byly využity i technologie úplně nové jako například Vue.js. Do obsahu portálu byly úspěšně zakomponovány témata výzev pro podávání návrhů nových projektů. Nad obsahem portálu lze provádět jak plnotextové tak i fasetové hledání. V~případě potřeby je možné pomocí dotazovacího jazyka sestrojit pokročilejší dotazy. Úspěšné řešení práce bylo potvrzeno několika experimenty. Pro další rozvoj práce bylo předloženo několik návrhů.
 
 Řešení této práce mi bylo přínosné především rozšířením obzorů v~oblasti nerelačních databázi, hlubším pohledem do principů plnotextového vyhledávání a také seznámením se s~používáním systému Vue.js.
+
+Výsledný portál je k dispozici online\footnote{European Research Projects Portal: \url{http://athena17.fit.vutbr.cz:2021/}}.
