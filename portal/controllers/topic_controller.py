@@ -30,36 +30,6 @@ topic_controller = Blueprint('topics', __name__, url_prefix='/topics')
 client = Elasticsearch()
 
 
-@topic_controller.route('/')
-def index():
-    search = Search(using=client, index='xfurda00_topics')
-
-    if request.args.has_key('query') and request.args.get('query') != '':
-        search = search.query(
-            Q('multi_match', query=request.args.get('query'),
-              fields=['identifier^6', 'title^5', 'tags^3', 'description']))
-
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    per_page = 10
-    paginate_from = (page - 1) * per_page
-    paginate_to = paginate_from + per_page
-    search = search[paginate_from:paginate_to]  # @todo Change to scan API becuase of large amount of data
-
-    # Execute the search
-    response = search.execute()
-
-    total = response.hits.total
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
-
-    return render_template('topics/index.html', results=response,
-                           get_arguments=request.args,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination)
-
-
 @topic_controller.route('/<string:topic_id>')
 def show(topic_id):
     s = Search(using=client, index="xfurda00_topics") \
@@ -74,8 +44,9 @@ def show(topic_id):
 
     searches = IndexSearch.createForEveryIndex()
     for (name, search) in searches.items():
-        search.search_raw = search.search_raw.query('match', topics__code__keyword=topic.identifier)
-        search.search = search.search.query('match', topics__code__keyword=topic.identifier)
+        if name != 'topics':
+            search.search_raw = search.search_raw.query('match', topics__code__keyword=topic.identifier)
+            search.search = search.search.query('match', topics__code__keyword=topic.identifier)
     IndexSearch.executeMany(searches)
 
     parsed_vue_facets = json.loads(searches['projects'].layout_data['vue_facets'])
@@ -87,7 +58,11 @@ def show(topic_id):
 
     similar_search = Search(using=client,
                             index="xfurda00_topics")
-    similar_search = similar_search.query(MoreLikeThis(like={'_id': topic.meta.id, '_index': 'xfurda00_topics', 'fields': ['tags', 'title^3']}))
+    similar_search = similar_search.query(MoreLikeThis(like={
+        '_id': topic.meta.id,
+        '_index': 'xfurda00_topics',
+        'fields': ['tags', 'title^3']
+    }))
 
     similar_response = similar_search.execute()
 
