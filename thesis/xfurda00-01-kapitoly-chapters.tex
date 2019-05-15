@@ -1,5 +1,5 @@
 \chapter{Úvod}
-Webové portály jsou v~současné době nedílnou součástí internetu. Umožňují jejím návštěvníkům získat na jednom místě relevantní informace shromážděné z~vícero různých zdrojů~\cite{bib:portal-liferay}.
+Webové portály jsou v~současné době nedílnou součástí internetu. Umožňují jejich návštěvníkům získat na jednom místě relevantní informace shromážděné z~vícero různých zdrojů~\cite{bib:portal-liferay}.
 
 Cílem této bakalářské práce je rozšíření stávajícího portálu, zaměřeného na výsledky evropských projektů. Od vytvoření tohoto portálu již uplynulo několik let, a proto bylo třeba jej upravit pro použití novějších verzí knihoven. Při této činnosti bylo kompletně přepracováno uživatelské rozhraní a obsah tohoto portálu byl rozšířen o~témata nově vypsaných výzev.
 
@@ -9,7 +9,7 @@ Tato práce vychází z~bakalářské práce \emph{Automaticky aktualizovaný we
 Webový portál byl od základu implementován znovu s~použitím modernějších technologií a čistějšího zdrojového kódu. Extrakce dat zůstala zachována, pouze byla rozšířena o~extrakci témat výzev k~předkládání návrhů.
 
 V~druhé kapitole práce, nazvané \uv{Rozbor řešené problematiky}, nejprve stručně shrnu základní principy vývoje webových stránek a poté přiblížím několik technologií, které jsem při tvorbě této bakalářské práce využil.
-Ve třetí kapitole s~názvem \uv{Návrh a implementace systému} se již zaměřím na konkrétní řešení této práce, uvedu několik obrázků z~výsledného portálu, jež je výsledkem této práce, a popíšu několik zajímavých částí samotného kódu.
+Ve třetí kapitole s~názvem \uv{Návrh a implementace systému} se již zaměřím na konkrétní řešení této práce, uvedu několik obrázků z~výsledného portálu, jež je výsledkem této práce, a popíši několik zajímavých částí samotného kódu.
 Ve čtvrté kapitole pojmenované \uv{Experimenty a vyhodnocení} provedu s~výsledným portálem několik experimentů, následně vyhodnotím jejich výstupy a vyvodím z~nich možná rozšíření portálu.
 V~samém závěru práce pak stručně zhodnotím výsledky této práce.
 
@@ -29,7 +29,7 @@ Tato kapitola v~úvodu přibližuje základní koncepci vývoje webu a praktiky,
 Z~pohledu vývoje nejen webových stránek je zvykem projekt rozlišovat do dvou vrstev. Tou první je klientská část (anglicky \emph{frontend}) a druhou je serverová část (anglicky \emph{backend}).
 
 Klientská část webu je to, co uživatel vidí, když stránku navštíví. Sestavení této části se v~žádném případě neobejde bez značkovacího jazyka HTML (\emph{Hypertext Markup Language}), který udává strukturu a obsah webové stránky. Další nedílnou součástí jsou kaskádové styly neboli CSS (\emph{Cascading Style Sheets}). Ty ovlivňují, jak bude obsah stránky esteticky působit. Další součástí, se kterou se setkáte téměř na každém webu, je skriptovací jazyk JavaScript, který umožňuje webové stránky obohatit o~interaktivitu.
-Zpracování této části webu probíhá na straně klienta - tedy internetovému prohlížeči uživatele. Na základě tohoto faktu lze každé stránce na internetu \uv{nahlédnout pod pokličku} a zdrojové kódy klientské části zobrazit. Ve většině případů je možné i~rovnou v~internetovém prohlížeči tyto kódy upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům webu se tyto změny nijak neprojeví.
+Zpracování této části webu probíhá na straně klienta - tedy internetovému prohlížeči uživatele. Na základě tohoto faktu lze každé stránce na internetu zobrazit zdrojové kódy klientské části. Ve většině případů je možné i~rovnou v~internetovém prohlížeči tyto kódy upravit, což má samozřejmě vliv jen pro současného uživatele a ostatním návštěvníkům webu se tyto změny nijak neprojeví.
 
 Oproti tomu serverová část je od uživatele izolována a zdrojové kódy pro něj nejsou přístupné, pokud je sám autor někde nezveřejní. Jejich interpretace totiž probíhá přímo na serveru a ten poté klientovi odešle již zpracovanou odpověď, obsahující pouze zdrojové kódy klientské části. Výběr technologie implementace serverové části je podstatně rozmanitější, patří mezi ně například Python, PHP, Java, C\#, C++, .NET, Ruby a další. Díky prostředí Node.js\footnote{Node.js: \url{https://nodejs.org/en/}} lze ale využít i~dříve zmiňovaný JavaScript, který pro tento účel nebyl primárně určen. 
 
@@ -41,7 +41,7 @@ Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhran�
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{obrazky-figures/mvc.png}
+	\includegraphics[width=\textwidth]{obrazky-figures/mvc.pdf}
 	\caption{Diagram toku akcí při využití architektury MVC. \emph{Převzato z~\cite{bib:mvc}}}
 	\label{img:mvc}
 \end{figure}
@@ -59,7 +59,7 @@ Oddělením těchto celků je zajištěna lepší organizovanost zdrojových kó
 \subsection{Responzivita}\label{section:responsive}
 \emph{Tato kapitola čerpá z~\cite{bib:responsive}}.
 
-Responzivní design, jak název vypovídá, je design, který je schopný reagovat. Stránka, která má takový design, se přizpůsobuje zařízení, na kterém je právě zobrazena. Díky tomu lze pohodlně prohlížet tu stejnou webovou stránku jak na desktopovém, tak i mobilním zařízení. 
+Responzivní design, jak název vypovídá, je design, který je schopný reagovat. Stránka, která má takový design, se přizpůsobuje zařízení, na kterém je právě zobrazena. Díky tomu lze pohodlně prohlížet tu stejnou webovou stránku jak na stolním počítači, tak i mobilním zařízení. 
 
 Před několika lety bylo zvykem tvořit webové stránky s~pevnou šířkou obsahu. Tato šířka byla volena tak, aby bylo možné stránku zobrazit jak na starších monitorech s~poměrem stran 4:3, tak i~na modernějších širokoúhlých monitorech. 
 
@@ -87,11 +87,11 @@ Takto obalené styly budou aplikovány jen v~případě, že zobrazovací zaří
 
 
 \subsection{Princip nejdříve mobil}\label{section:mobile-first}
-Ustálenou technikou, jak vyvíjet responzivní design webových stránek, je princip \uv{nejdříve mobil} (anglicky \emph{mobile-first}). Jak název vypovídá, základní myšlenkou tohoto principu je nejdříve myslet na mobilní zařízení, a až poté na desktopová zařízení. Tento přístup je možné aplikovat jak pro samotný návrh designu, tak i~pro jeho následnou implementaci.
+Ustálenou technikou, jak vyvíjet responzivní design webových stránek, je princip \uv{nejdříve mobil} (anglicky \emph{mobile-first}). Jak název vypovídá, základní myšlenkou tohoto principu je nejdříve myslet na mobilní zařízení, a až poté na stolní počítač. Tento přístup je možné aplikovat jak pro samotný návrh designu, tak i~pro jeho následnou implementaci.
 
-Protože mobilní zařízení nabízejí o~mnoho menší zobrazovací plochu než desktop, je zde každý kus prostoru drahocenný. Designér si proto musí nejprve ujasnit, které části webové stránky jsou pro uživatele prioritní a na základě těchto priorit sestavit návrh.
+Protože mobilní zařízení nabízejí o~mnoho menší zobrazovací plochu než stolní počítače, je zde každý kus prostoru drahocenný. Designér si proto musí nejprve ujasnit, které části webové stránky jsou pro uživatele prioritní a na základě těchto priorit sestavit návrh.
 
-V~případě využití tohoto principu při samotné implementaci designu se postupuje obdobně. Pokud jsou všechny kaskádové styly jak pro mobilní, tak pro desktopová zařízení zapsána v~jednom souboru, bude tento soubor na začátku nejprve obsahovat styly společné pro obě zařízení a styly určené pouze pro mobilní zařízení. Až poté se budou v~souboru objevovat specifické styly, nejpravděpodobněji podmíněné hodnotou vlastnosti \texttt{min-width}. Tyto styly budou aplikovány od určité šířky displeje a budou zaměřené na zobrazení například v~desktopových zařízeních. Díky tomuto přístupu bude samotný kód stylů zjednodušen. U~mobilních zařízení bývá zpravidla potřeba méně stylů a často lze využít některé z~výchozích vlastností daných prvků~\cite{bib:mobile-first}.
+V~případě využití tohoto principu při samotné implementaci designu se postupuje obdobně. Pokud jsou všechny kaskádové styly jak pro mobilní, tak pro stolní počítače zapsána v~jednom souboru, bude tento soubor na začátku nejprve obsahovat styly společné pro obě zařízení a styly určené pouze pro mobilní zařízení. Až poté se budou v~souboru objevovat specifické styly, nejpravděpodobněji podmíněné hodnotou vlastnosti \texttt{min-width}. Tyto styly budou aplikovány od určité šířky displeje a budou zaměřené na zobrazení například na stolních počítačích. Díky tomuto přístupu bude samotný kód stylů zjednodušen. U~mobilních zařízení bývá zpravidla potřeba méně stylů a často lze využít některé z~výchozích vlastností daných prvků~\cite{bib:mobile-first}.
 
 
 \section{Boostrap}
@@ -150,7 +150,7 @@ Mezi základní pilíře návrhového vzoru Flux patří několik následující
 
 \begin{itemize}
     \item \textbf{Jediný zdroj pravdy.} Data, která jsou sdílena více komponentami, jsou uložena na jednom místě - sklad (anglicky \emph{store}) a jsou oddělena od komponent, které je využívají. Komponenty mohou stále mít svá lokální data, ale nesmějí udržovat svou vlastní kopii sdílených dat, ty se vždy musí číst přímo ze skladu.
-    \item \textbf{Data pouze ke čtení.} Komponenty nesmějí přímo upravovat data ve skladu. V~případě potřeby změny těchto dat sklad pouze informují a ten se sám o~postará o~provedení změny pomocí tzv.~mutací (reprezentovány uzlem \emph{Mutations} v~grafu \ref{img:vuex-dataflow}). Díky tomuto přístupu se minimalizuje šance nepředpokládaných změn sdílených dat a funkce, starající se o~tyto změny, jsou jednodušeji dohledatelné.
+    \item \textbf{Data pouze ke čtení.} Komponenty nesmějí přímo upravovat data ve skladu. V~případě potřeby změny těchto dat sklad pouze informují a ten se sám o~postará o~provedení změny pomocí tzv.~mutací (reprezentovány uzlem \emph{Mutations} v~grafu \ref{img:vuex-dataflow}). Díky tomuto přístupu se minimalizuje šance nepředpokládaných změn sdílených dat a funkce, starající se o~tyto změny, jsou přehledněji umístěné.
     \item \textbf{Změny dat jsou synchronní.} Asynchronní provádění operací mnohdy přináší spoustu výhod, v~tomto případě je ale vyžadováno mutace provádět synchronně kvůli odstranění závislosti na pořadí a načasování různých událostí.
 \end{itemize}
 
@@ -380,8 +380,6 @@ Při využití algoritmické stematizace sice analyzátor nemusí znát všechna
 
 Druhým způsobem, který lze využít je stematizace na základě slovníku. Díky tomu jsou převedené tvary přesnější než ty získané algoritmem. Hlavním předpokladem v~této metodě je ovšem využití vhodného slovníku s~dostatečnou zásobou slov.
 
-\subsection{Podobnostní hledání}
-\blindtext[2]
 
 \subsection{Knihovny}
 Společnost Elastic\footnote{Elastic: \url{https://www.elastic.co/}} také vyvíjí několik oficiálně podporovaných nízkoúrovňových klientů systému Elasticsearch, určených pro mnoho populárních programovacích jazyků. Patří mezi ně například Java, JavaScript, Go, .NET, PHP, Perl nebo Python~\cite{bib:elastic-clients}.
@@ -441,14 +439,7 @@ Práce s~dotazy je tedy mnohem snadnější a vývojářům alespoň částečn�
 Objekt dotazu je v~knihovně reprezentován třídou \texttt{Search}. Tu lze ale kdykoliv převést do slovníku odpovídajícímu klasickému dotazu ve formátu JSON pomocí metody \texttt{to\_dict()}. Stejně tak je možné dotaz napsaný ve slovníku převést do objektu knihovny Elasticsearch DSL použitím metody \texttt{from\_dict()}. Tato funkcionalita umožňuje bez nutnosti zásahu do stávajícího kódu zpětnou kompatibilitu s~aplikacemi využívajícími například jen nízkoúrovňového klienta Python Elasticsearch Client.
 
 
-
-\section{Podobnostní hledání}
-Na webových stránkách je zvykem uživateli doporučovat další obsah na základě sdílených charakteristik s~právě prohlíženým obsahem. Příkladem může být čtení článku na zpravodajském webu. Pro takové doporučení se používá několik různých přístupů.
-
-\subsection{Hledání souvisejících dokumentů}
-\blindtext[2]
-
-\subsection{Kontextové procházení}
+\section{Kontextové procházení}
 \emph{Tato kapitola čerpá z~\cite{bib:similarity-context}}.
 
 Pro zobrazení relevantnějších výsledků vyhledávání lze využít kontext hledání uživatele. V~takovém případě se při počítání skóre relevantnosti nepracuje pouze s~aktuálním hledáním, ale i s~historií uživatele. Díky tomu je docíleno přizpůsobení výsledků přímo pro daného uživatele.
@@ -503,18 +494,18 @@ The Funding \& Tenders Portal\footnote{The Funding \& Tenders Portal: \url{https
 V~případě zájmu o~zažádání financování výzkumu je nutné nejprve prostřednictvím toho portálu najít výzvu k~předkládání návrhů v~odpovídajícím odvětví a dodržet konkrétní postup pro podání žádosti~\cite{bib:funding-find}.
 
 \subsection{Projekty a odevzdávané zprávy}
-\blindtext
+Informace o~projektech jsou čerpány z~portálu CORDIS, stejně jako většina odevzdávaných zpráv. Některé další zprávy jsou získávány přímo ze stránek jednotlivých projektů. Pro získání a zpracování těchto dat je využit extraktor dat z bakalářské práce, jejíž autorem je Petr Staněk~\cite{bib:stanek}.
 
 \subsubsection*{CORDIS}
-CORDIS\footnote{CORDIS: \url{https://cordis.europa.eu/}} (\emph{The Community Research and Development Information Service}) je portál provozovaný Evropskou Unií (dále jen EU) sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v~rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o~těchto projektech, tak i~o~jejích účastnících, vědeckých zprávách a publikacích~\cite{bib:cordis}.
+CORDIS\footnote{CORDIS: \url{https://cordis.europa.eu/}} (\emph{The Community Research and Development Information Service}) je portál provozovaný Úřadem pro úřední tisky Evropské Unie sloužící jako hlavní zdroj výsledků projektů, sponzorovaných v~rámci programů EU pro výzkum a inovaci. Na jednom místě veřejně poskytuje informace jak o~těchto projektech, tak i~o~jejích účastnících, vědeckých zprávách a publikacích~\cite{bib:cordis}.
 
 
 
 \section{Webový portál}
-Výsledný webový portál umožňuje uživateli prohlížet a vyhledávat data získána extraktorem dat. Jeho finální podoba je dostupná online na školním serveru athena17\footnote{Portál na serveru athena17: \url{http://athena17.fit.vutbr.cz:2021/}}. V~této kapitole je výsledný portál podrobně rozebrán.
+Výsledný webový portál umožňuje uživateli prohlížet a vyhledávat data získána extraktorem dat. V~této kapitole je výsledný portál podrobně rozebrán.
 
 \subsection{Vizuální podoba}
-Vizuální struktura vytvořeného webového portálu lze rozdělit do tří hlavních celků - hlavičky, postranního panelu a hlavního obsahu stránky. První dva z~těchto celků jsou určeny pro specifikaci vyhledávání. Aby bylo vyhledávání při procházení portálu vždy dostupné, pozice těchto celků v~desktopovém zobrazení zůstává neměnná i~při rolování zobrazené stránky.
+Vizuální struktura vytvořeného webového portálu lze rozdělit do tří hlavních celků - hlavičky, postranního panelu a hlavního obsahu stránky. První dva z~těchto celků jsou určeny pro specifikaci vyhledávání. Aby bylo vyhledávání při procházení portálu vždy dostupné, pozice těchto celků ve verzi pro stolní počítače zůstává neměnná i~při rolování zobrazené stránky.
 
 Portál obsahuje obecně dva typy stránek. Prvním typem jsou stránky obsahující výsledky vyhledávání, které lze vidět na snímku~\ref{image:portal-results}. V~případě úspěšného hledání lze z~těchto výsledků pomocí odkazů \uv{View topic} nebo \uv{View project} přejít na detailní stránku konkrétního výsledku. Tento typ stránek ovšem existuje pouze pro témata a projekty. U~odevzdaných zpráv se místo stránky detailu zobrazí přímo daný dokument. Příklad stránky detailu výsledku je vyobrazen na snímku~\ref{image:portal-detail}.
 
@@ -676,7 +667,12 @@ Jako parametr, který je předán cestou URL adresy očekává platný název fa
 Po úspěšném dotazu funkce vrací strukturu formátu JSON ve stejném tvaru jako například v~\texttt{checkedOptions} zmiňovaném v~kapitole~\ref{section:search}.
 
 \subsection{Dotazovací jazyk}
-\blindtext[2]
+Pokročilí uživatelé portálu mají možnost při vyhledávání sepsat složitější dotazy. Toho je docíleno díky využití dotazu typu \texttt{query\_string}, který nabízí systém Elasticsearch. V~takovém dotaze je možné využít například logické operátory \texttt{AND} a \texttt{OR}, žolíkový znak \texttt{?}, který může zastupovat libovolný řetězec nebo žolíkový znak \texttt{*}, který se chová obdobně, ale připouští i variantu prázdného řetězce. Dále jsou k~dispozici kulaté závorky, díky kterým lze části dotazu seskupit či dokonce vnořit. Další speciální funkci má znaménko \texttt{-}, díky kterému lze například označit, které slovo se ve výsledcích nemá objevit, oproti tomu znaménko \texttt{+} daný výraz ve výsledku vyžaduje. Text v~uvozovkách zase označuje hledání přesné shody namísto plnotextového hledání.
+
+Při použití pokročilých dotazů lze také specifikovat, kterých polí se daná část dotazu týká. Díky vyhledávání fráze \texttt{title:Oil} se dané slovo bude hledat výhradně v~názvu výzvy a ne například v~jejím obsahu.
+
+
+Dotaz \texttt{title:Innovation AND tags:("smart cities"~OR "bio*")} tedy nalezne všechny výzvy, které mají v názvu slovo \texttt{Innovation} a zároveň mají ve svých značkách frázi \texttt{smart cities} nebo jakékoliv slovo začínající na \texttt{bio}.
 
 \subsection{Model fasety}
 Jednotlivé fasety jsou v~portálu implementovány modelovou třídou \texttt{Facet} i přes to, že se jedná o~poměrně jednoduché entity, Tento přístup jsem zvolil zejména kvůli větší modulárnosti zdrojových kódů. Metody této třídy jsou většinou statické a usnadňují práci s~fasetami napříč portálem.
@@ -796,7 +792,7 @@ Z~grafu~\ref{img:scroll-graph} lze vypozorovat, že k~zobrazení pátého výsle
 
 
 \section{Rychlost obnovy dat}
-Prázdnou databázi je možné naplnit 3483 dostupnými tématy výzev za TODO minut. Periodická obnova, prováděna jednou za TODO dní doplní v~průměru TODO výzev a TODO jich aktualizuje. Tento proces trvá přibližně TODO minut.
+Prázdnou databázi je možné naplnit 3483 dostupnými tématy výzev za 17 minut. Periodická obnova dat je prováděna jednou za sedm dní.
 
 
 \section{Možnost úprav}\label{section:improvements}

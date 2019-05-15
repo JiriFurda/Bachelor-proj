@@ -53,16 +53,18 @@
                 <li>{{ topic.callForPropos }}</li>
             </ul>
 
-            <b>Tags</b>
-            <ul>
-                {% for tag in topic.tags %}
-                    <li>{{ tag }}</li>
-                {% endfor %}
-            </ul>
+            {% if topic.tags %}
+                <b>Tags</b>
+                <ul>
+                    {% for tag in topic.tags %}
+                        <li>{{ tag }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
     </div>
 
 
     <h1 class="h2"><strong>{{ topic.identifier }}</strong> - {{ topic.title }}</h1>
-    {{ topic.description|safe }}
+    {{ topic.description_html|safe }}
 {% endblock %}

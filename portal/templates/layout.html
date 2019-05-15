@@ -99,7 +99,7 @@
 <script>
     vue.$store.commit('initFacetsData', {{ layout_data['vue_facets']|safe }});
     vue.$store.commit('initEsQuery', {{ layout_data['vue_elastic_search']|safe }});
-    vue.$store.commit('initSearchType', {{ layout_data['get_arguments'].get('type', 'projects') }});
+    vue.$store.commit('initSearchType', '{{ layout_data['get_arguments'].get('type', 'projects') }}');
 </script>
 {% block javascript %}{% endblock %}
 </body>

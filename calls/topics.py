@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 import urllib, json
 from elasticsearch import Elasticsearch
-from elasticsearch_dsl import Document, Text, Index, Nested, InnerDoc, Integer, Keyword, Object
+from elasticsearch_dsl import Document, Text, Index, Nested, InnerDoc, Integer, Keyword, Object, Date
 import re
 from pprint import pprint
 
@@ -22,7 +22,12 @@ class Topic(Document):
     ccm2Id = Integer()
     callForPropos = Text(fields={'keyword': Keyword()})
     call_title = Text(fields={'keyword': Keyword()})
+    callStatus = Keyword()
+    openingDate = Date()
+    deadlineModel = Keyword()
+    deadlines = Date()
     description = Text()
+    description_html = Text()
     fundedUnder = Object(
         properties=dict(
             subprogramme=Text(fields={'keyword': Keyword()}),
@@ -51,17 +56,21 @@ class Extractor:
             output_topic.ccm2Id = int(input_topic['ccm2Id'])
             output_topic.callForPropos = input_topic['callIdentifier']
             output_topic.call_title = input_topic['callTitle']
-
+            output_topic.callStatus = input_topic['callStatus']
+            output_topic.openingDate = input_topic['plannedOpeningDateLong']
+            output_topic.deadlineModel = input_topic['actions'][0]['deadlineModel']
+            output_topic.deadlines = input_topic['deadlineDatesLong']
             output_topic.fundedUnder = FundedUnder(programme=input_topic['callProgramme'], subprogramme=input_topic['mainSpecificProgrammeLevelCode'])
-
             if 'tags' in input_topic:
                 output_topic.tags = input_topic['tags']
 
             url = 'http://ec.europa.eu/research/participants/portal/data/call/topics/{0}.json'.format(output_topic.identifier.lower())
+            print('Reading URL "{0}"'.format(url))
             response = urllib.urlopen(url)
             data = json.loads(response.read())
-            print('Read URL "{0}"'.format(url))
-            output_topic.description = data['description']
+            output_topic.description_html = data['description']
+            output_topic.description = re.sub('<[^>]*>', '', data['description'])
+
 
             output_topic.save()
             print('Saved topic {0}'.format(output_topic.identifier))
