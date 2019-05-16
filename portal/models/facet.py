@@ -39,6 +39,8 @@ class Facet:
                 Facet('partcountry', 'Part. Country', 'participant.country.keyword'),
                 Facet('year', 'Beginning year', 'year'),
                 Facet('tag', 'Tag', 'tags.keyword'),
+                Facet('callStatus', 'Status', 'callStatus.keyword'),
+                Facet('deadlineModel', 'Deadline Model', 'deadlineModel.keyword'),
             ]
         return facets_list
 

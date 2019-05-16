@@ -18,9 +18,8 @@
 
 from flask import Blueprint, request, abort, url_for, redirect, render_template
 from elasticsearch import Elasticsearch
-from elasticsearch_dsl import Search, Q
 from models.index_search import IndexSearch
-import json, copy
+from models.topic import Topic
 
 
 search_controller = Blueprint('search', __name__)
@@ -29,6 +28,7 @@ client = Elasticsearch()
 
 @search_controller.route('/')
 def index():
+    search_type = IndexSearch.getSearchType()
     searches = IndexSearch.createForEveryIndex()
     IndexSearch.executeMany(searches)
 
@@ -38,10 +38,14 @@ def index():
         'topics': searches['topics'].response
     }
 
+    casted_results = []
+    if search_type == 'topics':
+        casted_results = Topic.castFromResponse(searches['topics'].response)
+
     return render_template('search/index.html',
                            layout_data=searches[IndexSearch.getSearchType()].layout_data,
                            results=results,
                            searches=searches,
-                           search_type=IndexSearch.getSearchType(),
-                           debug=searches[IndexSearch.getSearchType()].search.to_dict()
+                           search_type=search_type,
+                           casted_results=casted_results,
                            )

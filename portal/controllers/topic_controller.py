@@ -20,7 +20,6 @@ from flask import Blueprint, Flask, render_template, request, abort
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 from elasticsearch_dsl.query import MoreLikeThis
-from flask_paginate import Pagination, get_page_args
 from models.topic import Topic
 from models.index_search import IndexSearch
 import json
@@ -68,7 +67,7 @@ def show(topic_id):
 
     #projects_response = Topic(topic_id).projects()
 
-    projects_query = Topic(topic_id).projects_query()    # Projects to search in
+    projects_query = Topic(topic).projects_query()    # Projects to search in
     projects_query.aggs.bucket('coordinator_country', 'terms', field='coordinator.country.keyword')
     projects_query.aggs.bucket('participant_country', 'terms', field='participant.country.keyword')
     projects_response = projects_query.execute()

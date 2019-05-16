@@ -65,26 +65,29 @@
             <h2>Topics</h2>
             <p>Found {{ searches[search_type].response.hits.total }} topics</p>
 
-            {% for result in searches[search_type].response.hits %}
+            {% for result in casted_results %}
                 <div class="card card--search_result card--small-padding rounded shadow-sm">
                     <div class="card-header bg-ec_dark_blue">
-                        <a href="{{ url_for("topics.show", topic_id=result.identifier) }}">
-                            <strong>{{ result.identifier }}</strong> - {{ result.title }}
+                        <a href="{{ url_for("topics.show", topic_id=result.body.identifier) }}">
+                            <strong>{{ result.body.identifier }}</strong> - {{ result.body.title }}
                         </a>
                     </div>
                     <div class="card-body">
                         <p>
-                            {% if result.meta.highlight and result.meta.highlight.description %}
-                                ...{{ " ... ".join(result.meta.highlight.description)|safe }}...
+                            {% if result.body.meta.highlight and result.body.meta.highlight.description %}
+                                ...{{ " ... ".join(result.body.meta.highlight.description)|safe }}...
                             {% else %}
-                                {% if result.description and result.description %}
-                                    {{ result.description[:300]|safe }}...
+                                {% if result.body.description and result.body.description %}
+                                    {{ result.body.description[:300]|safe }}...
                                 {% else %}
                                     Content is missing
                                 {% endif %}
                             {% endif %}
                         </p>
-                        <a href="{{ url_for("topics.show", topic_id=result.identifier) }}">View topic »</a>
+                        <a href="{{ url_for("topics.show", topic_id=result.body.identifier) }}">View topic »</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ result.statusSummary() }}
                     </div>
                 </div>
             {% endfor %}

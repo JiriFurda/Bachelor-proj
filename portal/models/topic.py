@@ -18,19 +18,20 @@
 
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
+import arrow
 
 
 client = Elasticsearch()
 
 
 class Topic:
-    def __init__(self, topic_id):
-        self.topic_id = topic_id
+    def __init__(self, body):
+        self.body = body
 
     def projects_query(self):
         projects_search = Search(using=client,
                                  index="xstane34_projects")
-        projects_search = projects_search.query('match', topics__code__keyword=self.topic_id)
+        projects_search = projects_search.query('match', topics__code__keyword=self.body.identifier)
 
         return projects_search
 
@@ -38,3 +39,33 @@ class Topic:
     def projects(self):
         projects_response = self.projects_query().execute()
         return projects_response
+
+    @classmethod
+    def castFromResponse(cls, response):
+        result = []
+        for hit in response.hits:
+            result.append(Topic(hit))
+        return result
+
+    def statusSummary(self):
+        result = self.body.callStatus
+
+        if self.body.callStatus != 'Closed':
+            result += ' - Deadline '
+
+        diff_for_humans = arrow.get(self.closestDeadline()).humanize()
+        result += ' '+diff_for_humans
+
+        return result
+
+    def closestDeadline(self):
+        rawDeadlines = self.body.deadlines
+        rawDeadlines.sort()
+
+        now = arrow.utcnow()
+        for rawDeadline in rawDeadlines:
+            parsedDeadline = arrow.get(rawDeadline)
+            if now < parsedDeadline:
+                return rawDeadline
+
+        return rawDeadlines[-1]
