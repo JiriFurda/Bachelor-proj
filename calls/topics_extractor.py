@@ -31,8 +31,14 @@ client = Elasticsearch()
 connections.create_connection()
 
 
+class FundedUnder(InnerDoc):
+    ''' Elasticsearch mapping for Topic inner document '''
+    subprogramme = Text(fields={'keyword': Keyword()})
+    programme = Text(fields={'keyword': Keyword()})
+
+
 class Topic(Document):
-    ''' Elasticsearch mapping for Topic document'''
+    ''' Elasticsearch mapping for Topic document '''
     identifier = Text(fields={'keyword': Keyword()})
     title = Text(fields={'keyword': Keyword()})
     tags = Text(fields={'keyword': Keyword()})
@@ -65,7 +71,8 @@ class Topic(Document):
         '''
         # Search for existing document
         s = Search(using=client, index="xfurda00_topics") \
-            .query("match", subCallId=int(input_topic['subCallId']))
+            .query("match", subCallId=int(input_topic['subCallId'])) \
+            .params(request_timeout=30)
         response = s.execute()
 
         if response.success() is True and response.hits.total > 0:
