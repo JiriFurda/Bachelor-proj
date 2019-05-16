@@ -25,57 +25,56 @@
             Topic details
         </div>
         <div class="card-body">
-            {#
-					<b>Type of action</b>
-					<ul>
-						<li></li>
-					</ul>
 
 					<b>Deadline Model</b>
 					<ul>
-						<li></li>
+						<li>{{ topic.body.deadlineModel }}</li>
 					</ul>
 
-					<b>Opening</b>
+					<b>Opening date</b>
 					<ul>
-						<li></li>
+						<li>{{ format_date(topic.body.openingDate) }}</li>
 					</ul>
 
-					<b>Deadline</b>
+					<b>Deadline {{ 's' if topic.body.deadlines|length > 1 }}</b>
 					<ul>
-						<li></li>
+                        {% for deadline in topic.body.deadlines %}
+						    <li>{{ format_date(deadline) }}</li>
+                        {% endfor %}
 					</ul>
 
 					<b>State</b>
 					<ul>
-						<li>{{  }}</li>
+						<li>{{ topic.body.callStatus }}</li>
 					</ul>
-                    #}
+
 
             <b>Funded under</b>
             <ul>
-                <li>{{ topic.fundedUnder.programme }}-{{ topic.fundedUnder.subprogramme }}</li>
+                <li>{{ topic.body.fundedUnder.programme }}-{{ topic.body.fundedUnder.subprogramme }}</li>
             </ul>
 
             <b>CCM2ID</b>
             <ul>
-                <li>{{ topic.ccm2Id }}</li>
+                <li>{{ topic.body.ccm2Id }}</li>
             </ul>
 
             <b>Call name</b>
             <ul>
-                <li>{{ topic.call_title }}</li>
+                <li>{{ topic.body.call_title }}</li>
             </ul>
 
-            <b>Call ID</b>
-            <ul>
-                <li>{{ topic.callForPropos }}</li>
-            </ul>
+            {% if topic.body.callForPropos %}
+                <b>Call ID</b>
+                <ul>
+                    <li>{{ topic.body.callForPropos }}</li>
+                </ul>
+            {% endif %}
 
-            {% if topic.tags %}
+            {% if topic.body.tags %}
                 <b>Tags</b>
                 <ul>
-                    {% for tag in topic.tags %}
+                    {% for tag in topic.body.tags %}
                         <li>{{ tag }}</li>
                     {% endfor %}
                 </ul>
@@ -84,6 +83,21 @@
     </div>
 
 
-    <h1 class="h2"><strong>{{ topic.identifier }}</strong> - {{ topic.title }}</h1>
-    {{ topic.description_html|safe }}
+    <h1 class="h2"><strong>{{ topic.body.identifier }}</strong> - {{ topic.body.title }}</h1>
+    {{ topic.body.description_html|safe }}
+    
+        {% if similar_topics %}
+        <h3 class="pb-2">Similar topics</h3>
+        <div class="row">
+            {% for similar_topic in similar_topics %}
+                <div class="col-md-4">
+                    <h4 class="h5">{{ similar_topic.title }}</h4>
+                    {% if similar_topic.description %}
+                        <p>{{ similar_topic.description[:300] }}...</p>
+                    {% endif %}
+                    <p><a class="btn btn-secondary" href="/topics/{{ similar_topic.identifier }}" role="button">Read more</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}

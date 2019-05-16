@@ -42,7 +42,6 @@ def index():
 
     return render_template('search/index.html',
                            layout_data=searches[IndexSearch.getSearchType()].layout_data,
-                           results=results,
                            searches=searches,
                            search_type=search_type,
                            casted_results=casted_results,

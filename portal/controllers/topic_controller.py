@@ -60,7 +60,7 @@ def show(topic_id):
     searches['projects'].layout_data['vue_facets'] = json.dumps(parsed_vue_facets)
 
     return render_template('topics/show.html',
-                           topic=response.hits[0],
+                           topic=topic,
                            similar_topics=topic.similar(3),
                            layout_data=searches[IndexSearch.getSearchType()].layout_data
                            )

@@ -22,6 +22,7 @@ from controllers.project_controller import project_controller
 from controllers.topic_controller import topic_controller
 from controllers.facet_controller import facet_controller
 from controllers.search_controller import search_controller
+import arrow
 
 
 # Create Flask instance
@@ -45,6 +46,12 @@ def modify_query(**new_values):
         args[key] = value
 
     return '{}?{}'.format(request.path, url_encode(args))
+
+@app.template_global()
+def format_date(date):
+    ''' Formates date '''
+    parsed = arrow.get(date)
+    return parsed.format('DD. MM. YYYY')
 
 
 # Run Flask website
