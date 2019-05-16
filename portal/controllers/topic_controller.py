@@ -19,9 +19,8 @@
 from flask import Blueprint, Flask, render_template, request, abort
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
-from elasticsearch_dsl.query import MoreLikeThis
-from models.topic import Topic
 from models.index_search import IndexSearch
+from models.topic import Topic
 import json
 
 
@@ -31,62 +30,37 @@ client = Elasticsearch()
 
 @topic_controller.route('/<string:topic_id>')
 def show(topic_id):
+    ''' Shows topic detail page '''
+
+    # Search topic with given id
     s = Search(using=client, index="xfurda00_topics") \
         .query("match", identifier=topic_id)
     response = s.execute()
 
+    # Check if topic was found
     if response.success() == False or response.hits.total == 0:
         abort(404)
 
-    topic = response.hits[0]
+    # Cast topic to object
+    topic = Topic(response.hits[0])
 
-
+    # Prepare Elasticsearch query with selected topic
     searches = IndexSearch.createForEveryIndex()
     for (name, search) in searches.items():
         if name != 'topics':
-            search.search_raw = search.search_raw.query('match', topics__code__keyword=topic.identifier)
-            search.search = search.search.query('match', topics__code__keyword=topic.identifier)
+            search.search_raw = search.search_raw.query('match', topics__code__keyword=topic.body.identifier)
+            search.search = search.search.query('match', topics__code__keyword=topic.body.identifier)
     IndexSearch.executeMany(searches)
 
+    # Mark the topic as selected in the sidebar
     parsed_vue_facets = json.loads(searches['projects'].layout_data['vue_facets'])
     for k, vue_facet in enumerate(parsed_vue_facets):
         if vue_facet['name'] == 'topic':
             parsed_vue_facets[k]['checkedOptions'] = vue_facet['mostFrequentOptions']
     searches['projects'].layout_data['vue_facets'] = json.dumps(parsed_vue_facets)
 
-
-    similar_search = Search(using=client,
-                            index="xfurda00_topics")
-    similar_search = similar_search.query(MoreLikeThis(like={
-        '_id': topic.meta.id,
-        '_index': 'xfurda00_topics',
-        'fields': ['tags', 'title^3']
-    }))
-
-    similar_response = similar_search.execute()
-
-    #projects_response = Topic(topic_id).projects()
-
-    projects_query = Topic(topic).projects_query()    # Projects to search in
-    projects_query.aggs.bucket('coordinator_country', 'terms', field='coordinator.country.keyword')
-    projects_query.aggs.bucket('participant_country', 'terms', field='participant.country.keyword')
-    projects_response = projects_query.execute()
-
-    countries_count = {}
-    for item in projects_response.aggregations.participant_country.buckets:
-        countries_count[item.key] = item.doc_count
-
-    for item in projects_response.aggregations.coordinator_country.buckets:
-        if item.key in countries_count:
-            countries_count[item.key] += item.doc_count
-        else:
-            countries_count[item.key] = item.doc_count
-
-    sorted_countries_count = sorted(countries_count.items(), key=lambda x: x[1], reverse=True)
-
     return render_template('topics/show.html',
                            topic=response.hits[0],
-                           similar_topics=similar_response,
-                           projects_in_topic=projects_response,
-                           countries=sorted_countries_count,
-                           layout_data=searches[IndexSearch.getSearchType()].layout_data)
+                           similar_topics=topic.similar(3),
+                           layout_data=searches[IndexSearch.getSearchType()].layout_data
+                           )

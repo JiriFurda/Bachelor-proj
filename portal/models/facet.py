@@ -26,6 +26,7 @@ class Facet:
 
     @staticmethod
     def all():
+        ''' Returns all available Facet instances '''
         facets_list = [
                 #Facet('index', 'Index', '_index'),
                 Facet('programme', 'Programme', 'fundedUnder.programme.keyword'),
@@ -44,20 +45,9 @@ class Facet:
             ]
         return facets_list
 
-
-    @staticmethod
-    def getByName(name):
-        facets = Facet.all()
-
-        for facet in facets:
-            if facet.name == name:
-                return facet
-
-        return None
-
-
     @classmethod
     def get(cls, searched_name):
+        ''' Retrieves one specific Facet instance '''
         for facet in cls.all():
             if facet.name == searched_name:
                 return facet
@@ -66,6 +56,7 @@ class Facet:
 
 
     def toDict(self):
+        ''' Converts Facet to dict '''
         dict = {
             'name': self.name,
             'title': self.title,
@@ -76,4 +67,5 @@ class Facet:
 
 
     def underscoreField(self):
+        ''' Convert nested facet filed names for usage as function argument '''
         return self.field.replace('.', '__')

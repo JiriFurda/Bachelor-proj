@@ -28,16 +28,14 @@ client = Elasticsearch()
 
 @search_controller.route('/')
 def index():
+    ''' Shows search results page '''
+
+    # Create and execute searches
     search_type = IndexSearch.getSearchType()
     searches = IndexSearch.createForEveryIndex()
     IndexSearch.executeMany(searches)
 
-    results = {
-        'projects': searches['projects'].response,
-        'deliverables': searches['deliverables'].response,
-        'topics': searches['topics'].response
-    }
-
+    # Cast results to models
     casted_results = []
     if search_type == 'topics':
         casted_results = Topic.castFromResponse(searches['topics'].response)

@@ -114,7 +114,7 @@ class IndexSearch:
 
         # Loop through every GET argument
         for arg_name, arg_value in request.args.iteritems(True):
-            facet = Facet.getByName(arg_name)
+            facet = Facet.get(arg_name)
             if facet is not None: # If argument name corresponds to a facet
                 facet_values = json.loads(arg_value)
                 facet_name = facet.underscoreField()

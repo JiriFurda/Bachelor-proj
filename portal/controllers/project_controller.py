@@ -29,20 +29,25 @@ client = Elasticsearch()
 
 @project_controller.route('/<int:project_id>')
 def show(project_id):
+    ''' Shows project detail page '''
 
+    # Search project with given id
     s = Search(using=client, index="xstane34_projects") \
         .query("match", id=project_id)
     response = s.execute()
 
+    # Check if project was found
     if response.success() == False or response.hits.total == 0:
         abort(404)
 
     project = response.hits[0]
 
-    similar_search = Search(using=client, index="xstane34_projects") #{'_id': project.id, '_index': 'xstane34_projects'}
+    # Search for similar projects
+    similar_search = Search(using=client, index="xstane34_projects")
     similar_search = similar_search.query(MoreLikeThis(like={'_id': project.id, '_index': 'xstane34_projects'}))
     similar_response = similar_search.execute()
 
+    # Create search for current search type
     index_search = IndexSearch.createForIndex(IndexSearch.getSearchType())
     index_search.execute()
 
