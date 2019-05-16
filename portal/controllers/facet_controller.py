@@ -60,6 +60,7 @@ def showApi(facet_name):
     results_arr = []
     #results_dict.update(response.to_dict())
     for result_es in results_es:
-        results_arr.append({'text': result_es.key, 'value': result_es.key, 'count': result_es.doc_count})
+        if request.args.get('search_val') is None or result_es.key.lower().find(request.args.get('search_val').lower()) != -1:
+            results_arr.append({'text': result_es.key, 'value': result_es.key, 'count': result_es.doc_count})
 
     return jsonify(results_arr)
