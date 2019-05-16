@@ -24,29 +24,34 @@ from flask_paginate import Pagination, get_page_args
 import copy, json
 
 
+# Create Elasticsearch client instance
 client = Elasticsearch()
 
 
 class IndexSearch:
+    ''' Class used for simpler creating Elasticsearch search queries '''
     def __init__(self, index, highlight, fields):
-        self.debug = None
-
+        # Process parameters
         self.index = index
         self.highlight = highlight
         self.fields = fields
 
+        # Set default values
         self.per_page = 10
         self.page = 1
 
+        # Prepare queries
         self.search_raw = self.buildSearch()    # Raw query
         self.search = self.buildAggregationsSearch()  # Query with facets aggregations
 
+        # Initialize empty result data
         self.response = None
         self.layout_data = None
         self.pagination = None
 
 
     def execute(self):
+        ''' Executes search '''
         self.response = self.search.execute()
         self.layout_data = self.prepareLayoutData()
         self.pagination = Pagination(page=self.page,
@@ -56,6 +61,8 @@ class IndexSearch:
 
 
     def buildSearch(self):
+        ''' Builds raw query '''
+
         # Init Elasticsearch search instance
         es_search = Search(using=client, index=self.index)
         es_search = es_search.highlight(self.highlight)
@@ -67,11 +74,14 @@ class IndexSearch:
         else:
             query = '*'
 
+        # Add query string to the search query
         query_string_query = Q('query_string', query=query, fields=self.fields)
-        filters_query = IndexSearch.getFiltersQuery()
 
+        # Apply filters to the query
+        filters_query = IndexSearch.getFiltersQuery()
         es_search = es_search.query('bool', must=[query_string_query, filters_query])
 
+        # Sort by last update if no search was executed
         if query == '*' and self.getSearchType() in ['projects', 'deliverables']:
             es_search = es_search.sort({
                 'lastUpdate.keyword':
@@ -87,6 +97,7 @@ class IndexSearch:
 
 
     def preparePagination(self, es_search):
+        ''' Prepares query for pagination '''
         self.page, self.per_page, offset = get_page_args(page_parameter='page',
                                                per_page_parameter='per_page')
         paginate_from = (self.page - 1) * self.per_page
@@ -98,6 +109,7 @@ class IndexSearch:
 
     @staticmethod
     def getFiltersQuery():
+        ''' Apply used filters to the search query '''
         filter_queries = []
 
         # Loop through every GET argument
@@ -107,18 +119,22 @@ class IndexSearch:
                 facet_values = json.loads(arg_value)
                 facet_name = facet.underscoreField()
 
+                # Process every value of the current facet
                 value_queries = []
                 for facet_value in facet_values:
                     value_queries.append(Q('match', **{facet_name: facet_value['value']}))
 
+                # Create OR query between these values
                 filter_queries.append(Q('bool', should=value_queries))
 
         return Q('bool', must=filter_queries)
 
 
     def buildAggregationsSearch(self):
+        ''' Build new search query including aggregations '''
         es_search = copy.copy(self.search_raw)
 
+        # Append every existing facet
         facets = Facet.all()
         for facet in facets:
             es_search.aggs.bucket(facet.name, 'terms', field=facet.field, size=6)
@@ -127,8 +143,10 @@ class IndexSearch:
 
 
     def prepareLayoutData(self):
+        ''' Prepare data for Vue.js components '''
         facets = Facet.all()
 
+        # Loop through every existing facet
         vue_facets = ''
         for facet in facets:
             facet_dict = facet.toDict()
@@ -163,13 +181,16 @@ class IndexSearch:
 
             facet_dict.update({'checkedOptions': checkedOptions})
 
-
             vue_facets += json.dumps(facet_dict)
             vue_facets += ','
+
+        # Update created string to be valid JSON
         vue_facets = '[' + vue_facets[:-1] + ']'
 
+        # Convert current Elasticsearch query to JSON
         vue_elastic_search = json.dumps(self.search_raw.to_dict())
 
+        # Create result dict
         result = {
             'vue_facets': vue_facets,
             'vue_elastic_search': vue_elastic_search,
@@ -181,6 +202,7 @@ class IndexSearch:
 
     @staticmethod
     def createForIndex(index):
+        ''' Creates predefined IndexSearch '''
         if index == 'projects':
             return IndexSearch('xstane34_projects',
                               'objective',
@@ -201,6 +223,7 @@ class IndexSearch:
 
     @staticmethod
     def getSearchType():
+        ''' Findout type of current search from the GET arguments '''
         if request.args.get('type') == 'deliverables' or request.args.get('type') == 'topics':
             return request.args.get('type')
 
@@ -210,6 +233,7 @@ class IndexSearch:
     # Mass action methods
     @staticmethod
     def createForEveryIndex():
+        ''' Creates predefined IndexSearch for every available search type '''
         return {
             'projects': IndexSearch.createForIndex('projects'),
             'deliverables': IndexSearch.createForIndex('deliverables'),
@@ -219,5 +243,6 @@ class IndexSearch:
 
     @staticmethod
     def executeMany(searches):
+        ''' Executes every IndexSearch given '''
         for (name, search) in searches.items():
             search.execute()

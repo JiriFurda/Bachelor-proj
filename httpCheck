@@ -5,5 +5,5 @@ ADDR=http://athena17.fit.vutbr.cz:2021
 RESPONSE=$(curl -IL --silent $ADDR | head -1)
 
 if ! [[ $RESPONSE =~ .*HTTP.* ]]; then
-	python2.7 /mnt/minerva1/nlp/projects/rrs_eu_projects14/my_project/portal/app.py
+	python2.7 /mnt/minerva1/nlp/projects/rrs_eu_projects14/my_project/portal/portal.py
 fi
