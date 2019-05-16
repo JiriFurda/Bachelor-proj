@@ -9,7 +9,7 @@
 #-----------------              FIT VUT v Brně             -----------------#
 #----------------- Autor: Jiří Furda (2018-2019)           -----------------#
 #----------------- Vedoucí: Doc. RNDr. Pavel Smrž, Ph.D.   -----------------#
-#----------------------- Poslední úpravy: 13.5.2019 ------------------------#
+#----------------------- Poslední úpravy: 16.5.2019 ------------------------#
 #--- Soubor: topic_controller.py                              Verze: 1.0 ---#
 #-------- http://knot.fit.vutbr.cz/wiki/index.php/rrs_eu_projects14 --------#
 #--------------------- Licence: BUT Open source licence --------------------#
