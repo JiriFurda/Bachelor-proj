@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (Web2C 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: xfurda00.aux
+The style file: bib-styles/czechiso.bst
+Database file #1: xfurda00-20-literatura-bibliography.bib
+Warning--entry type for "bib:ueq" isn't style-file defined
+--line 357 of file xfurda00-20-literatura-bibliography.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--empty journal in bib:python
+You've used 38 entries,
+            3151 wiz_defined-function locations,
+            862 strings with 11839 characters,
+and the built_in function-call counts, 12670 in all, are:
+= -- 885
+> -- 315
+< -- 6
++ -- 142
+- -- 90
+* -- 623
+:= -- 1521
+add.period$ -- 76
+call.type$ -- 38
+change.case$ -- 149
+chr.to.int$ -- 0
+cite$ -- 39
+duplicate$ -- 1264
+empty$ -- 1344
+format.name$ -- 94
+if$ -- 2741
+int.to.chr$ -- 0
+int.to.str$ -- 38
+missing$ -- 302
+newline$ -- 155
+num.names$ -- 76
+pop$ -- 701
+preamble$ -- 1
+purify$ -- 120
+quote$ -- 0
+skip$ -- 404
+stack$ -- 0
+substring$ -- 310
+swap$ -- 587
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 144
+warning$ -- 1
+while$ -- 80
+width$ -- 40
+write$ -- 378
+(There were 2 warnings)

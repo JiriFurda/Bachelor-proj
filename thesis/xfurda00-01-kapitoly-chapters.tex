@@ -9,7 +9,7 @@ Tato práce vychází z~bakalářské práce \emph{Automaticky aktualizovaný we
 Webový portál byl od základu implementován znovu s~použitím modernějších technologií a čistějšího zdrojového kódu. Extrakce dat zůstala zachována, pouze byla rozšířena o~extrakci témat výzev k~předkládání návrhů.
 
 V~druhé kapitole práce, nazvané \uv{Rozbor řešené problematiky}, nejprve stručně shrnu základní principy vývoje webových stránek a poté přiblížím několik technologií, které jsem při tvorbě této bakalářské práce využil.
-Ve třetí kapitole s~názvem \uv{Návrh a implementace systému} se již zaměřím na konkrétní řešení této práce, uvedu několik obrázků z~výsledného portálu, jež je výsledkem této práce, a popíši několik zajímavých částí samotného kódu.
+Ve třetí kapitole s~názvem \uv{Návrh a implementace systému} se již zaměřím na konkrétní řešení této práce, uvedu několik snímků z~portálu, jež je výsledkem této práce, a popíši několik zajímavých částí samotného kódu.
 Ve čtvrté kapitole pojmenované \uv{Experimenty a vyhodnocení} provedu s~výsledným portálem několik experimentů, následně vyhodnotím jejich výstupy a vyvodím z~nich možná rozšíření portálu.
 V~samém závěru práce pak stručně zhodnotím výsledky této práce.
 
@@ -42,7 +42,7 @@ Většinu aplikací lze obecně rozdělit na tři hlavní celky - data, rozhran�
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{obrazky-figures/mvc.pdf}
-	\caption{Diagram toku akcí při využití architektury MVC. \emph{Převzato z~\cite{bib:mvc}}}
+	\caption{Diagram toku akcí při využití architektury MVC. \emph{Převzato z~\cite{bib:mvc}}.}
 	\label{img:mvc}
 \end{figure}
 
@@ -81,7 +81,7 @@ Takto obalené styly budou aplikovány jen v~případě, že zobrazovací zaří
 	\includegraphics[width=0.5\textwidth-0.4cm]{obrazky-figures/fb-hamburger-1.png}
 	\hspace{0.5cm}
 	\includegraphics[width=0.5\textwidth-0.4cm]{obrazky-figures/fb-hamburger-2.png}
-	\caption{Hamburgerové menu použité v~mobilní aplikaci sociální sítě Facebook\protect\footnote{Mobilní aplikace Facebook v~obchodě Google Play: \url{https://play.google.com/store/apps/details?id=com.facebook.katana&hl=cs}}. Jeho zobrazení je ovládáno tlačítkem v~horní pravé části obrázků, znázorněným třemi vodorovnými čárami. Na levém snímku je možné vidět aplikaci se skrytým menu a v~pravém snímku zase se zobrazeným.}
+	\caption{Hamburgerové menu použité v~mobilní aplikaci sociální sítě Facebook\protect\footnote{Mobilní aplikace Facebook v~obchodě Google Play: \url{https://play.google.com/store/apps/details?id=com.facebook.katana&hl=cs}}. Jeho zobrazení je ovládáno tlačítkem v~pravé horní části obrázků, znázorněným třemi vodorovnými čárami. Na levém snímku je možné vidět aplikaci se skrytým menu a v~pravém snímku zase se zobrazeným.}
 \end{figure}
 
 
@@ -110,7 +110,7 @@ Python\footnote{Python: \url{https://www.python.org/}} je vysokoúrovňový inte
 
 
 \subsection{Flask}
-Flask\footnote{Flask: \url{http://flask.pocoo.org/}} je systém s~otevřeným zdrojovým kódem určený pro tvorbu systémové části webových stránek. Tento systém je napsaný v~programovacím jazyce Python a jedná se o~systém typu \emph{micro-framework}. Klíčový znak tohoto typu systémů je co nejmenší nebo i~nulová závislost na externích knihovnách~\cite{bib:flask-doc}.
+Flask\footnote{Flask: \url{http://flask.pocoo.org/}} je systém s~otevřeným zdrojovým kódem určený pro tvorbu systémové části webových stránek. Je napsaný v~programovacím jazyce Python a jedná se o~systém typu \emph{micro-framework}. Klíčový znak tohoto typu systémů je co nejmenší nebo i~nulová závislost na externích knihovnách~\cite{bib:flask-doc}.
 Flask si klade za cíl udržet si co nejjednodušší jádro, ale zároveň se soustředí na možnost tento základ jednoduše rozšířit~\cite{bib:flask-pym}.
 
 Smyslem systému Flask je být základním kamenem pro jakýkoliv typ webové aplikace. Z~tohoto důvodu na rozdíl od ostatních systémů neobsahuje žádnou abstrakci databázové vrstvy nebo knihovnu pro formuláře. V~případě potřeby využití takovýchto funkcí, lze použít některé z~dostupných rozšíření~\cite{bib:flask-design}.
@@ -125,7 +125,7 @@ nebo síťovou dopravní společností Lyft\footnote{Lyft: \url{https://www.lyft
 
 \section{Vue.js}\label{section:Vue.js}
 V~dnešní době jsou webové prohlížeče stále schopnější a výkonnější. Díky tomu se stává trendem přenášet stále větší části webové aplikace ze serveru na stranu klienta. Toho je docíleno pomocí skriptovacího jazyka JavaScript. V~současné době se nejvíce využívá knihovna jQuery, %[Todo: najít zdroj]
-ale začali se objevovat pokročilejší systémy jako například React\footnote{React: \url{https://reactjs.org/}}, Angular\footnote{Angular: \url{https://angular.io/}} a v~neposlední řadě Vue.js\footnote{Vue.js: \url{https://vuejs.org/}}.
+ale začaly se objevovat pokročilejší systémy jako například React\footnote{React: \url{https://reactjs.org/}}, Angular\footnote{Angular: \url{https://angular.io/}} a v~neposlední řadě Vue.js\footnote{Vue.js: \url{https://vuejs.org/}}.
 
 Vue.js je progresivní systém - přizpůsobuje se složitosti projektu. Podobně jako dříve zmiňovaný systém Flask se nejedná o~rozsáhlý systém, jehož části by se vypínaly, ale jedná se o~základní systém, který lze dále rozšiřovat~\cite{bib:vue-progressive}.
 Díky tomuto přístupu učební křivka není tak strmá, jako u~konkurenčních systémů. Jediné, co člověku pro začátek práce se systémem Vue.js stačí, je být obeznámen s~jazyky HTML a JavaScript~\cite{bib:vue-curve}.
@@ -134,12 +134,8 @@ Jedna z~předností toto systému je jednoduchost obousměrné vazby dat. Tato v
 V~praxi může být tato funkce využita například v~internetovém obchodě, kdy uživatel klikne na tlačítko \uv{Přidat do košíku}, které pouze rozšíří pole košíku o~další produkt. Bez jakéhokoliv dalšího úsilí komponenty, závislé na této proměnné, zaznamenají změnu a automaticky provedou odpovídající akce. Košík přepočítá celkový počet vybraného zboží, celkovou cenu nákupu, případně se zlevní cena daného produktu, při koupi dalších kusů a podobně.
 
 
-\subsection{Vue Router}
-Mezi oficiálně podporované knihovny patří například Vue Router\footnote{VueRouter: \url{https://router.vuejs.org/}}, umožňující tvorbu jednostránkové aplikace, kdy se načte pouze jedná jediná stránka a pomocí jazyka JavaScript a asynchronních požadavků se mění části obsahu webu. Server v~takovém případě slouží pouze jako úložiště dat a o~veškerou prezentaci se stará strana klienta~\cite{bib:vue-router}. %TODO obsahuje pekny ilustrace
-
-
 \subsection{Vuex}
-Dalším oficiálním rozšířením je Vuex, knihovna pro správu stavu. Pokud se v~aplikaci používá více komponent, které využívají stejnou proměnnou, brzy se zdrojový kód začne stávat velmi komplexním. 
+Jedním z oficiálních rozšíření je Vuex, knihovna pro správu stavu. Pokud se v~aplikaci používá více komponent, které využívají stejnou proměnnou, brzy se zdrojový kód začne stávat velmi komplexním. 
 V~tuto chvíli je vhodné využit knihovnu Vuex. Jejím účelem je udržovat centrální stav proměnných, které jsou sdíleny napříč různými komponentami v~aplikaci. Tohoto je docíleno díky dodržování návrhového vzoru jménem Flux~\cite{bib:vuex-doc}. 
 
 
@@ -166,7 +162,7 @@ Mezi základní pilíře návrhového vzoru Flux patří několik následující
 \subsubsection*{BootstrapVue}
 \emph{Tato kapitola čerpá z~\cite{bib:bootstrap-vue}}.
 
-BoostrapVue je systém klientské části webových stránek založený na systému Bootstrap, který pro svou plnou funkčnost vyžaduje použít také knihovnu jQuery. Pokud ale webová aplikace již pracuje se systémem Vue.js, mnohdy odpadá potřeba jQuery v~aplikaci využívat. Vzhledem k~faktu, že se jedná o~poměrně rozsáhlou knihovnu, není žádoucí ji používat jen z~důvodu, že je aplikace postavená na systému Bootstrap.
+BoostrapVue je systém klientské části webových stránek založený na systému Bootstrap, ten však pro svou plnou funkčnost vyžaduje použít také knihovnu jQuery. Pokud ale webová aplikace již pracuje se systémem Vue.js, mnohdy odpadá potřeba jQuery v~aplikaci využívat. Vzhledem k~faktu, že se jedná o~poměrně rozsáhlou knihovnu, není žádoucí ji používat jen z~důvodu, že je aplikace postavená na systému Bootstrap.
 
 V~tuto chvíli je vhodné využít alternativu jménem BoostrapVue, která závislost na knihovně jQuery nahrazuje závislostí na systému Vue.js. Systém BootstrapVue nabízí všechny komponenty původního systému, část z~nich ještě vylepšuje a také nabízí komponenty úplně nové.
 
@@ -196,7 +192,7 @@ Přímo učebnicovým příkladem takového zjednodušení je zápis modálního
   </div>
 </div>
 \end{verbatim}
-\emph{Kód byl převzat z~\cite{bib:bootstrap-modal}}
+\emph{Kód byl převzat z~\cite{bib:bootstrap-modal}}.
 
 Pomocí BoostrapVue lze identickou komponentu zapsat mnohem kratším a elegantnějším způsobem a to konkrétně:
 
@@ -214,7 +210,7 @@ Pomocí BoostrapVue lze identickou komponentu zapsat mnohem kratším a elegantn
 
 Elasticsearch\footnote{Elasticsearch: \url{https://www.elastic.co/products/elasticsearch}} je vyhledávač s~otevřeným zdrojovým kódem umožňující distribuované vyhledávání a analýzu v~reálném čase. Umožňuje velmi rychle pracovat s~rozsáhlými daty (anglicky \emph{big data}) a provádět nad nimi plnotextové vyhledávání, strukturované vyhledávání a nebo zmiňovanou analýzu.
 
-Tento vyhledávač je hojně využíván jak menšími projekty, tak i~světoznámými organizacemi. Za zmínku stojí například internetová encyklopedie Wikipedia\footnote{Wikipedia: \url{https://www.wikipedia.org/}}, britský deník The~Guardian\footnote{The Guardian: \url{https://www.theguardian.com/international}}, komunitní stránka pro výměnu rad programátorů StackOverflow\footnote{StackOverflow: \url{https://stackoverflow.com/}} nebo populární webová služba pro verzovací nástroj Git\footnote{Git: \url{https://git-scm.com/}} - GitHub.
+Tento vyhledávač je hojně využíván jak menšími projekty, tak i~světoznámými organizacemi. Za zmínku stojí například internetová encyklopedie Wikipedia\footnote{Wikipedia: \url{https://www.wikipedia.org/}}, britský deník The~Guardian\footnote{The Guardian: \url{https://www.theguardian.com/international}}, komunitní stránka pro výměnu rad programátorů StackOverflow\footnote{StackOverflow: \url{https://stackoverflow.com/}} nebo populární webová služba pro verzovací nástroj Git\footnote{Git: \url{https://git-scm.com/}} - GitHub\footnote{GitHub: \url{https://github.com/}}.
 
 Elasticsearch je postavený na knihovně Apache Lucene\footnote{Apache Lucene: \url{https://lucene.apache.org/}}, využívá především její funkce plnotextového vyhledávání. Oproti této knihovně však systém Elasticsearch nabízí o~mnoho přívětivější způsob používání, především pro začínající uživatele. 
 
@@ -229,7 +225,7 @@ Základní struktura databáze Elasticsearch se na první pohled od tradičních
 Skupina dokumentů s~podobnou strukturou se nazývá index. Ekvivalentem v~relačních databázích by v~tomto případě byla tabulka.
 
 \subsubsection*{Dokument}\label{section:dokument}
-Dokument je základní jednotka dat, které může být zaindexována. Obsah dokumentu je zapsán ve formátu (anglicky \emph{JavaScript Object Notation}). V~relační databázi lze dokument přirovnat k~řádku tabulky.
+Dokument je základní jednotka dat, která může být indexována. Obsah dokumentu je zapsán ve formátu JSON (anglicky \emph{JavaScript Object Notation}). V~relační databázi lze dokument přirovnat k~řádku tabulky.
 
 
 \subsection{Dotazy}
@@ -376,7 +372,7 @@ Součástí analyzátorů bývá často odstranění tokenů, které obsahují n
 
 Další nedílnou součástí pokročilejších analyzátorů je \emph{stematizace}, aneb získání kmene slova. Pro tuto operaci lze využit dva způsoby - algoritmus nebo slovník. Každý z~těchto způsobů má své plusy i mínusy.
 
-Při využití algoritmické stematizace sice analyzátor nemusí znát všechna slova v~daném jazyce, protože slova převádí do požadovaného tvaru pouze na základě sady pravidel, na durhou stranu ale dochází k~větší nepřesnosti. Elasticsearch v~případě využití české algoritmické stematizace ze slov odstraňuje všechny přípony.
+Při využití algoritmické stematizace sice analyzátor nemusí znát všechna slova v~daném jazyce, protože slova převádí do požadovaného tvaru pouze na základě sady pravidel, na druhou stranu ale dochází k~větší nepřesnosti. Elasticsearch v~případě využití české algoritmické stematizace ze slov odstraňuje všechny přípony.
 
 Druhým způsobem, který lze využít je stematizace na základě slovníku. Díky tomu jsou převedené tvary přesnější než ty získané algoritmem. Hlavním předpokladem v~této metodě je ovšem využití vhodného slovníku s~dostatečnou zásobou slov.
 
@@ -446,8 +442,6 @@ Pro zobrazení relevantnějších výsledků vyhledávání lze využít kontext
 Pro tyto účely je možné brát v~potaz předchozí hledání nebo podobnost s~dříve otevřenými dokumenty.
 
 Výhodou kontextového hledání je zpřesnění výsledků hledání bez nucení uživatele manuálně toto hledání blíže specifikovat. O~takovou možnost ovšem uživatel nepřijde, tento typ hledání se s~použitím fasetové navigace nijak nevylučuje. 
-Mimo to je díky tomuto přístupu možné objevit podobnost i mezi dokumenty, které spolu přímo nesdílí podstatná metadata. 
-
 
 \begin{figure}[H]
 	\centering
@@ -502,7 +496,7 @@ CORDIS\footnote{CORDIS: \url{https://cordis.europa.eu/}} (\emph{The Community Re
 
 
 \section{Webový portál}
-Výsledný webový portál umožňuje uživateli prohlížet a vyhledávat data získána extraktorem dat. V~této kapitole je výsledný portál podrobně rozebrán.
+Výsledný webový portál umožňuje uživateli prohlížet a vyhledávat data získaná extraktorem dat. V~této kapitole je výsledný portál podrobně rozebrán.
 
 \subsection{Vizuální podoba}
 Vizuální struktura vytvořeného webového portálu lze rozdělit do tří hlavních celků - hlavičky, postranního panelu a hlavního obsahu stránky. První dva z~těchto celků jsou určeny pro specifikaci vyhledávání. Aby bylo vyhledávání při procházení portálu vždy dostupné, pozice těchto celků ve verzi pro stolní počítače zůstává neměnná i~při rolování zobrazené stránky.
@@ -539,7 +533,7 @@ Základní struktura tohoto typu stránek je sdílena se snímkem~\ref{image:por
 Mimo to má postranní panel s~fasetovým vyhledáváním ve výchozím stavu pro fasetu \uv{Topic} zvolenou hodnotu právě zobrazeného tématu. Díky tomu lze snadno provést hledání projektů nebo odevzdaných zpráv právě s~tímto tématem.
 
 \subsection{Struktura adresáře}
-Veškeré zdrojové kódy portálu se nachází v~adresáři \texttt{portal}. Uvnitř této složky se nachází adresáře odpovídající architektuře MVC uvedené v~kapitole~\ref{section:mvc}.
+Veškeré zdrojové kódy portálu se nachází v~adresáři \texttt{portal}. Uvnitř této složky jsou obsaženy adresáře odpovídající architektuře MVC uvedené v~kapitole~\ref{section:mvc}.
 \begin{itemize}
   \item Složka \texttt{models} obsahuje modely.
   \item Složka \texttt{controllers} obsahuje kontrolery.
@@ -607,7 +601,7 @@ Druhý dotaz vzniká rozšířením dotazu z~metody \texttt{buildSearch()}. Je o
 \subsubsection*{prepareLayoutData()}
 Poté, co byly výše zmíněné dotazy vykonány, je třeba výsledky zpracovat a připravit pro předání do odpovídajících komponent. Výsledkem této funkce jsou tři struktury formátu JSON zabalené ve slovníku, obsahující data využívané pro inicializaci komponent v~šabloně.
 
-Jedna ze struktur, které je poté uložena do skladu knihovny Vuex může vypadat například následovně:
+Jedna ze struktur, která je poté uložena do skladu knihovny Vuex může vypadat například následovně:
 
 \begin{verbatim}
 {
@@ -672,7 +666,7 @@ Pokročilí uživatelé portálu mají možnost při vyhledávání sepsat slož
 Při použití pokročilých dotazů lze také specifikovat, kterých polí se daná část dotazu týká. Díky vyhledávání fráze \texttt{title:Oil} se dané slovo bude hledat výhradně v~názvu výzvy a ne například v~jejím obsahu.
 
 
-Dotaz \texttt{title:Innovation AND tags:("smart cities"~OR "bio*")} tedy nalezne všechny výzvy, které mají v názvu slovo \texttt{Innovation} a zároveň mají ve svých značkách frázi \texttt{smart cities} nebo jakékoliv slovo začínající na \texttt{bio}.
+Dotaz s obsahem \texttt{title:Innovation AND tags:("smart cities"~OR "bio*")} tedy nalezne všechny výzvy, které mají v názvu slovo \texttt{Innovation} a zároveň mají ve svých značkách frázi \texttt{smart cities} nebo jakékoliv slovo začínající na \texttt{bio}.
 
 \subsection{Model fasety}
 Jednotlivé fasety jsou v~portálu implementovány modelovou třídou \texttt{Facet} i přes to, že se jedná o~poměrně jednoduché entity, Tento přístup jsem zvolil zejména kvůli větší modulárnosti zdrojových kódů. Metody této třídy jsou většinou statické a usnadňují práci s~fasetami napříč portálem.
@@ -812,6 +806,6 @@ Další možné zlepšení by se mohlo týkat zvýšení viditelnosti níže um�
 \chapter{Závěr}
 Hlavním cílem této bakalářské práce bylo navrhnout a realizovat úpravu stávajícího portálu zaměřeného na výsledky evropských projektů. Portál byl úspěšně inovován s~použitím novějších verzí technologií použitých v~původním řešení. Mimo to byly využity i technologie úplně nové jako například Vue.js. Do obsahu portálu byly úspěšně zakomponovány témata výzev pro podávání návrhů nových projektů. Nad obsahem portálu lze provádět jak plnotextové tak i fasetové hledání. V~případě potřeby je možné pomocí dotazovacího jazyka sestrojit pokročilejší dotazy. Úspěšné řešení práce bylo potvrzeno několika experimenty. Pro další rozvoj práce bylo předloženo několik návrhů.
 
-Řešení této práce mi bylo přínosné především rozšířením obzorů v~oblasti nerelačních databázi, hlubším pohledem do principů plnotextového vyhledávání a také seznámením se s~používáním systému Vue.js.
+Řešení této práce mi bylo přínosné především rozšířením obzorů v~oblasti nerelačních databází, hlubším pohledem do principů plnotextového vyhledávání a také seznámením se s~používáním systému Vue.js.
 
 Výsledný portál je k dispozici online\footnote{European Research Projects Portal: \url{http://athena17.fit.vutbr.cz:2021/}}.

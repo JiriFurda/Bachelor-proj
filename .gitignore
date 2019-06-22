@@ -11,3 +11,11 @@ sablona2018/
 *.odt#
 
 CD/
+
+src/extractor/
+src/logs/
+src/cron_scripts
+src/shared
+src/initializedb.py
+src/extractor.py
+src/__init__.py

@@ -1,0 +1,206 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\selectlanguage}[1]{\relax}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{bib:vue-binding}
+{Anthony Gore}: {\it Exploring Vue.js: Reactive Two-Way Data Binding}. Medium -
+  a place to read and write big ideas and important stories, 2016-09-19,
+  [online; navštíveno 24.04.2019].
+\newline\urlprefix\url{https://medium.com/js-dojo/exploring-vue-js-reactive-two-way-data-binding-da533d0c4554}
+
+\bibitem{bib:vuex-guide}
+{Anthony Gore}: {\it WTF is Vuex? A Beginner’s Guide To Vue’s Application
+  Data Store}. Medium - a place to read and write big ideas and important
+  stories, 2016-11-30, [online; navštíveno 25.04.2019].
+\newline\urlprefix\url{https://medium.com/js-dojo/vuex-for-the-clueless-the-missing-primer-on-vues-application-data-store-33fa51ffc3af}
+
+\bibitem{bib:jinja}
+{Armin Ronacher}: {\it Welcome to Jinja2}. Jinja 2 Documentation (2.10), 2008,
+  [online; navštíveno 24.04.2019].
+\newline\urlprefix\url{http://jinja.pocoo.org/docs/2.10/}
+
+\bibitem{bib:hedonic}
+Bernardo, M.; Marimon, F.; del Mar Alonso-Almeida, M.: Functional quality and
+  hedonic quality: A study of the dimensions of e-service quality in online
+  travel agencies. \emph{Information \& Management}, ročník~49, č.~7, 2012:
+  s. 342 -- 347, ISSN 0378-7206,
+  \doi{https://doi.org/10.1016/j.im.2012.06.005}.
+\newline\urlprefix\url{http://www.sciencedirect.com/science/article/pii/S0378720612000511}
+
+\bibitem{bib:bootstrap}
+Bhaumik, S.: \emph{{\it Bootstrap Essentials}}. Packt Publishing Ltd., 2015,
+  ISBN 978-1-78439-517-9.
+
+\bibitem{bib:bootstrap-modal}
+{Bootstrap team}: {\it Modal}. Bootstrap - The most popular HTML, CSS and JS
+  library in the world., 2019, [online; navštíveno 04.05.2019].
+\newline\urlprefix\url{https://getbootstrap.com/docs/4.3/components/modal/}
+
+\bibitem{bib:similarity-context}
+Carevic, Z.; Sch{\"{u}}ller, S.; Mayr, P.; aj.: Contextualised Browsing in a
+  Digital Library's Living Lab. \emph{CoRR}, ročník abs/1804.06426, 2018,
+  \eprint{1804.06426}.
+\newline\urlprefix\url{http://arxiv.org/abs/1804.06426}
+
+\bibitem{bib:scroll}
+{Clicktale}: {\it Clicktale scrolling research report V2.0 – Part 1:
+  visibility and scroll reach}. Clicktale blog, 2007-10-05, [online;
+  navštíveno 12.05.2019].
+\newline\urlprefix\url{https://www.clicktale.com/resources/blog/clicktale-scrolling-research-report-v20-part-1-visibility-and-scroll-reach/}
+
+\bibitem{bib:web-development}
+{Code Conquest}: {\it Introduction to Web Development}. 2019, [online;
+  navštíveno 27.04.2019].
+\newline\urlprefix\url{https://www.codeconquest.com/what-is-coding/web-programming/}
+
+\bibitem{bib:elastic-concept}
+{Elasticsearch B.V.}: {\it Basic Concepts}. Elasticsearch Reference [7.0],
+  2019, [online; navštíveno 29.04.2019].
+\newline\urlprefix\url{https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started-concepts.html}
+
+\bibitem{bib:elastic-bucket}
+{Elasticsearch B.V.}: {\it Bucket Aggreagtions}. Elasticsearch Reference [7.0],
+  2019, [online; navštíveno 21.04.2019].
+\newline\urlprefix\url{https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html}
+
+\bibitem{bib:elastic-clients}
+{Elasticsearch B.V.}: {\it Elasticsearch Clients}. Elasticsearch - Open Source
+  Search \& Analytics, 2019, [online; navštíveno 02.05.2019].
+\newline\urlprefix\url{https://www.elastic.co/guide/en/elasticsearch/client/index.html}
+
+\bibitem{bib:elastic-context}
+{Elasticsearch B.V.}: {\it Query and filter context}. Elasticsearch - Open
+  Source Search \& Analytics, 2019, [online; navštíveno 07.05.2019].
+\newline\urlprefix\url{https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html}
+
+\bibitem{bib:funding-about}
+{European Union}: {\it About}. European Commission, 2019, [online; navštíveno
+  27.05.2019].
+\newline\urlprefix\url{https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home}
+
+\bibitem{bib:cordis}
+{European Union}: {\it About CORDIS}. 2019, [online; navštíveno 27.04.2019].
+\newline\urlprefix\url{https://cordis.europa.eu/about/}
+
+\bibitem{bib:funding-find}
+{European Union}: {\it Find a funding opportunity}. European Commission, 2019,
+  [online; navštíveno 05.05.2019].
+\newline\urlprefix\url{https://ec.europa.eu/info/funding-tenders/how-eu-funding-works/how-get-funding/find-funding-opportunity_en}
+
+\bibitem{bib:vue-progressive}
+{Evan You}: {\it The Progressive Framework}. Slides - Create and share
+  presenatations online, 2016, [online; navštíveno 23.04.2019].
+\newline\urlprefix\url{http://slides.com/evanyou/progressive-javascript#/19}
+
+\bibitem{bib:vue-curve}
+{Evan You}: {\it Comparison with Other Frameworks}. Vue.js, 2019, [online;
+  navštíveno 24.04.2019].
+\newline\urlprefix\url{https://vuejs.org/v2/guide/comparison.html#Learning-Curve}
+
+\bibitem{bib:vuex-doc}
+{Evan You}: {\it What is Vuex?} Vuex, 2019, [online; navštíveno 24.04.2019].
+\newline\urlprefix\url{https://vuex.vuejs.org}
+
+\bibitem{bib:responsive}
+Frain, B.: \emph{{\it Responsive Web Design with HTML5 and CSS3}}. Packt
+  Publishing Ltd., 2012, ISBN 978-1-84969-318-9.
+
+\bibitem{bib:elastic-defnitive}
+Gormley, C.; Tong, Z.: \emph{{\it Elasticsearch: The Definitive Guide: A
+  Distributed Real-Time Search and Analytics Engine}}. O'Reilly Media, Inc.,
+  2015, ISBN 978-1-449-35854-9.
+
+\bibitem{bib:elastic-dsl}
+{Honza Král}: {\it Elasticsearch DSL}. Elasticsearch DSL 7.0.0 documentation,
+  2019, [online; navštíveno 03.05.2019].
+\newline\urlprefix\url{https://elasticsearch-dsl.readthedocs.io/en/latest/}
+
+\bibitem{bib:facet}
+{Kathryn Whitenton}: {\it Filters vs. Facets: Definitions}. Nielsen Norman
+  Group: UX Training, Consulting, \& Research, 2014-03-16, [online;
+  navštíveno 21.04.2019].
+\newline\urlprefix\url{https://www.nngroup.com/articles/filters-vs-facets/}
+
+\bibitem{bib:flask-pym}
+{Kushal Das}: {\it Introduction to Flask}. Python for you and me, 2017,
+  [online; navštíveno 23.04.2019].
+\newline\urlprefix\url{https://pymbook.readthedocs.io/en/latest/flask.html}
+
+\bibitem{bib:portal-liferay}
+{Liferay Inc.}: {\it What is a Web Portal?} 2019, [online; navštíveno
+  20.04.2019].
+\newline\urlprefix\url{https://www.liferay.com/resources/l/web-portal}
+
+\bibitem{bib:elastic-fulltext}
+{Luděk Veselý}: {\it Seriál Elasticsearch: 4. Fulltextové vyhledávání v
+  češtině}. 2017-09-28, [online; navštíveno 02.05.2019].
+\newline\urlprefix\url{https://www.ludekvesely.cz/serial-elasticsearch-4-fulltextove-vyhledavani-v-cestine/}
+
+\bibitem{bib:elastic-utils}
+{Mozilla Foundation}: {\it ElasticUtils}. ElasticUtils dev documentation, 2015,
+  [online; navštíveno 03.05.2019].
+\newline\urlprefix\url{https://elasticutils.readthedocs.io/en/latest/}
+
+\bibitem{bib:flask-design}
+{Pallets Team}: {\it Design Decisions in Flask}. Flask 1.0.2 Documentation,
+  2010, [online; navštíveno 23.04.2019].
+\newline\urlprefix\url{http://flask.pocoo.org/docs/1.0/design/}
+
+\bibitem{bib:flask-doc}
+{Pallets Team}: {\it Foreword}. Flask 1.0.2 Documentation, 2010, [online;
+  navštíveno 24.04.2019].
+\newline\urlprefix\url{http://flask.pocoo.org/docs/1.0/foreword/}
+
+\bibitem{bib:flask-pep}
+{Phillip J. Eby}: {\it PEP 333 -- Python Web Server Gateway Interface v1.0}.
+  Python.org, 2003-12-7, [online; navštíveno 24.04.2019].
+\newline\urlprefix\url{https://www.python.org/dev/peps/pep-0333/#rationale-and-goals}
+
+\bibitem{bib:bootstrap-vue}
+Ratcliffe, S.: \emph{{\it ASP.NET Core 2 and Vue.js: Full Stack Web Development
+  with Vue, Vuex, and ASP.NET Core 2.0}}. Packt Publishing Ltd., 2018, ISBN
+  978-1-78883-946-4.
+
+\bibitem{bib:flask-lyft}
+{Roy Williams}: {\it Python 3 at Lyft}. Youtube, 2018-01-10, [online;
+  navštíveno 23.04.2019].
+\newline\urlprefix\url{https://www.youtube.com/watch?v=aetoXWRt24k&t=164}
+
+\bibitem{bib:python}
+Sanner, M.: Python: A Programming Language for Software Integration and
+  Development. 11 1998, \doi{10.1016/S1093-3263(99)99999-0}.
+
+\bibitem{bib:mvc}
+Sarker, I.; Apu, K.: MVC Architecture Driven Design and Implementation of Java
+  Framework for Developing Desktop Application. \emph{International Journal of
+  Information Technology}, ročník~7, 09 2014: s. 317--322,
+  \doi{10.14257/ijhit.2014.7.5.29}.
+
+\bibitem{bib:ueq}
+Schrepp, M.: User Experience Questionnaire Handbook. 08 2019.
+
+\bibitem{bib:stanek}
+Stan{\v{e}}k, P.: {\selectlanguage{czech}\emph{Automaticky aktualizovan{\'{y}}
+  webov{\'{y}} port{\'{a}}l}}. Bakal{\'{a}}{\v{r}}sk{\'{a}} pr{\'{a}}ce,
+  Vysok{\'{e}} u{\v{c}}en{\'{i}} technick{\'{e}} v Brn{\v{e}}, Fakulta
+  informa{\v{c}}n{\'{i}}ch technologi{\'{i}}, 2016.
+\newline\urlprefix\url{http://www.fit.vutbr.cz/study/DP/BP.php?id=18568}
+
+\bibitem{bib:flask-pinterest}
+{Steve Cohen}: {\it What challenges has Pinterest encountered with Flask?}
+  Quora - A place to share knowledge and better understand the world,
+  2015-01-08, [příspěvek v diskuzním fóru; navštíveno 23.04.2019].
+\newline\urlprefix\url{https://www.quora.com/What-challenges-has-Pinterest-encountered-with-Flask/answer/Steve-Cohen?share=1&srid=hXZd}
+
+\bibitem{bib:mobile-first}
+{Zell Liew}: {\it How To Write Mobile-first CSS}. 2014-12-17, [online;
+  navštíveno 03.05.2019].
+\newline\urlprefix\url{https://zellwk.com/blog/how-to-write-mobile-first-css/}
+
+\end{thebibliography}
