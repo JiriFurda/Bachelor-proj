@@ -9,7 +9,7 @@ Supervisor assessment: [hodnoceni_vedouciho.pdf](./docs/hodnoceni_vedouciho.pdf)
 
 ## Score
 * ITT (part 1 - winter 2018): **68/100 (D)**
-    * [Corresponding version](./tree/d8221ff5d913a36441007c86ef51810a73f3234c)
+    * [Corresponding version](../../tree/d8221ff5d913a36441007c86ef51810a73f3234c)
 * Review: **E**
 * Supervisor assessment: **55/100 (E)**
 * Defense: **F**
